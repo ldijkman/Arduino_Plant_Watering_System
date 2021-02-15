@@ -6,8 +6,23 @@
 // maar dan staat alles stil als je bijvoorbeeld een delay van 10 minuten hebt
 // gebeurt er niks gedurende die 10 minuten
 //
-// Copyright 2021 Dirk Luberth Dijkman bangert 30 1619GJ Andijk
+// Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
 //
+
+/*
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+GNU General Public License,
+
+which basically means that you may freely copy, change, and distribute it,
+
+but you may not impose any restrictions on further distribution,
+
+and you must make the source code available.
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+*/
+
 // Jo Martelaer arduino uno watergift
 //
 // DS3231 connected to +5vdc GND SCL SDA
