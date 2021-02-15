@@ -51,3 +51,10 @@ https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/Arduino_Plan
 
 
 http://Paypal.Me/LDijkman
+
+
+Rotary encoder menu change and save parameters to make it an independanr stand alone system
+
+reuse parts of
+
+http://84.107.155.75/forum/index.php?action=view&id=299
