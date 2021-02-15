@@ -1,6 +1,8 @@
 # Arduino Plant Watering System
 Arduino Plant Watering System
 
++/- 10 Dollar Automated Plant Watering Computer on Soil Moisture
+
 Arduino Nano, Uno or other Arduino device
 
 2 analog inputs for 2 Capacitive Moisture Sensors 
