@@ -7,7 +7,7 @@ arduino Nano, Uno or other Arduino device
 
 1 output for watering start
 
-i2c or RTC and LCD
+i2c for RTC and LCD
 
 
 2 capacitive moisture sensors
@@ -18,11 +18,11 @@ DS3231 RTC RealTimeClock
 
 start time end time let plants sleep at night, no watering at night
 
-maximum number of watering a day
+timed duration of watering
 
 pauzetime after watering
 
-timed duration of watering
+maximum number of watering a day
 
 software reboot, asm volatile (" jmp 0"); at 23:59:59 to reset wateringcounter and fresh millis();
 
