@@ -16,13 +16,15 @@ i2c or RTC and LCD
 
 DS3231 RTC RealTimeClock
 
-start time end time let plants sleep at night
+start time end time let plants sleep at night, no watering at night
 
 maximum number of watering a day
 
 pauzetime after watering
 
 timed duration of watering
+
+software reboot at 23:59:59 to reset wateringcounter and fresh millis();
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
