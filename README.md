@@ -5,7 +5,7 @@ Arduino Nano, Uno or other Arduino device
 
 2 analog inputs for 2 Capacitive Moisture Sensors 
 
-1 output for watering start
+1 output for watering start (Pump and/or Valve)
 
 i2c for RTC and LCD
 
