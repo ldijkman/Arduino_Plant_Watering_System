@@ -32,8 +32,8 @@ and you must make the source code available.
 //
 // DS3231 connected to +5vdc GND SCL SDA
 // 4x20 i2c LCD connected to +5vdc GND SCL SDA
-//
-//
+// capacitive soil moisture sensors A0 A1
+// Pump and or valve output D13 (is also onboard LED)
 
 #include "RTClib.h" // https://github.com/adafruit/RTClib
 
