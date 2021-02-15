@@ -22,7 +22,7 @@ start watering on average startvalue in % of 2 Capacitive Moisture Sensors
 
 timed duration of watering
 
-pauzetime after watering
+pauzetime after watering, give water time to soak into soil
 
 maximum number of watering a day
 
