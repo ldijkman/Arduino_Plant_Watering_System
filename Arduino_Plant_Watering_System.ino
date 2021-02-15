@@ -9,9 +9,8 @@
 // maar dan staat alles stil als je bijvoorbeeld een delay van 10 minuten hebt
 // gebeurt er niks gedurende die 10 minuten
 //
-// Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
 //
-
+// Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
 /*
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
