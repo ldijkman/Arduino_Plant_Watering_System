@@ -24,7 +24,7 @@ pauzetime after watering
 
 timed duration of watering
 
-software reboot at 23:59:59 to reset wateringcounter and fresh millis();
+software reboot, asm volatile (" jmp 0"); at 23:59:59 to reset wateringcounter and fresh millis();
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
