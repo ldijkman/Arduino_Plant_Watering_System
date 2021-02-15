@@ -31,6 +31,7 @@ and you must make the source code available.
 //
 //
 // DS3231 connected to +5vdc GND SCL SDA
+// 4x20 i2c LCD connected to +5vdc GND SCL SDA
 //
 //
 
