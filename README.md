@@ -20,7 +20,7 @@ DS3231 RTC RealTimeClock
 
 start time, end time, let plants sleep at night, no watering at night
 
-start watering on average startvalue in % of 2 Capacitive Moisture Sensors 
+start watering on average startvalue in % of 2 Capacitive Soil Moisture Sensors 
 
 timed duration of watering
 
