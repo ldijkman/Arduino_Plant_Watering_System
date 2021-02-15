@@ -292,6 +292,7 @@ void loop () {
     asm volatile("jmp 0");                                              // end of day reset/reboot arduino //start the day with a fresh millis() counter
     // no worry's about millis overflow every 50 days
     // and resets watergiftcounter
+    watergiftcounter=0;   // if you trust the millis(); 49-50 days overflow       comment out the line // asm volatile("jmp 0"); 
   }
 
 }
