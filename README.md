@@ -26,7 +26,7 @@ timed duration of watering
 
 pauzetime after watering, give water time to soak into soil
 
-maximum number of watering a day
+watering counter, maximum number of watering a day
 
 software reboot, asm volatile (" jmp 0"); at 23:59:59 to reset wateringcounter and fresh millis();
 
