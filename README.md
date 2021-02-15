@@ -32,6 +32,8 @@ watering counter, maximum number of watering a day
 
 software reboot, asm volatile (" jmp 0"); at 23:59:59 to reset wateringcounter and fresh millis();
 
+i do not know if my code is 49-50 day millis() overflow safe so thats why i do a software reboot
+
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 GNU General Public License,
