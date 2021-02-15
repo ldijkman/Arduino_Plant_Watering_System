@@ -196,8 +196,8 @@ void loop () {
         if (watergiftcounter == 0 || pauzetimer == 0 ) {          // eerstewatergift van de dag of pauzetimer==0
           if (watergiftcounter <= maximumaantalbeurtenperdag) {
             if (ValveStatus == 0) {
-              starttime = millis();
-              ValveStatus = 1;
+              starttime = millis();                              // save starttime millis only once
+              ValveStatus = 1;                                   // next time whe do no get here because valvestatus is now 1
               watergiftcounter = watergiftcounter + 1;
             }
           }
