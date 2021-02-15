@@ -39,3 +39,6 @@ but you may not impose any restrictions on further distribution,
 and you must make the source code available.
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+http://Paypal.Me/LDijkman
