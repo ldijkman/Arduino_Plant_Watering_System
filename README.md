@@ -5,18 +5,11 @@ Arduino Plant Watering System
 
 Arduino Nano, Uno or other Arduino device
 
-2 analog inputs for 2 Capacitive Soil Moisture Sensors 
+2 analog inputs A0 A1 for 2 Capacitive Soil Moisture Sensors 
 
-1 output for watering start (Pump and/or Valve)
+1 output D13 for watering start (Pump and/or Valve) (output D13 is also onboard LED)
 
-i2c for RTC and LCD
-
-
-2 Capacitive Soil Moisture Sensors 
-
-4x20 i2c LCD
-
-DS3231 RTC RealTimeClock
+i2c for DS3231 RTC RealTimeClock and 4x20 i2c LCD
 
 start time, end time, let plants sleep at night, no watering at night
 
