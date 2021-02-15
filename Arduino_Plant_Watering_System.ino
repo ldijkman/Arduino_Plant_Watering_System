@@ -82,8 +82,10 @@ void setup () {
   pinMode(13, OUTPUT);                 // pin 13 for valve open / close is also the onboard LED
 
   Serial.begin(115200);               // serial monitor
-
+  
+ 
   lcd.begin();                        // 21, 22);  // Initialize I2C LCD module (SDA = GPIO21, SCL = GPIO22)
+ // lcd.init();                      // Jo de Martelaer says lcd.begin(); does not work on win10 i have no problem with it on linux arduino ide 1.8.13
 
   lcd.backlight();                    // Turn backlight ON
   lcd.clear();                        // clear lcd
