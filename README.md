@@ -22,6 +22,8 @@ start time, end time, let plants sleep at night, no watering at night
 
 start watering on average startvalue in % of 2 Capacitive Soil Moisture Sensors 
 
+Better NOT put the sensors in 1 pot they may influence eachother if in 1 pot
+
 timed duration of watering
 
 pauzetime after watering, give water time to soak into soil
