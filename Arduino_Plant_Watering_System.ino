@@ -119,6 +119,8 @@ void loop () {
   second_ = now.second();
   if (last_second != second_) {       // only do this once each second
 
+    last_second = second_;
+    
     Serial.print("millis() "); Serial.println(millis());
     Serial.println("");
 
@@ -270,7 +272,7 @@ void loop () {
     Serial.print("pauzetimer ");
     Serial.println(pauzetimer / 1000);
 
-    last_second = second_;
+  
 
   }  // end do this only once each second
 
