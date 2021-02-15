@@ -5,7 +5,7 @@ Arduino Plant Watering System
 
 Arduino Nano, Uno or other Arduino device
 
-2 analog inputs A0 A1 for 2 Capacitive Soil Moisture Sensors 
+2 analog inputs A0 A1 for 2 Capacitive Soil Moisture Sensors (Capacitive soil sensor is less corrosion sensitive)
 
 1 output D13 for watering start (Pump and/or Valve) (output D13 is also onboard LED)
 
