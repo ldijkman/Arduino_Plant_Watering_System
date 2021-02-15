@@ -57,7 +57,7 @@ http://Paypal.Me/LDijkman
 
 Rotary encoder menu 
 
-change and save parameters to make it an independant stand alone system
+change and save parameters to EEPROM to make it an independant stand alone system
 
 reuse parts of code from
 
