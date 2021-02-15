@@ -45,7 +45,7 @@ char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursd
 #include <LiquidCrystal_I2C.h>       // Include LiquidCrystal_I2C library
 // https://github.com/marcoschwartz/LiquidCrystal_I2C/archive/master.zip
 
-LiquidCrystal_I2C lcd(0x27, 20, 4);  // Configure LiquidCrystal_I2C library with 0x27 address, 16 columns and 2 rows
+LiquidCrystal_I2C lcd(0x27, 20, 4);  // Configure LiquidCrystal_I2C library with 0x27 address, 20 columns and 4 rows
 
 int starttijdwatergift = 9;                             // 9 uur smorgens
 int eindtijdwatergift = 21;                             // 21 uur savonds
