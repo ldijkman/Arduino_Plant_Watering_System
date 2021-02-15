@@ -3,6 +3,13 @@ Arduino Plant Watering System
 
 arduino Nano, Uno or other Arduino device
 
+2 analog inputs for 2 moisture sensors 
+
+1 output for watering start
+
+i2c or RTC and LCD
+
+
 2 capacitive moisture sensors
 
 4x20 i2c LCD
