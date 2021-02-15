@@ -23,7 +23,10 @@ and you must make the source code available.
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 */
 
-// Jo Martelaer arduino uno watergift
+// Jo de Martelaer arduino uno watergift
+// Boomkwekerij Hortus Conclusus
+// https://www.hortusconclusus.be/
+//
 //
 // DS3231 connected to +5vdc GND SCL SDA
 //
