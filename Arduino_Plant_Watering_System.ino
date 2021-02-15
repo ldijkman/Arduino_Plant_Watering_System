@@ -1,5 +1,6 @@
 
 // https://github.com/ldijkman/Arduino_Plant_Watering_System
+// http://Paypal.Me/LDijkman
 
 // komt wat logica in
 // watergift timer werkt, pauzetimer werkt ook
