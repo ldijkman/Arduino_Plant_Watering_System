@@ -12,17 +12,12 @@
 //
 // Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
 /*
-&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
-GNU General Public License,
-
-which basically means that you may freely copy, change, and distribute it,
-
-but you may not impose any restrictions on further distribution,
-
-and you must make the source code available.
-
-&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+  GNU General Public License,
+  which basically means that you may freely copy, change, and distribute it,
+  but you may not impose any restrictions on further distribution,
+  and you must make the source code available.
+  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 */
 
 // Jo de Martelaer arduino uno watergift
@@ -70,7 +65,7 @@ byte watergiftcounter = 0;
 
 byte ValveStatus = 0;
 
-byte second_;
+byte second_now;
 byte last_second;
 
 byte maximumaantalbeurtenperdag = 8;
@@ -82,10 +77,10 @@ void setup () {
   pinMode(13, OUTPUT);                 // pin 13 for valve open / close is also the onboard LED
 
   Serial.begin(115200);               // serial monitor
-  
- 
+
+
   lcd.begin();                        // 21, 22);  // Initialize I2C LCD module (SDA = GPIO21, SCL = GPIO22)
- // lcd.init();                      // Jo de Martelaer says lcd.begin(); does not work on win10 i have no problem with it on linux arduino ide 1.8.13
+  // lcd.init();                      // Jo de Martelaer says lcd.begin(); does not work on win10 i have no problem with it on linux arduino ide 1.8.13
 
   lcd.backlight();                    // Turn backlight ON
   lcd.clear();                        // clear lcd
@@ -116,11 +111,11 @@ void loop () {
 
   DateTime now = rtc.now();
 
-  second_ = now.second();
-  if (last_second != second_) {       // only do this once each second
+  second_now = now.second();
+  if (last_second != second_now) {       // only do this once each second
 
-    last_second = second_;
-    
+    last_second = second_now;
+
     Serial.print("millis() "); Serial.println(millis());
     Serial.println("");
 
@@ -272,7 +267,7 @@ void loop () {
     Serial.print("pauzetimer ");
     Serial.println(pauzetimer / 1000);
 
-  
+
 
   }  // end do this only once each second
 
@@ -294,7 +289,7 @@ void loop () {
     asm volatile("jmp 0");                                              // end of day reset/reboot arduino //start the day with a fresh millis() counter
     // no worry's about millis overflow every 50 days
     // and resets watergiftcounter
-    watergiftcounter=0;   // if you trust the millis(); 49-50 days overflow       comment out the line // asm volatile("jmp 0"); 
+    watergiftcounter = 0; // if you trust the millis(); 49-50 days overflow       comment out the line // asm volatile("jmp 0");
   }
 
 }
