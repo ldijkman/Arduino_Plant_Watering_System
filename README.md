@@ -53,9 +53,11 @@ https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/Arduino_Plan
 http://Paypal.Me/LDijkman
 
 #
-# Future
+# Future:
 
-Rotary encoder menu change and save parameters to make it an independant stand alone system
+Rotary encoder menu 
+
+change and save parameters to make it an independant stand alone system
 
 reuse parts of code from
 
