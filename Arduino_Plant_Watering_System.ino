@@ -275,7 +275,6 @@ void loop () {
 
 
   if (watergiftcounter > maximumaantalbeurtenperdag) {
-    // blijft in deze loop tot midnight reset/reboot
     lcd.setCursor(0, 3);
     lcd.print(maximumaantalbeurtenperdag);
     lcd.print(" maximumaantalbeurt");
