@@ -186,12 +186,13 @@ void loop () {
       Serial.print("averageinprocent = "); Serial.print(averageinprocent); Serial.print(" switchpoint = "); Serial.println(wetnesforstartwatergiftbeurt);
       lcd.setCursor(0, 1);
       lcd.print("S1=");
-      lcd.print(map(sense1, drogesensor, nattesensor, 0, 100));
+      lcd.print(map(sense1, drogesensor, nattesensor, 0, 100));lcd.print("   ");
+      lcd.setCursor(6, 1);
       lcd.print(" S2=");
-      lcd.print(map(sense2, drogesensor, nattesensor, 0, 100));
+      lcd.print(map(sense2, drogesensor, nattesensor, 0, 100));lcd.print("   ");
+      lcd.setCursor(13, 1);
       lcd.print(" av=");
-      lcd.print(averageinprocent);
-      lcd.print("   ");
+      lcd.print(averageinprocent);lcd.print("   ");
 
 
       if (averageinprocent <= wetnesforstartwatergiftbeurt) {      // soil is dryer as setpoint
