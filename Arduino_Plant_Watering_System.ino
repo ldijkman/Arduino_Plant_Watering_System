@@ -52,10 +52,10 @@ long watergifttimer;
 long pauzetimer;
 long startpauzetimer;
 long starttime;
-int wetnesforstartwatergiftbeurt = 30;                  // if kleiner als 30 start watergift
+int wetnesforstartwatergiftbeurt = 30;                  // if smaller als 30% start watering
 
-int drogesensor = 626;                                  // een droge sensor geeft bij mij 653
-int nattesensor = 256;                                  // een natte sensor geeft bij mij 285
+int drogesensor = 626;                                  // my sensor value Dry in air   653
+int nattesensor = 256;                                  // my sensor value wit in water 285
 
 int sense1;
 int sense2;
