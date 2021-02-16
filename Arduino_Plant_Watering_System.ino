@@ -104,10 +104,11 @@ void setup () {
 
 void loop () {
 
-
-
+  (void)analogRead(A0);     // reduce analog pins influence eachother?
   sense1 = analogRead(A0);
+  (void)analogRead(A1);     // reduce analog pins influence eachother?
   sense2 = analogRead(A1);
+  (void)analogRead(A2);     // reduce analog pins influence eachother?
   sense3 = analogRead(A2);
 
   DateTime now = rtc.now();
