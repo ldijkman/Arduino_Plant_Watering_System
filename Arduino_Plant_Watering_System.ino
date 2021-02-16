@@ -56,13 +56,13 @@ long starttime;
 int wetnesforstartwatergiftbeurt = 30;                  // if smaller als 30% start watering
 
 int drogesensor = 626;                                  // my sensor value Dry in air   653
-int nattesensor = 256;                                  // my sensor value wit in water 285
+int nattesensor = 256;                                  // my sensor value wet in water 285
 
 int sense1;
 int sense2;
 int sense3;
 
-int averageinprocent;                                  // gemiddelde van meerdere sensoren
+int averageinprocent;                                  // gemiddelde van meerdere average multiple sensoren
 
 byte watergiftcounter = 0;
 
@@ -82,8 +82,8 @@ void setup () {
   Serial.begin(115200);               // serial monitor
 
 
-  lcd.begin();                        // 21, 22);  // Initialize I2C LCD module (SDA = GPIO21, SCL = GPIO22)
-  // lcd.init();                      // Jo de Martelaer says lcd.begin(); does not work on win10 i have no problem with it on linux arduino ide 1.8.13
+  lcd.begin();                        // lcd.begin(21, 22);  // Initialize I2C LCD module (SDA = GPIO21, SCL = GPIO22)
+  // lcd.init();                      // Jo de Martelaer says lcd.begin(); does not work on win10, strange i have no problem with it on linux arduino ide 1.8.13
 
   lcd.backlight();                    // Turn backlight ON
   lcd.clear();                        // clear lcd
