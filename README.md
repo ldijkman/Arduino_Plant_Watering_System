@@ -55,3 +55,7 @@ change and save parameters to EEPROM to make it an independant stand alone syste
 reuse parts of code from
 
 http://www.sticker.tk/forum/index.php?action=view&id=299
+
+or
+
+http://www.sticker.tk/forum/index.php?action=view&id=296
