@@ -1,7 +1,7 @@
 # Arduino Plant Watering System
 Arduino Plant Watering System
 
-blob:https://www.youtube.com/42f06a8b-63d9-40e6-9712-b4398e2fa301
+https://youtu.be/1jKAxLyOY_s
 
 +/- 10 Dollar Automated Plant Watering Computer on Soil Moisture
 
@@ -44,7 +44,7 @@ and you must make the source code available.
 
 https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/Arduino_Plant_Watering_System.ino
 
-blob:https://www.youtube.com/42f06a8b-63d9-40e6-9712-b4398e2fa301
+https://youtu.be/1jKAxLyOY_s
 
 
 http://Paypal.Me/LDijkman
