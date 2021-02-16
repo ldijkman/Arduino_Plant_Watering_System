@@ -195,8 +195,8 @@ void loop () {
       lcd.print(averageinprocent);lcd.print("   ");
 
 
-      if (averageinprocent <= wetnesforstartwatergiftbeurt) {      // soil is dryer as setpoint
-        if (watergiftcounter == 0 || pauzetimer == 0 ) {          // firstwaterpoor of day or pauzetimer==0
+      if (averageinprocent <= wetnesforstartwatergiftbeurt) {      // if soil is dryer as setpoint
+        if (watergiftcounter == 0 || pauzetimer == 0 ) {          // if firstwaterpoor of day or pauzetimer==0
           if (watergiftcounter <= maximumaantalbeurtenperdag) {
             if (ValveStatus == 0) {
               starttime = millis();                              // save starttime millis only once
