@@ -1,5 +1,7 @@
 
 // https://github.com/ldijkman/Arduino_Plant_Watering_System
+// https://youtu.be/1jKAxLyOY_s
+//
 // http://Paypal.Me/LDijkman
 
 // komt wat logica in
