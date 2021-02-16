@@ -25,6 +25,7 @@
 // Jo de Martelaer arduino uno watergift
 // Boomkwekerij Hortus Conclusus
 // https://www.hortusconclusus.be/
+// Catalogus https://www.hortusconclusus.be/collections
 //
 //
 // DS3231 connected to +5vdc GND SCL SDA
