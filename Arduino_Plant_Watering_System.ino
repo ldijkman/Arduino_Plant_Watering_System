@@ -220,12 +220,7 @@ void loop () {
       startpauzetimer = millis();
       if (millis() - starttime <= duurwatergiftbeurt) {
         lcd.setCursor(0, 3);
-        if (ValveStatus == 0) {
-          lcd.print("Closed");
-        }
-        if (ValveStatus == 1) {
-          lcd.print("Open");
-        }
+        lcd.print("Open");
         lcd.print(" ");
         watergifttimer = (starttime + duurwatergiftbeurt - millis()) / 1000;
         if (watergifttimer <= 0)watergifttimer = 0;
