@@ -217,7 +217,7 @@ void loop () {
     if (ValveStatus == 1) {
       Serial.println("watergift start kraan open pomp aan");
       digitalWrite(13, HIGH);             // 13 is onboard led en waterklep en/of waterpomp start
-      startpauzetimer = millis();
+      startpauzetimer = millis();         // the latest time  we get into "if (ValveStatus == 1) {" will be used to set "startpauzetimer = millis();" 
       if (millis() - starttime <= duurwatergiftbeurt) {
         lcd.setCursor(0, 3);
         lcd.print("Open");
