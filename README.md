@@ -67,4 +67,6 @@ http://www.sticker.tk/forum/index.php?action=view&id=296
 
 less then a dollar Capacitive Soil Moisture Sensor on aliexpress
 
+Capacitive is better corrosive resistant
+
 <img src="https://cdn-reichelt.de/bilder/web/xxl_ws/A300/CAP-SHYG_1.png">
