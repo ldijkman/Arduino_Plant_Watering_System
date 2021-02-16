@@ -59,3 +59,8 @@ http://www.sticker.tk/forum/index.php?action=view&id=299
 or
 
 http://www.sticker.tk/forum/index.php?action=view&id=296
+
+
+less then a dollar sensor on aliexpress
+
+<img src="https://cdn-reichelt.de/bilder/web/xxl_ws/A300/CAP-SHYG_1.png">
