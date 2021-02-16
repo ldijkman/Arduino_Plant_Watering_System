@@ -187,11 +187,11 @@ void loop () {
       lcd.setCursor(0, 1);
       lcd.print("S1=");
       lcd.print(map(sense1, drogesensor, nattesensor, 0, 100));lcd.print("   ");
-      lcd.setCursor(6, 1);
-      lcd.print(" S2=");
+      lcd.setCursor(7, 1);
+      lcd.print("S2=");
       lcd.print(map(sense2, drogesensor, nattesensor, 0, 100));lcd.print("   ");
-      lcd.setCursor(13, 1);
-      lcd.print(" av=");
+      lcd.setCursor(14, 1);
+      lcd.print("av=");
       lcd.print(averageinprocent);lcd.print("   ");
 
 
