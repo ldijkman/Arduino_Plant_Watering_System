@@ -1,17 +1,3 @@
-
-// https://github.com/ldijkman/Arduino_Plant_Watering_System
-// https://youtu.be/1jKAxLyOY_s
-//
-// http://Paypal.Me/LDijkman
-
-// komt wat logica in
-// watergift timer werkt, pauzetimer werkt ook
-// maar is alleen zichtbaar met LCD
-// kan makkelijker met gewone delays
-// maar dan staat alles stil als je bijvoorbeeld een delay van 10 minuten hebt
-// gebeurt er niks gedurende die 10 minuten
-//
-//
 // Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
 /*
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -21,7 +7,19 @@
   and you must make the source code available.
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 */
-
+// https://github.com/ldijkman/Arduino_Plant_Watering_System
+// https://youtu.be/1jKAxLyOY_s
+//
+// http://Paypal.Me/LDijkman
+//
+// komt wat logica in
+// watergift timer werkt, pauzetimer werkt ook
+// maar is alleen zichtbaar met LCD
+// kan makkelijker met gewone delays
+// maar dan staat alles stil als je bijvoorbeeld een delay van 10 minuten hebt
+// gebeurt er niks gedurende die 10 minuten
+//
+//
 // Jo de Martelaer arduino uno watergift
 // Boomkwekerij Hortus Conclusus
 // https://www.hortusconclusus.be/
