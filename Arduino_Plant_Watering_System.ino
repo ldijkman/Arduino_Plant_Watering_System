@@ -180,7 +180,7 @@ void loop () {
 
 
 
-    if (now.hour() >= starttijdwatergift && now.hour() <= eindtijdwatergift) {
+    if (now.hour() >= starttijdwatergift && now.hour() < eindtijdwatergift) {
       Serial.println("zit binnnen watergift mogelijk tijden");
       averageinprocent = map(((sense1 + sense2 ) / 2), drogesensor, nattesensor, 0, 100);
       Serial.print("averageinprocent = "); Serial.print(averageinprocent); Serial.print(" switchpoint = "); Serial.println(wetnesforstartwatergiftbeurt);
