@@ -179,8 +179,7 @@ void loop () {
 
 
 
-    if (now.hour() >= starttijdwatergift && now.hour() < eindtijdwatergift) {
-      Serial.println("zit binnnen watergift mogelijk tijden");
+
       averageinprocent = map(((sense1 + sense2 ) / 2), drogesensor, nattesensor, 0, 100);
       Serial.print("averageinprocent = "); Serial.print(averageinprocent); Serial.print(" switchpoint = "); Serial.println(wetnesforstartwatergiftbeurt);
       lcd.setCursor(0, 1);
@@ -193,7 +192,9 @@ void loop () {
       lcd.print("av=");
       lcd.print(averageinprocent);lcd.print("   ");
 
-
+    if (now.hour() >= starttijdwatergift && now.hour() < eindtijdwatergift) {
+      Serial.println("zit binnnen watergift mogelijk tijden");
+      
       if (averageinprocent <= wetnesforstartwatergiftbeurt) {      // if soil is dryer as setpoint
         if (watergiftcounter == 0 || pauzetimer == 0 ) {          // if firstwaterpoor of day or pauzetimer==0
           if (watergiftcounter <= maximumaantalbeurtenperdag) {
