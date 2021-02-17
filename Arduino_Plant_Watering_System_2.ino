@@ -1,23 +1,29 @@
+
 /*
 maybe a way to discharge analog read, affecting other pin????
 switch from low output to analogread
 i do not have 2 sensors to test it, only a floating second analog pin
-
 i dont know, im no programmer just a prutser / thinker
+e a way to discharge analog read, affecting other pin????
 
     pinMode(A0,OUTPUT);
     digitalWrite(A0,LOW);
     pinMode(A0,INPUT);
     delay(75);
     test1 = test1 + analogRead(A0);
+    pinMode(A0,OUTPUT);
+    digitalWrite(A0,LOW);
  
     pinMode(A3,OUTPUT);
     digitalWrite(A3,LOW);
     pinMode(A3,INPUT);
     delay(75);
     test2 = test2 + analogRead(A3);
+    pinMode(A3,OUTPUT);
+    digitalWrite(A3,LOW);
 
  */
+
 
 //
 // Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
@@ -139,12 +145,17 @@ void loop () {
     pinMode(A0,INPUT);
     delay(75);
     test1 = test1 + analogRead(A0);
+    pinMode(0,OUTPUT);
+    digitalWrite(A0,LOW);
  
     pinMode(A3,OUTPUT);
     digitalWrite(A3,LOW);
     pinMode(A3,INPUT);
     delay(75);
     test2 = test2 + analogRead(A3);
+    pinMode(A3,OUTPUT);
+    digitalWrite(A3,LOW);
+    
   }
   sense1 = (test1 / 5);             // divide by 100
   sense2 = (test2 / 5);
