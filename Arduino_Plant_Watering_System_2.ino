@@ -20,7 +20,6 @@ switch from low output to analogread
 
  */
 
-
 //
 // Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
 /*
@@ -133,7 +132,7 @@ void loop () {
 
   long test1 = 0;
   long test2 = 0;
-  for (int cc = 0; cc <= 10; cc++) {     // do 100 readings
+  for (int cc = 0; cc < 5; cc++) {     // do 100 readings
     //(void) analogRead(A0);            // reduce analog pins influence eachother?
     
     pinMode(A0,OUTPUT);
@@ -153,8 +152,8 @@ void loop () {
     digitalWrite(A3,LOW);
 
   }
-  sense1 = (test1 / 10);             // divide by 100
-  sense2 = (test2 / 10);
+  sense1 = (test1 / 5);             // divide by 100
+  sense2 = (test2 / 5);
 
   pinMode(A0,INPUT);
   pinMode(A3,INPUT);
