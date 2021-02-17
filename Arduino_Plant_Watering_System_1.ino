@@ -1,5 +1,3 @@
-// 100 analogreads divided by 100
-//
 // Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
 /*
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -108,7 +106,7 @@ void setup () {
 
 
 void loop () {
- 
+
   long test1 = 0;
   long test2 = 0;
   for (int cc = 0; cc <= 100; cc++) {     // do 100 readings
@@ -219,6 +217,10 @@ void loop () {
           }
         }
       }
+    } else {
+      lcd.setCursor(0, 2);
+      lcd.print("Time NO Watering");
+      delay(500);
     }
 
 
