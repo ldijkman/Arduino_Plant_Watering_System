@@ -1,7 +1,7 @@
 /*
 maybe a way to discharge analog read, affecting other pin????
 switch from low output to analogread
-i do not have 2 sensors to test it
+i do not have 2 sensors to test it, only a floatinng second analog pin
 
 i dont know, im no programmer just a prutser / thinker
 
