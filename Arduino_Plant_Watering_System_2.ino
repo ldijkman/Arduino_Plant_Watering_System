@@ -4,7 +4,7 @@ maybe a way to discharge analog read, affecting other pin????
 switch from low output to analogread
 i do not have 2 sensors to test it, only a floating second analog pin
 i dont know, im no programmer just a prutser / thinker
-e a way to discharge analog read, affecting other pin????
+
 
     pinMode(A0,OUTPUT);
     digitalWrite(A0,LOW);
@@ -145,7 +145,7 @@ void loop () {
     pinMode(A0,INPUT);
     delay(75);
     test1 = test1 + analogRead(A0);
-    pinMode(0,OUTPUT);
+    pinMode(A0,OUTPUT);
     digitalWrite(A0,LOW);
  
     pinMode(A3,OUTPUT);
