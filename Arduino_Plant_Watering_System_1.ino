@@ -220,6 +220,8 @@ void loop () {
     } else {
       lcd.setCursor(0, 2);
       lcd.print("Time NO Watering");
+      lcd.setCursor(0, 3);
+      lcd.print("Closed");
       delay(500);
     }
 
