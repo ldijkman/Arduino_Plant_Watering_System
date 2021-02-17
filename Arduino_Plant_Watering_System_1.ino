@@ -1,3 +1,4 @@
+//
 // Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
 /*
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -28,7 +29,7 @@
 //
 // DS3231 connected to +5vdc GND SCL SDA
 // 4x20 i2c LCD connected to +5vdc GND SCL SDA
-// capacitive soil moisture sensors A0 A1
+// capacitive soil moisture sensors A0 A5
 // Pump and or valve output D13 (is also onboard LED)
 
 #include "RTClib.h" // https://github.com/adafruit/RTClib
@@ -43,7 +44,7 @@ char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursd
 
 LiquidCrystal_I2C lcd(0x27, 20, 4);  // Configure LiquidCrystal_I2C library with 0x27 address, 20 columns and 4 rows
 
-int starttijdwatergift = 9;                             // 9 uur smorgens
+int starttijdwatergift = 13;                             // 9 uur smorgens
 int eindtijdwatergift = 21;                             // 21 uur savonds
 long duurwatergiftbeurt = 1 * 60 * 1000L;     // 10 minuten in miliseconds  L is needed anders spoort arduino niet 30582 maakt hij van deze berekening
 long pauzenawatergiftbeurt = 1 * 60 * 1000L;  // 30 minuten pauze in milliseconds
@@ -114,9 +115,9 @@ void loop () {
     delay(1);
     test1 = test1 + analogRead(A0);
     delay(1);
-    (void) analogRead(A1);            // reduce analog pins influence eachother?
+    (void) analogRead(A5);            // reduce analog pins influence eachother?
     delay(1);
-    test2 = test2 + analogRead(A1);
+    test2 = test2 + analogRead(A5);
     delay(1);
   }
   sense1 = (test1 / 100);             // divide by 100
@@ -172,9 +173,9 @@ void loop () {
 
     Serial.println();
     Serial.print("1 read analogread A0 = "); Serial.println(analogRead(A0));
-    Serial.print("1 read analogread A1 = "); Serial.println(analogRead(A1));
+    Serial.print("1 read analogread A5 = "); Serial.println(analogRead(A5));
     Serial.print("100 read analogread A0 = "); Serial.println(sense1);
-    Serial.print("100 read analogread A1 = "); Serial.println(sense2);
+    Serial.print("100 read analogread A5 = "); Serial.println(sense2);
     Serial.print("analogread average = "); Serial.println((sense1 + sense2) / 2);
 
     // een droge sensor geeft bij mij 653
@@ -219,7 +220,7 @@ void loop () {
       }
     } else {
       lcd.setCursor(0, 2);
-      lcd.print("Time NO Watering");    // time not in range for watering, let the plants sleep
+      lcd.print("Time NO Watering");   // time not in range for watering, let the plants sleep
       lcd.setCursor(0, 3);
       lcd.print("Closed");
       delay(500);
