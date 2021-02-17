@@ -1,3 +1,5 @@
+// 100 analog reads divided by 100 
+// A0 and A3
 //
 // Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
 /*
@@ -29,7 +31,7 @@
 //
 // DS3231 connected to +5vdc GND SCL SDA
 // 4x20 i2c LCD connected to +5vdc GND SCL SDA
-// capacitive soil moisture sensors A0 A5
+// capacitive soil moisture sensors A0 A3
 // Pump and or valve output D13 (is also onboard LED)
 
 #include "RTClib.h" // https://github.com/adafruit/RTClib
@@ -115,9 +117,9 @@ void loop () {
     delay(1);
     test1 = test1 + analogRead(A0);
     delay(1);
-    (void) analogRead(A5);            // reduce analog pins influence eachother?
+    (void) analogRead(A3);            // reduce analog pins influence eachother?
     delay(1);
-    test2 = test2 + analogRead(A5);
+    test2 = test2 + analogRead(A3);
     delay(1);
   }
   sense1 = (test1 / 100);             // divide by 100
@@ -173,9 +175,9 @@ void loop () {
 
     Serial.println();
     Serial.print("1 read analogread A0 = "); Serial.println(analogRead(A0));
-    Serial.print("1 read analogread A5 = "); Serial.println(analogRead(A5));
+    Serial.print("1 read analogread A3 = "); Serial.println(analogRead(A3));
     Serial.print("100 read analogread A0 = "); Serial.println(sense1);
-    Serial.print("100 read analogread A5 = "); Serial.println(sense2);
+    Serial.print("100 read analogread A3 = "); Serial.println(sense2);
     Serial.print("analogread average = "); Serial.println((sense1 + sense2) / 2);
 
     // een droge sensor geeft bij mij 653
