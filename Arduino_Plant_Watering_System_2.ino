@@ -2,6 +2,8 @@
 maybe a way to discharge analog read, affecting other pin????
 switch from low output to analogread
 
+i dont know, im no programmer just a prutser / thinker
+
     pinMode(A0,OUTPUT);
     digitalWrite(A0,LOW);
     pinMode(A0,INPUT);
