@@ -9,16 +9,12 @@ i dont know, im no programmer just a prutser / thinker
     pinMode(A0,INPUT);
     delay(75);
     test1 = test1 + analogRead(A0);
-    pinMode(A0,OUTPUT);
-    digitalWrite(A0,LOW);
  
     pinMode(A3,OUTPUT);
     digitalWrite(A3,LOW);
     pinMode(A3,INPUT);
     delay(75);
     test2 = test2 + analogRead(A3);
-    pinMode(A3,OUTPUT);
-    digitalWrite(A3,LOW);
 
  */
 
@@ -142,17 +138,12 @@ void loop () {
     pinMode(A0,INPUT);
     delay(75);
     test1 = test1 + analogRead(A0);
-    pinMode(A0,OUTPUT);
-    digitalWrite(A0,LOW);
  
     pinMode(A3,OUTPUT);
     digitalWrite(A3,LOW);
     pinMode(A3,INPUT);
     delay(75);
     test2 = test2 + analogRead(A3);
-    pinMode(A3,OUTPUT);
-    digitalWrite(A3,LOW);
-
   }
   sense1 = (test1 / 5);             // divide by 100
   sense2 = (test2 / 5);
