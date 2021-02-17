@@ -219,7 +219,7 @@ void loop () {
       }
     } else {
       lcd.setCursor(0, 2);
-      lcd.print("Time NO Watering");
+      lcd.print("Time NO Watering");    // time not in range for watering, let the plants sleep
       lcd.setCursor(0, 3);
       lcd.print("Closed");
       delay(500);
