@@ -1,9 +1,8 @@
-
 /*
-maybe a way to discharge analog read, affecting other pin????
-switch from low output to analogread
-i do not have 2 sensors to test it, only a floating second analog pin
-i dont know, im no programmer just a prutser / thinker
+  maybe a way to discharge analog read, affecting other pin????
+  switch from low output to analogread
+  i do not have 2 sensors to test it, only a floating second analog pin
+  i dont know, im no programmer just a prutser / thinker
 
 
     pinMode(A0,OUTPUT);
@@ -13,7 +12,7 @@ i dont know, im no programmer just a prutser / thinker
     test1 = test1 + analogRead(A0);
     pinMode(A0,OUTPUT);
     digitalWrite(A0,LOW);
- 
+
     pinMode(A3,OUTPUT);
     digitalWrite(A3,LOW);
     pinMode(A3,INPUT);
@@ -22,7 +21,7 @@ i dont know, im no programmer just a prutser / thinker
     pinMode(A3,OUTPUT);
     digitalWrite(A3,LOW);
 
- */
+*/
 
 
 //
@@ -139,29 +138,29 @@ void loop () {
   long test2 = 0;
   for (int cc = 0; cc < 5; cc++) {     // do 100 readings
     //(void) analogRead(A0);            // reduce analog pins influence eachother?
-    
-    pinMode(A0,OUTPUT);
-    digitalWrite(A0,LOW);
-    pinMode(A0,INPUT);
+
+    pinMode(A0, OUTPUT);
+    digitalWrite(A0, LOW);
+    pinMode(A0, INPUT);
     delay(75);
     test1 = test1 + analogRead(A0);
-    pinMode(A0,OUTPUT);
-    digitalWrite(A0,LOW);
- 
-    pinMode(A3,OUTPUT);
-    digitalWrite(A3,LOW);
-    pinMode(A3,INPUT);
+    pinMode(A0, OUTPUT);
+    digitalWrite(A0, LOW);
+
+    pinMode(A3, OUTPUT);
+    digitalWrite(A3, LOW);
+    pinMode(A3, INPUT);
     delay(75);
     test2 = test2 + analogRead(A3);
-    pinMode(A3,OUTPUT);
-    digitalWrite(A3,LOW);
-    
+    pinMode(A3, OUTPUT);
+    digitalWrite(A3, LOW);
+
   }
   sense1 = (test1 / 5);             // divide by 100
   sense2 = (test2 / 5);
 
-  pinMode(A0,INPUT);
-  pinMode(A3,INPUT);
+  pinMode(A0, INPUT);
+  pinMode(A3, INPUT);
   delay(75);
 
   DateTime now = rtc.now();
@@ -219,28 +218,22 @@ void loop () {
     Serial.print("100 read analogread A3 = "); Serial.println(sense2);
     Serial.print("analogread average = "); Serial.println((sense1 + sense2) / 2);
 
-    // een droge sensor geeft bij mij 653
-    // een natte sensor geeft bij mij 285
 
     Serial.print("sensor1 "); Serial.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); Serial.println(" % wet");
-    Serial.print("sensor2 "); Serial.print(map(sense2, dry_sensor_one, wet_sensor_one, 0, 100)); Serial.println(" % wet");
-    Serial.print("Average "); Serial.print(map(((sense1 + sense2) / 2), dry_sensor_one, wet_sensor_one, 0, 100)); Serial.println(" % wet");
-
+    Serial.print("sensor2 "); Serial.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); Serial.println(" % wet");  
+    
+    averageinprocent = (map(sense1, dry_sensor_one, wet_sensor_one, 0, 100) + map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)) / 2;
+    Serial.print("Average "); Serial.print(averageinprocent); Serial.println(" % wet");
 
     Serial.println(' ');
-
-
-
-
-
-    averageinprocent = map(((sense1 + sense2 ) / 2), dry_sensor_one, wet_sensor_one, 0, 100);
+  
     Serial.print("averageinprocent = "); Serial.print(averageinprocent); Serial.print(" switchpoint = "); Serial.println(wetnesforstartwatergiftbeurt);
     lcd.setCursor(0, 1);
     lcd.print("S1=");
     lcd.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); lcd.print("   ");
     lcd.setCursor(7, 1);
     lcd.print("S2=");
-    lcd.print(map(sense2, dry_sensor_one, wet_sensor_one, 0, 100)); lcd.print("   ");
+    lcd.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); lcd.print("   ");
     lcd.setCursor(14, 1);
     lcd.print("av=");
     lcd.print(averageinprocent); lcd.print("   ");
