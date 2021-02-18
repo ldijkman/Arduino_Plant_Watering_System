@@ -71,6 +71,9 @@ Capacitive is better corrosive resistant
 
 <img src="https://cdn-reichelt.de/bilder/web/xxl_ws/A300/CAP-SHYG_1.png">
 
+#
+# 3D Printer:
+
 https://www.google.com/search?q=3d+print+moisture+sensor
 
 https://www.codemacs.com/raspberrypi/howtoo/soil-moisture-sensor-waterproofing.9450461.htm
