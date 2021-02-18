@@ -211,6 +211,17 @@ void loop () {
           }
         }
       }
+    } else {
+      lcd.setCursor(0, 2);
+      if (now.hour() < starttijdwatergift) {
+        lcd.print("Time < "); lcd.print(starttijdwatergift); lcd.print(" Hour    ");  // time not in range for watering, let the plants sleep
+      }
+      if (now.hour() >= eindtijdwatergift) {
+        lcd.print("Time >= "); lcd.print(eindtijdwatergift); lcd.print(" Hour    ");  // time not in range for watering, let the plants sleep
+      }
+      lcd.setCursor(0, 3);
+      lcd.print("Closed");
+      delay(500);
     }
 
 
