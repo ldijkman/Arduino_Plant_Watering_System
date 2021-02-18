@@ -274,8 +274,12 @@ void loop () {
 
     }
 
-    pauzetimer =  pauzenawatergiftbeurt - (millis() - startpauzetimer) ;
-    if (pauzetimer <= 0) pauzetimer = 0;
+  
+    if (ValveStatus == 0) {
+      pauzetimer =  pauzenawatergiftbeurt - (millis() - startpauzetimer) ;
+      if (pauzetimer <= 0) pauzetimer = 0;
+    }
+    
     if (watergiftcounter <= 0) pauzetimer = 0;                 // anders gaat pauzetimer onnodig lopen bij start of reboot
 
 
