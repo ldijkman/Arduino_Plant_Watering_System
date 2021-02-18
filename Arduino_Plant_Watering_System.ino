@@ -312,3 +312,6 @@ void loop () {
   }
 
 }
+
+// A Penny for Sharing My Thoughts?
+// http://www.paypal.me/LDijkman
