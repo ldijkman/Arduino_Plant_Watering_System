@@ -313,5 +313,7 @@ void loop () {
 
 }
 
+// Een Heitje voor een karweitje
+// If I had a nickel ...
 // A Penny for Sharing My Thoughts?
 // http://www.paypal.me/LDijkman
