@@ -298,7 +298,7 @@ void loop () {
         lcd.print(TempInt);
         lcd.print(F(" new= "));
         lcd.print(wetnesforstartwatergiftbeurt);
-        TempLong = millis();  //reset innactive time counter
+        TempLong = millis();                        // load millis() into Templong for next countdown delay
         while ((millis() - TempLong)  <= 5000) {
           lcd.setCursor(16, 3);
           lcd.print(5 - (millis() - TempLong) / 1000); lcd.print(" ");
