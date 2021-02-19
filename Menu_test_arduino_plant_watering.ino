@@ -498,7 +498,7 @@ void loop () {
   }
 
 
-  if (now.hour() == 23 && now.minute() == 59 && now.second() >= 59) {
+  if (now.hour() == 23 && now.minute() == 59 && now.second() >= 58) {
     asm volatile("jmp 0");                                              // end of day reset/reboot arduino //start the day with a fresh millis() counter
     // no worry's about millis overflow every 50 days
     // and resets watergiftcounter
