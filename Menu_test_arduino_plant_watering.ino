@@ -134,6 +134,8 @@ float SwitchOnTemp;
 float TempFloat;
 int TempInt;
 
+long backlightofftimeout = 1 * 60 * 1000L;      // time to switch backlight off
+long backlightstart;
 
 
 void setup () {
@@ -182,7 +184,7 @@ void setup () {
   //  EEPROM.get(40, MaxTime2SetPoint);
 
 
-
+  backlightstart = millis();
 
 }
 
@@ -190,6 +192,13 @@ void setup () {
 
 
 void loop () {
+
+  if (millis() - backlightstart > backlightofftimeout) {
+    lcd.noBacklight();                    // Turn backlight OFF
+  }
+  if (millis() - backlightstart < backlightofftimeout) {
+    lcd.backlight();                    // Turn backlight ON
+  }
 
   long test1 = 0;
   long test2 = 0;
@@ -223,6 +232,8 @@ void loop () {
 
   if (!SetButton()) {                       // if !=not SetButton, SW = pulled up by resistor on KY-040 to +,  so LOW is button pressed
     menu = 1;
+    backlightstart = millis();
+    lcd.backlight(); 
     while (SetButton() == LOW) {
       // loop until button released
       // maybe a timer here
@@ -417,6 +428,7 @@ void loop () {
 
 
     if (ValveStatus == 1) {
+      backlightstart = millis();
       Serial.println("watergift start kraan open pomp aan");
       digitalWrite(13, HIGH);             // 13 is onboard led en waterklep en/of waterpomp start
       startpauzetimer = millis();         // the latest time  we get into "if (ValveStatus == 1) {" will be used to set "startpauzetimer = millis();"
@@ -549,7 +561,6 @@ int8_t read_rotary() {
   // Copyright John Main - best-microcontroller-projects.com
   // https://www.best-microcontroller-projects.com/rotary-encoder.html
 }
-
 
 
 
