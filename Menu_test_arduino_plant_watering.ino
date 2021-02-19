@@ -3,6 +3,7 @@
  * trying to make a start with menu for changing parameters 
  * shows only text now => inside menu when you push the rotary encoder button
  *         a bit of copy paste modify from http://www.sticker.tk/forum/index.php?action=view&id=296
+ *                                         http://www.sticker.tk/forum/index.php?action=view&id=299
  * 
   maybe a way to discharge analog read, affecting other pin????
   switch from low output to analogread
