@@ -1,37 +1,19 @@
 /*
    removed the date for showing sp= setpoint               (add another LCD display with different i2c adress? ;-)
+   
    added rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
    trying to make a start with menu for changing parameters
    shows only text now => inside menu when you push the rotary encoder button
+   can change setpoint now
            a bit of copy paste modify from http://www.sticker.tk/forum/index.php?action=view&id=296
                                            http://www.sticker.tk/forum/index.php?action=view&id=299
 
-  maybe a way to discharge analog read, affecting other pin????
-  switch from low output to analogread
-  i do not have 2 sensors to test it, only a floating second analog pin
-  i dont know, im no programmer just a prutser / thinker
-    pinMode(A0,OUTPUT);
-    digitalWrite(A0,LOW);
-    pinMode(A0,INPUT);
-    delay(75);
-    test1 = test1 + analogRead(A0);
-    pinMode(A0,OUTPUT);
-    digitalWrite(A0,LOW);
-    pinMode(A3,OUTPUT);
-    digitalWrite(A3,LOW);
-    pinMode(A3,INPUT);
-    delay(75);
-    test2 = test2 + analogRead(A3);
-    pinMode(A3,OUTPUT);
-    digitalWrite(A3,LOW);
 */
 
 
 /*
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
   Arduino Automated Plant Watering System
-
   Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
   https://m.facebook.com/luberth.dijkman
   https://github.com/ldijkman/Arduino_Plant_Watering_System
@@ -40,13 +22,9 @@
   which basically means that you may freely copy, change, and distribute it,
   but you may not impose any restrictions on further distribution,
   and you must make the source code available.
-
   https://www.gnu.org/licenses
-
   http://Paypal.Me/LDijkman
-
   All above must be included in any redistribution
-
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 */
 
@@ -96,11 +74,11 @@ long TempLong;
 
 int wetnesforstartwatergiftbeurt = 30;                  // if smaller als 30% start watering
 
-int dry_sensor_one = 730;                                  // my sensor value Dry in air   653
-int wet_sensor_one = 428;                                  // my sensor value wet in water 285
+int dry_sensor_one = 804;                                  // my sensor value Dry in air   653
+int wet_sensor_one = 449;                                  // my sensor value wet in water 285
 
-int dry_sensor_two = 800;                                  // my sensor value Dry in air   653
-int wet_sensor_two = 437;                                  // my sensor value wet in water 285
+int dry_sensor_two = 804;                                  // my sensor value Dry in air   653
+int wet_sensor_two = 449;                                  // my sensor value wet in water 285
 
 int sense1;
 int sense2;
@@ -127,7 +105,7 @@ byte maximumaantalbeurtenperdag = 8;
 static uint8_t prevNextCode = 0;
 static uint16_t store = 0;
 
-#define backlightstartbutton 5        // button on input D5, if pulled down to ground backlight goes on (NO normally open momentary pushbutton)
+#define backlightstartbutton 5        // button on input D5, if pulled down to ground backlight goes on
 //
 
 byte menu = 0;
@@ -149,8 +127,8 @@ void setup () {
   pinMode(CLK, INPUT_PULLUP);          // rotary encoder
   pinMode(DATA, INPUT);                // rotary encoder
   pinMode(DATA, INPUT_PULLUP);         // rotary encoder
- 
-  pinMode(backlightstartbutton, INPUT_PULLUP);            // button on input "backlightstartbutton",  if pulled down to ground backlight goes on (NO normally open momentary pushbutton)
+
+  pinMode(backlightstartbutton, INPUT_PULLUP);            // button on input "backlightstartbutton",  if pulled down to ground backlight goes on
 
   Serial.begin(115200);               // serial monitor
 
@@ -204,42 +182,32 @@ void loop () {
     lcd.backlight();                    // Turn backlight ON
   }
 
-  if(digitalRead(backlightstartbutton)==LOW){backlightstart = millis();}   // button on input "backlightstartbutton",  if pulled down to ground backlight goes on (NO normally open momentary pushbutton)
+  if (digitalRead(backlightstartbutton) == LOW) {
+    backlightstart = millis(); // button on input "backlightstartbutton",  if pulled down to ground backlight goes on
+  }
+
 
   long test1 = 0;
   long test2 = 0;
-  for (int cc = 0; cc < 5; cc++) {     // do 100 readings
-    //(void) analogRead(A0);            // reduce analog pins influence eachother?
-
-    pinMode(A0, OUTPUT);
-    digitalWrite(A0, LOW);
-    pinMode(A0, INPUT);
-    delay(75);
+  for (int cc = 0; cc < 100; cc++) {     // do 100 readings
+    (void) analogRead(A0);            // reduce analog pins influence eachother?
+    delay(1);
     test1 = test1 + analogRead(A0);
-    pinMode(A0, OUTPUT);
-    digitalWrite(A0, LOW);
-
-    pinMode(A3, OUTPUT);
-    digitalWrite(A3, LOW);
-    pinMode(A3, INPUT);
-    delay(75);
+    delay(1);
+    (void) analogRead(A3);            // reduce analog pins influence eachother?
+    delay(1);
     test2 = test2 + analogRead(A3);
-    pinMode(A3, OUTPUT);
-    digitalWrite(A3, LOW);
-
+    delay(1);
   }
-  sense1 = (test1 / 5);             // divide by 100
-  sense2 = (test2 / 5);
+  sense1 = (test1 / 100);             // divide by 100
+  sense2 = (test2 / 100);
 
-  pinMode(A0, INPUT);
-  pinMode(A3, INPUT);
-  delay(75);
 
 
   if (!SetButton()) {                       // if !=not SetButton, SW = pulled up by resistor on KY-040 to +,  so LOW is button pressed
     menu = 1;
     backlightstart = millis();
-    lcd.backlight(); 
+    lcd.backlight();
     while (SetButton() == LOW) {                                    // while setbutton==LOW, pulled up by resistor, LOW is pressed
       // loop until button released
       // maybe a timer here
@@ -276,7 +244,7 @@ void loop () {
 
     float rval;
     if ( rval = read_rotary() ) {
-      wetnesforstartwatergiftbeurt = wetnesforstartwatergiftbeurt + (rval);      
+      wetnesforstartwatergiftbeurt = wetnesforstartwatergiftbeurt + (rval);
       if (wetnesforstartwatergiftbeurt >= 70) wetnesforstartwatergiftbeurt = 70;
       if (wetnesforstartwatergiftbeurt <= 10) wetnesforstartwatergiftbeurt = 10;
       TempLong = millis();  //reset innactive time counter
@@ -286,7 +254,7 @@ void loop () {
 
     }
 
-    if (SetButton()==LOW) {                                      // if setbutton==LOW, pulled up by resistor, LOW is pressed
+    if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
       menu = 2;
       lcd.clear();
       delay(250);
@@ -596,4 +564,3 @@ void TimeOut() {
 // If I had a nickel ...
 // A Penny for Sharing My Thoughts?
 // http://www.paypal.me/LDijkman
-
