@@ -307,11 +307,15 @@ void loop () {
     if (now.second() <= 9)lcd.print('0');
     lcd.print(now.second());
     lcd.print(" ");
-    lcd.print(now.day());
-    lcd.print("-");
-    lcd.print(now.month());
-    lcd.print("-");
-    lcd.print(now.year());
+    //lcd.print(now.day());
+    //lcd.print("-");
+    //lcd.print(now.month());
+    //lcd.print("-");
+    //lcd.print(now.year());
+    //lcd.print(" ");
+    lcd.setCursor(14, 0);
+    lcd.print("sp=");                           // switchpoint
+    lcd.print(wetnesforstartwatergiftbeurt);
     lcd.print(" ");
 
     Serial.println(' ');
