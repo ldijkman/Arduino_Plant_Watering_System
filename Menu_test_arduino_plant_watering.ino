@@ -26,22 +26,28 @@
 
 /*
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+  
   Arduino Automated Plant Watering System
+  
   Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
   https://m.facebook.com/luberth.dijkman
-  
+  https://github.com/ldijkman/Arduino_Plant_Watering_System
+  https://youtu.be/1jKAxLyOY_s
+
   GNU General Public License,
   which basically means that you may freely copy, change, and distribute it,
   but you may not impose any restrictions on further distribution,
   and you must make the source code available.
   
   https://www.gnu.org/licenses
+  
+  http://Paypal.Me/LDijkman
+  
+  All above must be included in any redistribution
+  
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 */
-// https://github.com/ldijkman/Arduino_Plant_Watering_System
-// https://youtu.be/1jKAxLyOY_s
-//
-// http://Paypal.Me/LDijkman
+
 //
 // komt wat logica in
 // watergift timer werkt, pauzetimer werkt ook
@@ -455,4 +461,14 @@ int8_t read_rotary() {
   // Copyright John Main - best-microcontroller-projects.com
   // https://www.best-microcontroller-projects.com/rotary-encoder.html
 }
+
+
+
+
+
+// Een Heitje voor een karweitje
+// If I had a nickel ...
+// A Penny for Sharing My Thoughts?
+// http://www.paypal.me/LDijkman
+
 
