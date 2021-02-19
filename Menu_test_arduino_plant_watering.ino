@@ -134,7 +134,7 @@ void setup () {
 
   pinMode(13, OUTPUT);                 // pin 13 for valve open / close is also the onboard LED
 
-  pinMode(rotarybutton_SW, INPUT);       // rotary encoder
+  pinMode(rotarybutton_SW, INPUT);       // rotary encoder SW = pulled up by resistor on KY-040 to +
   pinMode(CLK, INPUT);               // rotary encoder
   pinMode(CLK, INPUT_PULLUP);        // rotary encoder
   pinMode(DATA, INPUT);              // rotary encoder
@@ -198,7 +198,7 @@ void loop () {
   delay(75);
 
 
-  if (!SetButton()) {                       //if !=not setbutton pressed
+  if (!SetButton()) {                       // if !=not setbutton pressed, SW = pulled up by resistor on KY-040 to +,  so low is button pressed
     menu = 1;
     while (SetButton() == LOW) {
       // loop until button released
