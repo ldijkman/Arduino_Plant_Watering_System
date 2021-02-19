@@ -457,6 +457,7 @@ void loop () {
     if (ValveStatus == 0) {
       pauzetimer =  pauzenawatergiftbeurt - (millis() - startpauzetimer) ;
       if (pauzetimer <= 0) pauzetimer = 0;
+      if (pauzetimer > 0)backlightstart = millis();
     }
     if (watergiftcounter <= 0) pauzetimer = 0;                 // anders gaat pauzetimer onnodig lopen bij start of reboot
 
