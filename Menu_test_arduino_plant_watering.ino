@@ -275,13 +275,14 @@ void loop () {
 
     float rval;
     if ( rval = read_rotary() ) {
-      wetnesforstartwatergiftbeurt = wetnesforstartwatergiftbeurt + (rval);
+      wetnesforstartwatergiftbeurt = wetnesforstartwatergiftbeurt + (rval);      
+      if (wetnesforstartwatergiftbeurt >= 70) wetnesforstartwatergiftbeurt = 70;
+      if (wetnesforstartwatergiftbeurt <= 10) wetnesforstartwatergiftbeurt = 10;
       TempLong = millis();  //reset innactive time counter
       lcd.setCursor(2, 2);
       lcd.print(wetnesforstartwatergiftbeurt);
       lcd.print(F(" % "));
-      if (wetnesforstartwatergiftbeurt >= 70) wetnesforstartwatergiftbeurt = 70;
-      if (wetnesforstartwatergiftbeurt <= 10) wetnesforstartwatergiftbeurt = 10;
+
     }
 
     if (SetButton()==LOW) {                                      // if setbutton==LOW, pulled up by resistor, LOW is pressed
@@ -303,7 +304,7 @@ void loop () {
           lcd.setCursor(16, 3);
           lcd.print(5 - (millis() - TempLong) / 1000); lcd.print(" ");
         }
-        for (int i = 0; i < 10; i++)Serial.println(F("SwitchOnTemp DATA WRITEN / SAVED TO EEPROM "));
+        for (int i = 0; i < 10; i++)Serial.println(F("wetnesforstartwatergiftbeurt DATA WRITTEN / SAVED TO EEPROM "));
         lcd.clear();
       }
 
@@ -594,4 +595,5 @@ void TimeOut() {
 // If I had a nickel ...
 // A Penny for Sharing My Thoughts?
 // http://www.paypal.me/LDijkman
+
 
