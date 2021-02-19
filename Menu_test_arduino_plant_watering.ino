@@ -1,10 +1,10 @@
 /*
- * added rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
- * trying to make a start with menu for changing parameters 
- * shows only text now => inside menu when you push the rotary encoder button
- *         a bit of copy paste modify from http://www.sticker.tk/forum/index.php?action=view&id=296
- *                                         http://www.sticker.tk/forum/index.php?action=view&id=299
- * 
+   added rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
+   trying to make a start with menu for changing parameters
+   shows only text now => inside menu when you push the rotary encoder button
+           a bit of copy paste modify from http://www.sticker.tk/forum/index.php?action=view&id=296
+                                           http://www.sticker.tk/forum/index.php?action=view&id=299
+
   maybe a way to discharge analog read, affecting other pin????
   switch from low output to analogread
   i do not have 2 sensors to test it, only a floating second analog pin
@@ -28,25 +28,24 @@
 
 /*
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-  
+
   Arduino Automated Plant Watering System
-  
+
   Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
   https://m.facebook.com/luberth.dijkman
   https://github.com/ldijkman/Arduino_Plant_Watering_System
   https://youtu.be/1jKAxLyOY_s
-
   GNU General Public License,
   which basically means that you may freely copy, change, and distribute it,
   but you may not impose any restrictions on further distribution,
   and you must make the source code available.
-  
+
   https://www.gnu.org/licenses
-  
+
   http://Paypal.Me/LDijkman
-  
+
   All above must be included in any redistribution
-  
+
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 */
 
@@ -72,6 +71,7 @@
 
 #include "RTClib.h" // https://github.com/adafruit/RTClib
 
+#include <EEPROM.h>
 
 RTC_DS3231 rtc;
 
@@ -90,6 +90,9 @@ long watergifttimer;
 long pauzetimer;
 long startpauzetimer;
 long starttime;
+
+long TempLong;
+
 int wetnesforstartwatergiftbeurt = 30;                  // if smaller als 30% start watering
 
 int dry_sensor_one = 730;                                  // my sensor value Dry in air   653
@@ -119,16 +122,16 @@ byte maximumaantalbeurtenperdag = 8;
 #define rotarybutton_SW 2           // input D2 rotary encoder SW
 #define CLK 3                       // input D3 rotary encoder CLK
 #define DATA 4                      // input D4 rotary encoder DT
-// and connect rotary encoder to +5vdc and GND to 0vdc, -, min, GND, ground, or whatever they call it 
+// and connect rotary encoder to +5vdc and GND to 0vdc, -, min, GND, ground, or whatever they call it
 static uint8_t prevNextCode = 0;
 static uint16_t store = 0;
 //
 
 byte menu = 0;
 
-
-
-
+float SwitchOnTemp;
+float TempFloat;
+int TempInt;
 
 
 
@@ -217,6 +220,62 @@ void loop () {
     }
     lcd.clear();
   }
+
+  //1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+  //setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint
+  TempLong = millis();  //reset innactive time counter
+  if (menu == 1) {
+    lcd.setCursor(0, 0);
+    lcd.print(F("1 Set SwitchPoint %"));
+    lcd.setCursor(2, 2);
+    lcd.print(wetnesforstartwatergiftbeurt);
+    lcd.print(F(" % "));
+  }
+  while (menu == 1) {
+    lcd.setCursor(16, 3);
+    lcd.print(10 - (millis() - TempLong) / 1000); lcd.print(" ");
+    if ((millis() - TempLong)  > 10000) {
+      TimeOut();
+      break;
+    }
+
+    float rval;
+    if ( rval = read_rotary() ) {
+      wetnesforstartwatergiftbeurt = wetnesforstartwatergiftbeurt + (rval);
+      TempLong = millis();  //reset innactive time counter
+      lcd.setCursor(2, 2);
+      lcd.print(wetnesforstartwatergiftbeurt);
+      lcd.print(F(" % "));
+      if (wetnesforstartwatergiftbeurt >= 70) wetnesforstartwatergiftbeurt = 70;
+      if (wetnesforstartwatergiftbeurt <= 10) wetnesforstartwatergiftbeurt = 10;
+    }
+
+    if (!SetButton()) {                         //if !=not setbutton pressed
+      menu = 2;
+      lcd.clear();
+      delay(250);
+
+      EEPROM.get(0, TempInt);                         // limmited write to eeprom = read is unlimmited
+      if (wetnesforstartwatergiftbeurt != TempInt) {                  // only write to eeprom if value is different
+        EEPROM.put(0, wetnesforstartwatergiftbeurt);                    // put already checks if val is needed to write
+        lcd.setCursor(0, 0);
+        lcd.print(F("Saving to EEPROM"));
+        lcd.setCursor(0, 2);
+        lcd.print("old= ");
+        lcd.print(TempInt);
+        lcd.print(F(" new= "));
+        lcd.print(wetnesforstartwatergiftbeurt);
+        delay(5000);
+        for (int i = 0; i < 10; i++)Serial.println(F("SwitchOnTemp DATA WRITEN / SAVED TO EEPROM "));
+        lcd.clear();
+      }
+
+
+    }
+  }
+
+
+
 
 
 
@@ -470,9 +529,24 @@ int8_t read_rotary() {
 
 
 
+
+//******************************************************************
+void TimeOut() {
+  lcd.clear();  //exit menu if 20 seconds innactive
+  lcd.setCursor(0, 1);
+  lcd.print(F("TimeOut"));
+  lcd.setCursor(0, 2);
+  lcd.print(F("Return to Mainscreen"));
+  delay(2000);
+  lcd.clear();
+  menu = 0;
+}
+
+
+
+
 // Een Heitje voor een karweitje
 // If I had a nickel ...
 // A Penny for Sharing My Thoughts?
 // http://www.paypal.me/LDijkman
-
 
