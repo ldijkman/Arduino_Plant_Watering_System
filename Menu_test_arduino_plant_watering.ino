@@ -1,5 +1,5 @@
 /*
-   removed the date for showing sp= setpoint               (add another LCD display with different i2c adress? ;-) 
+   removed the date for showing sp= setpoint               (add another LCD display with different i2c adress? ;-)
    added rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
    trying to make a start with menu for changing parameters
    shows only text now => inside menu when you push the rotary encoder button
@@ -167,22 +167,23 @@ void setup () {
     // following line sets the RTC to the date & time this sketch was compiled
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   }
-   
-   
- // read stored valeus from EEPROM
+
+
+
+  // read stored valeus from EEPROM
   EEPROM.get(0, wetnesforstartwatergiftbeurt);
-//  EEPROM.get(5, CalibrationOffset);
-//  EEPROM.get(10, relayonpointbelowsetpoint);
-//  EEPROM.get(15, relayoffabovesetpoint);
-//  EEPROM.get(20, MaxTimeRelayMayBeonInSeconds);
-//  EEPROM.get(25, CoolorHeat);
-//  EEPROM.get(30, HighTempAlarmVal);
-//  EEPROM.get(35, LowTempAlarmVal);
-//  EEPROM.get(40, MaxTime2SetPoint);
+  //  EEPROM.get(5, CalibrationOffset);
+  //  EEPROM.get(10, relayonpointbelowsetpoint);
+  //  EEPROM.get(15, relayoffabovesetpoint);
+  //  EEPROM.get(20, MaxTimeRelayMayBeonInSeconds);
+  //  EEPROM.get(25, CoolorHeat);
+  //  EEPROM.get(30, HighTempAlarmVal);
+  //  EEPROM.get(35, LowTempAlarmVal);
+  //  EEPROM.get(40, MaxTime2SetPoint);
 
 
 
-    
+
 }
 
 
@@ -271,7 +272,6 @@ void loop () {
       menu = 2;
       lcd.clear();
       delay(250);
-
       EEPROM.get(0, TempInt);                         // limmited write to eeprom = read is unlimmited
       if (wetnesforstartwatergiftbeurt != TempInt) {                  // only write to eeprom if value is different
         EEPROM.put(0, wetnesforstartwatergiftbeurt);                    // put already checks if val is needed to write
@@ -282,7 +282,11 @@ void loop () {
         lcd.print(TempInt);
         lcd.print(F(" new= "));
         lcd.print(wetnesforstartwatergiftbeurt);
-        delay(5000);
+        TempLong = millis();  //reset innactive time counter
+        while ((millis() - TempLong)  <= 5000) {
+          lcd.setCursor(16, 3);
+          lcd.print(5 - (millis() - TempLong) / 1000); lcd.print(" ");
+        }
         for (int i = 0; i < 10; i++)Serial.println(F("SwitchOnTemp DATA WRITEN / SAVED TO EEPROM "));
         lcd.clear();
       }
