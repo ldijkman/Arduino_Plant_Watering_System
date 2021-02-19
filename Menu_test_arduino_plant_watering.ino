@@ -555,14 +555,17 @@ int8_t read_rotary() {
 
 
 
+
 //******************************************************************
 void TimeOut() {
   lcd.clear();  //exit menu if 20 seconds innactive
-  lcd.setCursor(0, 1);
+  lcd.setCursor(6, 0);
   lcd.print(F("TimeOut"));
-  lcd.setCursor(0, 2);
+  lcd.setCursor(0, 1);
   lcd.print(F("Return to Mainscreen"));
-  delay(2000);
+  lcd.setCursor(0, 3);
+  lcd.print(F("NOT saved to EEPROM!"));
+  delay(2500);
   lcd.clear();
   menu = 0;
 }
