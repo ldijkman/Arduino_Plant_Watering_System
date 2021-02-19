@@ -198,7 +198,7 @@ void loop () {
   delay(75);
 
 
-  if (!SetButton()) {                       // if !=not setbutton pressed, SW = pulled up by resistor on KY-040 to +,  so low is button pressed
+  if (!SetButton()) {                       // if !=not SetButton, SW = pulled up by resistor on KY-040 to +,  so LOW is button pressed
     menu = 1;
     while (SetButton() == LOW) {
       // loop until button released
