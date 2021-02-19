@@ -1,5 +1,5 @@
 /*
- * added rotary encoder push button
+ * added rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
  * trying to make a start with menu for changing parameters 
  * shows only text now => inside menu when you push the rotary encoder button
  * 
@@ -111,6 +111,7 @@ byte last_second;
 
 byte maximumaantalbeurtenperdag = 8;
 
+// rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
 // Robust Rotary encoder reading
 // Copyright John Main - best-microcontroller-projects.com
 #define rotarybutton_SW 2        // input D2 rotary encoder SW
@@ -119,6 +120,7 @@ byte maximumaantalbeurtenperdag = 8;
 // and connect rotary encoder to +5vdc and GND to 0vdc, -, min, GND, ground, or whatever they call it 
 static uint8_t prevNextCode = 0;
 static uint16_t store = 0;
+//
 
 byte menu = 0;
 
