@@ -126,6 +126,8 @@ byte maximumaantalbeurtenperdag = 8;
 // and connect rotary encoder to +5vdc and GND to 0vdc, -, min, GND, ground, or whatever they call it
 static uint8_t prevNextCode = 0;
 static uint16_t store = 0;
+
+#define backlightstartbutton 5        // button on input D5, if pulled down to ground backlight goes on
 //
 
 byte menu = 0;
@@ -147,7 +149,8 @@ void setup () {
   pinMode(CLK, INPUT_PULLUP);          // rotary encoder
   pinMode(DATA, INPUT);                // rotary encoder
   pinMode(DATA, INPUT_PULLUP);         // rotary encoder
-
+ 
+  pinMode(backlightstartbutton, INPUT_PULLUP);            // button on input "backlightstartbutton",  if pulled down to ground backlight goes on
 
   Serial.begin(115200);               // serial monitor
 
@@ -199,6 +202,8 @@ void loop () {
   if (millis() - backlightstart < backlightofftimeout) {
     lcd.backlight();                    // Turn backlight ON
   }
+
+  if(digitalRead(backlightstartbutton)==LOW){backlightstart = millis();}   // button on input "backlightstartbutton",  if pulled down to ground backlight goes on
 
   long test1 = 0;
   long test2 = 0;
@@ -498,7 +503,7 @@ void loop () {
   }
 
 
-  if (now.hour() == 23 && now.minute() == 59 && now.second() >= 58) {
+  if (now.hour() == 23 && now.minute() == 59 && now.second() >= 59) {
     asm volatile("jmp 0");                                              // end of day reset/reboot arduino //start the day with a fresh millis() counter
     // no worry's about millis overflow every 50 days
     // and resets watergiftcounter
