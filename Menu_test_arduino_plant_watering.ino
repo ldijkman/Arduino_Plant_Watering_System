@@ -132,13 +132,13 @@ byte menu = 0;
 
 void setup () {
 
-  pinMode(13, OUTPUT);                 // pin 13 for valve open / close is also the onboard LED
+  pinMode(13, OUTPUT);                  // pin 13 for valve open / close is also the onboard LED
 
-  pinMode(rotarybutton_SW, INPUT);       // rotary encoder SW = pulled up by resistor on KY-040 to +
-  pinMode(CLK, INPUT);               // rotary encoder
-  pinMode(CLK, INPUT_PULLUP);        // rotary encoder
-  pinMode(DATA, INPUT);              // rotary encoder
-  pinMode(DATA, INPUT_PULLUP);       // rotary encoder
+  pinMode(rotarybutton_SW, INPUT);     // rotary encoder SW = pulled up by resistor on KY-040 to +
+  pinMode(CLK, INPUT);                 // rotary encoder
+  pinMode(CLK, INPUT_PULLUP);          // rotary encoder
+  pinMode(DATA, INPUT);                // rotary encoder
+  pinMode(DATA, INPUT_PULLUP);         // rotary encoder
 
 
   Serial.begin(115200);               // serial monitor
