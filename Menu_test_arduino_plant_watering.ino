@@ -127,7 +127,7 @@ byte maximumaantalbeurtenperdag = 8;
 static uint8_t prevNextCode = 0;
 static uint16_t store = 0;
 
-#define backlightstartbutton 5        // button on input D5, if pulled down to ground backlight goes on
+#define backlightstartbutton 5        // button on input D5, if pulled down to ground backlight goes on (NO normally open momentary pushbutton)
 //
 
 byte menu = 0;
@@ -150,7 +150,7 @@ void setup () {
   pinMode(DATA, INPUT);                // rotary encoder
   pinMode(DATA, INPUT_PULLUP);         // rotary encoder
  
-  pinMode(backlightstartbutton, INPUT_PULLUP);            // button on input "backlightstartbutton",  if pulled down to ground backlight goes on
+  pinMode(backlightstartbutton, INPUT_PULLUP);            // button on input "backlightstartbutton",  if pulled down to ground backlight goes on (NO normally open momentary pushbutton)
 
   Serial.begin(115200);               // serial monitor
 
@@ -204,7 +204,7 @@ void loop () {
     lcd.backlight();                    // Turn backlight ON
   }
 
-  if(digitalRead(backlightstartbutton)==LOW){backlightstart = millis();}   // button on input "backlightstartbutton",  if pulled down to ground backlight goes on
+  if(digitalRead(backlightstartbutton)==LOW){backlightstart = millis();}   // button on input "backlightstartbutton",  if pulled down to ground backlight goes on (NO normally open momentary pushbutton)
 
   long test1 = 0;
   long test2 = 0;
