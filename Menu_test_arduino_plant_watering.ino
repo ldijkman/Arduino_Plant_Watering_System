@@ -1,4 +1,5 @@
 /*
+   removed the date for showing sp= setpoint
    added rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
    trying to make a start with menu for changing parameters
    shows only text now => inside menu when you push the rotary encoder button
