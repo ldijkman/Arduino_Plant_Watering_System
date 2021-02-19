@@ -109,8 +109,8 @@ byte maximumaantalbeurtenperdag = 8;
 // Copyright John Main - best-microcontroller-projects.com
 #define rotarybutton_SW 2        // input D2 rotary encoder SW
 #define CLK 3                 // input D3 rotary encoder CLK
-#define DATA 4                // input D3 rotary encoder DT
-// and connect rotary encoder to +5vdc and 0vdc, -, min, gnd, ground, or whatever they call it 
+#define DATA 4                // input D4 rotary encoder DT
+// and connect rotary encoder to +5vdc and GND to 0vdc, -, min, GND, ground, or whatever they call it 
 static uint8_t prevNextCode = 0;
 static uint16_t store = 0;
 
