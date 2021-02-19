@@ -239,7 +239,7 @@ void loop () {
     menu = 1;
     backlightstart = millis();
     lcd.backlight(); 
-    while (SetButton() == LOW) {
+    while (SetButton() == LOW) {                                    // while setbutton==LOW, pulled up by resistor, LOW is pressed
       // loop until button released
       // maybe a timer here
       // alarm if button never released
@@ -257,7 +257,7 @@ void loop () {
 
   //1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
   //setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint
-  TempLong = millis();  //reset innactive time counter
+  TempLong = millis();  // reset innactive time counter
   if (menu == 1) {
     lcd.setCursor(0, 0);
     lcd.print(F("1 Set SwitchPoint %"));
@@ -284,13 +284,13 @@ void loop () {
       if (wetnesforstartwatergiftbeurt <= 10) wetnesforstartwatergiftbeurt = 10;
     }
 
-    if (!SetButton()) {                         //if !=not setbutton pressed
+    if (SetButton()==LOW) {                                      // if setbutton==LOW, pulled up by resistor, LOW is pressed
       menu = 2;
       lcd.clear();
       delay(250);
-      EEPROM.get(0, TempInt);                         // limmited write to eeprom = read is unlimmited
-      if (wetnesforstartwatergiftbeurt != TempInt) {                  // only write to eeprom if value is different
-        EEPROM.put(0, wetnesforstartwatergiftbeurt);                    // put already checks if val is needed to write
+      EEPROM.get(0, TempInt);                                   // limmited write to eeprom = read is unlimmited
+      if (wetnesforstartwatergiftbeurt != TempInt) {            // only write to eeprom if value is different
+        EEPROM.put(0, wetnesforstartwatergiftbeurt);            // put already checks if val is needed to write
         lcd.setCursor(0, 0);
         lcd.print(F("Saving to EEPROM"));
         lcd.setCursor(0, 2);
@@ -298,7 +298,7 @@ void loop () {
         lcd.print(TempInt);
         lcd.print(F(" new= "));
         lcd.print(wetnesforstartwatergiftbeurt);
-        TempLong = millis();                        // load millis() into Templong for next countdown delay
+        TempLong = millis();                                    // load millis() into Templong for next countdown delay
         while ((millis() - TempLong)  <= 5000) {
           lcd.setCursor(16, 3);
           lcd.print(5 - (millis() - TempLong) / 1000); lcd.print(" ");
