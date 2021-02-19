@@ -155,8 +155,9 @@ void setup () {
   Serial.begin(115200);               // serial monitor
 
 
-  lcd.begin();                        // lcd.begin(21, 22);  // Initialize I2C LCD module (SDA = GPIO21, SCL = GPIO22)
-  // lcd.init();                      // Jo de Martelaer says lcd.begin(); does not work on win10, strange i have no problem with it on linux arduino ide 1.8.13
+  lcd.begin();                        // Initialize I2C LCD module (SDA = GPIO21, SCL = GPIO22)
+  // lcd.begin(21, 22);               // Jo de Martelaer says lcd.begin(); does not work on win10, use  lcd.init(); he says
+  // lcd.init();                      // strange i have no problem with it on linux arduino ide 1.8.13
 
   lcd.backlight();                    // Turn backlight ON
   lcd.clear();                        // clear lcd
@@ -595,5 +596,4 @@ void TimeOut() {
 // If I had a nickel ...
 // A Penny for Sharing My Thoughts?
 // http://www.paypal.me/LDijkman
-
 
