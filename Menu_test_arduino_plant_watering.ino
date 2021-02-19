@@ -167,6 +167,22 @@ void setup () {
     // following line sets the RTC to the date & time this sketch was compiled
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   }
+   
+   
+ // read stored valeus from EEPROM
+  EEPROM.get(0, wetnesforstartwatergiftbeurt);
+//  EEPROM.get(5, CalibrationOffset);
+//  EEPROM.get(10, relayonpointbelowsetpoint);
+//  EEPROM.get(15, relayoffabovesetpoint);
+//  EEPROM.get(20, MaxTimeRelayMayBeonInSeconds);
+//  EEPROM.get(25, CoolorHeat);
+//  EEPROM.get(30, HighTempAlarmVal);
+//  EEPROM.get(35, LowTempAlarmVal);
+//  EEPROM.get(40, MaxTime2SetPoint);
+
+
+
+    
 }
 
 
