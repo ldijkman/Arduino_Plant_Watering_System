@@ -44,7 +44,7 @@
 // https://www.hortusconclusus.be/
 // Catalogus => https://www.hortusconclusus.be/collections
 //
-// Arduino PlantWatering Examples i have seen on the internet are to simple, overwatering, no pause, no limmits, no timebounds, less feedback 
+// Arduino PlantWatering Examples i have seen on the internet are to simple, overwatering, no pause, no limmits, no timebounds, less feedback, no standalone system ability to change parameters
 //
 // Jo Says has problems with sensors influencing eachother?
 // https://www.youtube.com/c/HortusconclususBe/videos
