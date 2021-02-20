@@ -1053,7 +1053,7 @@ void loop () {
     lcd.print(" ");
     lcd.setCursor(0, 3);
     if (ValveStatus == 0) {
-      lcd.print("Closed");
+      lcd.print("Closed      ");     // dont know sometimes a long value at 0/close = erase it with extra spaces
     }
     if (ValveStatus == 1) {
       lcd.print("Open");
