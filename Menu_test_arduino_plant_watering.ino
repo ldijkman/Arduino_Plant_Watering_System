@@ -387,7 +387,7 @@ void loop () {
 
 
   // 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-  // Calibrate sensors Calibrate sensors Calibrate sensors Calibrate sensors Calibrate sensors Calibrate sensors 
+  // Calibrate sensors Calibrate sensors Calibrate sensors Calibrate sensors Calibrate sensors Calibrate sensors
   TempLong = millis();  //reset innactive time counter
   if (menu == 2) {
     lcd.setCursor(0, 0);
@@ -521,7 +521,7 @@ void loop () {
   }// calibrate sensors==2
 
 
-  
+
 
 
   // 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
@@ -658,7 +658,7 @@ void loop () {
 
 
 
-  // 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+  // 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
   // maximumaantalbeurtenperdag maximumaantalbeurtenperdag maximumaantalbeurtenperdag maximumaantalbeurtenperdag
   TempLong = millis();  // reset innactive time counter
   if (menu == 5) {
@@ -721,7 +721,7 @@ void loop () {
   }// end menu 5
 
 
-  // 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+  // 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6
   // starttijdwatergift starttijdwatergift starttijdwatergift starttijdwatergift starttijdwatergift starttijdwatergift
   TempLong = millis();  // reset innactive time counter
   if (menu == 6) {
@@ -746,7 +746,7 @@ void loop () {
       starttijdwatergift = starttijdwatergift + (rval);          // 1  step
       if (starttijdwatergift <= 0) starttijdwatergift = 0;       // starttijdwatergift
       if (starttijdwatergift >= 12) starttijdwatergift = 12;     // starttijdwatergift max 12 o clock
-                                                   //should check that starttijdwatergift < eindtijdwatergift
+      //should check that starttijdwatergift < eindtijdwatergift
       TempLong = millis();  //reset innactive time counter
       lcd.setCursor(9, 2);
       lcd.print(starttijdwatergift);
@@ -758,7 +758,7 @@ void loop () {
       while (SetButton() == LOW) {
         /*wait for button released*/
       }
-      menu = 7;
+      menu = 10;
       lcd.clear();
 
       EEPROM.get(40, TempInt);                                   // limmited write to eeprom = read is unlimmited
@@ -789,9 +789,38 @@ void loop () {
 
 
 
+  // 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10
+  // Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits
+  TempLong = millis();  // reset innactive time counter
+  if (menu == 10) {
+    lcd.clear();
+    DateTime now = rtc.now();
+    lcd.setCursor(0, 0);
+    lcd.print(F("Copyright 2021-")); lcd.print(now.year());
+    lcd.setCursor(0, 1);
+    lcd.print(F("Luberth Dijkman"));
+    lcd.setCursor(0, 2);
+    lcd.print(F("Bangert 30 1619GJ"));
+    lcd.setCursor(0, 3);
+    lcd.print(F("Andijk Holland"));
+  }
+  while (menu == 10) {
+    lcd.setCursor(18, 3);
+    if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
+    lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
+    if ((millis() - TempLong)  > 10000) {
+      delay(1000);  // want to see the zero 0
+      lcd.clear();
+      menu = 11;
+      break;
+    }
+
+  }// end menu 10
 
 
-  
+
+
+
 
   DateTime now = rtc.now();
 
