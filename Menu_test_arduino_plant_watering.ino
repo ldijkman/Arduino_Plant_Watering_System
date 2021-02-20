@@ -195,6 +195,7 @@ void setup () {
   // 667 2
   // 668 255
 
+// DO NEXT ONLY ONCE
   // first run ??? write some val to eeprom if value at eepromadres 666 not is 666
   // if this is first run then val will not be 666 at eeprom adres 666 so next will be run
   EEPROM.get(666, TempInt);
@@ -208,8 +209,8 @@ void setup () {
     //  EEPROM.put(30, Variable-Here);
     //  EEPROM.put(35, Variable-Here);
     //  EEPROM.put(40, Variable-Here);
-
-    EEPROM.put(666, 666);        // set eepromadres 666 to val 666 no need to call / run this anymore in future
+    EEPROM.put(666, 666);        // ONLY ONCE set eepromadres 666 to val 666 no need to call / run this anymore in future
+    
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print(F("Hi There! First run"));
@@ -226,7 +227,7 @@ void setup () {
       delay(500);
     }
     lcd.clear();
-  }
+  }// END ONLY ONCE, MADE HIS MARK
 
   // Read stored valeus from EEPROM
   EEPROM.get(0, wetnesforstartwatergiftbeurt);
