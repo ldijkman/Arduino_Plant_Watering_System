@@ -1,6 +1,7 @@
+
 /*
    removed the date for showing sp= setpoint               (add another LCD display with different i2c adress? ;-)
-   
+
    added rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
    trying to make a start with menu for changing parameters
    shows only text now => inside menu when you push the rotary encoder button
@@ -14,15 +15,18 @@
 /*
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
   Arduino Automated Plant Watering System
+  Must become, Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
   Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
   https://m.facebook.com/luberth.dijkman
   https://github.com/ldijkman/Arduino_Plant_Watering_System
   https://youtu.be/1jKAxLyOY_s
+  
   GNU General Public License,
   which basically means that you may freely copy, change, and distribute it,
   but you may not impose any restrictions on further distribution,
   and you must make the source code available.
   https://www.gnu.org/licenses
+  
   http://Paypal.Me/LDijkman
   All above must be included in any redistribution
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -235,8 +239,9 @@ void loop () {
     lcd.print(F(" % "));
   }
   while (menu == 1) {
-    lcd.setCursor(16, 3);
-    lcd.print(10 - (millis() - TempLong) / 1000); lcd.print(" ");
+    lcd.setCursor(18, 3);
+    lcd.print(10 - (millis() - TempLong) / 1000);
+    if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // erase 0 of 10 when 9
     if ((millis() - TempLong)  > 10000) {
       TimeOut();
       break;
@@ -270,7 +275,7 @@ void loop () {
         lcd.print(wetnesforstartwatergiftbeurt);
         TempLong = millis();                                    // load millis() into Templong for next countdown delay
         while ((millis() - TempLong)  <= 5000) {
-          lcd.setCursor(16, 3);
+          lcd.setCursor(18, 3);
           lcd.print(5 - (millis() - TempLong) / 1000); lcd.print(" ");
         }
         for (int i = 0; i < 10; i++)Serial.println(F("wetnesforstartwatergiftbeurt DATA WRITTEN / SAVED TO EEPROM "));
