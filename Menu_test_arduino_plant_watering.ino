@@ -51,9 +51,9 @@
 // https://www.youtube.com/c/HortusconclususBe/videos
 // maybe use i2c analog 4 channel 16bit https://www.google.com/search?q=ads1115
 // is the ads1115 multiplexing like arduino?
-// or use 2 single channel i2c analog to digital converters with a different i2c adress, No noise? 
+// or use 2 single channel i2c analog to digital converters with a different i2c adress, No noise?  
 // https://www.google.com/search?q=1+channel+i2c+analog+to+digital+converter
-//
+// 1 channel 12bit? MCP4725 I2C 
 //
 //
 // with irrigation drippers / drip emmiters you have more control of amount of water per time!?
@@ -223,22 +223,22 @@ void loop () {
       backlightstart = millis(); // button on input "backlightstartbutton",  if pulled down to ground backlight goes on
     }
 
-  long test1 = 0;
-  long test2 = 0;
-  int dummy;
+  long Read_A0 = 0;
+  long Read_A3 = 0;
+  int dummy_read;
   for (int cc = 0; cc < 10; cc++) {     // do 10 readings
 
-    dummy = analogRead(A0);          // reduce analog pins influence eachother?
+    dummy_read = analogRead(A0);          // reduce analog pins influence eachother?
     delay(1);
-    test1 = test1 + analogRead(A0);
+    Read_A0 = Read_A0 + analogRead(A0);
     delay(1);
-    dummy = analogRead(A3);            // reduce analog pins influence eachother?
+    dummy_read = analogRead(A3);            // reduce analog pins influence eachother?
     delay(1);
-    test2 = test2 + analogRead(A3);
+    Read_A3 = Read_A3 + analogRead(A3);
     delay(1);
   }
-  sense1 = (test1 / 10);             // divide by 10
-  sense2 = (test2 / 10);
+  sense1 = (Read_A0 / 10);             // divide by 10
+  sense2 = (Read_A3 / 10);
 
 
 
