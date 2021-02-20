@@ -421,8 +421,9 @@ void loop () {
     if (ValveStatus == 1) {
       backlightstart = millis();                                 // keep backlight on when valvestatus is open
       Serial.println("watergift start kraan open pomp aan");
-      digitalWrite(13, HIGH);             // 13 is onboard led en waterklep en/of waterpomp start
-      startpauzetimer = millis();         // the latest time  we get into "if (ValveStatus == 1) {" will be used to set "startpauzetimer = millis();"
+      digitalWrite(13, HIGH);                  // 13 is onboard led en waterklep en/of waterpomp start
+      startpauzetimer = millis();              // the latest time  we get into "if (ValveStatus == 1) {" will be used to set "startpauzetimer = millis();"
+       pauzetimer =  pauzenawatergiftbeurt;    // show pauzetime, wich countdown after valvestaus=0
       if (millis() - starttime <= duurwatergiftbeurt) {
         lcd.setCursor(0, 3);
         lcd.print("Open");
