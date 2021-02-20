@@ -56,7 +56,11 @@
 // DS3231 connected to +5vdc GND SCL SDA
 // 4x20 i2c LCD connected to +5vdc GND SCL SDA
 //
-// capacitive soil moisture sensors A0 A3
+// Cheap dollar capacitive soil moisture sensors are in the Khz range
+// more expensive capacitive soil moisture sensors are  in the +/-75Mhz range (mineral/contemination transperency?)
+// but it isnt the 555 timer replacement that justfys the 30xprice
+//
+// capacitive soil moisture sensors connected to analog A0 A3
 //
 // Pump and or valve output D13 (is also onboard LED)
 //
