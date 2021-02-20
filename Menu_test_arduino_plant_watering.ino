@@ -44,6 +44,8 @@
 // https://www.hortusconclusus.be/
 // Catalogus => https://www.hortusconclusus.be/collections
 //
+// Arduino PlantWatering Examples i have seen on the internet are to simple, overwatering, no pause, no limmits, no timebounds, less feedback 
+//
 // Jo Says has problems with sensors influencing eachother?
 // https://www.youtube.com/c/HortusconclususBe/videos
 // maybe use i2c analog 4 channel 16bit https://www.google.com/search?q=ads1115
