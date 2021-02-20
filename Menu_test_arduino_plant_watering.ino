@@ -745,7 +745,7 @@ void loop () {
     if ( rval = read_rotary() ) {
       starttijdwatergift = starttijdwatergift + (rval);          // 1  step
       if (starttijdwatergift <= 0) starttijdwatergift = 0;       // starttijdwatergift
-      if (starttijdwatergift >= 12) starttijdwatergift = 12;     // starttijdwatergift max 12 o clock
+      if (starttijdwatergift >= 23) starttijdwatergift = 23;     // starttijdwatergift max 12 o clock
       //should check that starttijdwatergift < eindtijdwatergift
       TempLong = millis();  //reset innactive time counter
       lcd.setCursor(9, 2);
@@ -758,7 +758,7 @@ void loop () {
       while (SetButton() == LOW) {
         /*wait for button released*/
       }
-      menu = 10;
+      menu = 7;
       lcd.clear();
 
       EEPROM.get(40, TempInt);                                   // limmited write to eeprom = read is unlimmited
@@ -784,6 +784,75 @@ void loop () {
 
     }
   }// end menu 6
+
+
+
+
+
+// 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+  // eindtijdwatergift eindtijdwatergift eindtijdwatergift eindtijdwatergift eindtijdwatergift eindtijdwatergift eindtijdwatergift 
+  TempLong = millis();  // reset innactive time counter
+  if (menu == 7) {
+    lcd.setCursor(0, 0);
+    lcd.print(F("7 End Hour water"));
+    lcd.setCursor(9, 2);
+    lcd.print(eindtijdwatergift);
+    lcd.print(F(" "));
+  }
+  while (menu == 7) {
+    lcd.setCursor(18, 3);
+    if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
+    lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
+    if ((millis() - TempLong)  > 10000) {
+      delay(1000);  // want to see the zero 0
+      TimeOut();
+      break;
+    }
+
+    float rval;
+    if ( rval = read_rotary() ) {
+      eindtijdwatergift = eindtijdwatergift + (rval);          // 1  step
+      if (eindtijdwatergift <= 0) eindtijdwatergift = 0;       // eindtijdwatergift
+      if (eindtijdwatergift >= 23) eindtijdwatergift = 23;     // eindtijdwatergift max 12 o clock
+      //should check that starttijdwatergift < eindtijdwatergift
+      TempLong = millis();  //reset innactive time counter
+      lcd.setCursor(9, 2);
+      lcd.print(eindtijdwatergift);
+      lcd.print(F(" "));
+
+    }
+
+    if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+      while (SetButton() == LOW) {
+        /*wait for button released*/
+      }
+      menu = 10;
+      lcd.clear();
+
+      EEPROM.get(45, TempInt);                                   // limmited write to eeprom = read is unlimmited
+      if (eindtijdwatergift != TempInt) {                       // only write to eeprom if value is different
+        EEPROM.put(45, eindtijdwatergift);                       // put already checks if val is needed to write
+        lcd.setCursor(0, 0);
+        lcd.print(F("Saving to EEPROM"));
+        lcd.setCursor(0, 2);
+        lcd.print("old= ");
+        lcd.print(TempInt);
+        lcd.print(F(" new= "));
+        lcd.print(eindtijdwatergift);
+        TempLong = millis();                                    // load millis() into Templong for next countdown delay
+        while ((millis() - TempLong)  <= 5000) {
+          lcd.setCursor(19, 3);
+          lcd.print(5 - (millis() - TempLong) / 1000);          // on lcd timeout countdown
+        }
+        delay(1000);  // want to see the zero 0
+        for (int i = 0; i < 10; i++)Serial.println(F("eindtijdwatergift DATA WRITTEN / SAVED TO EEPROM "));
+        lcd.clear();
+      }
+
+
+    }
+  }// end menu 7
+
 
 
 
