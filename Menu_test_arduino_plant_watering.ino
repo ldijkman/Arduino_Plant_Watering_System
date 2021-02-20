@@ -97,12 +97,12 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);  // Configure LiquidCrystal_I2C library with
 
 int starttijdwatergift = 10;                                // 9 uur smorgens
 int eindtijdwatergift = 21;                                 // 21 uur savonds
-long duurwatergiftbeurt = 60;                               // 60 seconds
-long pauzenawatergiftbeurt = 1 ;                            // 1 minute
-long watergifttimer;
-long pauzetimer;
-long startpauzetimer;
-long starttime;
+signed long duurwatergiftbeurt = 60;                               // 60 seconds
+signed long pauzenawatergiftbeurt = 1 ;                            // 1 minute
+signed long watergifttimer;
+signed long pauzetimer;
+signed long startpauzetimer;
+signed long starttime;
 
 int wetnesforstartwatergiftbeurt = 30;                      // if smaller als 30% start watering
 
