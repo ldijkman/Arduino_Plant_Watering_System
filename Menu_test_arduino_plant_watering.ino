@@ -43,6 +43,7 @@
 // Boomkwekerij Hortus Conclusus
 // https://www.hortusconclusus.be/
 // Catalogus => https://www.hortusconclusus.be/collections
+// https://youtu.be/MXaQvxmsSy4//
 //
 //
 // DS3231 connected to +5vdc GND SCL SDA
@@ -64,9 +65,9 @@
 
 #include "RTClib.h" // https://github.com/adafruit/RTClib
 
-#include <EEPROM.h>
-
 RTC_DS3231 rtc;
+
+#include <EEPROM.h>
 
 char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
@@ -83,8 +84,6 @@ long watergifttimer;
 long pauzetimer;
 long startpauzetimer;
 long starttime;
-
-long TempLong;
 
 int wetnesforstartwatergiftbeurt = 30;                  // if smaller als 30% start watering
 
@@ -124,7 +123,8 @@ static uint16_t store = 0;
 
 byte menu = 0;
 
-float SwitchOnTemp;
+
+long TempLong;                                   // Temporary re-used over and over again
 float TempFloat;
 int TempInt;
 
