@@ -95,22 +95,22 @@ char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursd
 
 LiquidCrystal_I2C lcd(0x27, 20, 4);  // Configure LiquidCrystal_I2C library with 0x27 address, 20 columns and 4 rows
 
-int starttijdwatergift = 10;                             // 9 uur smorgens
-int eindtijdwatergift = 21;                             // 21 uur savonds
-long duurwatergiftbeurt = 60;   // 60 seconds
-long pauzenawatergiftbeurt = 1 ;  // 1 minute
+int starttijdwatergift = 10;                                // 9 uur smorgens
+int eindtijdwatergift = 21;                                 // 21 uur savonds
+long duurwatergiftbeurt = 60;                               // 60 seconds
+long pauzenawatergiftbeurt = 1 ;                            // 1 minute
 long watergifttimer;
 long pauzetimer;
 long startpauzetimer;
 long starttime;
 
-int wetnesforstartwatergiftbeurt = 30;                  // if smaller als 30% start watering
+int wetnesforstartwatergiftbeurt = 30;                      // if smaller als 30% start watering
 
-int dry_sensor_one = 804;                                  // my sensor value Dry in air   653
-int wet_sensor_one = 449;                                  // my sensor value wet in water 285
+int dry_sensor_one = 804;                                   // my sensor value Dry in air   653
+int wet_sensor_one = 449;                                   // my sensor value wet in water 285
 
-int dry_sensor_two = 804;                                  // my sensor value Dry in air   653
-int wet_sensor_two = 449;                                  // my sensor value wet in water 285
+int dry_sensor_two = 804;                                   // my sensor value Dry in air   653
+int wet_sensor_two = 449;                                   // my sensor value wet in water 285
 
 int sense1;
 int sense2;
@@ -148,6 +148,7 @@ byte menu = 0;
 long TempLong;                                   // Temporary re-used over and over again
 float TempFloat;
 int TempInt;
+byte TempByte;
 
 long backlightofftimeout = 1 * 60 * 1000L;      // time to switch backlight off in milliseconds (the L is needed, otherwise wrong calculation Arduino IDE)
 long backlightstart;
@@ -646,11 +647,86 @@ void loop () {
 
 
     }
-  }// end menu 3
+  }// end menu 4
 
 
 
 
+
+
+
+ //5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5  5 5 5 5 5 5 5 5 5 5 5 
+  //maximumaantalbeurtenperdag maximumaantalbeurtenperdag maximumaantalbeurtenperdag maximumaantalbeurtenperdag
+  TempLong = millis();  // reset innactive time counter
+  if (menu == 5) {
+    lcd.setCursor(0, 0);
+    lcd.print(F("5 Max water count"));
+    lcd.setCursor(9, 2);
+    lcd.print(maximumaantalbeurtenperdag);
+    lcd.print(F(" "));
+  }
+  while (menu == 5) {
+    lcd.setCursor(18, 3);
+    if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
+    lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
+    if ((millis() - TempLong)  > 10000) {
+      delay(1000);  // want to see the zero 0
+      TimeOut();
+      break;
+    }
+
+    float rval;
+    if ( rval = read_rotary() ) {
+      maximumaantalbeurtenperdag = maximumaantalbeurtenperdag + (rval);          // 1  step
+      if (maximumaantalbeurtenperdag <= 2) maximumaantalbeurtenperdag = 2;       // minimal maximumaantalbeurtenperdag
+      TempLong = millis();  //reset innactive time counter
+      lcd.setCursor(9, 2);
+      lcd.print(maximumaantalbeurtenperdag);
+      lcd.print(F(" "));
+
+    }
+
+    if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+      while (SetButton() == LOW) {
+        /*wait for button released*/
+      }
+      menu = 6;
+      lcd.clear();
+
+      EEPROM.get(35, TempByte);                                   // limmited write to eeprom = read is unlimmited
+      if (maximumaantalbeurtenperdag != TempByte) {            // only write to eeprom if value is different
+        EEPROM.put(35, maximumaantalbeurtenperdag);            // put already checks if val is needed to write
+        lcd.setCursor(0, 0);
+        lcd.print(F("Saving to EEPROM"));
+        lcd.setCursor(0, 2);
+        lcd.print("old= ");
+        lcd.print(TempByte);
+        lcd.print(F(" new= "));
+        lcd.print(maximumaantalbeurtenperdag);
+        TempLong = millis();                                    // load millis() into Templong for next countdown delay
+        while ((millis() - TempLong)  <= 5000) {
+          lcd.setCursor(19, 3);
+          lcd.print(5 - (millis() - TempLong) / 1000);          // on lcd timeout countdown
+        }
+        delay(1000);  // want to see the zero 0
+        for (int i = 0; i < 10; i++)Serial.println(F("maximumaantalbeurtenperdag DATA WRITTEN / SAVED TO EEPROM "));
+        lcd.clear();
+      }
+
+
+    }
+  }// end menu 5
+
+
+
+
+
+
+
+
+
+
+  
 
   DateTime now = rtc.now();
 
