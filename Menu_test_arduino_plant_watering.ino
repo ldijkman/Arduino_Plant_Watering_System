@@ -336,7 +336,7 @@ void loop () {
     //lcd.print(now.year());
     //lcd.print(" ");
     lcd.setCursor(14, 0);
-    lcd.print("sp=");                           // switchpoint
+    lcd.print("sp=");                           // setpoint switchpoint ??%
     lcd.print(wetnesforstartwatergiftbeurt);
     lcd.print(" ");
 
