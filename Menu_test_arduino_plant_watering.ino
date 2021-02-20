@@ -360,7 +360,7 @@ void loop () {
     }
 
     if (SetButton() == LOW) {        // LOW setbutton is pressed
-       delay(500);
+      delay(500);
       if (Calibrate_Sensors == 1) {   // you chose NO so exit
         menu = 3;
         lcd.clear();
@@ -368,6 +368,7 @@ void loop () {
       }
 
       if (Calibrate_Sensors == 2) {   // you chose Yes so whe go to calibrate
+        Calibrate_Sensors = 1;
         lcd.clear();
         while (0 == 0) {
           lcd.setCursor(0, 0);
@@ -376,12 +377,15 @@ void loop () {
           lcd.print("Clean Dry in Air?");
           lcd.setCursor(9, 3);
           lcd.print(analogRead(A0));
-          delay(50);
+          delay(250);
           if (SetButton() == LOW) {        // LOW setbutton is pressed
+            while(SetButton() == LOW) {/*wait for button released*/}
+            lcd.clear();
             break;
           }
         }
-        lcd.clear();
+
+        
         while (0 == 0) {
           lcd.setCursor(0, 0);
           lcd.print("Sensor1 analog A0");
@@ -389,13 +393,52 @@ void loop () {
           lcd.print("Wet in Watter?");
           lcd.setCursor(9, 3);
           lcd.print(analogRead(A0));
-          delay(50);
+          delay(250);
           if (SetButton() == LOW) {        // LOW setbutton is pressed
+           while(SetButton() == LOW) {/*wait for button released*/}
+            lcd.clear();
             break;
           }
-          delay(500);
+
           // more in future
         }
+        
+
+        while (0 == 0) {
+          lcd.setCursor(0, 0);
+          lcd.print("Sensor2 analog A3");
+          lcd.setCursor(0, 1);
+          lcd.print("Clean Dry in Air?");
+          lcd.setCursor(9, 3);
+          lcd.print(analogRead(A3));
+          delay(250);
+          if (SetButton() == LOW) {        // LOW setbutton is pressed
+            while(SetButton() == LOW) {/*wait for button released*/}
+            lcd.clear();
+            break;
+          }
+
+          // more in future
+        }
+
+        
+        while (0 == 0) {
+          lcd.setCursor(0, 0);
+          lcd.print("Sensor2 analog A3");
+          lcd.setCursor(0, 1);
+          lcd.print("Wet in Watter?");
+          lcd.setCursor(9, 3);
+          lcd.print(analogRead(A3));
+          delay(250);
+          if (SetButton() == LOW) {        // LOW setbutton is pressed
+            while(SetButton() == LOW) {/*wait for button released*/} 
+            lcd.clear();
+            break;
+          }
+
+          // more in future
+        }   
+       
       }
     }
 
