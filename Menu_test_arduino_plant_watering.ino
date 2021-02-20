@@ -46,6 +46,9 @@
 //
 // https://www.youtube.com/c/HortusconclususBe/videos
 //
+// with irrigation drippers /drip emmiters you have more control of amount of water per time!? 
+// different types liters/per hour
+//
 //
 // DS3231 connected to +5vdc GND SCL SDA
 // 4x20 i2c LCD connected to +5vdc GND SCL SDA
