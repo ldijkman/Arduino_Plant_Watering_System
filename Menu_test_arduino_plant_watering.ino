@@ -270,7 +270,7 @@ void loop () {
   if (menu == 1) {
     lcd.setCursor(0, 0);
     lcd.print(F("1 Set SwitchPoint %"));
-    lcd.setCursor(2, 2);
+    lcd.setCursor(8, 2);
     lcd.print(wetnesforstartwatergiftbeurt);
     lcd.print(F(" % "));
   }
@@ -290,7 +290,7 @@ void loop () {
       if (wetnesforstartwatergiftbeurt >= 70) wetnesforstartwatergiftbeurt = 70;
       if (wetnesforstartwatergiftbeurt <= 10) wetnesforstartwatergiftbeurt = 10;
       TempLong = millis();  //reset innactive time counter
-      lcd.setCursor(2, 2);
+      lcd.setCursor(8, 2);
       lcd.print(wetnesforstartwatergiftbeurt);
       lcd.print(F(" % "));
 
