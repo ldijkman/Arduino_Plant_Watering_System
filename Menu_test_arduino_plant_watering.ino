@@ -381,6 +381,7 @@ void loop () {
           if (SetButton() == LOW) {        // LOW setbutton is pressed
             while(SetButton() == LOW) {/*wait for button released*/}
             lcd.clear();
+            delay(500); // user gets a better expeirience switch to next screen?
             break;
           }
         }
@@ -397,6 +398,7 @@ void loop () {
           if (SetButton() == LOW) {        // LOW setbutton is pressed
            while(SetButton() == LOW) {/*wait for button released*/}
             lcd.clear();
+            delay(500); // user gets a better expeirience switch to next screen?
             break;
           }
 
@@ -415,6 +417,7 @@ void loop () {
           if (SetButton() == LOW) {        // LOW setbutton is pressed
             while(SetButton() == LOW) {/*wait for button released*/}
             lcd.clear();
+            delay(500); // user gets a better expeirience switch to next screen?
             break;
           }
 
@@ -433,6 +436,7 @@ void loop () {
           if (SetButton() == LOW) {        // LOW setbutton is pressed
             while(SetButton() == LOW) {/*wait for button released*/} 
             lcd.clear();
+            delay(500); // user gets a better expeirience switch to next screen?
             break;
           }
 
