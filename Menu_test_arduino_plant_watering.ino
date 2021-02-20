@@ -168,16 +168,16 @@ void setup () {
 
 
 
-  // read stored valeus from EEPROM
+  // Read stored valeus from EEPROM
   EEPROM.get(0, wetnesforstartwatergiftbeurt);
-  //  EEPROM.get(5, CalibrationOffset);
-  //  EEPROM.get(10, relayonpointbelowsetpoint);
-  //  EEPROM.get(15, relayoffabovesetpoint);
-  //  EEPROM.get(20, MaxTimeRelayMayBeonInSeconds);
-  //  EEPROM.get(25, CoolorHeat);
-  //  EEPROM.get(30, HighTempAlarmVal);
-  //  EEPROM.get(35, LowTempAlarmVal);
-  //  EEPROM.get(40, MaxTime2SetPoint);
+  //  EEPROM.get(5, Variable-Here);
+  //  EEPROM.get(10, Variable-Here);
+  //  EEPROM.get(15, Variable-Here);
+  //  EEPROM.get(20, Variable-Here);
+  //  EEPROM.get(25, Variable-Here);
+  //  EEPROM.get(30, Variable-Here);
+  //  EEPROM.get(35, Variable-Here);
+  //  EEPROM.get(40, Variable-Here);
 
 
   backlightstart = millis();          // load millis() in backlightstart
