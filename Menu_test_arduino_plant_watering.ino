@@ -359,10 +359,44 @@ void loop () {
       if (Calibrate_Sensors == 2)lcd.print(F("Yes"));
     }
 
-    if (!SetButton()) { //if !=not setbutton pressed
-      menu = 3;
-      lcd.clear();
-      delay(250);
+    if (SetButton() == LOW) {        // LOW setbutton is pressed
+       delay(500);
+      if (Calibrate_Sensors == 1) {   // you chose NO so exit
+        menu = 3;
+        lcd.clear();
+        delay(250);
+      }
+
+      if (Calibrate_Sensors == 2) {   // you chose Yes so whe go to calibrate
+        lcd.clear();
+        while (0 == 0) {
+          lcd.setCursor(0, 0);
+          lcd.print("Sensor1 analog A0");
+          lcd.setCursor(0, 1);
+          lcd.print("Clean Dry in Air?");
+          lcd.setCursor(9, 3);
+          lcd.print(analogRead(A0));
+          delay(50);
+          if (SetButton() == LOW) {        // LOW setbutton is pressed
+            break;
+          }
+        }
+        lcd.clear();
+        while (0 == 0) {
+          lcd.setCursor(0, 0);
+          lcd.print("Sensor1 analog A0");
+          lcd.setCursor(0, 1);
+          lcd.print("Wet in Watter?");
+          lcd.setCursor(9, 3);
+          lcd.print(analogRead(A0));
+          delay(50);
+          if (SetButton() == LOW) {        // LOW setbutton is pressed
+            break;
+          }
+          delay(500);
+          // more in future
+        }
+      }
     }
 
 
