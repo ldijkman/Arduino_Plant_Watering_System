@@ -260,7 +260,7 @@ void loop () {
   }
   while (menu == 1) {
     lcd.setCursor(18, 3);  
-    if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // erase 0 of 10 when 9
+    if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
     lcd.print(10 - (millis() - TempLong) / 1000);
     if ((millis() - TempLong)  > 10000) {
       delay(500);  // want to see the zero 0
