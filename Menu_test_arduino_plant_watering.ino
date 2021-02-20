@@ -531,9 +531,8 @@ void loop () {
 
     float rval;
     if ( rval = read_rotary() ) {
-      duurwatergiftbeurt = duurwatergiftbeurt + (rval*10);
-      //if (duurwatergiftbeurt >= 70) duurwatergiftbeurt = 70;
-      if (duurwatergiftbeurt <= 10) duurwatergiftbeurt = 10;
+      duurwatergiftbeurt = duurwatergiftbeurt + (rval*10);          // 10 second steps
+      if (duurwatergiftbeurt <= 10) duurwatergiftbeurt = 10;        // minimal watering time 10 seconds
       TempLong = millis();  //reset innactive time counter
       lcd.setCursor(6, 2);
       lcd.print(duurwatergiftbeurt);
