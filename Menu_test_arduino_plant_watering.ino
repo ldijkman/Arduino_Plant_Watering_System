@@ -44,16 +44,16 @@
 // https://www.hortusconclusus.be/
 // Catalogus => https://www.hortusconclusus.be/collections
 //
-// Arduino PlantWatering Examples i have seen on the internet are to simple, overwatering, no pause, no limmits, no timebounds, less feedback, 
+// Arduino PlantWatering Examples i have seen on the internet are to simple, overwatering, no pause, no limmits, no timebounds, less feedback,
 // no standalone system ability to change parameters
 //
 // Jo Says has problems with sensors influencing eachother?
 // https://www.youtube.com/c/HortusconclususBe/videos
 // maybe use i2c analog 4 channel 16bit https://www.google.com/search?q=ads1115
 // is the ads1115 multiplexing like arduino?
-// or use 2 single channel i2c analog to digital converters with a different i2c adress, No noise?  
+// or use 2 single channel i2c analog to digital converters with a different i2c adress, No noise?
 // https://www.google.com/search?q=1+channel+i2c+analog+to+digital+converter
-// 1 channel 12bit? MCP4725 I2C 
+// 1 channel 12bit? MCP4725 I2C
 //
 //
 // with irrigation drippers / drip emmiters you have more control of amount of water per time!?
@@ -126,6 +126,8 @@ byte second_now;
 byte last_second;
 
 byte maximumaantalbeurtenperdag = 8;
+
+byte Calibrate_Sensors = 1;
 
 // rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
 // Robust Rotary encoder reading
@@ -210,18 +212,18 @@ void setup () {
 void loop () {
 
 
-    if (backlightflag==1 && millis() - backlightstart > backlightofftimeout) {                // if backlight timed out turn it off
-      lcd.noBacklight();                    // Turn backlight OFF
-      backlightflag=0;
-    }
-    if (backlightflag==0 && millis() - backlightstart < backlightofftimeout) {
-      lcd.backlight();                    // Turn backlight ON
-      backlightflag=1;
-    }
+  if (backlightflag == 1 && millis() - backlightstart > backlightofftimeout) {              // if backlight timed out turn it off
+    lcd.noBacklight();                    // Turn backlight OFF
+    backlightflag = 0;
+  }
+  if (backlightflag == 0 && millis() - backlightstart < backlightofftimeout) {
+    lcd.backlight();                    // Turn backlight ON
+    backlightflag = 1;
+  }
 
-    if (digitalRead(backlightstartbutton) == LOW) {
-      backlightstart = millis(); // button on input "backlightstartbutton",  if pulled down to ground backlight goes on
-    }
+  if (digitalRead(backlightstartbutton) == LOW) {
+    backlightstart = millis(); // button on input "backlightstartbutton",  if pulled down to ground backlight goes on
+  }
 
   long Read_A0 = 0;
   long Read_A3 = 0;
@@ -273,7 +275,7 @@ void loop () {
     lcd.print(F(" % "));
   }
   while (menu == 1) {
-    lcd.setCursor(18, 3);  
+    lcd.setCursor(18, 3);
     if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
     lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
     if ((millis() - TempLong)  > 10000) {
@@ -321,6 +323,51 @@ void loop () {
 
     }
   }
+
+  //2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+  //Calibrate sensors
+  TempLong = millis();  //reset innactive time counter
+  if (menu == 2) {
+    lcd.setCursor(0, 0);
+    lcd.print(F("2 Calibrate Sensors"));
+    lcd.setCursor(9, 2);
+    if (Calibrate_Sensors == 1)lcd.print(F("No "));
+    if (Calibrate_Sensors == 2)lcd.print(F("Yes"));
+  }
+  while (menu == 2) {
+
+    lcd.setCursor(18, 3);
+    if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
+    lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
+    if ((millis() - TempLong)  > 10000) {
+      delay(1000);  // want to see the zero 0
+      TimeOut();
+      break;
+    }
+
+    float rval;
+    if ( rval = read_rotary() ) {
+      Calibrate_Sensors  = Calibrate_Sensors  + rval;
+      TempLong = millis();  //reset innactive time counte
+      lcd.setCursor(9, 2);
+      lcd.print(Calibrate_Sensors);
+      lcd.print(F(" "));
+      if (Calibrate_Sensors < 1)Calibrate_Sensors = 2;
+      if (Calibrate_Sensors > 2)Calibrate_Sensors = 1;
+      lcd.setCursor(9, 2);
+      if (Calibrate_Sensors == 1)lcd.print(F("No "));
+      if (Calibrate_Sensors == 2)lcd.print(F("Yes"));
+    }
+
+    if (!SetButton()) { //if !=not setbutton pressed
+      menu = 3;
+      lcd.clear();
+      delay(250);
+    }
+
+
+  }
+
 
 
 
