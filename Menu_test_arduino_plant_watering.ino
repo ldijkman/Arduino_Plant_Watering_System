@@ -16,6 +16,7 @@
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
   Arduino Automated Plant Watering System
   Must become, Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
+  
   Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
   https://m.facebook.com/luberth.dijkman
   https://github.com/ldijkman/Arduino_Plant_Watering_System
