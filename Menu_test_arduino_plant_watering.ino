@@ -796,7 +796,7 @@ void loop () {
     lcd.clear();
     DateTime now = rtc.now();
     lcd.setCursor(0, 0);
-    lcd.print(F("Copyright 2021-")); lcd.print(now.year());
+    lcd.print(F("Copyright 2020->")); lcd.print(now.year());
     lcd.setCursor(0, 1);
     lcd.print(F("Luberth Dijkman"));
     lcd.setCursor(0, 2);
