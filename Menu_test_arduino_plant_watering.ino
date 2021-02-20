@@ -50,8 +50,20 @@
 //
 // DS3231 connected to +5vdc GND SCL SDA
 // 4x20 i2c LCD connected to +5vdc GND SCL SDA
+//
 // capacitive soil moisture sensors A0 A3
+//
 // Pump and or valve output D13 (is also onboard LED)
+//
+// rotarybutton_SW 2           // input D2 rotary encoder SW
+// CLK 3                       // input D3 rotary encoder CLK
+// DATA 4                      // input D4 rotary encoder DT
+// and connect rotary encoder to +5vdc and GND to 0vdc, -, min, GND, ground, or whatever they call it
+
+
+
+
+
 
 #include "RTClib.h" // https://github.com/adafruit/RTClib
 
