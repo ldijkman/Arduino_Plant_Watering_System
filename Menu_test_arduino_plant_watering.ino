@@ -259,10 +259,11 @@ void loop () {
     lcd.print(F(" % "));
   }
   while (menu == 1) {
-    lcd.setCursor(18, 3);
-    lcd.print(10 - (millis() - TempLong) / 1000);
+    lcd.setCursor(18, 3);  
     if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // erase 0 of 10 when 9
+    lcd.print(10 - (millis() - TempLong) / 1000);
     if ((millis() - TempLong)  > 10000) {
+      delay(500);  // want to see the zero 0
       TimeOut();
       break;
     }
@@ -295,9 +296,10 @@ void loop () {
         lcd.print(wetnesforstartwatergiftbeurt);
         TempLong = millis();                                    // load millis() into Templong for next countdown delay
         while ((millis() - TempLong)  <= 5000) {
-          lcd.setCursor(18, 3);
-          lcd.print(5 - (millis() - TempLong) / 1000); lcd.print(" ");
+          lcd.setCursor(19, 3);
+          lcd.print(5 - (millis() - TempLong) / 1000); 
         }
+        delay(500);  // want to see the zero 0
         for (int i = 0; i < 10; i++)Serial.println(F("wetnesforstartwatergiftbeurt DATA WRITTEN / SAVED TO EEPROM "));
         lcd.clear();
       }
