@@ -297,9 +297,12 @@ void loop () {
     }
 
     if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+      while (SetButton() == LOW) {
+        /*wait for button released*/
+      }
       menu = 2;
       lcd.clear();
-      delay(250);
+
       EEPROM.get(0, TempInt);                                   // limmited write to eeprom = read is unlimmited
       if (wetnesforstartwatergiftbeurt != TempInt) {            // only write to eeprom if value is different
         EEPROM.put(0, wetnesforstartwatergiftbeurt);            // put already checks if val is needed to write
@@ -360,95 +363,102 @@ void loop () {
     }
 
     if (SetButton() == LOW) {        // LOW setbutton is pressed
-      delay(500);
-      if (Calibrate_Sensors == 1) {   // you chose NO so exit
-        menu = 3;
-        lcd.clear();
-        delay(250);
+      while (SetButton() == LOW) {
+        /*wait for button released*/
       }
+      menu = 3;
+      lcd.clear();
+      delay(250);
+    }
 
-      if (Calibrate_Sensors == 2) {   // you chose Yes so whe go to calibrate
-        Calibrate_Sensors = 1;
+
+  }// end menu 2
+
+  if (Calibrate_Sensors == 2) {   // you chose Yes so whe go to calibrate
+    Calibrate_Sensors = 1;
+    lcd.clear();
+    while (0 == 0) {
+      lcd.setCursor(0, 0);
+      lcd.print("Sensor1 analog A0");
+      lcd.setCursor(0, 1);
+      lcd.print("Clean Dry in Air?");
+      lcd.setCursor(9, 3);
+      lcd.print(analogRead(A0));
+      delay(250);
+      if (SetButton() == LOW) {        // LOW setbutton is pressed
+        while (SetButton() == LOW) {
+          /*wait for button released*/
+        }
         lcd.clear();
-        while (0 == 0) {
-          lcd.setCursor(0, 0);
-          lcd.print("Sensor1 analog A0");
-          lcd.setCursor(0, 1);
-          lcd.print("Clean Dry in Air?");
-          lcd.setCursor(9, 3);
-          lcd.print(analogRead(A0));
-          delay(250);
-          if (SetButton() == LOW) {        // LOW setbutton is pressed
-            while(SetButton() == LOW) {/*wait for button released*/}
-            lcd.clear();
-            delay(500); // user gets a better expeirience switch to next screen?
-            break;
-          }
-        }
-
-        
-        while (0 == 0) {
-          lcd.setCursor(0, 0);
-          lcd.print("Sensor1 analog A0");
-          lcd.setCursor(0, 1);
-          lcd.print("Wet in Watter?");
-          lcd.setCursor(9, 3);
-          lcd.print(analogRead(A0));
-          delay(250);
-          if (SetButton() == LOW) {        // LOW setbutton is pressed
-           while(SetButton() == LOW) {/*wait for button released*/}
-            lcd.clear();
-            delay(500); // user gets a better expeirience switch to next screen?
-            break;
-          }
-
-          // more in future
-        }
-        
-
-        while (0 == 0) {
-          lcd.setCursor(0, 0);
-          lcd.print("Sensor2 analog A3");
-          lcd.setCursor(0, 1);
-          lcd.print("Clean Dry in Air?");
-          lcd.setCursor(9, 3);
-          lcd.print(analogRead(A3));
-          delay(250);
-          if (SetButton() == LOW) {        // LOW setbutton is pressed
-            while(SetButton() == LOW) {/*wait for button released*/}
-            lcd.clear();
-            delay(500); // user gets a better expeirience switch to next screen?
-            break;
-          }
-
-          // more in future
-        }
-
-        
-        while (0 == 0) {
-          lcd.setCursor(0, 0);
-          lcd.print("Sensor2 analog A3");
-          lcd.setCursor(0, 1);
-          lcd.print("Wet in Watter?");
-          lcd.setCursor(9, 3);
-          lcd.print(analogRead(A3));
-          delay(250);
-          if (SetButton() == LOW) {        // LOW setbutton is pressed
-            while(SetButton() == LOW) {/*wait for button released*/} 
-            lcd.clear();
-            delay(500); // user gets a better expeirience switch to next screen?
-            break;
-          }
-
-          // more in future
-        }   
-       
+        delay(500); // user gets a better expeirience switch to next screen?
+        break;
       }
     }
 
 
-  }
+    while (0 == 0) {
+      lcd.setCursor(0, 0);
+      lcd.print("Sensor1 analog A0");
+      lcd.setCursor(0, 1);
+      lcd.print("Wet in Watter?");
+      lcd.setCursor(9, 3);
+      lcd.print(analogRead(A0));
+      delay(250);
+      if (SetButton() == LOW) {        // LOW setbutton is pressed
+        while (SetButton() == LOW) {
+          /*wait for button released*/
+        }
+        lcd.clear();
+        delay(500); // user gets a better expeirience switch to next screen?
+        break;
+      }
 
+      // more in future
+    }
+
+
+    while (0 == 0) {
+      lcd.setCursor(0, 0);
+      lcd.print("Sensor2 analog A3");
+      lcd.setCursor(0, 1);
+      lcd.print("Clean Dry in Air?");
+      lcd.setCursor(9, 3);
+      lcd.print(analogRead(A3));
+      delay(250);
+      if (SetButton() == LOW) {        // LOW setbutton is pressed
+        while (SetButton() == LOW) {
+          /*wait for button released*/
+        }
+        lcd.clear();
+        delay(500); // user gets a better expeirience switch to next screen?
+        break;
+      }
+
+      // more in future
+    }
+
+
+    while (0 == 0) {
+      lcd.setCursor(0, 0);
+      lcd.print("Sensor2 analog A3");
+      lcd.setCursor(0, 1);
+      lcd.print("Wet in Watter?");
+      lcd.setCursor(9, 3);
+      lcd.print(analogRead(A3));
+      delay(250);
+      if (SetButton() == LOW) {        // LOW setbutton is pressed
+        while (SetButton() == LOW) {
+          /*wait for button released*/
+        }
+        lcd.clear();
+        delay(500); // user gets a better expeirience switch to next screen?
+        break;
+      }
+
+      // more in future
+    }
+
+  }
 
 
 
