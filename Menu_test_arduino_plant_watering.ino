@@ -16,18 +16,18 @@
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
   Arduino Automated Plant Watering System
   Must become, Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
-  
+
   Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
   https://m.facebook.com/luberth.dijkman
   https://github.com/ldijkman/Arduino_Plant_Watering_System
   https://youtu.be/1jKAxLyOY_s
-  
+
   GNU General Public License,
   which basically means that you may freely copy, change, and distribute it,
   but you may not impose any restrictions on further distribution,
   and you must make the source code available.
   https://www.gnu.org/licenses
-  
+
   http://Paypal.Me/LDijkman
   All above must be included in any redistribution
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -46,8 +46,9 @@
 //
 // https://www.youtube.com/c/HortusconclususBe/videos
 //
-// with irrigation drippers /drip emmiters you have more control of amount of water per time!? 
+// with irrigation drippers / drip emmiters you have more control of amount of water per time!?
 // different types liters/per hour
+// white tyleen hose less heat / polution
 //
 //
 // DS3231 connected to +5vdc GND SCL SDA
@@ -134,6 +135,7 @@ int TempInt;
 
 long backlightofftimeout = 1 * 60 * 1000L;      // time to switch backlight off in milliseconds (the L is needed, otherwise wrong calculation Arduino IDE)
 long backlightstart;
+byte backlightflag;
 
 
 void setup () {
@@ -193,36 +195,40 @@ void setup () {
 
 void loop () {
 
-  if (millis() - backlightstart > backlightofftimeout) {                // if backlight timed out turn it off
-    lcd.noBacklight();                    // Turn backlight OFF
-  }
-  if (millis() - backlightstart < backlightofftimeout) {
-    lcd.backlight();                    // Turn backlight ON
-  }
 
-  if (digitalRead(backlightstartbutton) == LOW) {
-    backlightstart = millis(); // button on input "backlightstartbutton",  if pulled down to ground backlight goes on
-  }
+    if (backlightflag==1 && millis() - backlightstart > backlightofftimeout) {                // if backlight timed out turn it off
+      lcd.noBacklight();                    // Turn backlight OFF
+      backlightflag=0;
+    }
+    if (backlightflag==0 && millis() - backlightstart < backlightofftimeout) {
+      lcd.backlight();                    // Turn backlight ON
+      backlightflag=1;
+    }
 
+    if (digitalRead(backlightstartbutton) == LOW) {
+      backlightstart = millis(); // button on input "backlightstartbutton",  if pulled down to ground backlight goes on
+    }
 
   long test1 = 0;
   long test2 = 0;
-  for (int cc = 0; cc < 100; cc++) {     // do 100 readings
-    (void) analogRead(A0);            // reduce analog pins influence eachother?
+  int dummy;
+  for (int cc = 0; cc < 10; cc++) {     // do 10 readings
+
+    dummy = analogRead(A0);          // reduce analog pins influence eachother?
     delay(1);
     test1 = test1 + analogRead(A0);
     delay(1);
-    (void) analogRead(A3);            // reduce analog pins influence eachother?
+    dummy = analogRead(A3);            // reduce analog pins influence eachother?
     delay(1);
     test2 = test2 + analogRead(A3);
     delay(1);
   }
-  sense1 = (test1 / 100);             // divide by 100
-  sense2 = (test2 / 100);
+  sense1 = (test1 / 10);             // divide by 10
+  sense2 = (test2 / 10);
 
 
 
-  if (SetButton()==LOW) {                       // if !=not SetButton, SW = pulled up by resistor on KY-040 to +,  so LOW is button pressed
+  if (SetButton() == LOW) {                     // if !=not SetButton, SW = pulled up by resistor on KY-040 to +,  so LOW is button pressed
     menu = 1;
     backlightstart = millis();
     lcd.backlight();
@@ -311,6 +317,8 @@ void loop () {
   if (last_second != second_now) {       // only do this once each second
 
     last_second = second_now;
+
+
 
     Serial.print("millis() "); Serial.println(millis());
     Serial.println("");
@@ -426,7 +434,7 @@ void loop () {
       Serial.println("watergift start kraan open pomp aan");
       digitalWrite(13, HIGH);                  // 13 is onboard led en waterklep en/of waterpomp start
       startpauzetimer = millis();              // the latest time  we get into "if (ValveStatus == 1) {" will be used to set "startpauzetimer = millis();"
-       pauzetimer =  pauzenawatergiftbeurt;    // show pauzetime, wich countdown after valvestaus=0
+      pauzetimer =  pauzenawatergiftbeurt;    // show pauzetime, wich countdown after valvestaus=0
       if (millis() - starttime <= duurwatergiftbeurt) {
         lcd.setCursor(0, 3);
         lcd.print("Open");
