@@ -50,20 +50,18 @@ https://youtu.be/1jKAxLyOY_s
 http://Paypal.Me/LDijkman
 
 #
-# Future:
+# The Future is now:
 
 Rotary encoder menu 
 
-change and save parameters to EEPROM to make it an independant stand alone system
+change and save parameters settings to EEPROM, calibrate sensors 
 
-reuse parts of code from
+an independant stand alone real plant watering system, the first?
 
-http://www.sticker.tk/forum/index.php?action=view&id=299
+https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/Menu_test_arduino_plant_watering.ino
 
-or
-
-http://www.sticker.tk/forum/index.php?action=view&id=296
-
+#
+# Sense:
 
 less then a dollar Capacitive Soil Moisture Sensor on aliexpress
 
