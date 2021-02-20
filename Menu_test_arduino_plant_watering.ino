@@ -58,7 +58,7 @@
 //
 // Cheap dollar capacitive soil moisture sensors are in the Khz range
 // more expensive capacitive soil moisture sensors are  in the +/-75Mhz range (mineral/contemination transperency?)
-// but it isnt the 555 timer replacement that justfys the 30xprice
+// but it isnt the 555 timer replacement that justfys the 30x an up price
 //
 // capacitive soil moisture sensors connected to analog A0 A3
 //
