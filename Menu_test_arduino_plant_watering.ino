@@ -218,7 +218,7 @@ void loop () {
 
 
 
-  if (!SetButton()) {                       // if !=not SetButton, SW = pulled up by resistor on KY-040 to +,  so LOW is button pressed
+  if (SetButton()==LOW) {                       // if !=not SetButton, SW = pulled up by resistor on KY-040 to +,  so LOW is button pressed
     menu = 1;
     backlightstart = millis();
     lcd.backlight();
