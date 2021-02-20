@@ -316,8 +316,10 @@ void loop () {
     lcd.clear();
   }
 
-  //1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-  //setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint
+
+
+  // 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+  // setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint
   TempLong = millis();  // reset innactive time counter
   if (menu == 1) {
     lcd.setCursor(0, 0);
@@ -379,8 +381,13 @@ void loop () {
     }
   }// end menu 1
 
-  //2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-  //Calibrate sensors
+
+
+
+
+
+  // 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+  // Calibrate sensors Calibrate sensors Calibrate sensors Calibrate sensors Calibrate sensors Calibrate sensors 
   TempLong = millis();  //reset innactive time counter
   if (menu == 2) {
     lcd.setCursor(0, 0);
@@ -422,9 +429,9 @@ void loop () {
       lcd.clear();
       delay(250);
     }
-
-
   }// end menu 2
+
+
 
   if (Calibrate_Sensors == 2) {   // you chose Yes so whe go to calibrate
     Calibrate_Sensors = 1;
@@ -468,8 +475,6 @@ void loop () {
         delay(500); // user gets a better expeirience switch to next screen?
         break;
       }
-
-      // more in future
     }
 
 
@@ -491,8 +496,6 @@ void loop () {
         delay(500); // user gets a better expeirience switch to next screen?
         break;
       }
-
-      // more in future
     }
 
 
@@ -514,15 +517,15 @@ void loop () {
         delay(500); // user gets a better expeirience switch to next screen?
         break;
       }
-
-      // more in future
     }
+  }// calibrate sensors==2
 
-  }
+
+  
 
 
-  //3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-  //duurwatergiftbeurt duurwatergiftbeurt duurwatergiftbeurt duurwatergiftbeurt duurwatergiftbeurt
+  // 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+  // duurwatergiftbeurt duurwatergiftbeurt duurwatergiftbeurt duurwatergiftbeurt duurwatergiftbeurt
   TempLong = millis();  // reset innactive time counter
   if (menu == 3) {
     lcd.setCursor(0, 0);
@@ -587,8 +590,8 @@ void loop () {
 
 
 
-  //4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4  4  4 4 4 4  4 4 4 4 4 4 4  4
-  //pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt
+  // 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+  // pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt
   TempLong = millis();  // reset innactive time counter
   if (menu == 4) {
     lcd.setCursor(0, 0);
@@ -655,8 +658,8 @@ void loop () {
 
 
 
- //5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5  5 5 5 5 5 5 5 5 5 5 5 
-  //maximumaantalbeurtenperdag maximumaantalbeurtenperdag maximumaantalbeurtenperdag maximumaantalbeurtenperdag
+  // 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+  // maximumaantalbeurtenperdag maximumaantalbeurtenperdag maximumaantalbeurtenperdag maximumaantalbeurtenperdag
   TempLong = millis();  // reset innactive time counter
   if (menu == 5) {
     lcd.setCursor(0, 0);
@@ -718,8 +721,8 @@ void loop () {
   }// end menu 5
 
 
- //6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-  //starttijdwatergift starttijdwatergift starttijdwatergift starttijdwatergift starttijdwatergift starttijdwatergift
+  // 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+  // starttijdwatergift starttijdwatergift starttijdwatergift starttijdwatergift starttijdwatergift starttijdwatergift
   TempLong = millis();  // reset innactive time counter
   if (menu == 6) {
     lcd.setCursor(0, 0);
