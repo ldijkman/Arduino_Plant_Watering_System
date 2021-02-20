@@ -197,9 +197,10 @@ void setup () {
 
 // DO NEXT ONLY ONCE
   // first run ??? write some val to eeprom if value at eepromadres 666 not is 666
-  // if this is first run then val will not be 666 at eeprom adres 666 so next will be run
-  EEPROM.get(666, TempInt);
-  if (TempInt != 666) {           // IF this is the first run THEN val at eeprom adres 666 is -1???
+  // if this is first run then val will not be 666 at eeprom adres 666 
+  // so next will be run
+  EEPROM.get(666, TempInt);        // read eeprom adress 666 into TempInt   
+  if (TempInt != 666) {           // IF not is 666, this is the first run THEN val at eeprom adres 666 is -1???
     EEPROM.put(0, wetnesforstartwatergiftbeurt);
     EEPROM.put(5, dry_sensor_one);
     EEPROM.put(10, wet_sensor_one);
