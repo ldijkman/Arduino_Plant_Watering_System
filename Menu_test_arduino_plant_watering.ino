@@ -98,7 +98,7 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);  // Configure LiquidCrystal_I2C library with
 int starttijdwatergift = 10;                             // 9 uur smorgens
 int eindtijdwatergift = 21;                             // 21 uur savonds
 long duurwatergiftbeurt = 60;   // 60 seconds
-long pauzenawatergiftbeurt = 1 * 60 * 1000L;  // 30 minuten pauze in milliseconds
+long pauzenawatergiftbeurt = 1 ;  // 1 minute
 long watergifttimer;
 long pauzetimer;
 long startpauzetimer;
@@ -207,7 +207,7 @@ void setup () {
     EEPROM.put(15, dry_sensor_two);
     EEPROM.put(20, wet_sensor_two);
     EEPROM.put(25, duurwatergiftbeurt);
-    //  EEPROM.put(30, Variable-Here);
+    EEPROM.put(30, pauzenawatergiftbeurt);
     //  EEPROM.put(35, Variable-Here);
     //  EEPROM.put(40, Variable-Here);
     EEPROM.put(666, 666);        // ONLY ONCE set eepromadres 666 to val 666 no need to call / run this anymore in future
@@ -237,7 +237,7 @@ void setup () {
   EEPROM.get(15, dry_sensor_two);
   EEPROM.get(20, wet_sensor_two);
   EEPROM.get(25, duurwatergiftbeurt);
-  //  EEPROM.get(30, Variable-Here);
+  EEPROM.get(30, pauzenawatergiftbeurt);
   //  EEPROM.get(35, Variable-Here);
   //  EEPROM.get(40, Variable-Here);
 
@@ -574,6 +574,73 @@ void loop () {
 
 
 
+
+  //4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4  4  4 4 4 4  4 4 4 4 4 4 4  4
+  //pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt 
+  TempLong = millis();  // reset innactive time counter
+  if (menu == 4) {
+    lcd.setCursor(0, 0);
+    lcd.print(F("4 PauzeTime T in Min"));
+    lcd.setCursor(6, 2);
+    lcd.print(pauzenawatergiftbeurt);
+    lcd.print(F(" Min. "));
+  }
+  while (menu == 4) {
+    lcd.setCursor(18, 3);
+    if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
+    lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
+    if ((millis() - TempLong)  > 10000) {
+      delay(1000);  // want to see the zero 0
+      TimeOut();
+      break;
+    }
+
+    float rval;
+    if ( rval = read_rotary() ) {
+      pauzenawatergiftbeurt = pauzenawatergiftbeurt + (rval);          // 1 minute steps
+      if (pauzenawatergiftbeurt <= 1) pauzenawatergiftbeurt = 1;       // minimal pauzetime 1 minutes
+      TempLong = millis();  //reset innactive time counter
+      lcd.setCursor(6, 2);
+      lcd.print(pauzenawatergiftbeurt);
+      lcd.print(F(" Min. "));
+
+    }
+
+    if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+      while (SetButton() == LOW) {
+        /*wait for button released*/
+      }
+      menu = 5;
+      lcd.clear();
+
+      EEPROM.get(30, TempInt);                                   // limmited write to eeprom = read is unlimmited
+      if (pauzenawatergiftbeurt != TempInt) {            // only write to eeprom if value is different
+        EEPROM.put(30, pauzenawatergiftbeurt);            // put already checks if val is needed to write
+        lcd.setCursor(0, 0);
+        lcd.print(F("Saving to EEPROM"));
+        lcd.setCursor(0, 2);
+        lcd.print("old= ");
+        lcd.print(TempInt);
+        lcd.print(F(" new= "));
+        lcd.print(pauzenawatergiftbeurt);
+        TempLong = millis();                                    // load millis() into Templong for next countdown delay
+        while ((millis() - TempLong)  <= 5000) {
+          lcd.setCursor(19, 3);
+          lcd.print(5 - (millis() - TempLong) / 1000);          // on lcd timeout countdown
+        }
+        delay(1000);  // want to see the zero 0
+        for (int i = 0; i < 10; i++)Serial.println(F("pauzenawatergiftbeurt DATA WRITTEN / SAVED TO EEPROM "));
+        lcd.clear();
+      }
+
+
+    }
+  }// end menu 3
+
+
+
+
+
   DateTime now = rtc.now();
 
   second_now = now.second();
@@ -697,7 +764,7 @@ void loop () {
       Serial.println("watergift start kraan open pomp aan");
       digitalWrite(13, HIGH);                  // 13 is onboard led en waterklep en/of waterpomp start
       startpauzetimer = millis();              // the latest time  we get into "if (ValveStatus == 1) {" will be used to set "startpauzetimer = millis();"
-      pauzetimer =  pauzenawatergiftbeurt;    // show pauzetime, wich countdown after valvestaus=0
+      pauzetimer =  (pauzenawatergiftbeurt*60*1000L);    // show pauzetime, wich countdown after valvestaus=0
       if (millis() - starttime <= (duurwatergiftbeurt * 1000L)) {
         lcd.setCursor(0, 3);
         lcd.print("Open");
@@ -721,7 +788,7 @@ void loop () {
     }
 
     if (ValveStatus == 0) {
-      pauzetimer =  pauzenawatergiftbeurt - (millis() - startpauzetimer) ;
+      pauzetimer =  (pauzenawatergiftbeurt*60*1000L) - (millis() - startpauzetimer) ;
       if (pauzetimer <= 0) pauzetimer = 0;
       if (pauzetimer > 0)backlightstart = millis();            // keep backlight on when pauzetimer is running
     }
