@@ -47,6 +47,7 @@
 // Jo Says has problems with sensors influencing eachother?
 // https://www.youtube.com/c/HortusconclususBe/videos
 // maybe use i2c analog 4 channel 16bit https://www.google.com/search?q=ads1115
+// is the ads1115 multiplexing like arduino?
 //
 // with irrigation drippers / drip emmiters you have more control of amount of water per time!?
 // different types liters/per hour
