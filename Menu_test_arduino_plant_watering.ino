@@ -188,14 +188,52 @@ void setup () {
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   }
 
+  // want to see the contents of EEPROM there is a read example Arduino IDE =>File=>Examples=>EEPROM=>eeprom_read
+  // 666 on adres 666 is written in EEPROM like this
+  // 665 255
+  // 666 154       2x256+154=666
+  // 667 2
+  // 668 255
 
+  // first run ??? write some val to eeprom if value at eepromadres 666 not is 666
+  // if this is first run then val will not be 666 at eeprom adres 666 so next will be run
+  EEPROM.get(666, TempInt);
+  if (TempInt != 666) {           // IF this is the first run THEN val at eeprom adres 666 is -1???
+    EEPROM.put(0, wetnesforstartwatergiftbeurt);
+    EEPROM.put(5, dry_sensor_one);
+    EEPROM.put(10, wet_sensor_one);
+    EEPROM.put(15, dry_sensor_two);
+    EEPROM.put(20, wet_sensor_two);
+    //  EEPROM.put(25, Variable-Here);
+    //  EEPROM.put(30, Variable-Here);
+    //  EEPROM.put(35, Variable-Here);
+    //  EEPROM.put(40, Variable-Here);
+
+    EEPROM.put(666, 666);        // set eepromadres 666 to val 666 no need to call / run this anymore in future
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print(F("Hi There! First run"));
+    lcd.setCursor(0, 1);
+    lcd.print(F("Have written value's"));
+    lcd.setCursor(0, 2);
+    lcd.print(F("to EEPROM "));
+    lcd.setCursor(0, 3);
+    lcd.print(F("Thanks for trying"));
+    for (int i = 30 ; i > 0 ; i--) {
+      lcd.setCursor(17, 2);
+      lcd.print(i);
+      lcd.print(" ");
+      delay(500);
+    }
+    lcd.clear();
+  }
 
   // Read stored valeus from EEPROM
   EEPROM.get(0, wetnesforstartwatergiftbeurt);
-  //  EEPROM.get(5, Variable-Here);
-  //  EEPROM.get(10, Variable-Here);
-  //  EEPROM.get(15, Variable-Here);
-  //  EEPROM.get(20, Variable-Here);
+  EEPROM.get(5, dry_sensor_one);
+  EEPROM.get(10, wet_sensor_one);
+  EEPROM.get(15, dry_sensor_two);
+  EEPROM.get(20, wet_sensor_two);
   //  EEPROM.get(25, Variable-Here);
   //  EEPROM.get(30, Variable-Here);
   //  EEPROM.get(35, Variable-Here);
@@ -389,6 +427,8 @@ void loop () {
         while (SetButton() == LOW) {
           /*wait for button released*/
         }
+        dry_sensor_one = analogRead(A0);
+        EEPROM.put(5, dry_sensor_one);
         lcd.clear();
         delay(500); // user gets a better expeirience switch to next screen?
         break;
@@ -408,6 +448,8 @@ void loop () {
         while (SetButton() == LOW) {
           /*wait for button released*/
         }
+        wet_sensor_one = analogRead(A0);
+        EEPROM.put(10, wet_sensor_one);
         lcd.clear();
         delay(500); // user gets a better expeirience switch to next screen?
         break;
@@ -429,6 +471,8 @@ void loop () {
         while (SetButton() == LOW) {
           /*wait for button released*/
         }
+        dry_sensor_two = analogRead(A3);
+        EEPROM.put(15, dry_sensor_two);
         lcd.clear();
         delay(500); // user gets a better expeirience switch to next screen?
         break;
@@ -450,6 +494,8 @@ void loop () {
         while (SetButton() == LOW) {
           /*wait for button released*/
         }
+        wet_sensor_two = analogRead(A3);
+        EEPROM.put(20, wet_sensor_two);
         lcd.clear();
         delay(500); // user gets a better expeirience switch to next screen?
         break;
