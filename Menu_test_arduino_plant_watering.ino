@@ -59,11 +59,11 @@
 //
 // Cheap dollar capacitive soil moisture sensors are in the Khz range
 // more expensive capacitive soil moisture sensors are  in the +/-75Mhz range (mineral/contemination transperency?)
-// but it isnt the 555 timer replacement that justfys the 30x an up price
+// but it isnt the 555 timer replacement that justfys the 30x and up price
 //
 // capacitive soil moisture sensors connected to analog A0 A3
 //
-// Pump and or valve output D13 (is also onboard LED)
+// Pump and or valve output D13 (wich is also onboard LED)
 //
 // rotarybutton_SW 2           // input D2 rotary encoder SW
 // CLK 3                       // input D3 rotary encoder CLK
@@ -268,9 +268,9 @@ void loop () {
   while (menu == 1) {
     lcd.setCursor(18, 3);  
     if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
-    lcd.print(10 - (millis() - TempLong) / 1000);
+    lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
     if ((millis() - TempLong)  > 10000) {
-      delay(500);  // want to see the zero 0
+      delay(1000);  // want to see the zero 0
       TimeOut();
       break;
     }
@@ -304,9 +304,9 @@ void loop () {
         TempLong = millis();                                    // load millis() into Templong for next countdown delay
         while ((millis() - TempLong)  <= 5000) {
           lcd.setCursor(19, 3);
-          lcd.print(5 - (millis() - TempLong) / 1000); 
+          lcd.print(5 - (millis() - TempLong) / 1000);          // on lcd timeout countdown
         }
-        delay(500);  // want to see the zero 0
+        delay(1000);  // want to see the zero 0
         for (int i = 0; i < 10; i++)Serial.println(F("wetnesforstartwatergiftbeurt DATA WRITTEN / SAVED TO EEPROM "));
         lcd.clear();
       }
