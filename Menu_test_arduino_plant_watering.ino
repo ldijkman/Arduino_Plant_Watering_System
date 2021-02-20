@@ -37,15 +37,15 @@
 // komt wat logica in
 // watergift timer werkt, pauzetimer werkt ook
 // maar is alleen zichtbaar met LCD
-// kan makkelijker met gewone delays
+// kan makkelijker met gewone delays instead of millis();
 // maar dan staat alles stil als je bijvoorbeeld een delay van 10 minuten hebt
 // gebeurt er niks gedurende die 10 minuten
 //
 // it all started with a question from Jo
-// Jo de Martelaer arduino uno watergift
+// Jo de Martelaer Arduino UNO / NANO WaterGift
 // Boomkwekerij Hortus Conclusus
 // https://www.hortusconclusus.be/
-// Catalogus https://www.hortusconclusus.be/collections
+// Catalogus => https://www.hortusconclusus.be/collections
 //
 //
 // DS3231 connected to +5vdc GND SCL SDA
