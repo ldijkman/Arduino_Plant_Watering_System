@@ -51,6 +51,7 @@
 // https://www.youtube.com/c/HortusconclususBe/videos
 // maybe use i2c analog 4 channel 16bit https://www.google.com/search?q=ads1115
 // is the ads1115 multiplexing like arduino?
+// or use 2 single channel i2c analog to digital converters with a different i2c adress, No noise?  
 //
 // with irrigation drippers / drip emmiters you have more control of amount of water per time!?
 // different types liters/per hour
