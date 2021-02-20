@@ -195,12 +195,17 @@ void setup () {
   // 667 2
   // 668 255
 
+
+
+
+
   // DO NEXT ONLY ONCE
+  int override_doitonce = 0;  // 1 set variables as above to eeprom,  program set it back to 0 after boot and reprogram with 0
   // first run ??? write some val to eeprom if value at eepromadres 666 not is 666
   // if this is first run then val will not be 666 at eeprom adres 666
   // so next will be run
   EEPROM.get(666, TempInt);        // read eeprom adress 666 into TempInt
-  if (TempInt != 666) {           // IF not is 666, this is the first run THEN val at eeprom adres 666 is -1???
+  if (override_doitonce == 1 || TempInt != 666) {       // IF not is 666, this is the first run THEN val at eeprom adres 666 is -1???
     EEPROM.put(0, wetnesforstartwatergiftbeurt);
     EEPROM.put(5, dry_sensor_one);
     EEPROM.put(10, wet_sensor_one);
@@ -208,8 +213,12 @@ void setup () {
     EEPROM.put(20, wet_sensor_two);
     EEPROM.put(25, duurwatergiftbeurt);
     EEPROM.put(30, pauzenawatergiftbeurt);
-    //  EEPROM.put(35, Variable-Here);
-    //  EEPROM.put(40, Variable-Here);
+    EEPROM.put(35, maximumaantalbeurtenperdag);
+    EEPROM.put(40, starttijdwatergift);
+    EEPROM.put(45, eindtijdwatergift);
+    EEPROM.put(50, backlightofftimeout);
+    //  EEPROM.put(55, Variable-Here);
+    //  EEPROM.put(60, Variable-Here);
     EEPROM.put(666, 666);        // ONLY ONCE set eepromadres 666 to val 666 no need to call / run this anymore in future
 
     lcd.clear();
@@ -238,10 +247,12 @@ void setup () {
   EEPROM.get(20, wet_sensor_two);
   EEPROM.get(25, duurwatergiftbeurt);
   EEPROM.get(30, pauzenawatergiftbeurt);
-  //  EEPROM.get(35, Variable-Here);
-  //  EEPROM.get(40, Variable-Here);
-
-
+  EEPROM.get(35, maximumaantalbeurtenperdag);
+  EEPROM.get(40, starttijdwatergift);
+  EEPROM.get(45, eindtijdwatergift);
+  EEPROM.get(50, backlightofftimeout);
+  //  EEPROM.get(55, Variable-Here);
+  //  EEPROM.get(60, Variable-Here);
   backlightstart = millis();          // load millis() in backlightstart
 
 }
@@ -576,7 +587,7 @@ void loop () {
 
 
   //4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4  4  4 4 4 4  4 4 4 4 4 4 4  4
-  //pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt 
+  //pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt
   TempLong = millis();  // reset innactive time counter
   if (menu == 4) {
     lcd.setCursor(0, 0);
@@ -764,7 +775,7 @@ void loop () {
       Serial.println("watergift start kraan open pomp aan");
       digitalWrite(13, HIGH);                  // 13 is onboard led en waterklep en/of waterpomp start
       startpauzetimer = millis();              // the latest time  we get into "if (ValveStatus == 1) {" will be used to set "startpauzetimer = millis();"
-      pauzetimer =  (pauzenawatergiftbeurt*60*1000L);    // show pauzetime, wich countdown after valvestaus=0
+      pauzetimer =  (pauzenawatergiftbeurt * 60 * 1000L); // show pauzetime, wich countdown after valvestaus=0
       if (millis() - starttime <= (duurwatergiftbeurt * 1000L)) {
         lcd.setCursor(0, 3);
         lcd.print("Open");
@@ -788,7 +799,7 @@ void loop () {
     }
 
     if (ValveStatus == 0) {
-      pauzetimer =  (pauzenawatergiftbeurt*60*1000L) - (millis() - startpauzetimer) ;
+      pauzetimer =  (pauzenawatergiftbeurt * 60 * 1000L) - (millis() - startpauzetimer) ;
       if (pauzetimer <= 0) pauzetimer = 0;
       if (pauzetimer > 0)backlightstart = millis();            // keep backlight on when pauzetimer is running
     }
