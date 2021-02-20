@@ -34,14 +34,11 @@
 */
 
 //
-// komt wat logica in
-// watergift timer werkt, pauzetimer werkt ook
-// maar is alleen zichtbaar met LCD
 // kan makkelijker met gewone delays instead of millis();
 // maar dan staat alles stil als je bijvoorbeeld een delay van 10 minuten hebt
 // gebeurt er niks gedurende die 10 minuten
 //
-// it all started with a question from Jo
+// it all started with a Question from Jo
 // Jo de Martelaer Arduino UNO / NANO WaterGift
 // Boomkwekerij Hortus Conclusus
 // https://www.hortusconclusus.be/
@@ -131,13 +128,13 @@ float SwitchOnTemp;
 float TempFloat;
 int TempInt;
 
-long backlightofftimeout = 1 * 60 * 1000L;      // time to switch backlight off
+long backlightofftimeout = 1 * 60 * 1000L;      // time to switch backlight off in milliseconds (the L is needed, otherwise wrong calculation Arduino IDE)
 long backlightstart;
 
 
 void setup () {
 
-  pinMode(13, OUTPUT);                  // pin 13 for valve open / close is also the onboard LED
+  pinMode(13, OUTPUT);                 // pin 13 for valve open / close is also the onboard LED
 
   pinMode(rotarybutton_SW, INPUT);     // rotary encoder SW = pulled up by resistor on KY-040 to +
   pinMode(CLK, INPUT);                 // rotary encoder
