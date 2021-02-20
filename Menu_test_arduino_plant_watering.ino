@@ -41,7 +41,7 @@
 // maar dan staat alles stil als je bijvoorbeeld een delay van 10 minuten hebt
 // gebeurt er niks gedurende die 10 minuten
 //
-//
+// it all started with a question from Jo
 // Jo de Martelaer arduino uno watergift
 // Boomkwekerij Hortus Conclusus
 // https://www.hortusconclusus.be/
