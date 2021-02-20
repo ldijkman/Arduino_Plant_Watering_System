@@ -54,7 +54,7 @@
 // white tyleen hose less heat / polution
 //
 //
-// DS3231 connected to +5vdc GND SCL SDA
+// DS3231 RTC realtimeclock connected to +5vdc GND SCL SDA
 // 4x20 i2c LCD connected to +5vdc GND SCL SDA
 //
 // Cheap dollar capacitive soil moisture sensors are in the Khz range
