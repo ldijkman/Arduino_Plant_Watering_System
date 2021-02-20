@@ -189,7 +189,7 @@ void setup () {
   }
 
   // want to see the contents of EEPROM there is a read example Arduino IDE =>File=>Examples=>EEPROM=>eeprom_read
-  // 666 on adres 666 is written in EEPROM like this
+  //               666 on adres 666 is written in EEPROM like this
   // 665 255
   // 666 154       2x256+154=666
   // 667 2
