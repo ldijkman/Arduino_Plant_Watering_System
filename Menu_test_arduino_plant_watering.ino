@@ -299,8 +299,8 @@ void loop () {
   }
 
   //blinknodelay_flag
-  currentMillis = millis();                        
-  if (currentMillis - previousMillis >= 500) {     //binknodelay example but not blink a LED, but set a flag => half a second on, half a second off
+  currentMillis = millis();
+  if (currentMillis - previousMillis >= 1000) {     //binknodelay example but not blink a LED, but set a flag => 1 second on, 1 second off
     previousMillis = currentMillis;
     if (blinknodelay_flag == 0) {
       blinknodelay_flag = 1;                       // used for backgroundlight blink when maxcount
@@ -1125,17 +1125,6 @@ void loop () {
         }
       }
     }
-  } else {
-    if (blinknodelay_flag == 0) {                          // part off blink when time not ok for watering
-      lcd.setCursor(0, 2);
-      if (now.hour() < starttijdwatergift) {
-        lcd.print("OFF, Time < "); lcd.print(starttijdwatergift); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
-      }
-      if (now.hour() >= eindtijdwatergift) {
-        lcd.print("OFF, Time >= "); lcd.print(eindtijdwatergift); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
-      }
-    }
-
   }
 
 
@@ -1181,9 +1170,22 @@ void loop () {
   }
   if (watergiftcounter <= 0) pauzetimer = 0;                 // anders gaat pauzetimer onnodig lopen bij start of reboot
 
-  if (blinknodelay_flag == 1) {                              // part off blink when time not ok for watering
+
+
+
+  if (blinknodelay_flag == 0) {                          // part off blink when time not ok for watering
+    lcd.setCursor(0, 2);
+    if (now.hour() < starttijdwatergift) {
+      lcd.print("OFF, Time < "); lcd.print(starttijdwatergift); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
+    }
+    if (now.hour() >= eindtijdwatergift) {
+      lcd.print("OFF, Time >= "); lcd.print(eindtijdwatergift); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
+    }
+  }
+
+  if (blinknodelay_flag == 1) {                          // part off blink when time not ok for watering
     lcd.setCursor(16, 2);
-    lcd.print("    "); // erase the last part of line of text
+    lcd.print("    "); // erase the last part of line of text  = erase =>   Hour
     lcd.setCursor(0, 2);
     lcd.print("count=");
     lcd.print(watergiftcounter);
@@ -1234,7 +1236,7 @@ void loop () {
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////
   counter = counter + 1;                // just a counter to see how many times i get here
   if (counter == 100)counter = 0;
   lcd.setCursor(10, 0);
@@ -1242,7 +1244,7 @@ void loop () {
   lcd.print(counter);                  // just a counter to see how many times i get here
 
   delay(100); // slow it down
-//////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 
