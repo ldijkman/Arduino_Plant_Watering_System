@@ -1089,7 +1089,7 @@ void loop () {
 
 
     if (now.hour() >= starttijdwatergift && now.hour() < eindtijdwatergift) {
-      Serial.println("zit binnnen watergift mogelijk tijden");
+      //Serial.println("zit binnnen watergift mogelijk tijden");
 
       if (averageinprocent <= wetnesforstartwatergiftbeurt) {      // if soil is dryer as setpoint
         if (watergiftcounter == 0 || pauzetimer == 0 ) {          // if firstwaterpoor of day or pauzetimer==0
@@ -1127,7 +1127,7 @@ void loop () {
 
     if (ValveStatus == 1) {
       backlightstart = millis();                                 // keep backlight on when valvestatus is open
-      Serial.println("watergift start kraan open pomp aan");
+      //Serial.println("watergift start kraan open pomp aan");
       digitalWrite(13, HIGH);                  // 13 is onboard led en waterklep en/of waterpomp start
       startpauzetimer = millis();              // the latest time  we get into "if (ValveStatus == 1) {" will be used to set "startpauzetimer = millis();"
       pauzetimer =  (pauzenawatergiftbeurt * 60 * 1000L); // show pauzetime, wich countdown after valvestaus=0
@@ -1139,15 +1139,15 @@ void loop () {
         if (watergifttimer <= 0)watergifttimer = 0;
         lcd.print(watergifttimer);
         lcd.print("      ");
-        Serial.print("watergifttimer ");
-        Serial.println(watergifttimer);
+        //Serial.print("watergifttimer ");
+        //Serial.println(watergifttimer);
       }
     }
 
 
 
     if (millis() - starttime >= (duurwatergiftbeurt * 1000L)) {
-      Serial.println("watergift stop / kraan dicht pomp uit");
+      //Serial.println("watergift stop / kraan dicht pomp uit");
       digitalWrite(13, LOW);          // 13 is onboard led  en waterklep en/of waterpomp stop
       ValveStatus = 0;
 
@@ -1179,8 +1179,8 @@ void loop () {
     lcd.setCursor(14, 3);
     lcd.print(rtc.getTemperature());
     lcd.print("C");
-    Serial.print("pauzetimer ");
-    Serial.println(pauzetimer / 1000);
+    //Serial.print("pauzetimer ");
+    //Serial.println(pauzetimer / 1000);
 
 
 
@@ -1191,9 +1191,9 @@ void loop () {
     lcd.setCursor(0, 3);
     lcd.print(maximumaantalbeurtenperdag);
     lcd.print(" maximumaantalbeurt");
-    Serial.print("maximumaantalbeurtenperdag ");
-    Serial.println(maximumaantalbeurtenperdag);
-    Serial.println("watergift stop / kraan dicht pomp uit");
+    //Serial.print("maximumaantalbeurtenperdag ");
+    //Serial.println(maximumaantalbeurtenperdag);
+    //Serial.println("watergift stop / kraan dicht pomp uit");
     digitalWrite(13, LOW);          // 13 is onboard led  en waterklep en/of waterpomp stop
 
   }
