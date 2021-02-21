@@ -1192,7 +1192,7 @@ void loop () {
   if (watergiftcounter > maximumaantalbeurtenperdag) {
     lcd.setCursor(0, 3);
     lcd.print(maximumaantalbeurtenperdag);
-    lcd.print(" maximumaantalbeurt");
+    lcd.print(" Maximum Count");
     //Serial.print("maximumaantalbeurtenperdag ");
     //Serial.println(maximumaantalbeurtenperdag);
     //Serial.println("watergift stop / kraan dicht pomp uit");
