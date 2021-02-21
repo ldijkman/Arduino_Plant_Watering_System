@@ -890,7 +890,7 @@ void loop () {
     lcd.setCursor(0, 0);
     lcd.print(F("Copyright 2020->")); lcd.print(now.year());
     lcd.setCursor(0, 1);
-    lcd.print(F("Luberth Dijkman"));
+    lcd.print(F("Dirk Luberth Dijkman"));
     lcd.setCursor(0, 2);
     lcd.print(F("Bangert 30 1619GJ"));
     lcd.setCursor(0, 3);
