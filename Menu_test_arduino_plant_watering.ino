@@ -1084,6 +1084,10 @@ void loop () {
     lcd.print("av=");
     lcd.print(averageinprocent); lcd.print("   ");
 
+  }  // end do this only once each second
+
+
+
     if (now.hour() >= starttijdwatergift && now.hour() < eindtijdwatergift) {
       Serial.println("zit binnnen watergift mogelijk tijden");
 
@@ -1180,7 +1184,7 @@ void loop () {
 
 
 
-  }  // end do this only once each second
+
 
 
   if (watergiftcounter > maximumaantalbeurtenperdag) {
