@@ -4,12 +4,12 @@
 
    added rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
 
-   Rotary encoder menu mostly working
-   few more menu items i would like to add
-      menu backlight_time
-      menu time / date set
-  Done, menu eeprom erase      No / Yes   factory settings reset & reboot
-      menu software reboot   No / Yes
+   Rotary encoder menu_nrmostly working
+   few more menu_nritems i would like to add
+      menu_nrbacklight_time
+      menu_nrtime / date set
+  Done, menu_nreeprom erase      No / Yes   factory settings reset & reboot
+      menu_nrsoftware reboot   No / Yes
       menu's parameter info => at wich times a wateringjob started today
 
            a bit of copy, paste, modify from http://www.sticker.tk/forum/index.php?action=view&id=296
@@ -148,7 +148,7 @@ static uint8_t prevNextCode = 0;
 static uint16_t store = 0;
 //
 
-byte menu = 0;
+byte menu_nr = 0;
 
 
 long TempLong;                                   // Temporary re-used over and over again
@@ -238,7 +238,7 @@ void setup () {
     lcd.setCursor(0, 3);
     lcd.print(F("Thanks for trying"));
     for (int i = 30 ; i >= 0 ; i--) {
-      lcd.setCursor(18, 3); 
+      lcd.setCursor(18, 3);
       if (i <= 9) lcd.print(" ");
       lcd.print(i);
       delay(500);
@@ -322,7 +322,7 @@ void loop () {
       lcd.setCursor(0, 2);
       lcd.print(F("   Keep pressed?    "));
       lcd.setCursor(0, 3);
-      lcd.print(F(" For Menu Enter in  "));
+      lcd.print(F(" For menu_nrEnter in  "));
 
       lcd.setCursor(19, 3);
       lcd.print(5 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
@@ -332,11 +332,11 @@ void loop () {
         lcd.setCursor(0, 1);
         lcd.print(F("                    "));
         lcd.setCursor(0, 2);
-        lcd.print(F("   Entering Menu    "));
+        lcd.print(F("   Entering menu_nr   "));
         lcd.setCursor(0, 3);
         lcd.print(F("   Release Button   "));
         delay(500);
-        menu = 1;
+        menu_nr = 1;
       }
     }
     lcd.clear();
@@ -345,19 +345,19 @@ void loop () {
 
 
 
-  if (menu != 0) {         // only check next menus if menu not = 0
+  if (menu_nr != 0) {        // only check next menus if menu_nrnot = 0
 
     // 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
     // setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint
     TempLong = millis();  // reset innactive time counter
-    if (menu == 1) {
+    if (menu_nr == 1) {
       lcd.setCursor(0, 0);
       lcd.print(F("1 Set SwitchPoint %"));
       lcd.setCursor(8, 2);
       lcd.print(wetnesforstartwatergiftbeurt);
       lcd.print(F(" % "));
     }
-    while (menu == 1) {
+    while (menu_nr == 1) {
       lcd.setCursor(18, 3);
       if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
       lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
@@ -383,7 +383,7 @@ void loop () {
         while (SetButton() == LOW) {
           /*wait for button released*/
         }
-        menu = 2;
+        menu_nr = 2;
         lcd.clear();
 
         EEPROM.get(0, TempInt);                                   // limmited write to eeprom = read is unlimmited
@@ -408,7 +408,7 @@ void loop () {
 
 
       }
-    }// end menu 1
+    }// end menu_nr1
 
 
 
@@ -418,14 +418,14 @@ void loop () {
     // 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
     // Calibrate sensors Calibrate sensors Calibrate sensors Calibrate sensors Calibrate sensors Calibrate sensors
     TempLong = millis();  //reset innactive time counter
-    if (menu == 2) {
+    if (menu_nr == 2) {
       lcd.setCursor(0, 0);
       lcd.print(F("2 Calibrate Sensors"));
       lcd.setCursor(9, 2);
       if (Calibrate_Sensors == 1)lcd.print(F("No "));
       if (Calibrate_Sensors == 2)lcd.print(F("Yes"));
     }
-    while (menu == 2) {
+    while (menu_nr == 2) {
 
       lcd.setCursor(18, 3);
       if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
@@ -454,11 +454,11 @@ void loop () {
         while (SetButton() == LOW) {
           /*wait for button released*/
         }
-        menu = 3;
+        menu_nr = 3;
         lcd.clear();
         delay(250);
       }
-    }// end menu 2
+    }// end menu_nr2
 
 
 
@@ -563,14 +563,14 @@ void loop () {
     // 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
     // duurwatergiftbeurt duurwatergiftbeurt duurwatergiftbeurt duurwatergiftbeurt duurwatergiftbeurt
     TempLong = millis();  // reset innactive time counter
-    if (menu == 3) {
+    if (menu_nr == 3) {
       lcd.setCursor(0, 0);
       lcd.print(F("3 Watering T in Sec."));
       lcd.setCursor(6, 2);
       lcd.print(duurwatergiftbeurt);
       lcd.print(F(" Sec. "));
     }
-    while (menu == 3) {
+    while (menu_nr == 3) {
       lcd.setCursor(18, 3);
       if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
       lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
@@ -603,7 +603,7 @@ void loop () {
         while (SetButton() == LOW) {
           /*wait for button released*/
         }
-        menu = 4;
+        menu_nr = 4;
         lcd.clear();
 
         EEPROM.get(25, TempInt);                                   // limmited write to eeprom = read is unlimmited
@@ -628,7 +628,7 @@ void loop () {
 
 
       }
-    }// end menu 3
+    }// end menu_nr3
 
 
 
@@ -636,14 +636,14 @@ void loop () {
     // 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
     // pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt pauzenawatergiftbeurt
     TempLong = millis();  // reset innactive time counter
-    if (menu == 4) {
+    if (menu_nr == 4) {
       lcd.setCursor(0, 0);
       lcd.print(F("4 PauzeTime T in Min"));
       lcd.setCursor(6, 2);
       lcd.print(pauzenawatergiftbeurt);
       lcd.print(F(" Min. "));
     }
-    while (menu == 4) {
+    while (menu_nr == 4) {
       lcd.setCursor(18, 3);
       if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
       lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
@@ -668,7 +668,7 @@ void loop () {
         while (SetButton() == LOW) {
           /*wait for button released*/
         }
-        menu = 5;
+        menu_nr = 5;
         lcd.clear();
 
         EEPROM.get(30, TempInt);                                   // limmited write to eeprom = read is unlimmited
@@ -693,7 +693,7 @@ void loop () {
 
 
       }
-    }// end menu 4
+    }// end menu_nr4
 
 
 
@@ -704,14 +704,14 @@ void loop () {
     // 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
     // maximumaantalbeurtenperdag maximumaantalbeurtenperdag maximumaantalbeurtenperdag maximumaantalbeurtenperdag
     TempLong = millis();  // reset innactive time counter
-    if (menu == 5) {
+    if (menu_nr == 5) {
       lcd.setCursor(0, 0);
       lcd.print(F("5 Max water count"));
       lcd.setCursor(9, 2);
       lcd.print(maximumaantalbeurtenperdag);
       lcd.print(F(" "));
     }
-    while (menu == 5) {
+    while (menu_nr == 5) {
       lcd.setCursor(18, 3);
       if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
       lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
@@ -736,7 +736,7 @@ void loop () {
         while (SetButton() == LOW) {
           /*wait for button released*/
         }
-        menu = 6;
+        menu_nr = 6;
         lcd.clear();
 
         EEPROM.get(35, TempByte);                                   // limmited write to eeprom = read is unlimmited
@@ -761,20 +761,20 @@ void loop () {
 
 
       }
-    }// end menu 5
+    }// end menu_nr5
 
 
     // 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6
     // starttijdwatergift starttijdwatergift starttijdwatergift starttijdwatergift starttijdwatergift starttijdwatergift
     TempLong = millis();  // reset innactive time counter
-    if (menu == 6) {
+    if (menu_nr == 6) {
       lcd.setCursor(0, 0);
       lcd.print(F("6 Start Hour water"));
       lcd.setCursor(9, 2);
       lcd.print(starttijdwatergift);
       lcd.print(F(" "));
     }
-    while (menu == 6) {
+    while (menu_nr == 6) {
       lcd.setCursor(18, 3);
       if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
       lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
@@ -801,7 +801,7 @@ void loop () {
         while (SetButton() == LOW) {
           /*wait for button released*/
         }
-        menu = 7;
+        menu_nr = 7;
         lcd.clear();
 
         EEPROM.get(40, TempInt);                                   // limmited write to eeprom = read is unlimmited
@@ -826,7 +826,7 @@ void loop () {
 
 
       }
-    }// end menu 6
+    }// end menu_nr6
 
 
 
@@ -835,14 +835,14 @@ void loop () {
     // 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7
     // eindtijdwatergift eindtijdwatergift eindtijdwatergift eindtijdwatergift eindtijdwatergift eindtijdwatergift eindtijdwatergift
     TempLong = millis();  // reset innactive time counter
-    if (menu == 7) {
+    if (menu_nr == 7) {
       lcd.setCursor(0, 0);
       lcd.print(F("7 End Hour water"));
       lcd.setCursor(9, 2);
       lcd.print(eindtijdwatergift);
       lcd.print(F(" "));
     }
-    while (menu == 7) {
+    while (menu_nr == 7) {
       lcd.setCursor(18, 3);
       if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
       lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
@@ -869,7 +869,7 @@ void loop () {
         while (SetButton() == LOW) {
           /*wait for button released*/
         }
-        menu = 11;
+        menu_nr = 11;
         lcd.clear();
 
         EEPROM.get(45, TempInt);                                   // limmited write to eeprom = read is unlimmited
@@ -894,7 +894,7 @@ void loop () {
 
 
       }
-    }// end menu 7
+    }// end menu_nr7
 
 
 
@@ -902,7 +902,7 @@ void loop () {
     // 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11
     // EEPROM Erase Reboot
     TempLong = millis();  //reset innactive time counter
-    if (menu == 11) {
+    if (menu_nr == 11) {
       lcd.setCursor(0, 0);
       lcd.print(F("11 EEPROMClearReboot"));
       lcd.setCursor(0, 1);
@@ -911,7 +911,7 @@ void loop () {
       if (eepromerase == 1)lcd.print(F("No "));
       if (eepromerase == 2)lcd.print(F("Yes"));
     }
-    while (menu == 11) {
+    while (menu_nr == 11) {
 
       lcd.setCursor(18, 3);
       if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
@@ -940,11 +940,11 @@ void loop () {
         while (SetButton() == LOW) {
           /*wait for button released*/
         }
-        menu = 12;
+        menu_nr = 12;
         lcd.clear();
         delay(250);
       }
-    }// end menu 11
+    }// end menu_nr11
 
 
 
@@ -971,7 +971,7 @@ void loop () {
     // 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12
     // Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits
     TempLong = millis();  // reset innactive time counter
-    if (menu == 12) {
+    if (menu_nr == 12) {
       lcd.clear();
       DateTime now = rtc.now();
       lcd.setCursor(0, 0);
@@ -983,22 +983,22 @@ void loop () {
       lcd.setCursor(0, 3);
       lcd.print(F("Andijk Holland"));
     }
-    while (menu == 12) {
+    while (menu_nr == 12) {
       lcd.setCursor(18, 3);
       if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
       lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
       if ((millis() - TempLong)  > 10000) {
         delay(1000);  // want to see the zero 0
         lcd.clear();
-        menu = 0;
+        menu_nr = 0;
         break;
       }
 
-    }// end menu 12
+    }// end menu_nr12
 
 
 
-  } // end    if (menu != 0) {
+  } // end    if (menu_nr!= 0) {
 
 
 
@@ -1267,7 +1267,7 @@ int8_t read_rotary() {
 
 //******************************************************************
 void TimeOut() {
-  lcd.clear();  //exit menu if 20 seconds innactive
+  lcd.clear();  //exit menu_nrif 20 seconds innactive
   lcd.setCursor(6, 0);
   lcd.print(F("TimeOut"));
   lcd.setCursor(0, 1);
@@ -1276,7 +1276,7 @@ void TimeOut() {
   lcd.print(F("NOT saved to EEPROM!"));
   delay(2500);
   lcd.clear();
-  menu = 0;
+  menu_nr = 0;
 }
 
 
