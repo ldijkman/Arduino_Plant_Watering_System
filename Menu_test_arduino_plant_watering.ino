@@ -551,9 +551,9 @@ void loop () {
 
     float rval;
     if ( rval = read_rotary() ) {
-      if (duurwatergiftbeurt >= 600)duurwatergiftbeurt = duurwatergiftbeurt + (rval * 30);        // 30+20+10=60 second steps above 600 seconds
-      if (duurwatergiftbeurt >= 300)duurwatergiftbeurt = duurwatergiftbeurt + (rval * 20);        // 20+10=30 second steps above 300 seconds
-      if (duurwatergiftbeurt >= 60)duurwatergiftbeurt = duurwatergiftbeurt + (rval * 10);         // 10 second steps above 60 seconds
+      if (duurwatergiftbeurt >= 600)duurwatergiftbeurt = duurwatergiftbeurt + (rval * 30);        // 30+24+6=60 second steps above 600 seconds
+      if (duurwatergiftbeurt >= 300)duurwatergiftbeurt = duurwatergiftbeurt + (rval * 24);        // 24+6=30 second steps above 300 seconds
+      if (duurwatergiftbeurt >= 60)duurwatergiftbeurt = duurwatergiftbeurt + (rval * 6);          // 6 second steps above 60 seconds
       if (duurwatergiftbeurt <= 60)duurwatergiftbeurt = duurwatergiftbeurt + (rval);              // 1 second steps
       if (duurwatergiftbeurt <= 2) duurwatergiftbeurt = 2;                                        // minimal watering time 2 seconds
       TempLong = millis();  //reset innactive time counter
