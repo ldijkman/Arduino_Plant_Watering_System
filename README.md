@@ -76,13 +76,12 @@ Capacitive is better corrosive resistant
 #
 # 3D Printer:
 
-https://www.google.com/search?q=3d+print+moisture+sensor
+not mine!
 
 https://www.codemacs.com/raspberrypi/howtoo/soil-moisture-sensor-waterproofing.9450461.htm
 
 <img src="https://www.codemacs.com/post.images/16204626.1.webp">
 
-https://www.thingiverse.com/thing:2952434
+https://www.codemacs.com/raspberrypi/howtoo/soil-moisture-sensor-waterproofing.9450461.htm
 
-<img src="https://cdn.thingiverse.com/renders/cb/96/fb/c5/82/576137ff660eed9ba9b4aad358fdf76c_preview_featured.jpg">
 
