@@ -238,13 +238,14 @@ void setup () {
     lcd.setCursor(0, 3);
     lcd.print(F("Thanks for trying"));
     for (int i = 30 ; i > 0 ; i--) {
-      lcd.setCursor(17, 2);
+      if (i <= 9) lcd.print(" ");
+      lcd.setCursor(18, 3);
       lcd.print(i);
-      lcd.print(" ");
       delay(500);
     }
+    delay(1000); // want to see the 0
     lcd.clear();
-  }// END ONLY ONCE, MADE HIS MARK
+  }// END Do it ONLY ONCE, MADE HIS MARK
 
 
 
@@ -342,9 +343,9 @@ void loop () {
   }
 
 
-  
 
-  if (menu != 0) {
+
+  if (menu != 0) {         // only check next menus if menu not = 0
 
     // 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
     // setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint
@@ -997,294 +998,294 @@ void loop () {
 
 
 
-  } // end    if (menu != 0) {  
+  } // end    if (menu != 0) {
 
 
 
 
-    DateTime now = rtc.now();
+  DateTime now = rtc.now();
 
-    second_now = now.second();
-    if (last_second != second_now) {       // only do this once each second
+  second_now = now.second();
+  if (last_second != second_now) {       // only do this once each second
 
-      last_second = second_now;
-
-
-
-      Serial.print("millis() "); Serial.println(millis());
-      Serial.println("");
-
-      Serial.print(daysOfTheWeek[now.dayOfTheWeek()]);
-      Serial.print(" ");
-      Serial.print(now.day(), DEC);
-      Serial.print("-");
-      Serial.print(now.month(), DEC);
-      Serial.print("-");
-      Serial.print(now.year(), DEC);
+    last_second = second_now;
 
 
-      lcd.setCursor(0, 0);
-      lcd.print(now.hour());
-      lcd.print(':');
-      if (now.minute() <= 9)lcd.print('0');
-      lcd.print(now.minute());
-      lcd.print(':');
-      if (now.second() <= 9)lcd.print('0');
-      lcd.print(now.second());
-      lcd.print(" ");
-      //lcd.print(now.day());
-      //lcd.print("-");
-      //lcd.print(now.month());
-      //lcd.print("-");
-      //lcd.print(now.year());
-      //lcd.print(" ");
-      lcd.setCursor(14, 0);
-      lcd.print("sp=");                           // setpoint switchpoint ??%
-      lcd.print(wetnesforstartwatergiftbeurt);
-      lcd.print(" ");
 
-      Serial.println(' ');
+    Serial.print("millis() "); Serial.println(millis());
+    Serial.println("");
 
-      Serial.print(now.hour(), DEC);
-      Serial.print(':');
-      Serial.print(now.minute(), DEC);
-      Serial.print(':');
-      Serial.print(now.second(), DEC);
-      Serial.println();
-
-      Serial.print("Temperature: ");
-      Serial.print(rtc.getTemperature());
-      Serial.println(" C");
-
-      Serial.println();
-      Serial.print("1 read analogread A0 = "); Serial.println(analogRead(A0));
-      Serial.print("1 read analogread A3 = "); Serial.println(analogRead(A3));
-      Serial.print("100 read analogread A0 = "); Serial.println(sense1);
-      Serial.print("100 read analogread A3 = "); Serial.println(sense2);
-      Serial.print("analogread average = "); Serial.println((sense1 + sense2) / 2);
+    Serial.print(daysOfTheWeek[now.dayOfTheWeek()]);
+    Serial.print(" ");
+    Serial.print(now.day(), DEC);
+    Serial.print("-");
+    Serial.print(now.month(), DEC);
+    Serial.print("-");
+    Serial.print(now.year(), DEC);
 
 
-      Serial.print("sensor1 "); Serial.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); Serial.println(" % wet");
-      Serial.print("sensor2 "); Serial.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); Serial.println(" % wet");
+    lcd.setCursor(0, 0);
+    lcd.print(now.hour());
+    lcd.print(':');
+    if (now.minute() <= 9)lcd.print('0');
+    lcd.print(now.minute());
+    lcd.print(':');
+    if (now.second() <= 9)lcd.print('0');
+    lcd.print(now.second());
+    lcd.print(" ");
+    //lcd.print(now.day());
+    //lcd.print("-");
+    //lcd.print(now.month());
+    //lcd.print("-");
+    //lcd.print(now.year());
+    //lcd.print(" ");
+    lcd.setCursor(14, 0);
+    lcd.print("sp=");                           // setpoint switchpoint ??%
+    lcd.print(wetnesforstartwatergiftbeurt);
+    lcd.print(" ");
 
-      averageinprocent = (map(sense1, dry_sensor_one, wet_sensor_one, 0, 100) + map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)) / 2;
-      Serial.print("Average "); Serial.print(averageinprocent); Serial.println(" % wet");
+    Serial.println(' ');
 
-      Serial.println(' ');
+    Serial.print(now.hour(), DEC);
+    Serial.print(':');
+    Serial.print(now.minute(), DEC);
+    Serial.print(':');
+    Serial.print(now.second(), DEC);
+    Serial.println();
 
-      Serial.print("averageinprocent = "); Serial.print(averageinprocent); Serial.print(" switchpoint = "); Serial.println(wetnesforstartwatergiftbeurt);
-      lcd.setCursor(0, 1);
-      lcd.print("S1=");
-      lcd.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); lcd.print("   ");
-      lcd.setCursor(7, 1);
-      lcd.print("S2=");
-      lcd.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); lcd.print("   ");
-      lcd.setCursor(14, 1);
-      lcd.print("av=");
-      lcd.print(averageinprocent); lcd.print("   ");
+    Serial.print("Temperature: ");
+    Serial.print(rtc.getTemperature());
+    Serial.println(" C");
 
-      if (now.hour() >= starttijdwatergift && now.hour() < eindtijdwatergift) {
-        Serial.println("zit binnnen watergift mogelijk tijden");
+    Serial.println();
+    Serial.print("1 read analogread A0 = "); Serial.println(analogRead(A0));
+    Serial.print("1 read analogread A3 = "); Serial.println(analogRead(A3));
+    Serial.print("100 read analogread A0 = "); Serial.println(sense1);
+    Serial.print("100 read analogread A3 = "); Serial.println(sense2);
+    Serial.print("analogread average = "); Serial.println((sense1 + sense2) / 2);
 
-        if (averageinprocent <= wetnesforstartwatergiftbeurt) {      // if soil is dryer as setpoint
-          if (watergiftcounter == 0 || pauzetimer == 0 ) {          // if firstwaterpoor of day or pauzetimer==0
-            if (watergiftcounter <= maximumaantalbeurtenperdag) {
-              if (ValveStatus == 0) {
-                starttime = millis();                              // save starttime millis only once
-                ValveStatus = 1;                                   // next time whe do no get here because valvestatus is now 1
-                watergiftcounter = watergiftcounter + 1;
-              }
+
+    Serial.print("sensor1 "); Serial.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); Serial.println(" % wet");
+    Serial.print("sensor2 "); Serial.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); Serial.println(" % wet");
+
+    averageinprocent = (map(sense1, dry_sensor_one, wet_sensor_one, 0, 100) + map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)) / 2;
+    Serial.print("Average "); Serial.print(averageinprocent); Serial.println(" % wet");
+
+    Serial.println(' ');
+
+    Serial.print("averageinprocent = "); Serial.print(averageinprocent); Serial.print(" switchpoint = "); Serial.println(wetnesforstartwatergiftbeurt);
+    lcd.setCursor(0, 1);
+    lcd.print("S1=");
+    lcd.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); lcd.print("   ");
+    lcd.setCursor(7, 1);
+    lcd.print("S2=");
+    lcd.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); lcd.print("   ");
+    lcd.setCursor(14, 1);
+    lcd.print("av=");
+    lcd.print(averageinprocent); lcd.print("   ");
+
+    if (now.hour() >= starttijdwatergift && now.hour() < eindtijdwatergift) {
+      Serial.println("zit binnnen watergift mogelijk tijden");
+
+      if (averageinprocent <= wetnesforstartwatergiftbeurt) {      // if soil is dryer as setpoint
+        if (watergiftcounter == 0 || pauzetimer == 0 ) {          // if firstwaterpoor of day or pauzetimer==0
+          if (watergiftcounter <= maximumaantalbeurtenperdag) {
+            if (ValveStatus == 0) {
+              starttime = millis();                              // save starttime millis only once
+              ValveStatus = 1;                                   // next time whe do no get here because valvestatus is now 1
+              watergiftcounter = watergiftcounter + 1;
             }
           }
         }
-      } else {
-        lcd.setCursor(0, 2);
-        if (now.hour() < starttijdwatergift) {
-          lcd.print("OFF, Time < "); lcd.print(starttijdwatergift); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
-        }
-        if (now.hour() >= eindtijdwatergift) {
-          lcd.print("OFF, Time >= "); lcd.print(eindtijdwatergift); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
-        }
-        lcd.setCursor(0, 3);
-        lcd.print("Closed");
-        delay(500);
-        lcd.setCursor(0, 2);
-        lcd.print("                    "); // erase the line of text
       }
-
-
-
-
-
-
-
-
-
-      if (ValveStatus == 1) {
-        backlightstart = millis();                                 // keep backlight on when valvestatus is open
-        Serial.println("watergift start kraan open pomp aan");
-        digitalWrite(13, HIGH);                  // 13 is onboard led en waterklep en/of waterpomp start
-        startpauzetimer = millis();              // the latest time  we get into "if (ValveStatus == 1) {" will be used to set "startpauzetimer = millis();"
-        pauzetimer =  (pauzenawatergiftbeurt * 60 * 1000L); // show pauzetime, wich countdown after valvestaus=0
-        if (millis() - starttime <= (duurwatergiftbeurt * 1000L)) {
-          lcd.setCursor(0, 3);
-          lcd.print("Open");
-          lcd.print(" ");
-          watergifttimer = (starttime + (duurwatergiftbeurt * 1000L) - millis()) / 1000;
-          if (watergifttimer <= 0)watergifttimer = 0;
-          lcd.print(watergifttimer);
-          lcd.print("      ");
-          Serial.print("watergifttimer ");
-          Serial.println(watergifttimer);
-        }
-      }
-
-
-
-      if (millis() - starttime >= (duurwatergiftbeurt * 1000L)) {
-        Serial.println("watergift stop / kraan dicht pomp uit");
-        digitalWrite(13, LOW);          // 13 is onboard led  en waterklep en/of waterpomp stop
-        ValveStatus = 0;
-
-      }
-
-      if (ValveStatus == 0) {
-        pauzetimer =  (pauzenawatergiftbeurt * 60 * 1000L) - (millis() - startpauzetimer) ;
-        if (pauzetimer <= 0) pauzetimer = 0;
-        if (pauzetimer > 0)backlightstart = millis();            // keep backlight on when pauzetimer is running
-      }
-      if (watergiftcounter <= 0) pauzetimer = 0;                 // anders gaat pauzetimer onnodig lopen bij start of reboot
-
-
+    } else {
       lcd.setCursor(0, 2);
-      lcd.print("count=");
-      lcd.print(watergiftcounter);
-      lcd.print(" pauze=");
-      lcd.print(pauzetimer / 1000);
-      lcd.print(" ");
-      lcd.setCursor(0, 3);
-      if (ValveStatus == 0) {
-        lcd.print("Closed      ");     // dont know sometimes a long value at 0/close = erase it with extra spaces
-        // looked like a overflow from long 0 countdown to max long = 2^32-1 value
-        // should count signed long to -1 and i say if -1 count is 0
+      if (now.hour() < starttijdwatergift) {
+        lcd.print("OFF, Time < "); lcd.print(starttijdwatergift); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
       }
-      if (ValveStatus == 1) {
+      if (now.hour() >= eindtijdwatergift) {
+        lcd.print("OFF, Time >= "); lcd.print(eindtijdwatergift); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
+      }
+      lcd.setCursor(0, 3);
+      lcd.print("Closed");
+      delay(500);
+      lcd.setCursor(0, 2);
+      lcd.print("                    "); // erase the line of text
+    }
+
+
+
+
+
+
+
+
+
+    if (ValveStatus == 1) {
+      backlightstart = millis();                                 // keep backlight on when valvestatus is open
+      Serial.println("watergift start kraan open pomp aan");
+      digitalWrite(13, HIGH);                  // 13 is onboard led en waterklep en/of waterpomp start
+      startpauzetimer = millis();              // the latest time  we get into "if (ValveStatus == 1) {" will be used to set "startpauzetimer = millis();"
+      pauzetimer =  (pauzenawatergiftbeurt * 60 * 1000L); // show pauzetime, wich countdown after valvestaus=0
+      if (millis() - starttime <= (duurwatergiftbeurt * 1000L)) {
+        lcd.setCursor(0, 3);
         lcd.print("Open");
+        lcd.print(" ");
+        watergifttimer = (starttime + (duurwatergiftbeurt * 1000L) - millis()) / 1000;
+        if (watergifttimer <= 0)watergifttimer = 0;
+        lcd.print(watergifttimer);
+        lcd.print("      ");
+        Serial.print("watergifttimer ");
+        Serial.println(watergifttimer);
       }
-      lcd.setCursor(14, 3);
-      lcd.print(rtc.getTemperature());
-      lcd.print("C");
-      Serial.print("pauzetimer ");
-      Serial.println(pauzetimer / 1000);
+    }
 
 
 
-    }  // end do this only once each second
-
-
-    if (watergiftcounter > maximumaantalbeurtenperdag) {
-      lcd.setCursor(0, 3);
-      lcd.print(maximumaantalbeurtenperdag);
-      lcd.print(" maximumaantalbeurt");
-      Serial.print("maximumaantalbeurtenperdag ");
-      Serial.println(maximumaantalbeurtenperdag);
+    if (millis() - starttime >= (duurwatergiftbeurt * 1000L)) {
       Serial.println("watergift stop / kraan dicht pomp uit");
       digitalWrite(13, LOW);          // 13 is onboard led  en waterklep en/of waterpomp stop
+      ValveStatus = 0;
 
     }
 
-
-    if (now.hour() == 23 && now.minute() == 59 && now.second() >= 59) {
-      asm volatile("jmp 0");                                              // end of day reset/reboot arduino //start the day with a fresh millis() counter
-      // no worry's about millis overflow every 50 days
-      // and resets watergiftcounter
-      watergiftcounter = 0; // if you trust the millis(); 49-50 days overflow       comment out the line // asm volatile("jmp 0");
+    if (ValveStatus == 0) {
+      pauzetimer =  (pauzenawatergiftbeurt * 60 * 1000L) - (millis() - startpauzetimer) ;
+      if (pauzetimer <= 0) pauzetimer = 0;
+      if (pauzetimer > 0)backlightstart = millis();            // keep backlight on when pauzetimer is running
     }
-
-  }
-
+    if (watergiftcounter <= 0) pauzetimer = 0;                 // anders gaat pauzetimer onnodig lopen bij start of reboot
 
 
-
-
-
-
-
-
-
-
-
-
-  //*******************************************************************
-  boolean SetButton() {
-    boolean sval;
-    sval = digitalRead(rotarybutton_SW);
-    return sval;
-  }
-
-
-
-
-
-
-
-
-
-  //*******************************************************************
-  int8_t read_rotary() {
-    static int8_t rot_enc_table[] = {0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0};
-
-    // Robust Rotary encoder reading
-    // Copyright John Main - best-microcontroller-projects.com
-    // https://www.best-microcontroller-projects.com/rotary-encoder.html
-
-    prevNextCode <<= 2;
-    if (digitalRead(DATA)) prevNextCode |= 0x02;
-    if (digitalRead(CLK)) prevNextCode |= 0x01;
-    prevNextCode &= 0x0f;
-
-    // If valid then store as 16 bit data.
-    if  (rot_enc_table[prevNextCode] ) {
-      store <<= 4;
-      store |= prevNextCode;
-      //if (store==0xd42b) return 1;
-      //if (store==0xe817) return -1;
-      if ((store & 0xff) == 0x2b) return -1;
-      if ((store & 0xff) == 0x17) return 1;
-    }
-    return 0;
-
-    // Robust Rotary encoder reading
-    // Copyright John Main - best-microcontroller-projects.com
-    // https://www.best-microcontroller-projects.com/rotary-encoder.html
-  }
-
-
-
-
-
-
-  //******************************************************************
-  void TimeOut() {
-    lcd.clear();  //exit menu if 20 seconds innactive
-    lcd.setCursor(6, 0);
-    lcd.print(F("TimeOut"));
-    lcd.setCursor(0, 1);
-    lcd.print(F("Return to Mainscreen"));
+    lcd.setCursor(0, 2);
+    lcd.print("count=");
+    lcd.print(watergiftcounter);
+    lcd.print(" pauze=");
+    lcd.print(pauzetimer / 1000);
+    lcd.print(" ");
     lcd.setCursor(0, 3);
-    lcd.print(F("NOT saved to EEPROM!"));
-    delay(2500);
-    lcd.clear();
-    menu = 0;
+    if (ValveStatus == 0) {
+      lcd.print("Closed      ");     // dont know sometimes a long value at 0/close = erase it with extra spaces
+      // looked like a overflow from long 0 countdown to max long = 2^32-1 value
+      // should count signed long to -1 and i say if -1 count is 0
+    }
+    if (ValveStatus == 1) {
+      lcd.print("Open");
+    }
+    lcd.setCursor(14, 3);
+    lcd.print(rtc.getTemperature());
+    lcd.print("C");
+    Serial.print("pauzetimer ");
+    Serial.println(pauzetimer / 1000);
+
+
+
+  }  // end do this only once each second
+
+
+  if (watergiftcounter > maximumaantalbeurtenperdag) {
+    lcd.setCursor(0, 3);
+    lcd.print(maximumaantalbeurtenperdag);
+    lcd.print(" maximumaantalbeurt");
+    Serial.print("maximumaantalbeurtenperdag ");
+    Serial.println(maximumaantalbeurtenperdag);
+    Serial.println("watergift stop / kraan dicht pomp uit");
+    digitalWrite(13, LOW);          // 13 is onboard led  en waterklep en/of waterpomp stop
+
   }
 
 
+  if (now.hour() == 23 && now.minute() == 59 && now.second() >= 59) {
+    asm volatile("jmp 0");                                              // end of day reset/reboot arduino //start the day with a fresh millis() counter
+    // no worry's about millis overflow every 50 days
+    // and resets watergiftcounter
+    watergiftcounter = 0; // if you trust the millis(); 49-50 days overflow       comment out the line // asm volatile("jmp 0");
+  }
+
+}
 
 
-  // Een Heitje voor een karweitje
-  // If I had a nickel ...
-  // A Penny for Sharing My Thoughts?
-  // http://www.paypal.me/LDijkman
 
-  // Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
-  // Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
+
+
+
+
+
+
+
+
+
+
+//*******************************************************************
+boolean SetButton() {
+  boolean sval;
+  sval = digitalRead(rotarybutton_SW);
+  return sval;
+}
+
+
+
+
+
+
+
+
+
+//*******************************************************************
+int8_t read_rotary() {
+  static int8_t rot_enc_table[] = {0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0};
+
+  // Robust Rotary encoder reading
+  // Copyright John Main - best-microcontroller-projects.com
+  // https://www.best-microcontroller-projects.com/rotary-encoder.html
+
+  prevNextCode <<= 2;
+  if (digitalRead(DATA)) prevNextCode |= 0x02;
+  if (digitalRead(CLK)) prevNextCode |= 0x01;
+  prevNextCode &= 0x0f;
+
+  // If valid then store as 16 bit data.
+  if  (rot_enc_table[prevNextCode] ) {
+    store <<= 4;
+    store |= prevNextCode;
+    //if (store==0xd42b) return 1;
+    //if (store==0xe817) return -1;
+    if ((store & 0xff) == 0x2b) return -1;
+    if ((store & 0xff) == 0x17) return 1;
+  }
+  return 0;
+
+  // Robust Rotary encoder reading
+  // Copyright John Main - best-microcontroller-projects.com
+  // https://www.best-microcontroller-projects.com/rotary-encoder.html
+}
+
+
+
+
+
+
+//******************************************************************
+void TimeOut() {
+  lcd.clear();  //exit menu if 20 seconds innactive
+  lcd.setCursor(6, 0);
+  lcd.print(F("TimeOut"));
+  lcd.setCursor(0, 1);
+  lcd.print(F("Return to Mainscreen"));
+  lcd.setCursor(0, 3);
+  lcd.print(F("NOT saved to EEPROM!"));
+  delay(2500);
+  lcd.clear();
+  menu = 0;
+}
+
+
+
+
+// Een Heitje voor een karweitje
+// If I had a nickel ...
+// A Penny for Sharing My Thoughts?
+// http://www.paypal.me/LDijkman
+
+// Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
+// Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
