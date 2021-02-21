@@ -6,10 +6,10 @@
 
    Rotary encoder menu mostly working
    few more menu items i would like to add
-      menu backlight time
-      menu time date set
-      menu eeprom erase
-      menu software reboot
+      menu backlight_time
+      menu time / date set
+      menu eeprom erase      No / Yes
+      menu software reboot   No / Yes
       menu's parameter info
 
            a bit of copy, paste, modify from http://www.sticker.tk/forum/index.php?action=view&id=296
