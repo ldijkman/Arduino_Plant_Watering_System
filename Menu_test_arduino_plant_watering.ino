@@ -309,12 +309,11 @@ void loop () {
   if (SetButton() == LOW) {                     // if !=not SetButton, SW = pulled up by resistor on KY-040 to +,  so LOW is button pressed
 
     backlightstart = millis();
-    lcd.backlight();
+    lcd.backlight();                                               // turn backlight on
     TempLong = millis();  // reset innactive time counter
-    while (SetButton() == LOW) {                                    // while setbutton==LOW, pulled up by resistor, LOW is pressed
-      // loop until button released
-      // maybe a timer here
-      // alarm if button never released
+    while (SetButton() == LOW) {                                   // while setbutton==LOW, pulled up by resistor, LOW is pressed
+
+      if ((millis() - TempLong)  < 5000) {                         // only show this mssage the first 5 seconds
       lcd.setCursor(0, 0);
       lcd.print(F("Ok Backlight ON     "));
       lcd.setCursor(0, 1);
@@ -323,16 +322,17 @@ void loop () {
       lcd.print(F("   Keep pressed?    "));
       lcd.setCursor(0, 3);
       lcd.print(F(" For menu Enter in  "));
-
+      }
+      
       lcd.setCursor(19, 3);
-      lcd.print(5 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
-      if ((millis() - TempLong)  > 5000) {
+      lcd.print(5 - (millis() - TempLong) / 1000);                // on LCD timeout countdown
+      if ((millis() - TempLong)  > 5000) {                        // after 5 seconds pressed we get into menu system
         lcd.setCursor(0, 0);
-        lcd.print(F("Ok we are in        "));
+        lcd.print(F("Ok, We are in Menu  "));
         lcd.setCursor(0, 1);
         lcd.print(F("                    "));
         lcd.setCursor(0, 2);
-        lcd.print(F("   Entering menu   "));
+        lcd.print(F("For Entering Menu   "));
         lcd.setCursor(0, 3);
         lcd.print(F("   Release Button   "));
         delay(500);
