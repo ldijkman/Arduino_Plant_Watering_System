@@ -8,7 +8,7 @@
    few more menu items i would like to add
       menu backlight_time
       menu time / date set
-Done, menu eeprom erase      No / Yes   factory settings reset & reboot
+  Done, menu eeprom erase      No / Yes   factory settings reset & reboot
       menu software reboot   No / Yes
       menu's parameter info => at wich times a wateringjob started today
 
@@ -246,7 +246,7 @@ void setup () {
     lcd.clear();
   }// END ONLY ONCE, MADE HIS MARK
 
-  
+
 
   // Read stored valeus from EEPROM
   EEPROM.get(0, wetnesforstartwatergiftbeurt);
@@ -939,9 +939,14 @@ void loop () {
 
   if (eepromerase == 2) {                              // you chose Yes so whe go to erase eeprom
     for (int i = 0 ; i < EEPROM.length() ; i++) {
+      lcd.setCursor(3, 2);
+      lcd.print("Erase "); lcd.print(i);
       EEPROM.write(i, 0);                             // erase eeprom
     }
-    delay(10);
+    delay(1000);
+    lcd.setCursor(3, 2);
+    lcd.print("Reboot Now!    ");
+    delay(2000);
     asm volatile("jmp 0");                          // reboot
   }
 
