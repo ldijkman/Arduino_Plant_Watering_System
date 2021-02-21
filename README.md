@@ -54,9 +54,13 @@ http://Paypal.Me/LDijkman
 
 Rotary encoder menu 
 
-change and save parameters settings to EEPROM, calibrate sensors 
+Change and save parameters settings to EEPROM
 
-an independant stand alone real plant watering system, the first?
+Calibrate sensors 
+
+an independant stand alone real plant watering system 
+
+The First?
 
 https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/Menu_test_arduino_plant_watering.ino
 
