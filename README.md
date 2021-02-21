@@ -5,13 +5,15 @@ https://youtu.be/1jKAxLyOY_s
 
 +/- 10 Dollar Automated Plant Watering Computer on Soil Moisture
 
-Arduino Nano, Uno or other Arduino device
+Arduino Nano or Uno
 
-2 analog inputs A0 A1 for 2 Capacitive Soil Moisture Sensors (Capacitive soil sensor is less corrosion sensitive)
+2 analog inputs A0 A3 for 2 Capacitive Soil Moisture Sensors (Capacitive soil sensor is less corrosion sensitive)
 
 1 output D13 for watering start (Pump and/or Valve) (output D13 is also onboard LED)
 
-i2c for DS3231 RTC RealTimeClock and 4x20 i2c LCD
+i2c for DS3231 RTC RealTimeClock 
+
+i2c for 4x20 i2c LCD
 
 start time, end time, let plants sleep at night, no watering at night
 
@@ -42,7 +44,7 @@ and you must make the source code available.
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 
-https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/Arduino_Plant_Watering_System.ino
+https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/Menu_test_arduino_plant_watering.ino
 
 https://youtu.be/1jKAxLyOY_s
 
