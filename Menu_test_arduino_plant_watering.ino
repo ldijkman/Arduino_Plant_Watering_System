@@ -904,7 +904,7 @@ void loop () {
     TempLong = millis();  //reset innactive time counter
     if (menu_nr == 11) {
       lcd.setCursor(0, 0);
-      lcd.print(F("11 EEPROMClearReboot"));
+      lcd.print(F("EEPROM Erase Reboot"));
       lcd.setCursor(0, 1);
       lcd.print(F("Factory Settings?"));
       lcd.setCursor(9, 3);
