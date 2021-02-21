@@ -143,8 +143,6 @@ byte Calibrate_Sensors = 1;
 // and connect rotary encoder to +5vdc and GND to 0vdc, -, min, GND, ground, or whatever they call it
 static uint8_t prevNextCode = 0;
 static uint16_t store = 0;
-
-#define backlightstartbutton 5        // button on input D5, if pulled down to ground backlight goes on
 //
 
 byte menu = 0;
@@ -170,8 +168,7 @@ void setup () {
   pinMode(DATA, INPUT);                // rotary encoder
   pinMode(DATA, INPUT_PULLUP);         // rotary encoder
 
-  pinMode(backlightstartbutton, INPUT_PULLUP);            // button on input "backlightstartbutton",  if pulled down to ground backlight goes on
-
+ 
   Serial.begin(115200);               // serial monitor
 
 
@@ -278,9 +275,7 @@ void loop () {
     backlightflag = 1;
   }
 
-  if (digitalRead(backlightstartbutton) == LOW) {
-    backlightstart = millis(); // button on input "backlightstartbutton",  if pulled down to ground backlight goes on
-  }
+
 
   long Read_A0 = 0;
   long Read_A3 = 0;
@@ -302,21 +297,37 @@ void loop () {
 
 
   if (SetButton() == LOW) {                     // if !=not SetButton, SW = pulled up by resistor on KY-040 to +,  so LOW is button pressed
-    menu = 1;
+
     backlightstart = millis();
     lcd.backlight();
+    TempLong = millis();  // reset innactive time counter
     while (SetButton() == LOW) {                                    // while setbutton==LOW, pulled up by resistor, LOW is pressed
       // loop until button released
       // maybe a timer here
       // alarm if button never released
       lcd.setCursor(0, 0);
-      lcd.print(F("                    "));
+      lcd.print(F("Ok Backlight ON     "));
       lcd.setCursor(0, 1);
-      lcd.print(F(" In Menu System Now "));
-      lcd.setCursor(0, 2);
-      lcd.print(F("   Release Button   "));
-      lcd.setCursor(0, 3);
       lcd.print(F("                    "));
+      lcd.setCursor(0, 2);
+      lcd.print(F("   Keep pressed?    "));
+      lcd.setCursor(0, 3);
+      lcd.print(F("   For Menu Enter   "));
+
+      lcd.setCursor(18, 3);
+      lcd.print(5 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
+      if ((millis() - TempLong)  > 5000) {
+        lcd.setCursor(0, 0);
+        lcd.print(F("Ok we are in    "));
+        lcd.setCursor(0, 1);
+        lcd.print(F("                    "));
+        lcd.setCursor(0, 2);
+        lcd.print(F("   Entering Menu    "));
+        lcd.setCursor(0, 3);
+        lcd.print(F("   Release Button   "));
+        delay(500);
+        menu = 1;
+      }
     }
     lcd.clear();
   }
@@ -561,9 +572,9 @@ void loop () {
       lcd.print(duurwatergiftbeurt);
       lcd.print(F(" Sec. "));
       lcd.setCursor(6, 3);
-      float wateringtime=duurwatergiftbeurt;
+      float wateringtime = duurwatergiftbeurt;
       float minutetime = (wateringtime / 60);
-      lcd.print(minutetime,1);
+      lcd.print(minutetime, 1);
       lcd.print(F(" Min. "));
 
     }
