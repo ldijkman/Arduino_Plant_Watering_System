@@ -58,12 +58,12 @@
 // is the ads1115 multiplexing like arduino?
 // or use 2 single channel i2c analog to digital converters with a different i2c adress, No noise?
 // https://www.google.com/search?q=1+channel+i2c+analog+to+digital+converter
-// 1 channel 12bit? MCP4725 I2C
+// future maybe 2x 1 channel 12bit? MCP4725 I2C, both with different i2c adres
 //
 //
 // with irrigation drippers / drip emmiters you have more control of amount of water per time!?
 // different types liters/per hour
-// white tyleen hose less heat / polution
+// white tyleen hose less heat / polution, better not use black, do not use transparent
 //
 //
 // DS3231 RTC realtimeclock connected to +5vdc GND SCL SDA
