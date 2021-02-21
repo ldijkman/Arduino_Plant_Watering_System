@@ -563,7 +563,7 @@ void loop () {
       lcd.setCursor(6, 3);
       float wateringtime=duurwatergiftbeurt;
       float minutetime = (wateringtime / 60);
-      lcd.print(minutetime,1);
+      lcd.print(minutetime,2);
       lcd.print(F(" Min. "));
 
     }
