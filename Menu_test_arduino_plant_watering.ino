@@ -64,6 +64,7 @@
 // with irrigation drippers / drip emmiters you have more control of amount of water per time!?
 // different types liters/per hour
 // white tyleen hose less heat / polution, better not use black, do not use transparent
+// use an extra dripper in a measurecan to monitor/check water given each day (empty it each day)
 //
 //
 // DS3231 RTC realtimeclock connected to +5vdc GND SCL SDA
