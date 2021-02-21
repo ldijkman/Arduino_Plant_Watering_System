@@ -62,6 +62,7 @@
 // https://www.google.com/search?q=aliexpress+MCP4725
 //
 // What is maximum sensor wire length for analog? for i2c?
+// soil-watch sells 5v analog with 20meter cables (unshielded?=does that make sense) https://pino-tech.eu/soilwatch10/
 //
 //
 // with irrigation drippers / drip emmiters you have more control of amount of water per time!?
