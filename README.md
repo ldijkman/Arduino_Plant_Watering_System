@@ -56,9 +56,11 @@ Rotary encoder menu
 
 Change and save parameters settings to EEPROM
 
-Calibrate sensors 
+Calibrate sensors settings without PC
 
 an independant stand alone real plant watering system 
+
+Low cost, Low power consumption
 
 The First?
 
