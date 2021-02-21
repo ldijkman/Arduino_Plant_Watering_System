@@ -170,10 +170,10 @@ void setup () {
 
   pinMode(13, OUTPUT);                 // pin 13 for valve open / close is also the onboard LED
 
+//                                            i have 3 pullup resistors on my KY-040 so INPUT_PULLUP should not be needed BUT  
+//                                            Jo says no pullup resistor on SW on his rotary decoder so made it input_pullup
   pinMode(rotarybutton_SW, INPUT_PULLUP);     // rotary encoder SW = pulled up by resistor on KY-040 to +
- // pinMode(CLK, INPUT);                      // rotary encoder
   pinMode(CLK, INPUT_PULLUP);                 // rotary encoder
-  //pinMode(DATA, INPUT);                     // rotary encoder
   pinMode(DATA, INPUT_PULLUP);                // rotary encoder
 
 
