@@ -467,7 +467,7 @@ void loop () {
         dry_sensor_one = analogRead(A0);
         EEPROM.put(5, dry_sensor_one);
         lcd.clear();
-        delay(500); // user gets a better expeirience switch to next screen?
+        delay(500); // user gets a better experience switch to next screen?
         break;
       }
     }
@@ -488,7 +488,7 @@ void loop () {
         wet_sensor_one = analogRead(A0);
         EEPROM.put(10, wet_sensor_one);
         lcd.clear();
-        delay(500); // user gets a better expeirience switch to next screen?
+        delay(500); // user gets a better experience switch to next screen?
         break;
       }
     }
@@ -509,7 +509,7 @@ void loop () {
         dry_sensor_two = analogRead(A3);
         EEPROM.put(15, dry_sensor_two);
         lcd.clear();
-        delay(500); // user gets a better expeirience switch to next screen?
+        delay(500); // user gets a better experience switch to next screen?
         break;
       }
     }
@@ -530,7 +530,7 @@ void loop () {
         wet_sensor_two = analogRead(A3);
         EEPROM.put(20, wet_sensor_two);
         lcd.clear();
-        delay(500); // user gets a better expeirience switch to next screen?
+        delay(500); // user gets a better experience switch to next screen?
         break;
       }
     }
