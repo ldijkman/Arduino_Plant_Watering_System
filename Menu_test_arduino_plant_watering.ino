@@ -332,7 +332,7 @@ void loop () {
         lcd.setCursor(0, 1);
         lcd.print(F("                    "));
         lcd.setCursor(0, 2);
-        lcd.print(F("   Entering menu_nr   "));
+        lcd.print(F("   Entering menu   "));
         lcd.setCursor(0, 3);
         lcd.print(F("   Release Button   "));
         delay(500);
