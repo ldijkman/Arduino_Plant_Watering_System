@@ -114,6 +114,9 @@ signed long pauzetimer;
 signed long startpauzetimer;
 signed long starttime;
 
+unsigned long previousMillis = 0;
+unsigned long currentMillis;
+
 int wetnesforstartwatergiftbeurt = 30;                      // if smaller als 30% start watering
 
 int dry_sensor_one = 795;                                   // my sensor value Dry in air   795
@@ -164,6 +167,8 @@ byte TempByte;
 long backlightofftimeout = 1 * 60 * 1000L;      // time to switch backlight off in milliseconds (the L is needed, otherwise wrong calculation Arduino IDE)
 long backlightstart;
 byte backlightflag;
+
+byte blinknodelay_flag;
 
 
 
@@ -291,7 +296,17 @@ void loop () {
     backlightflag = 1;
   }
 
-
+  //blinknodelay_flag
+  currentMillis = millis();
+  if (currentMillis - previousMillis >= 500) {
+    previousMillis = currentMillis;
+    if (blinknodelay_flag == 0) {
+      blinknodelay_flag = 1;                       // used for backgroundlight blink when maxcount
+    } else {                                       // part off text blink when time not ok for watering
+      blinknodelay_flag = 0;                      
+    }
+  }
+  //blinknodelay_flag
 
   long Read_A0 = 0;
   long Read_A3 = 0;
@@ -1109,18 +1124,16 @@ void loop () {
       }
     }
   } else {
-    lcd.setCursor(0, 2);
-    if (now.hour() < starttijdwatergift) {
-      lcd.print("OFF, Time < "); lcd.print(starttijdwatergift); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
+    if (blinknodelay_flag == 0) {                          // part off blink when time not ok for watering
+      lcd.setCursor(0, 2);
+      if (now.hour() < starttijdwatergift) {
+        lcd.print("OFF, Time < "); lcd.print(starttijdwatergift); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
+      }
+      if (now.hour() >= eindtijdwatergift) {
+        lcd.print("OFF, Time >= "); lcd.print(eindtijdwatergift); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
+      }
     }
-    if (now.hour() >= eindtijdwatergift) {
-      lcd.print("OFF, Time >= "); lcd.print(eindtijdwatergift); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
-    }
-    lcd.setCursor(0, 3);
-    lcd.print("Closed");
-    delay(500);
-    lcd.setCursor(0, 2);
-    lcd.print("                    "); // erase the line of text
+
   }
 
 
@@ -1166,13 +1179,16 @@ void loop () {
   }
   if (watergiftcounter <= 0) pauzetimer = 0;                 // anders gaat pauzetimer onnodig lopen bij start of reboot
 
-
-  lcd.setCursor(0, 2);
-  lcd.print("count=");
-  lcd.print(watergiftcounter);
-  lcd.print(" pauze=");
-  lcd.print(pauzetimer / 1000);
-  lcd.print(" ");
+  if (blinknodelay_flag == 1) {                              // part off blink when time not ok for watering
+    lcd.setCursor(16, 2);
+    lcd.print("    "); // erase the last part of line of text
+    lcd.setCursor(0, 2);
+    lcd.print("count=");
+    lcd.print(watergiftcounter);
+    lcd.print(" pauze=");
+    lcd.print(pauzetimer / 1000);
+    lcd.print(" ");
+  }
   lcd.setCursor(0, 3);
   if (ValveStatus == 0) {
     lcd.print("Closed      ");     // dont know sometimes a long value at 0/close = erase it with extra spaces
@@ -1202,9 +1218,8 @@ void loop () {
     //Serial.println("watergift stop / kraan dicht pomp uit");
     digitalWrite(13, LOW);          // 13 is onboard led  en waterklep en/of waterpomp stop
 
-    lcd.noBacklight();
-    delay(500);                    // should be blinked with millis(); delay is no good
-    lcd.backlight();               // max count reached error blink backlight
+    if (blinknodelay_flag == 0)lcd.noBacklight();              // max count reached error blink backlight
+    if (blinknodelay_flag == 1)lcd.backlight();               // max count reached error blink backlight
   }
 
 
