@@ -170,6 +170,8 @@ byte backlightflag;
 
 byte blinknodelay_flag;
 
+int counter;
+
 
 
 //**********************************************************************************************
@@ -303,7 +305,7 @@ void loop () {
     if (blinknodelay_flag == 0) {
       blinknodelay_flag = 1;                       // used for backgroundlight blink when maxcount
     } else {                                       // part off text blink when time not ok for watering
-      blinknodelay_flag = 0;                      
+      blinknodelay_flag = 0;
     }
   }
   //blinknodelay_flag
@@ -1229,6 +1231,13 @@ void loop () {
     // and resets watergiftcounter
     watergiftcounter = 0; // if you trust the millis(); 49-50 days overflow       comment out the line // asm volatile("jmp 0");
   }
+
+
+  counter = counter + 1;                // just a counter to see how many times i get here
+  if (counter == 100)counter = 0;
+  lcd.setCursor(10, 0);
+  if (counter <= 9)lcd.print(" "); 
+  lcd.print(counter);                  // just a counter to see how many times i get here
 
 }
 
