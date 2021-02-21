@@ -560,6 +560,11 @@ void loop () {
       lcd.setCursor(6, 2);
       lcd.print(duurwatergiftbeurt);
       lcd.print(F(" Sec. "));
+      lcd.setCursor(6, 3);
+      float wateringtime=duurwatergiftbeurt;
+      float minutetime = (wateringtime / 60);
+      lcd.print(minutetime,1);
+      lcd.print(F(" Min. "));
 
     }
 
@@ -1061,8 +1066,8 @@ void loop () {
     lcd.setCursor(0, 3);
     if (ValveStatus == 0) {
       lcd.print("Closed      ");     // dont know sometimes a long value at 0/close = erase it with extra spaces
-                                     // looked like a overflow from long 0 countdown to max long = 2^32-1 value
-                                     // should count signed long to -1 and i say if -1 count is 0
+      // looked like a overflow from long 0 countdown to max long = 2^32-1 value
+      // should count signed long to -1 and i say if -1 count is 0
     }
     if (ValveStatus == 1) {
       lcd.print("Open");
