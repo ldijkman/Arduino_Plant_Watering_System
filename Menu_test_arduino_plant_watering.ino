@@ -11,6 +11,7 @@
   Done, menu eeprom erase      No / Yes   factory settings reset & reboot
       menu software reboot   No / Yes
       menu's parameter info => at wich times a wateringjob started today
+      menu reset watering count
 
            a bit of copy, paste, modify from http://www.sticker.tk/forum/index.php?action=view&id=296
                                              http://www.sticker.tk/forum/index.php?action=view&id=299
