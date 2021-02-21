@@ -314,7 +314,7 @@ void loop () {
       lcd.setCursor(0, 3);
       lcd.print(F("   For Menu Enter   "));
 
-      lcd.setCursor(18, 3);
+      lcd.setCursor(19, 3);
       lcd.print(5 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
       if ((millis() - TempLong)  > 5000) {
         lcd.setCursor(0, 0);
