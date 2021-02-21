@@ -73,7 +73,7 @@
 // more expensive capacitive soil moisture sensors are  in the +/-75Mhz range (mineral/contemination transperency?)
 // but it isnt the 555 timer replacement that justfys the 30x and up price
 //
-// capacitive soil moisture sensors connected to analog A0 A3
+// 2 capacitive soil moisture sensors connected to analog A0 and A3
 //
 // Pump and or valve output D13 (wich is also onboard LED)
 //
