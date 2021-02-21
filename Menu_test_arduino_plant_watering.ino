@@ -312,13 +312,13 @@ void loop () {
       lcd.setCursor(0, 2);
       lcd.print(F("   Keep pressed?    "));
       lcd.setCursor(0, 3);
-      lcd.print(F("   For Menu Enter   "));
+      lcd.print(F(" For Menu Enter in  "));
 
       lcd.setCursor(19, 3);
       lcd.print(5 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
       if ((millis() - TempLong)  > 5000) {
         lcd.setCursor(0, 0);
-        lcd.print(F("Ok we are in    "));
+        lcd.print(F("Ok we are in        "));
         lcd.setCursor(0, 1);
         lcd.print(F("                    "));
         lcd.setCursor(0, 2);
