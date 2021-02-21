@@ -87,18 +87,17 @@
 
 
 
-#include "RTClib.h" // https://github.com/adafruit/RTClib
+#include "RTClib.h"                   // https://github.com/adafruit/RTClib
 
 RTC_DS3231 rtc;
 
 #include <EEPROM.h>
 
-char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-
-#include <LiquidCrystal_I2C.h>       // Include LiquidCrystal_I2C library
-// https://github.com/marcoschwartz/LiquidCrystal_I2C/archive/master.zip
+#include <LiquidCrystal_I2C.h>       // https://github.com/marcoschwartz/LiquidCrystal_I2C/archive/master.zip
 
 LiquidCrystal_I2C lcd(0x27, 20, 4);  // Configure LiquidCrystal_I2C library with 0x27 address, 20 columns and 4 rows
+
+char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
 int starttijdwatergift = 9;                                 // starttime 9 o clock in the morning
 int eindtijdwatergift = 21;                                 // endtime  21 o clock in te evening
@@ -121,7 +120,7 @@ int sense1;
 int sense2;
 
 
-int averageinprocent;                                  // gemiddelde van meerdere average multiple sensoren
+int averageinprocent;                                      // average of 2 sensors in %
 
 byte watergiftcounter = 0;
 
@@ -158,6 +157,8 @@ long backlightstart;
 byte backlightflag;
 
 
+
+//**********************************************************************************************
 void setup () {
 
   pinMode(13, OUTPUT);                 // pin 13 for valve open / close is also the onboard LED
@@ -256,6 +257,7 @@ void setup () {
   EEPROM.get(50, backlightofftimeout);
   //  EEPROM.get(55, Variable-Here);
   //  EEPROM.get(60, Variable-Here);
+  
   backlightstart = millis();          // load millis() in backlightstart
 
 }
@@ -263,8 +265,10 @@ void setup () {
 
 
 
-void loop () {
 
+
+//**********************************************************************************************************
+void loop () {
 
   if (backlightflag == 1 && millis() - backlightstart > backlightofftimeout) {              // if backlight timed out turn it off
     lcd.noBacklight();                    // Turn backlight OFF
@@ -903,7 +907,7 @@ void loop () {
     if ((millis() - TempLong)  > 10000) {
       delay(1000);  // want to see the zero 0
       lcd.clear();
-      menu = 11;
+      menu = 0;
       break;
     }
 
