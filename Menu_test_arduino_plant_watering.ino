@@ -10,17 +10,17 @@
       menu time date set
       menu eeprom erase
       menu software reboot
+      menu's parameter info
 
-           a bit of copy paste modify from http://www.sticker.tk/forum/index.php?action=view&id=296
-                                           http://www.sticker.tk/forum/index.php?action=view&id=299
+           a bit of copy, paste, modify from http://www.sticker.tk/forum/index.php?action=view&id=296
+                                             http://www.sticker.tk/forum/index.php?action=view&id=299
 
 */
 
-
 /*
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-  Arduino Automated Plant Watering System
-  Must become, Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
+  Arduino Automated Plant Watering System, automatic irrigation system
+  Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
 
   Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
   https://m.facebook.com/luberth.dijkman
@@ -551,8 +551,8 @@ void loop () {
 
     float rval;
     if ( rval = read_rotary() ) {
-      if (duurwatergiftbeurt >= 600)duurwatergiftbeurt = duurwatergiftbeurt + (rval * 60);        // 60 second steps above 600 seconds
-      if (duurwatergiftbeurt >= 300)duurwatergiftbeurt = duurwatergiftbeurt + (rval * 30);        // 30 second steps above 300 seconds
+      if (duurwatergiftbeurt >= 600)duurwatergiftbeurt = duurwatergiftbeurt + (rval * 30);        // 30+20+10=60 second steps above 600 seconds
+      if (duurwatergiftbeurt >= 300)duurwatergiftbeurt = duurwatergiftbeurt + (rval * 20);        // 20+10=30 second steps above 300 seconds
       if (duurwatergiftbeurt >= 60)duurwatergiftbeurt = duurwatergiftbeurt + (rval * 10);         // 10 second steps above 60 seconds
       if (duurwatergiftbeurt <= 60)duurwatergiftbeurt = duurwatergiftbeurt + (rval);              // 1 second steps
       if (duurwatergiftbeurt <= 2) duurwatergiftbeurt = 2;                                        // minimal watering time 2 seconds
