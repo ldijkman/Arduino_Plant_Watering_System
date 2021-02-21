@@ -134,6 +134,9 @@ byte maximumaantalbeurtenperdag = 8;
 
 byte Calibrate_Sensors = 1;
 
+byte eepromerase = 1;
+
+
 // rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
 // Robust Rotary encoder reading
 // Copyright John Main - best-microcontroller-projects.com
@@ -170,7 +173,7 @@ void setup () {
   pinMode(DATA, INPUT);                // rotary encoder
   pinMode(DATA, INPUT_PULLUP);         // rotary encoder
 
- 
+
   Serial.begin(115200);               // serial monitor
 
 
@@ -205,12 +208,11 @@ void setup () {
 
 
   // DO NEXT ONLY ONCE
-  int override_doitonce = 0;  // 1 set variables as above to eeprom,  program set it back to 0 after boot and reprogram with 0
   // first run ??? write some val to eeprom if value at eepromadres 666 not is 666
   // if this is first run then val will not be 666 at eeprom adres 666
   // so next will be run
-  EEPROM.get(666, TempInt);        // read eeprom adress 666 into TempInt
-  if (override_doitonce == 1 || TempInt != 666) {       // IF not is 666, this is the first run THEN val at eeprom adres 666 is -1???
+  EEPROM.get(666, TempInt);                                  // read eeprom adress 666 into TempInt
+  if (TempInt != 666) {                                     // IF this is the first run THEN val at eeprom adres 666 is not 666 ???
     EEPROM.put(0, wetnesforstartwatergiftbeurt);
     EEPROM.put(5, dry_sensor_one);
     EEPROM.put(10, wet_sensor_one);
@@ -224,7 +226,7 @@ void setup () {
     EEPROM.put(50, backlightofftimeout);
     //  EEPROM.put(55, Variable-Here);
     //  EEPROM.put(60, Variable-Here);
-    EEPROM.put(666, 666);        // ONLY ONCE, Make His Mark, set eepromadres 666 to val 666 no need to call / run this anymore in future
+    EEPROM.put(666, 666);                 // ONLY ONCE, Make His Mark, set eepromadres 666 to val 666 no need to call / run this anymore in future
 
     lcd.clear();
     lcd.setCursor(0, 0);
@@ -244,6 +246,8 @@ void setup () {
     lcd.clear();
   }// END ONLY ONCE, MADE HIS MARK
 
+  
+
   // Read stored valeus from EEPROM
   EEPROM.get(0, wetnesforstartwatergiftbeurt);
   EEPROM.get(5, dry_sensor_one);
@@ -258,7 +262,7 @@ void setup () {
   EEPROM.get(50, backlightofftimeout);
   //  EEPROM.get(55, Variable-Here);
   //  EEPROM.get(60, Variable-Here);
-  
+
   backlightstart = millis();          // load millis() in backlightstart
 
 }
@@ -854,7 +858,7 @@ void loop () {
       while (SetButton() == LOW) {
         /*wait for button released*/
       }
-      menu = 10;
+      menu = 11;
       lcd.clear();
 
       EEPROM.get(45, TempInt);                                   // limmited write to eeprom = read is unlimmited
@@ -884,12 +888,74 @@ void loop () {
 
 
 
+  // 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11
+  // EEPROM Erase Reboot
+  TempLong = millis();  //reset innactive time counter
+  if (menu == 11) {
+    lcd.setCursor(0, 0);
+    lcd.print(F("11 EEPROMClearReboot"));
+    lcd.setCursor(0, 1);
+    lcd.print(F("Factory Settings?"));
+    lcd.setCursor(9, 3);
+    if (eepromerase == 1)lcd.print(F("No "));
+    if (eepromerase == 2)lcd.print(F("Yes"));
+  }
+  while (menu == 11) {
+
+    lcd.setCursor(18, 3);
+    if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
+    lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
+    if ((millis() - TempLong)  > 10000) {
+      delay(1000);  // want to see the zero 0
+      TimeOut();
+      break;
+    }
+
+    float rval;
+    if ( rval = read_rotary() ) {
+      eepromerase  = eepromerase  + rval;
+      TempLong = millis();  //reset innactive time counte
+      lcd.setCursor(9, 3);
+      lcd.print(eepromerase);
+      lcd.print(F(" "));
+      if (eepromerase < 1)eepromerase = 2;
+      if (eepromerase > 2)eepromerase = 1;
+      lcd.setCursor(9, 3);
+      if (eepromerase == 1)lcd.print(F("No "));
+      if (eepromerase == 2)lcd.print(F("Yes"));
+    }
+
+    if (SetButton() == LOW) {        // LOW setbutton is pressed
+      while (SetButton() == LOW) {
+        /*wait for button released*/
+      }
+      menu = 12;
+      lcd.clear();
+      delay(250);
+    }
+  }// end menu 11
 
 
-  // 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10
+
+  if (eepromerase == 2) {                              // you chose Yes so whe go to erase eeprom
+    for (int i = 0 ; i < EEPROM.length() ; i++) {
+      EEPROM.write(i, 0);                             // erase eeprom
+    }
+    delay(10);
+    asm volatile("jmp 0");                          // reboot
+  }
+
+
+
+
+
+
+
+
+  // 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12
   // Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits
   TempLong = millis();  // reset innactive time counter
-  if (menu == 10) {
+  if (menu == 12) {
     lcd.clear();
     DateTime now = rtc.now();
     lcd.setCursor(0, 0);
@@ -901,7 +967,7 @@ void loop () {
     lcd.setCursor(0, 3);
     lcd.print(F("Andijk Holland"));
   }
-  while (menu == 10) {
+  while (menu == 12) {
     lcd.setCursor(18, 3);
     if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
     lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
@@ -912,7 +978,7 @@ void loop () {
       break;
     }
 
-  }// end menu 10
+  }// end menu 12
 
 
 
