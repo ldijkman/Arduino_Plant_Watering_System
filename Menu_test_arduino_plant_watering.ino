@@ -322,7 +322,7 @@ void loop () {
       lcd.setCursor(0, 2);
       lcd.print(F("   Keep pressed?    "));
       lcd.setCursor(0, 3);
-      lcd.print(F(" For menu_nrEnter in  "));
+      lcd.print(F(" For menu Enter in  "));
 
       lcd.setCursor(19, 3);
       lcd.print(5 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
