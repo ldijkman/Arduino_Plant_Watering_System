@@ -4,12 +4,12 @@
 
    added rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
 
-   Rotary encoder menu_nrmostly working
-   few more menu_nritems i would like to add
-      menu_nrbacklight_time
-      menu_nrtime / date set
-  Done, menu_nreeprom erase      No / Yes   factory settings reset & reboot
-      menu_nrsoftware reboot   No / Yes
+   Rotary encoder menu mostly working
+   few more menu items i would like to add
+      menu backlight_time
+      menu time / date set
+  Done, menu eeprom erase      No / Yes   factory settings reset & reboot
+      menu software reboot   No / Yes
       menu's parameter info => at wich times a wateringjob started today
 
            a bit of copy, paste, modify from http://www.sticker.tk/forum/index.php?action=view&id=296
