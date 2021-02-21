@@ -100,10 +100,10 @@ char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursd
 
 LiquidCrystal_I2C lcd(0x27, 20, 4);  // Configure LiquidCrystal_I2C library with 0x27 address, 20 columns and 4 rows
 
-int starttijdwatergift = 10;                                // 9 uur smorgens
-int eindtijdwatergift = 21;                                 // 21 uur savonds
-signed long duurwatergiftbeurt = 60;                               // 60 seconds
-signed long pauzenawatergiftbeurt = 1 ;                            // 1 minute
+int starttijdwatergift = 9;                                 // starttime 9 o clock in the morning
+int eindtijdwatergift = 21;                                 // endtime  21 o clock in te evening
+signed long duurwatergiftbeurt = 60;                        // in seconds = 60 seconds
+signed long pauzenawatergiftbeurt = 1 ;                     // in minutes = 1 minute
 signed long watergifttimer;
 signed long pauzetimer;
 signed long startpauzetimer;
@@ -111,11 +111,11 @@ signed long starttime;
 
 int wetnesforstartwatergiftbeurt = 30;                      // if smaller als 30% start watering
 
-int dry_sensor_one = 804;                                   // my sensor value Dry in air   653
-int wet_sensor_one = 449;                                   // my sensor value wet in water 285
+int dry_sensor_one = 795;                                   // my sensor value Dry in air   795
+int wet_sensor_one = 435;                                   // my sensor value wet in water 435
 
-int dry_sensor_two = 804;                                   // my sensor value Dry in air   653
-int wet_sensor_two = 449;                                   // my sensor value wet in water 285
+int dry_sensor_two = 795;                                   // my sensor value Dry in air   795
+int wet_sensor_two = 435;                                   // my sensor value wet in water 435
 
 int sense1;
 int sense2;
