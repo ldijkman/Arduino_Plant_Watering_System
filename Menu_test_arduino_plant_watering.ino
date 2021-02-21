@@ -299,12 +299,12 @@ void loop () {
   }
 
   //blinknodelay_flag
-  currentMillis = millis();
-  if (currentMillis - previousMillis >= 500) {
+  currentMillis = millis();                        
+  if (currentMillis - previousMillis >= 500) {     //binknodelay example but not blink a LED, but set a flag => half a second on, half a second off
     previousMillis = currentMillis;
     if (blinknodelay_flag == 0) {
       blinknodelay_flag = 1;                       // used for backgroundlight blink when maxcount
-    } else {                                       // part off text blink when time not ok for watering
+    } else {                                       // part off text blink when time not in range for watering
       blinknodelay_flag = 0;
     }
   }
@@ -1233,12 +1233,16 @@ void loop () {
   }
 
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////
   counter = counter + 1;                // just a counter to see how many times i get here
   if (counter == 100)counter = 0;
   lcd.setCursor(10, 0);
-  if (counter <= 9)lcd.print(" "); 
+  if (counter <= 9)lcd.print(" ");
   lcd.print(counter);                  // just a counter to see how many times i get here
 
+  delay(100); // slow it down
+//////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 
