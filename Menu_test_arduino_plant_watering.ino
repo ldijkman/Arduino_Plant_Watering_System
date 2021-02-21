@@ -3,9 +3,14 @@
    removed the date for showing sp= setpoint               (add another LCD display with different i2c adress? ;-)
 
    added rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
-   trying to make a start with menu for changing parameters
-   shows only text now => inside menu when you push the rotary encoder button
-   can change setpoint now
+
+   Rotary encoder menu mostly working
+   few more menu items i would like to add
+      menu backlight time
+      menu time ate set
+      menu eeprom erase
+      menu software reboot
+      
            a bit of copy paste modify from http://www.sticker.tk/forum/index.php?action=view&id=296
                                            http://www.sticker.tk/forum/index.php?action=view&id=299
 
