@@ -6,12 +6,12 @@
 
    Rotary encoder menu mostly working
    few more menu items i would like to add
-      menu backlight_time
+      menu  set backlight_time
       menu time / date set
   Done, menu eeprom erase      No / Yes   factory settings reset & reboot
       menu software reboot   No / Yes
       menu's parameter info => at wich times a wateringjob started today
-      menu reset watering count
+      menu reset watering counter
 
            a bit of copy, paste, modify from http://www.sticker.tk/forum/index.php?action=view&id=296
                                              http://www.sticker.tk/forum/index.php?action=view&id=299
@@ -1193,12 +1193,15 @@ void loop () {
   if (watergiftcounter > maximumaantalbeurtenperdag) {
     lcd.setCursor(0, 3);
     lcd.print(maximumaantalbeurtenperdag);
-    lcd.print(" Maximum Count");
+    lcd.print(" MaximumCount");
     //Serial.print("maximumaantalbeurtenperdag ");
     //Serial.println(maximumaantalbeurtenperdag);
     //Serial.println("watergift stop / kraan dicht pomp uit");
     digitalWrite(13, LOW);          // 13 is onboard led  en waterklep en/of waterpomp stop
-
+    
+    lcd.noBacklight();
+    delay(500);                    // should be blinked with millis(); delay is no good
+    lcd.backlight();               // max count reached error blink backlight
   }
 
 
