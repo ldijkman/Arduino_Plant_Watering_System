@@ -1179,3 +1179,6 @@ void TimeOut() {
 // If I had a nickel ...
 // A Penny for Sharing My Thoughts?
 // http://www.paypal.me/LDijkman
+
+// Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
+// Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
