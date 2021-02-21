@@ -460,6 +460,13 @@ void loop () {
 
   if (Calibrate_Sensors == 2) {   // you chose Yes so whe go to calibrate
     Calibrate_Sensors = 1;
+
+    // WARNING!!!
+    // there is no timeout on this calibrate screens => for safety turn water off => its up to you to do a succesfull calibration
+    digitalWrite(13, LOW);          // 13 is onboard led  en waterklep en/of waterpomp stop
+    // there is no timeout on this calibrate screens => for safety turn water off => its up to you to do a succesfull calibration
+    // WARNING!!!
+
     lcd.clear();
     while (0 == 0) {
       lcd.setCursor(0, 0);
