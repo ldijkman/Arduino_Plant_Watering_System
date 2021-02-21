@@ -10,7 +10,7 @@
       menu time / date set
       menu eeprom erase      No / Yes
       menu software reboot   No / Yes
-      menu's parameter info
+      menu's parameter info => at wich times a wateringjob started today
 
            a bit of copy, paste, modify from http://www.sticker.tk/forum/index.php?action=view&id=296
                                              http://www.sticker.tk/forum/index.php?action=view&id=299
