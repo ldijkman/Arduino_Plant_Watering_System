@@ -83,6 +83,8 @@ not mine!
 
 https://www.codemacs.com/raspberrypi/howtoo/soil-moisture-sensor-waterproofing.9450461.htm
 
+STL file for your slic3r / 3d printer https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/www.codemacs.com_downloads_smsensor.cover.stl 
+
 <img src="https://www.codemacs.com/post.images/16204626.1.webp">
 
 https://www.codemacs.com/raspberrypi/howtoo/soil-moisture-sensor-waterproofing.9450461.htm
