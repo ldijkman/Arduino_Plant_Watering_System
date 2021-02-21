@@ -225,7 +225,7 @@ void setup () {
     EEPROM.put(50, backlightofftimeout);
     //  EEPROM.put(55, Variable-Here);
     //  EEPROM.put(60, Variable-Here);
-    EEPROM.put(666, 666);        // ONLY ONCE set eepromadres 666 to val 666 no need to call / run this anymore in future
+    EEPROM.put(666, 666);        // ONLY ONCE, Make His Mark, set eepromadres 666 to val 666 no need to call / run this anymore in future
 
     lcd.clear();
     lcd.setCursor(0, 0);
