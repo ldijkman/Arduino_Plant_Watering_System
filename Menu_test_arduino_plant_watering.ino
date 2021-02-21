@@ -237,7 +237,7 @@ void setup () {
     lcd.print(F("to EEPROM "));
     lcd.setCursor(0, 3);
     lcd.print(F("Thanks for trying"));
-    for (int i = 30 ; i > 0 ; i--) {
+    for (int i = 30 ; i >= 0 ; i--) {
       lcd.setCursor(18, 3); 
       if (i <= 9) lcd.print(" ");
       lcd.print(i);
