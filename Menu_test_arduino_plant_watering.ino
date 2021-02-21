@@ -314,18 +314,18 @@ void loop () {
     while (SetButton() == LOW) {                                   // while setbutton==LOW, pulled up by resistor, LOW is pressed
 
       if ((millis() - TempLong)  < 5000) {                         // only show this mssage the first 5 seconds
-      lcd.setCursor(0, 0);
-      lcd.print(F("Ok Backlight ON     "));
-      lcd.setCursor(0, 1);
-      lcd.print(F("                    "));
-      lcd.setCursor(0, 2);
-      lcd.print(F("   Keep pressed?    "));
-      lcd.setCursor(0, 3);
-      lcd.print(F(" For menu Enter in  "));
+        lcd.setCursor(0, 0);
+        lcd.print(F("Ok Backlight ON     "));
+        lcd.setCursor(0, 1);
+        lcd.print(F("                    "));
+        lcd.setCursor(0, 2);
+        lcd.print(F("   Keep pressed?    "));
+        lcd.setCursor(0, 3);
+        lcd.print(F(" For menu Enter in  "));
+        lcd.setCursor(19, 3);
+        lcd.print(5 - (millis() - TempLong) / 1000);              // on LCD countdown until menu system enter
       }
-      
-      lcd.setCursor(19, 3);
-      lcd.print(5 - (millis() - TempLong) / 1000);                // on LCD timeout countdown
+
       if ((millis() - TempLong)  > 5000) {                        // after 5 seconds pressed we get into menu system
         lcd.setCursor(0, 0);
         lcd.print(F("Ok, We are in Menu  "));
@@ -1088,99 +1088,99 @@ void loop () {
 
 
 
-    if (now.hour() >= starttijdwatergift && now.hour() < eindtijdwatergift) {
-      //Serial.println("zit binnnen watergift mogelijk tijden");
+  if (now.hour() >= starttijdwatergift && now.hour() < eindtijdwatergift) {
+    //Serial.println("zit binnnen watergift mogelijk tijden");
 
-      if (averageinprocent <= wetnesforstartwatergiftbeurt) {      // if soil is dryer as setpoint
-        if (watergiftcounter == 0 || pauzetimer == 0 ) {          // if firstwaterpoor of day or pauzetimer==0
-          if (watergiftcounter <= maximumaantalbeurtenperdag) {
-            if (ValveStatus == 0) {
-              starttime = millis();                              // save starttime millis only once
-              ValveStatus = 1;                                   // next time whe do no get here because valvestatus is now 1
-              watergiftcounter = watergiftcounter + 1;
-            }
+    if (averageinprocent <= wetnesforstartwatergiftbeurt) {      // if soil is dryer as setpoint
+      if (watergiftcounter == 0 || pauzetimer == 0 ) {          // if firstwaterpoor of day or pauzetimer==0
+        if (watergiftcounter <= maximumaantalbeurtenperdag) {
+          if (ValveStatus == 0) {
+            starttime = millis();                              // save starttime millis only once
+            ValveStatus = 1;                                   // next time whe do no get here because valvestatus is now 1
+            watergiftcounter = watergiftcounter + 1;
           }
         }
       }
-    } else {
-      lcd.setCursor(0, 2);
-      if (now.hour() < starttijdwatergift) {
-        lcd.print("OFF, Time < "); lcd.print(starttijdwatergift); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
-      }
-      if (now.hour() >= eindtijdwatergift) {
-        lcd.print("OFF, Time >= "); lcd.print(eindtijdwatergift); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
-      }
-      lcd.setCursor(0, 3);
-      lcd.print("Closed");
-      delay(500);
-      lcd.setCursor(0, 2);
-      lcd.print("                    "); // erase the line of text
     }
-
-
-
-
-
-
-
-
-
-    if (ValveStatus == 1) {
-      backlightstart = millis();                                 // keep backlight on when valvestatus is open
-      //Serial.println("watergift start kraan open pomp aan");
-      digitalWrite(13, HIGH);                  // 13 is onboard led en waterklep en/of waterpomp start
-      startpauzetimer = millis();              // the latest time  we get into "if (ValveStatus == 1) {" will be used to set "startpauzetimer = millis();"
-      pauzetimer =  (pauzenawatergiftbeurt * 60 * 1000L); // show pauzetime, wich countdown after valvestaus=0
-      if (millis() - starttime <= (duurwatergiftbeurt * 1000L)) {
-        lcd.setCursor(0, 3);
-        lcd.print("Open");
-        lcd.print(" ");
-        watergifttimer = (starttime + (duurwatergiftbeurt * 1000L) - millis()) / 1000;
-        if (watergifttimer <= 0)watergifttimer = 0;
-        lcd.print(watergifttimer);
-        lcd.print("      ");
-        //Serial.print("watergifttimer ");
-        //Serial.println(watergifttimer);
-      }
-    }
-
-
-
-    if (millis() - starttime >= (duurwatergiftbeurt * 1000L)) {
-      //Serial.println("watergift stop / kraan dicht pomp uit");
-      digitalWrite(13, LOW);          // 13 is onboard led  en waterklep en/of waterpomp stop
-      ValveStatus = 0;
-
-    }
-
-    if (ValveStatus == 0) {
-      pauzetimer =  (pauzenawatergiftbeurt * 60 * 1000L) - (millis() - startpauzetimer) ;
-      if (pauzetimer <= 0) pauzetimer = 0;
-      if (pauzetimer > 0)backlightstart = millis();            // keep backlight on when pauzetimer is running
-    }
-    if (watergiftcounter <= 0) pauzetimer = 0;                 // anders gaat pauzetimer onnodig lopen bij start of reboot
-
-
+  } else {
     lcd.setCursor(0, 2);
-    lcd.print("count=");
-    lcd.print(watergiftcounter);
-    lcd.print(" pauze=");
-    lcd.print(pauzetimer / 1000);
-    lcd.print(" ");
+    if (now.hour() < starttijdwatergift) {
+      lcd.print("OFF, Time < "); lcd.print(starttijdwatergift); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
+    }
+    if (now.hour() >= eindtijdwatergift) {
+      lcd.print("OFF, Time >= "); lcd.print(eindtijdwatergift); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
+    }
     lcd.setCursor(0, 3);
-    if (ValveStatus == 0) {
-      lcd.print("Closed      ");     // dont know sometimes a long value at 0/close = erase it with extra spaces
-      // looked like a overflow from long 0 countdown to max long = 2^32-1 value
-      // should count signed long to -1 and i say if -1 count is 0
-    }
-    if (ValveStatus == 1) {
+    lcd.print("Closed");
+    delay(500);
+    lcd.setCursor(0, 2);
+    lcd.print("                    "); // erase the line of text
+  }
+
+
+
+
+
+
+
+
+
+  if (ValveStatus == 1) {
+    backlightstart = millis();                                 // keep backlight on when valvestatus is open
+    //Serial.println("watergift start kraan open pomp aan");
+    digitalWrite(13, HIGH);                  // 13 is onboard led en waterklep en/of waterpomp start
+    startpauzetimer = millis();              // the latest time  we get into "if (ValveStatus == 1) {" will be used to set "startpauzetimer = millis();"
+    pauzetimer =  (pauzenawatergiftbeurt * 60 * 1000L); // show pauzetime, wich countdown after valvestaus=0
+    if (millis() - starttime <= (duurwatergiftbeurt * 1000L)) {
+      lcd.setCursor(0, 3);
       lcd.print("Open");
+      lcd.print(" ");
+      watergifttimer = (starttime + (duurwatergiftbeurt * 1000L) - millis()) / 1000;
+      if (watergifttimer <= 0)watergifttimer = 0;
+      lcd.print(watergifttimer);
+      lcd.print("      ");
+      //Serial.print("watergifttimer ");
+      //Serial.println(watergifttimer);
     }
-    lcd.setCursor(14, 3);
-    lcd.print(rtc.getTemperature());
-    lcd.print("C");
-    //Serial.print("pauzetimer ");
-    //Serial.println(pauzetimer / 1000);
+  }
+
+
+
+  if (millis() - starttime >= (duurwatergiftbeurt * 1000L)) {
+    //Serial.println("watergift stop / kraan dicht pomp uit");
+    digitalWrite(13, LOW);          // 13 is onboard led  en waterklep en/of waterpomp stop
+    ValveStatus = 0;
+
+  }
+
+  if (ValveStatus == 0) {
+    pauzetimer =  (pauzenawatergiftbeurt * 60 * 1000L) - (millis() - startpauzetimer) ;
+    if (pauzetimer <= 0) pauzetimer = 0;
+    if (pauzetimer > 0)backlightstart = millis();            // keep backlight on when pauzetimer is running
+  }
+  if (watergiftcounter <= 0) pauzetimer = 0;                 // anders gaat pauzetimer onnodig lopen bij start of reboot
+
+
+  lcd.setCursor(0, 2);
+  lcd.print("count=");
+  lcd.print(watergiftcounter);
+  lcd.print(" pauze=");
+  lcd.print(pauzetimer / 1000);
+  lcd.print(" ");
+  lcd.setCursor(0, 3);
+  if (ValveStatus == 0) {
+    lcd.print("Closed      ");     // dont know sometimes a long value at 0/close = erase it with extra spaces
+    // looked like a overflow from long 0 countdown to max long = 2^32-1 value
+    // should count signed long to -1 and i say if -1 count is 0
+  }
+  if (ValveStatus == 1) {
+    lcd.print("Open");
+  }
+  lcd.setCursor(14, 3);
+  lcd.print(rtc.getTemperature());
+  lcd.print("C");
+  //Serial.print("pauzetimer ");
+  //Serial.println(pauzetimer / 1000);
 
 
 
