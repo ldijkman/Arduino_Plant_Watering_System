@@ -7,10 +7,10 @@
    Rotary encoder menu mostly working
    few more menu items i would like to add
       menu backlight time
-      menu time ate set
+      menu time date set
       menu eeprom erase
       menu software reboot
-      
+
            a bit of copy paste modify from http://www.sticker.tk/forum/index.php?action=view&id=296
                                            http://www.sticker.tk/forum/index.php?action=view&id=299
 
@@ -551,9 +551,11 @@ void loop () {
 
     float rval;
     if ( rval = read_rotary() ) {
-      if (duurwatergiftbeurt >= 60)duurwatergiftbeurt = duurwatergiftbeurt + (rval * 10);     // 10 second steps above 60 seconds
-      if (duurwatergiftbeurt <= 60)duurwatergiftbeurt = duurwatergiftbeurt + (rval);          // 1 second steps
-      if (duurwatergiftbeurt <= 2) duurwatergiftbeurt = 2;                                   // minimal watering time 2 seconds
+      if (duurwatergiftbeurt >= 600)duurwatergiftbeurt = duurwatergiftbeurt + (rval * 60);        // 60 second steps above 600 seconds
+      if (duurwatergiftbeurt >= 300)duurwatergiftbeurt = duurwatergiftbeurt + (rval * 30);        // 30 second steps above 300 seconds
+      if (duurwatergiftbeurt >= 60)duurwatergiftbeurt = duurwatergiftbeurt + (rval * 10);         // 10 second steps above 60 seconds
+      if (duurwatergiftbeurt <= 60)duurwatergiftbeurt = duurwatergiftbeurt + (rval);              // 1 second steps
+      if (duurwatergiftbeurt <= 2) duurwatergiftbeurt = 2;                                        // minimal watering time 2 seconds
       TempLong = millis();  //reset innactive time counter
       lcd.setCursor(6, 2);
       lcd.print(duurwatergiftbeurt);
@@ -794,8 +796,8 @@ void loop () {
 
 
 
-// 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
-  // eindtijdwatergift eindtijdwatergift eindtijdwatergift eindtijdwatergift eindtijdwatergift eindtijdwatergift eindtijdwatergift 
+  // 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7
+  // eindtijdwatergift eindtijdwatergift eindtijdwatergift eindtijdwatergift eindtijdwatergift eindtijdwatergift eindtijdwatergift
   TempLong = millis();  // reset innactive time counter
   if (menu == 7) {
     lcd.setCursor(0, 0);
