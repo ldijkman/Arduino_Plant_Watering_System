@@ -1,6 +1,8 @@
 # Arduino Plant Watering System
 Arduino Plant Watering System
 
+Advanced, Intelligent, Smart, Automated, Automatic
+
 https://youtu.be/1jKAxLyOY_s
 
 +/- 10 Dollar Automated Plant Watering Computer on Soil Moisture
