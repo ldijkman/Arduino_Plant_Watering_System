@@ -54,17 +54,19 @@
 //
 // Jo Says has problems with sensors influencing eachother?
 // https://www.youtube.com/c/HortusconclususBe/videos
-// maybe use i2c analog 4 channel 16bit https://www.google.com/search?q=ads1115
+// maybe use i2c analog 4 channel 16bit https://www.google.com/search?q=aliexpress+ads1115
 // is the ads1115 multiplexing like arduino?
-// or use 2 single channel i2c analog to digital converters with a different i2c adress, No noise?
-// https://www.google.com/search?q=1+channel+i2c+analog+to+digital+converter
+// or use 2 single channel i2c analog to digital converters with a different i2c adress, No Noise?
 // future maybe 2x 1 channel 12bit? MCP4725 I2C, both with different i2c adres
+// https://www.google.com/search?q=aliexpress+MCP4725
+//
+// What is maximum sensor wire length for analog? for i2c?
 //
 //
 // with irrigation drippers / drip emmiters you have more control of amount of water per time!?
 // different types liters/per hour
 // white tyleen hose less heat / polution, better not use black, do not use transparent
-// use an extra dripper in a measurecan to monitor/check water given each day (empty it each day)
+// use an extra dripper in a measurecan to monitor/check water given each day (empty can each day)
 //
 //
 // DS3231 RTC realtimeclock connected to +5vdc GND SCL SDA
