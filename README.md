@@ -49,7 +49,6 @@ https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/Menu_test_ar
 https://youtu.be/1jKAxLyOY_s
 
 
-http://Paypal.Me/LDijkman
 
 #
 # The Future is now:
@@ -88,4 +87,5 @@ https://www.codemacs.com/raspberrypi/howtoo/soil-moisture-sensor-waterproofing.9
 
 https://www.codemacs.com/raspberrypi/howtoo/soil-moisture-sensor-waterproofing.9450461.htm
 
-
+a Penny for Sharing My Thoughts?
+http://www.paypal.me/LDijkman
