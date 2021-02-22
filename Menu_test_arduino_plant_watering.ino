@@ -299,7 +299,7 @@ void loop () {
     backlightflag = 1;
   }
 
-  //blinknodelay_flag
+  //blinknodelay_flag => likely there is a bit somewhere that does the same so it could be done with less code
   currentMillis = millis();
   if (currentMillis - previousMillis >= 1000) {     //binknodelay example but not blink a LED, but set a flag => 1 second on, 1 second off
     previousMillis = currentMillis;
@@ -309,7 +309,8 @@ void loop () {
       blinknodelay_flag = 0;
     }
   }
-  //blinknodelay_flag
+  //blinknodelay_flag => likely there is a bit somewhere that does the same so it could be done with less code
+  
 
 
   // read the sensors 10 times and divide by 10
@@ -450,9 +451,10 @@ void loop () {
     if (menu_nr == 2) {
       lcd.setCursor(0, 0);
       lcd.print(F("2 Calibrate Sensors"));
-      lcd.setCursor(9, 2);
-      if (Calibrate_Sensors == 1)lcd.print(F("No "));
-      if (Calibrate_Sensors == 2)lcd.print(F("Yes"));
+      lcd.setCursor(7, 2);
+      if (Calibrate_Sensors == 1)lcd.print(F(" No   "));
+      if (Calibrate_Sensors == 2)lcd.print(F(" Yes  "));
+      if (Calibrate_Sensors == 3)lcd.print(F("Adjust"));
     }
     while (menu_nr == 2) {
 
@@ -468,15 +470,13 @@ void loop () {
       float rval;
       if ( rval = read_rotary() ) {
         Calibrate_Sensors  = Calibrate_Sensors  + rval;
-        TempLong = millis();  //reset innactive time counte
-        lcd.setCursor(9, 2);
-        lcd.print(Calibrate_Sensors);
-        lcd.print(F(" "));
-        if (Calibrate_Sensors < 1)Calibrate_Sensors = 2;
-        if (Calibrate_Sensors > 2)Calibrate_Sensors = 1;
-        lcd.setCursor(9, 2);
-        if (Calibrate_Sensors == 1)lcd.print(F("No "));
-        if (Calibrate_Sensors == 2)lcd.print(F("Yes"));
+        TempLong = millis();  //reset innactive time counter
+        if (Calibrate_Sensors < 1)Calibrate_Sensors = 3;
+        if (Calibrate_Sensors > 3)Calibrate_Sensors = 1;
+        lcd.setCursor(7, 2);
+        if (Calibrate_Sensors == 1)lcd.print(F(" No   "));
+        if (Calibrate_Sensors == 2)lcd.print(F(" Yes  "));
+        if (Calibrate_Sensors == 3)lcd.print(F("Adjust"));
       }
 
       if (SetButton() == LOW) {        // LOW setbutton is pressed
@@ -583,7 +583,16 @@ void loop () {
           break;
         }
       }
-    }// calibrate sensors==2
+    }// end calibrate sensors==2
+
+
+
+    if (Calibrate_Sensors == 3) {   // you chose Adjust
+      Calibrate_Sensors = 1;
+      lcd.clear();
+      lcd.print("Adjust not yet!");
+      delay(5000);
+    }// end    if (Calibrate_Sensors == 3) {   // you chose Adjust
 
 
 
