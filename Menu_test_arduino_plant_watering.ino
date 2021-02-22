@@ -1321,6 +1321,8 @@ void TimeOut() {
   lcd.print(F("NOT saved to EEPROM!"));
   delay(2500);
   lcd.clear();
+  Calibrate_Sensors = 1; // NO when timedout in YES
+  eepromerase = 1;       // NO when timedout in YES
   menu_nr = 0;
 }
 
