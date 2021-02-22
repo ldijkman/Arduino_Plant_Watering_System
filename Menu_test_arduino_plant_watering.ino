@@ -168,7 +168,7 @@ long backlightofftimeout = 1 ;                  // time to switch backlight off 
 long backlightstart;
 byte backlightflag;
 
-byte blinknodelay_flag;
+byte blinknodelay_flag;                         // a blink flag that is 1 second==1, and 1 second==0
 
 int counter;
 
