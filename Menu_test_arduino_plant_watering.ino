@@ -632,6 +632,7 @@ void loop () {
                 lcd.setCursor(0, 0);
                 lcd.print("long press exit    ");
                 if ((millis() - TempLong)  > 2500) {                       // after 5 seconds pressed we get into menu system
+                  lcd.clear();
                   lcd.setCursor(0, 0);
                   lcd.print(F("Ok, EXIT  "));
                   lcd.setCursor(0, 3);
@@ -678,6 +679,7 @@ void loop () {
                 lcd.setCursor(0, 0);
                 lcd.print("long press exit    ");
                 if ((millis() - TempLong)  > 2500) {                       // after 5 seconds pressed we get into menu system
+                  lcd.clear();
                   lcd.setCursor(0, 0);
                   lcd.print(F("Ok, EXIT  "));
                   lcd.setCursor(0, 3);
@@ -724,6 +726,7 @@ void loop () {
                 lcd.setCursor(0, 0);
                 lcd.print("long press exit    ");
                 if ((millis() - TempLong)  > 2500) {                       // after 5 seconds pressed we get into menu system
+                  lcd.clear();
                   lcd.setCursor(0, 0);
                   lcd.print(F("Ok, EXIT  "));
                   lcd.setCursor(0, 3);
@@ -769,6 +772,7 @@ void loop () {
                 lcd.setCursor(0, 0);
                 lcd.print("long press exit    ");
                 if ((millis() - TempLong)  > 2500) {                       // after 5 seconds pressed we get into menu system
+                  lcd.clear();
                   lcd.setCursor(0, 0);
                   lcd.print(F("Ok, EXIT  "));
                   lcd.setCursor(0, 3);
