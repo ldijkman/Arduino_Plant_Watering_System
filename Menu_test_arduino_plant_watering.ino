@@ -117,7 +117,7 @@ signed long starttime;
 unsigned long previousMillis = 0;
 unsigned long currentMillis;
 
-int wetnesforstartwatergiftbeurt = 30;                      // if smaller als 30% start watering
+int moistureforstartwatering = 30;                      // if smaller als 30% start watering
 
 int dry_sensor_one = 795;                                   // my sensor value Dry in air   795
 int wet_sensor_one = 435;                                   // my sensor value wet in water 435
@@ -164,7 +164,7 @@ float TempFloat;
 int TempInt;
 byte TempByte;
 
-long backlightofftimeout = 1 ;                  // time to switch backlight off in minutes 
+long backlightofftimeout = 5;                  // time to switch backlight off in minutes
 long backlightstart;
 byte backlightflag;
 
@@ -181,7 +181,7 @@ void setup () {
 
   //                                            i have 3 pullup resistors on my KY-040 so INPUT_PULLUP should not be needed
   //                                            BUT
-  //                                            Jo says no pullup resistor on SW on his rotary decoder => so made it input_pullup
+  //                                            Jo says NO pullup resistor on SW on his rotary decoder => so made it input_pullup
   pinMode(rotarybutton_SW, INPUT_PULLUP);     // rotary encoder SW = pulled up by resistor on KY-040 to +
   pinMode(CLK, INPUT_PULLUP);                 // rotary encoder CLK = pulled up by resistor on KY-040 to +
   pinMode(DATA, INPUT_PULLUP);                // rotary encoder DATA = pulled up by resistor on KY-040 to +
@@ -226,7 +226,7 @@ void setup () {
   // so next will be run
   EEPROM.get(666, TempInt);                                  // read eeprom adress 666 into TempInt
   if (TempInt != 666) {                                     // IF this is the first run THEN val at eeprom adres 666 is not 666 ???
-    EEPROM.put(0, wetnesforstartwatergiftbeurt);
+    EEPROM.put(0, moistureforstartwatering);
     EEPROM.put(5, dry_sensor_one);
     EEPROM.put(10, wet_sensor_one);
     EEPROM.put(15, dry_sensor_two);
@@ -250,7 +250,7 @@ void setup () {
     lcd.print(F("to EEPROM "));
     lcd.setCursor(0, 3);
     lcd.print(F("Thanks for trying"));
-    for (int i = 30 ; i >= 0 ; i--) {
+    for (int i = 30 ; i >= 0 ; i--) {   // on LCD countdown 30 to 0 half a second tick
       lcd.setCursor(18, 3);
       if (i <= 9) lcd.print(" ");
       lcd.print(i);
@@ -263,7 +263,7 @@ void setup () {
 
 
   // Read stored valeus from EEPROM
-  EEPROM.get(0, wetnesforstartwatergiftbeurt);
+  EEPROM.get(0, moistureforstartwatering);
   EEPROM.get(5, dry_sensor_one);
   EEPROM.get(10, wet_sensor_one);
   EEPROM.get(15, dry_sensor_two);
@@ -289,11 +289,11 @@ void setup () {
 //**********************************************************************************************************
 void loop () {
 
-  if (backlightflag == 1 && millis() - backlightstart > (backlightofftimeout* 60 * 1000L)) {              // if backlight timed out turn it off
+  if (backlightflag == 1 && millis() - backlightstart > (backlightofftimeout * 60 * 1000L)) {             // if backlight timed out turn it off
     lcd.noBacklight();                    // Turn backlight OFF
     backlightflag = 0;
   }
-  if (backlightflag == 0 && millis() - backlightstart < (backlightofftimeout* 60 * 1000L)) {
+  if (backlightflag == 0 && millis() - backlightstart < (backlightofftimeout * 60 * 1000L)) {
     lcd.backlight();                    // Turn backlight ON
     backlightflag = 1;
   }
@@ -309,6 +309,9 @@ void loop () {
     }
   }
   //blinknodelay_flag
+
+
+// read the sensors 10 times and divide by 10
 
   long Read_A0 = 0;
   long Read_A3 = 0;
@@ -327,11 +330,13 @@ void loop () {
   sense1 = (Read_A0 / 10);             // divide by 10
   sense2 = (Read_A3 / 10);
 
+// end read the sensors 10 times and divide by 10
 
 
-  if (SetButton() == LOW) {                     // if !=not SetButton, SW = pulled up by resistor on KY-040 to +,  so LOW is button pressed
 
-    backlightstart = millis();
+  if (SetButton() == LOW) {                     //  SW = pulled up by resistor on KY-040 to +,  so LOW is button pressed
+
+    backlightstart = millis();                                     // load current millis() into backlightstart
     lcd.backlight();                                               // turn backlight on
     TempLong = millis();  //  load current millis() into TempLong
     while (SetButton() == LOW) {                                   // while setbutton==LOW, pulled up by resistor, LOW is pressed
@@ -368,7 +373,7 @@ void loop () {
 
 
 
-  if (menu_nr != 0) {        // only check next menus if menu_nrnot = 0
+  if (menu_nr != 0) {        // only check next menus if menu_nr not = 0
 
     // 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
     // setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint
@@ -377,7 +382,7 @@ void loop () {
       lcd.setCursor(0, 0);
       lcd.print(F("1 Set SwitchPoint %"));
       lcd.setCursor(8, 2);
-      lcd.print(wetnesforstartwatergiftbeurt);
+      lcd.print(moistureforstartwatering);
       lcd.print(F(" % "));
     }
     while (menu_nr == 1) {
@@ -392,12 +397,12 @@ void loop () {
 
       float rval;
       if ( rval = read_rotary() ) {
-        wetnesforstartwatergiftbeurt = wetnesforstartwatergiftbeurt + (rval);
-        if (wetnesforstartwatergiftbeurt >= 70) wetnesforstartwatergiftbeurt = 70;
-        if (wetnesforstartwatergiftbeurt <= 10) wetnesforstartwatergiftbeurt = 10;
+        moistureforstartwatering = moistureforstartwatering + (rval);
+        if (moistureforstartwatering >= 70) moistureforstartwatering = 70;
+        if (moistureforstartwatering <= 10) moistureforstartwatering = 10;
         TempLong = millis();  //  load current millis() into TempLong
         lcd.setCursor(8, 2);
-        lcd.print(wetnesforstartwatergiftbeurt);
+        lcd.print(moistureforstartwatering);
         lcd.print(F(" % "));
 
       }
@@ -410,22 +415,22 @@ void loop () {
         lcd.clear();
 
         EEPROM.get(0, TempInt);                                   // limmited write to eeprom = read is unlimmited
-        if (wetnesforstartwatergiftbeurt != TempInt) {            // only write to eeprom if value is different
-          EEPROM.put(0, wetnesforstartwatergiftbeurt);            // put already checks if val is needed to write
+        if (moistureforstartwatering != TempInt) {            // only write to eeprom if value is different
+          EEPROM.put(0, moistureforstartwatering);            // put already checks if val is needed to write
           lcd.setCursor(0, 0);
           lcd.print(F("Saving to EEPROM"));
           lcd.setCursor(0, 2);
           lcd.print("old= ");
           lcd.print(TempInt);
           lcd.print(F(" new= "));
-          lcd.print(wetnesforstartwatergiftbeurt);
+          lcd.print(moistureforstartwatering);
           TempLong = millis();                                    // load millis() into Templong for next countdown delay
           while ((millis() - TempLong)  <= 5000) {
             lcd.setCursor(19, 3);
             lcd.print(5 - (millis() - TempLong) / 1000);          // on lcd timeout countdown
           }
           delay(1000);  // want to see the zero 0
-          for (int i = 0; i < 10; i++)Serial.println(F("wetnesforstartwatergiftbeurt DATA WRITTEN / SAVED TO EEPROM "));
+          for (int i = 0; i < 10; i++)Serial.println(F("moistureforstartwatering DATA WRITTEN / SAVED TO EEPROM "));
           lcd.clear();
         }
 
@@ -1064,7 +1069,7 @@ void loop () {
     //lcd.print(" ");
     lcd.setCursor(14, 0);
     lcd.print("sp=");                           // setpoint switchpoint ??%
-    lcd.print(wetnesforstartwatergiftbeurt);
+    lcd.print(moistureforstartwatering);
     lcd.print(" ");
 
     Serial.println(' ');
@@ -1096,7 +1101,7 @@ void loop () {
 
     Serial.println(' ');
 
-    Serial.print("averageinprocent = "); Serial.print(averageinprocent); Serial.print(" switchpoint = "); Serial.println(wetnesforstartwatergiftbeurt);
+    Serial.print("averageinprocent = "); Serial.print(averageinprocent); Serial.print(" switchpoint = "); Serial.println(moistureforstartwatering);
     lcd.setCursor(0, 1);
     lcd.print("S1=");
     lcd.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); lcd.print("   ");
@@ -1114,7 +1119,7 @@ void loop () {
   if (now.hour() >= start_hour && now.hour() < end_hour) {
     //Serial.println("zit binnnen watergift mogelijk tijden");
 
-    if (averageinprocent <= wetnesforstartwatergiftbeurt) {      // if soil is dryer as setpoint
+    if (averageinprocent <= moistureforstartwatering) {      // if soil is dryer as setpoint
       if (watergiftcounter == 0 || pauzetimer == 0 ) {          // if firstwaterpoor of day or pauzetimer==0
         if (watergiftcounter <= maximumaantalbeurtenperdag) {
           if (ValveStatus == 0) {
@@ -1237,7 +1242,7 @@ void loop () {
 
 
   /////////////////////////////////////////////////////////////////////////////////////////////
-  
+
   counter = counter + 1;                // just a counter to see how many times i get here
   if (counter == 100)counter = 0;
   lcd.setCursor(10, 0);
@@ -1245,7 +1250,7 @@ void loop () {
   lcd.print(counter);                  // just a counter to see how many times i get here
 
   delay(50); // slow it down a bit
-  
+
   //////////////////////////////////////////////////////////////////////////////////////////////
 }
 
