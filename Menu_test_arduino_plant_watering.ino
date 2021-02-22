@@ -606,182 +606,189 @@ void loop () {
 
 
         // dry_sensor_one dry_sensor_one dry_sensor_one dry_sensor_one dry_sensor_one dry_sensor_one dry_sensor_one dry_sensor_one dry_sensor_one
-        while (1 == 1) {
-          lcd.setCursor(8, 1); lcd.print("["); lcd.setCursor(12, 1); lcd.print("]");
-          float rval;
-          if ( rval = read_rotary() ) {
-            dry_sensor_one = dry_sensor_one + (rval);
+        if (exitflag == 0) {
+          while (1 == 1) {
             lcd.setCursor(8, 1); lcd.print("["); lcd.setCursor(12, 1); lcd.print("]");
-            readsensors();
-            lcd.setCursor(0, 0);
-            lcd.print("actual   dry   wet ");
-            lcd.setCursor(0, 1);
-            lcd.print("s1 "); lcd.print(sense1); lcd.setCursor(9, 1); lcd.print(dry_sensor_one); lcd.setCursor(15, 1); lcd.print(wet_sensor_one);
-            lcd.setCursor(0, 2);
-            lcd.print("s2 "); lcd.print(sense2); lcd.setCursor(9, 2); lcd.print(dry_sensor_two); lcd.setCursor(15, 2); lcd.print(wet_sensor_two);
-            lcd.setCursor(0, 3);
-            lcd.print("s1 "); lcd.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); lcd.print("% ");
-            lcd.setCursor(9, 3);
-            lcd.print("s2 "); lcd.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); lcd.print("% ");
-          }
-
-          if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
-            TempLong = millis();
-            while (SetButton() == LOW) {
+            float rval;
+            if ( rval = read_rotary() ) {
+              dry_sensor_one = dry_sensor_one + (rval);
+              lcd.setCursor(8, 1); lcd.print("["); lcd.setCursor(12, 1); lcd.print("]");
+              readsensors();
               lcd.setCursor(0, 0);
-              lcd.print("long press exit    ");
-              if ((millis() - TempLong)  > 2500) {                       // after 5 seconds pressed we get into menu system
-                lcd.setCursor(0, 0);
-                lcd.print(F("Ok, EXIT  "));
-                lcd.setCursor(0, 3);
-                lcd.print(F("   Release Button   "));
-                delay(500);
-                exitflag = 1;
-              }
+              lcd.print("actual   dry   wet ");
+              lcd.setCursor(0, 1);
+              lcd.print("s1 "); lcd.print(sense1); lcd.setCursor(9, 1); lcd.print(dry_sensor_one); lcd.setCursor(15, 1); lcd.print(wet_sensor_one);
+              lcd.setCursor(0, 2);
+              lcd.print("s2 "); lcd.print(sense2); lcd.setCursor(9, 2); lcd.print(dry_sensor_two); lcd.setCursor(15, 2); lcd.print(wet_sensor_two);
+              lcd.setCursor(0, 3);
+              lcd.print("s1 "); lcd.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); lcd.print("% ");
+              lcd.setCursor(9, 3);
+              lcd.print("s2 "); lcd.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); lcd.print("% ");
             }
-            lcd.setCursor(0, 0);
-            lcd.print("actual   dry   wet ");
-            EEPROM.put(5, dry_sensor_one);
-            lcd.setCursor(8, 1); lcd.print(" "); lcd.setCursor(12, 1); lcd.print(" ");
-            break;
+
+            if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+              TempLong = millis();
+              while (SetButton() == LOW) {
+                lcd.setCursor(0, 0);
+                lcd.print("long press exit    ");
+                if ((millis() - TempLong)  > 2500) {                       // after 5 seconds pressed we get into menu system
+                  lcd.setCursor(0, 0);
+                  lcd.print(F("Ok, EXIT  "));
+                  lcd.setCursor(0, 3);
+                  lcd.print(F("   Release Button   "));
+                  delay(500);
+                  exitflag = 1;
+                }
+              }
+              lcd.setCursor(0, 0);
+              lcd.print("actual   dry   wet ");
+              EEPROM.put(5, dry_sensor_one);
+              lcd.setCursor(8, 1); lcd.print(" "); lcd.setCursor(12, 1); lcd.print(" ");
+              break;
+            }
           }
         }
 
 
 
         // wet_sensor_one wet_sensor_one wet_sensor_one wet_sensor_one wet_sensor_one wet_sensor_one wet_sensor_one wet_sensor_one wet_sensor_one wet_sensor_one
-        while (1 == 1) {
-          lcd.setCursor(14, 1); lcd.print("["); lcd.setCursor(18, 1); lcd.print("]");
-          float rval;
-          if ( rval = read_rotary() ) {
-            wet_sensor_one = wet_sensor_one + (rval);
+        if (exitflag == 0) {
+          while (1 == 1) {
             lcd.setCursor(14, 1); lcd.print("["); lcd.setCursor(18, 1); lcd.print("]");
-            readsensors();
-            lcd.setCursor(0, 0);
-            lcd.print("actual   dry   wet ");
-            lcd.setCursor(0, 1);
-            lcd.print("s1 "); lcd.print(sense1); lcd.setCursor(9, 1); lcd.print(dry_sensor_one); lcd.setCursor(15, 1); lcd.print(wet_sensor_one);
-            lcd.setCursor(0, 2);
-            lcd.print("s2 "); lcd.print(sense2); lcd.setCursor(9, 2); lcd.print(dry_sensor_two); lcd.setCursor(15, 2); lcd.print(wet_sensor_two);
-            lcd.setCursor(0, 3);
-            lcd.print("s1 "); lcd.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); lcd.print("% ");
-            lcd.setCursor(9, 3);
-            lcd.print("s2 "); lcd.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); lcd.print("% ");
-          }
-
-          if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
-            TempLong = millis();
-            while (SetButton() == LOW) {
+            float rval;
+            if ( rval = read_rotary() ) {
+              wet_sensor_one = wet_sensor_one + (rval);
+              lcd.setCursor(14, 1); lcd.print("["); lcd.setCursor(18, 1); lcd.print("]");
+              readsensors();
               lcd.setCursor(0, 0);
-              lcd.print("long press exit    ");
-              if ((millis() - TempLong)  > 2500) {                       // after 5 seconds pressed we get into menu system
-                lcd.setCursor(0, 0);
-                lcd.print(F("Ok, EXIT  "));
-                lcd.setCursor(0, 3);
-                lcd.print(F("   Release Button   "));
-                delay(500);
-                exitflag = 1;
-              }
+              lcd.print("actual   dry   wet ");
+              lcd.setCursor(0, 1);
+              lcd.print("s1 "); lcd.print(sense1); lcd.setCursor(9, 1); lcd.print(dry_sensor_one); lcd.setCursor(15, 1); lcd.print(wet_sensor_one);
+              lcd.setCursor(0, 2);
+              lcd.print("s2 "); lcd.print(sense2); lcd.setCursor(9, 2); lcd.print(dry_sensor_two); lcd.setCursor(15, 2); lcd.print(wet_sensor_two);
+              lcd.setCursor(0, 3);
+              lcd.print("s1 "); lcd.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); lcd.print("% ");
+              lcd.setCursor(9, 3);
+              lcd.print("s2 "); lcd.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); lcd.print("% ");
             }
-            lcd.setCursor(0, 0);
-            lcd.print("actual   dry   wet ");
-            EEPROM.put(10, wet_sensor_one);
-            lcd.setCursor(14, 1); lcd.print(" "); lcd.setCursor(18, 1); lcd.print(" ");
-            break;
+
+            if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+              TempLong = millis();
+              while (SetButton() == LOW) {
+                lcd.setCursor(0, 0);
+                lcd.print("long press exit    ");
+                if ((millis() - TempLong)  > 2500) {                       // after 5 seconds pressed we get into menu system
+                  lcd.setCursor(0, 0);
+                  lcd.print(F("Ok, EXIT  "));
+                  lcd.setCursor(0, 3);
+                  lcd.print(F("   Release Button   "));
+                  delay(500);
+                  exitflag = 1;
+                }
+              }
+              lcd.setCursor(0, 0);
+              lcd.print("actual   dry   wet ");
+              EEPROM.put(10, wet_sensor_one);
+              lcd.setCursor(14, 1); lcd.print(" "); lcd.setCursor(18, 1); lcd.print(" ");
+              break;
+            }
           }
         }
 
 
 
         // dry_sensor_two dry_sensor_two dry_sensor_two dry_sensor_two dry_sensor_two dry_sensor_two dry_sensor_two dry_sensor_two dry_sensor_two
-        while (1 == 1) {
-          lcd.setCursor(8, 2); lcd.print("["); lcd.setCursor(12, 2); lcd.print("]");
-          float rval;
-          if ( rval = read_rotary() ) {
-            dry_sensor_two = dry_sensor_two + (rval);
+        if (exitflag == 0) {
+          while (1 == 1) {
             lcd.setCursor(8, 2); lcd.print("["); lcd.setCursor(12, 2); lcd.print("]");
-            readsensors();
-            lcd.setCursor(0, 0);
-            lcd.print("actual   dry   wet ");
-            lcd.setCursor(0, 1);
-            lcd.print("s1 "); lcd.print(sense1); lcd.setCursor(9, 1); lcd.print(dry_sensor_one); lcd.setCursor(15, 1); lcd.print(wet_sensor_one);
-            lcd.setCursor(0, 2);
-            lcd.print("s2 "); lcd.print(sense2); lcd.setCursor(9, 2); lcd.print(dry_sensor_two); lcd.setCursor(15, 2); lcd.print(wet_sensor_two);
-            lcd.setCursor(0, 3);
-            lcd.print("s1 "); lcd.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); lcd.print("% ");
-            lcd.setCursor(9, 3);
-            lcd.print("s2 "); lcd.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); lcd.print("% ");
-          }
-
-          if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
-            TempLong = millis();
-            while (SetButton() == LOW) {
+            float rval;
+            if ( rval = read_rotary() ) {
+              dry_sensor_two = dry_sensor_two + (rval);
+              lcd.setCursor(8, 2); lcd.print("["); lcd.setCursor(12, 2); lcd.print("]");
+              readsensors();
               lcd.setCursor(0, 0);
-              lcd.print("long press exit    ");
-              if ((millis() - TempLong)  > 2500) {                       // after 5 seconds pressed we get into menu system
-                lcd.setCursor(0, 0);
-                lcd.print(F("Ok, EXIT  "));
-                lcd.setCursor(0, 3);
-                lcd.print(F("   Release Button   "));
-                delay(500);
-                exitflag = 1;
-              }
+              lcd.print("actual   dry   wet ");
+              lcd.setCursor(0, 1);
+              lcd.print("s1 "); lcd.print(sense1); lcd.setCursor(9, 1); lcd.print(dry_sensor_one); lcd.setCursor(15, 1); lcd.print(wet_sensor_one);
+              lcd.setCursor(0, 2);
+              lcd.print("s2 "); lcd.print(sense2); lcd.setCursor(9, 2); lcd.print(dry_sensor_two); lcd.setCursor(15, 2); lcd.print(wet_sensor_two);
+              lcd.setCursor(0, 3);
+              lcd.print("s1 "); lcd.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); lcd.print("% ");
+              lcd.setCursor(9, 3);
+              lcd.print("s2 "); lcd.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); lcd.print("% ");
             }
-            lcd.setCursor(0, 0);
-            lcd.print("actual   dry   wet ");
-            EEPROM.put(15, dry_sensor_two);
-            lcd.setCursor(8, 2); lcd.print(" "); lcd.setCursor(12, 2); lcd.print(" ");
-            break;
+
+            if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+              TempLong = millis();
+              while (SetButton() == LOW) {
+                lcd.setCursor(0, 0);
+                lcd.print("long press exit    ");
+                if ((millis() - TempLong)  > 2500) {                       // after 5 seconds pressed we get into menu system
+                  lcd.setCursor(0, 0);
+                  lcd.print(F("Ok, EXIT  "));
+                  lcd.setCursor(0, 3);
+                  lcd.print(F("   Release Button   "));
+                  delay(500);
+                  exitflag = 1;
+                }
+              }
+              lcd.setCursor(0, 0);
+              lcd.print("actual   dry   wet ");
+              EEPROM.put(15, dry_sensor_two);
+              lcd.setCursor(8, 2); lcd.print(" "); lcd.setCursor(12, 2); lcd.print(" ");
+              break;
+            }
           }
         }
-
 
 
         // wet_sensor_two wet_sensor_two wet_sensor_two wet_sensor_two wet_sensor_two wet_sensor_two wet_sensor_two wet_sensor_two wet_sensor_two
-        while (1 == 1) {
-          lcd.setCursor(14, 2); lcd.print("["); lcd.setCursor(18, 2); lcd.print("]");
-          float rval;
-          if ( rval = read_rotary() ) {
-            wet_sensor_two = wet_sensor_two + (rval);
+        if (exitflag == 0) {
+          while (1 == 1) {
             lcd.setCursor(14, 2); lcd.print("["); lcd.setCursor(18, 2); lcd.print("]");
-            readsensors();
-            lcd.setCursor(0, 0);
-            lcd.print("actual   dry   wet  ");
-            lcd.setCursor(0, 1);
-            lcd.print("s1 "); lcd.print(sense1); lcd.setCursor(9, 1); lcd.print(dry_sensor_one); lcd.setCursor(15, 1); lcd.print(wet_sensor_one);
-            lcd.setCursor(0, 2);
-            lcd.print("s2 "); lcd.print(sense2); lcd.setCursor(9, 2); lcd.print(dry_sensor_two); lcd.setCursor(15, 2); lcd.print(wet_sensor_two);
-            lcd.setCursor(0, 3);
-            lcd.print("s1 "); lcd.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); lcd.print("% ");
-            lcd.setCursor(9, 3);
-            lcd.print("s2 "); lcd.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); lcd.print("% ");
-          }
-
-          if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
-            TempLong = millis();
-            while (SetButton() == LOW) {
+            float rval;
+            if ( rval = read_rotary() ) {
+              wet_sensor_two = wet_sensor_two + (rval);
+              lcd.setCursor(14, 2); lcd.print("["); lcd.setCursor(18, 2); lcd.print("]");
+              readsensors();
               lcd.setCursor(0, 0);
-              lcd.print("long press exit    ");
-              if ((millis() - TempLong)  > 2500) {                       // after 5 seconds pressed we get into menu system
-                lcd.setCursor(0, 0);
-                lcd.print(F("Ok, EXIT  "));
-                lcd.setCursor(0, 3);
-                lcd.print(F("   Release Button   "));
-                delay(500);
-                exitflag = 1;
-              }
+              lcd.print("actual   dry   wet  ");
+              lcd.setCursor(0, 1);
+              lcd.print("s1 "); lcd.print(sense1); lcd.setCursor(9, 1); lcd.print(dry_sensor_one); lcd.setCursor(15, 1); lcd.print(wet_sensor_one);
+              lcd.setCursor(0, 2);
+              lcd.print("s2 "); lcd.print(sense2); lcd.setCursor(9, 2); lcd.print(dry_sensor_two); lcd.setCursor(15, 2); lcd.print(wet_sensor_two);
+              lcd.setCursor(0, 3);
+              lcd.print("s1 "); lcd.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); lcd.print("% ");
+              lcd.setCursor(9, 3);
+              lcd.print("s2 "); lcd.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); lcd.print("% ");
             }
-            lcd.setCursor(0, 0);
-            lcd.print("actual   dry   wet  ");
-            EEPROM.put(20, wet_sensor_two);
-            lcd.setCursor(14, 2); lcd.print(" "); lcd.setCursor(18, 2); lcd.print(" ");
-            break;
+
+            if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+              TempLong = millis();
+              while (SetButton() == LOW) {
+                lcd.setCursor(0, 0);
+                lcd.print("long press exit    ");
+                if ((millis() - TempLong)  > 2500) {                       // after 5 seconds pressed we get into menu system
+                  lcd.setCursor(0, 0);
+                  lcd.print(F("Ok, EXIT  "));
+                  lcd.setCursor(0, 3);
+                  lcd.print(F("   Release Button   "));
+                  delay(500);
+                  exitflag = 1;
+                }
+              }
+              lcd.setCursor(0, 0);
+              lcd.print("actual   dry   wet  ");
+              EEPROM.put(20, wet_sensor_two);
+              lcd.setCursor(14, 2); lcd.print(" "); lcd.setCursor(18, 2); lcd.print(" ");
+              break;
+            }
+
           }
-          
         }
       }
     }   // end    if (Calibrate_Sensors == 3) {   // you chose Adjust
- lcd.clear();
+    lcd.clear();
     exitflag = 0;
 
 
