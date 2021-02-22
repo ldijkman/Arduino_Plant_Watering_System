@@ -1317,7 +1317,7 @@ int8_t read_rotary() {
 
 //******************************************************************
 void TimeOut() {
-  lcd.clear();  //exit menu_nrif 20 seconds innactive
+  lcd.clear();  //exit menu_nr if 20 seconds innactive
   lcd.setCursor(6, 0);
   lcd.print(F("TimeOut"));
   lcd.setCursor(0, 1);
