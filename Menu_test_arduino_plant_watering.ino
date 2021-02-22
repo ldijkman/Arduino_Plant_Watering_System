@@ -777,16 +777,11 @@ void loop () {
             lcd.setCursor(14, 2); lcd.print(" "); lcd.setCursor(18, 2); lcd.print(" ");
             break;
           }
+          
         }
-
-
-
-
-
       }
-
     }   // end    if (Calibrate_Sensors == 3) {   // you chose Adjust
-
+ lcd.clear();
     exitflag = 0;
 
 
