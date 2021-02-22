@@ -312,7 +312,7 @@ void loop () {
   //blinknodelay_flag
 
 
-// read the sensors 10 times and divide by 10
+  // read the sensors 10 times and divide by 10
 
   long Read_A0 = 0;
   long Read_A3 = 0;
@@ -331,7 +331,7 @@ void loop () {
   sense1 = (Read_A0 / 10);             // divide by 10
   sense2 = (Read_A3 / 10);
 
-// end read the sensors 10 times and divide by 10
+  // end read the sensors 10 times and divide by 10
 
 
 
@@ -1247,13 +1247,15 @@ void loop () {
   counter = counter + 1;                // just a counter to see how many times i get here
   if (counter >= 480)counter = 0;
   lcd.setCursor(9, 0);
-   if (counter <= 99)lcd.print(" ");
+  if (counter <= 99)lcd.print(" ");
   if (counter <= 9)lcd.print(" ");
   lcd.print(counter);                  // just a counter to see how many times i get here
 
 
-while(millis()-loopspeed <= 125){/**/}       // limmit loop to max 8 times per second, 480 times a minute
-loopspeed=millis();
+  while (millis() - loopspeed <= 125) {
+    /**/
+  }       // limmit loop to max 8 times per second, 480 times a minute
+  loopspeed = millis();
 
   //////////////////////////////////////////////////////////////////////////////////////////////
 }
