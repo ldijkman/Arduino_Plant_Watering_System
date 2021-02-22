@@ -176,7 +176,7 @@ byte blinknodelay_flag;                         // a blink flag that is 1 second
 
 int counter;
 
-
+char watering_times[25][8] = {"1:00:00", "2:00:00", "3:00:00", "4:00:00", "5:00:00", "6:00:00", "7:00:00"};  // maybe to eprom
 
 //**********************************************************************************************
 void setup () {
@@ -302,7 +302,8 @@ void loop () {
     backlightflag = 1;
   }
 
-  //blinknodelay_flag => likely there is a bit somewhere that does the same so it could be done with less code
+  //blinknodelay_flag => likely there is a bit somewhere that does the same so it could be done with less code, 
+  //or maybe something with timer1 bitread or isr to set a flag
   currentMillis = millis();
   if (currentMillis - previousMillis >= 1000) {     //binknodelay example but not blink a LED, but set a flag => 1 second on, 1 second off
     previousMillis = currentMillis;
@@ -313,8 +314,8 @@ void loop () {
     }
   }
   //blinknodelay_flag => likely there is a bit somewhere that does the same so it could be done with less code
-
-
+ //or maybe something with timer1 bitread or isr to set a flag
+ 
 
   // read the sensors 10 times and divide by 10
 
