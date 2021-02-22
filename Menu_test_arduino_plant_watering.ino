@@ -590,17 +590,32 @@ void loop () {
         lcd.setCursor(0, 0);
         lcd.print("actual   dry   wet ");
         lcd.setCursor(0, 1);
-        lcd.print("s1 "); lcd.print(sense1); lcd.setCursor(9, 1); lcd.print(dry_sensor_one);lcd.setCursor(15, 1); lcd.print(wet_sensor_one);
+        lcd.print("s1 "); lcd.print(sense1); lcd.setCursor(9, 1); lcd.print(dry_sensor_one); lcd.setCursor(15, 1); lcd.print(wet_sensor_one);
         lcd.setCursor(0, 2);
         lcd.print("s2 "); lcd.print(sense2); lcd.setCursor(9, 2); lcd.print(dry_sensor_two); lcd.setCursor(15, 2); lcd.print(wet_sensor_two);
         lcd.setCursor(0, 3);
         lcd.print("s1 "); lcd.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); lcd.print("% ");
         lcd.setCursor(9, 3);
         lcd.print("s2 "); lcd.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); lcd.print("% ");
-        lcd.setCursor(11, 1);
+
         lcd.setCursor(8, 1); lcd.print("["); lcd.setCursor(12, 1); lcd.print("]");
         delay(200);
         lcd.setCursor(8, 1); lcd.print(" "); lcd.setCursor(12, 1); lcd.print(" ");
+        delay(200);
+        lcd.setCursor(14, 1); lcd.print("["); lcd.setCursor(18, 1); lcd.print("]");
+        delay(200);
+        lcd.setCursor(14, 1); lcd.print(" "); lcd.setCursor(18, 1); lcd.print(" ");
+
+        delay(200);
+
+        lcd.setCursor(8, 2); lcd.print("["); lcd.setCursor(12, 2); lcd.print("]");
+        delay(200);
+        lcd.setCursor(8, 2); lcd.print(" "); lcd.setCursor(12, 2); lcd.print(" ");
+        delay(200);
+        lcd.setCursor(14, 2); lcd.print("["); lcd.setCursor(18, 2); lcd.print("]");
+        delay(200);
+        lcd.setCursor(14, 2); lcd.print(" "); lcd.setCursor(18, 2); lcd.print(" ");
+        delay(200);
         if (SetButton() == LOW) {        // LOW setbutton is pressed
           while (SetButton() == LOW) {
             /*wait for button released*/
