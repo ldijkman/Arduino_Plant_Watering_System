@@ -128,6 +128,9 @@ int wet_sensor_two = 435;                                   // my sensor value w
 int sense1;
 int sense2;
 
+long Read_A0 = 0;
+long Read_A3 = 0;
+int dummy_read;
 
 int averageinprocent;                                      // average of 2 sensors in %
 
@@ -165,7 +168,7 @@ float TempFloat;
 int TempInt;
 byte TempByte;
 
-long backlightofftimeout = 5;                  // time to switch backlight off in minutes
+int backlightofftimeout = 5;                  // time to switch backlight off in minutes
 long backlightstart;
 byte backlightflag;
 
@@ -310,27 +313,12 @@ void loop () {
     }
   }
   //blinknodelay_flag => likely there is a bit somewhere that does the same so it could be done with less code
-  
+
 
 
   // read the sensors 10 times and divide by 10
 
-  long Read_A0 = 0;
-  long Read_A3 = 0;
-  int dummy_read;
-  for (int cc = 0; cc < 10; cc++) {     // do 10 readings
-
-    dummy_read = analogRead(A0);          // reduce analog pins influence eachother?
-    delay(1);
-    Read_A0 = Read_A0 + analogRead(A0);
-    delay(1);
-    dummy_read = analogRead(A3);            // reduce analog pins influence eachother?
-    delay(1);
-    Read_A3 = Read_A3 + analogRead(A3);
-    delay(1);
-  }
-  sense1 = (Read_A0 / 10);             // divide by 10
-  sense2 = (Read_A3 / 10);
+  readsensors();
 
   // end read the sensors 10 times and divide by 10
 
@@ -502,18 +490,19 @@ void loop () {
 
       lcd.clear();
       while (0 == 0) {
+        readsensors();
         lcd.setCursor(0, 0);
         lcd.print("Sensor1 analog A0");
         lcd.setCursor(0, 1);
         lcd.print("Clean Dry in Air?");
         lcd.setCursor(9, 3);
-        lcd.print(analogRead(A0));
+        lcd.print(sense1);
         delay(250);
         if (SetButton() == LOW) {        // LOW setbutton is pressed
           while (SetButton() == LOW) {
             /*wait for button released*/
           }
-          dry_sensor_one = analogRead(A0);
+          dry_sensor_one = sense1;
           EEPROM.put(5, dry_sensor_one);
           lcd.clear();
           delay(500); // user gets a better experience switch to next screen?
@@ -523,18 +512,19 @@ void loop () {
 
 
       while (0 == 0) {
+        readsensors();
         lcd.setCursor(0, 0);
         lcd.print("Sensor1 analog A0");
         lcd.setCursor(0, 1);
         lcd.print("Wet in Watter?");
         lcd.setCursor(9, 3);
-        lcd.print(analogRead(A0));
+        lcd.print(sense1);
         delay(250);
         if (SetButton() == LOW) {        // LOW setbutton is pressed
           while (SetButton() == LOW) {
             /*wait for button released*/
           }
-          wet_sensor_one = analogRead(A0);
+          wet_sensor_one = sense1;
           EEPROM.put(10, wet_sensor_one);
           lcd.clear();
           delay(500); // user gets a better experience switch to next screen?
@@ -544,18 +534,19 @@ void loop () {
 
 
       while (0 == 0) {
+        readsensors();
         lcd.setCursor(0, 0);
         lcd.print("Sensor2 analog A3");
         lcd.setCursor(0, 1);
         lcd.print("Clean Dry in Air?");
         lcd.setCursor(9, 3);
-        lcd.print(analogRead(A3));
+        lcd.print(sense2);
         delay(250);
         if (SetButton() == LOW) {        // LOW setbutton is pressed
           while (SetButton() == LOW) {
             /*wait for button released*/
           }
-          dry_sensor_two = analogRead(A3);
+          dry_sensor_two = sense2;
           EEPROM.put(15, dry_sensor_two);
           lcd.clear();
           delay(500); // user gets a better experience switch to next screen?
@@ -565,18 +556,19 @@ void loop () {
 
 
       while (0 == 0) {
+        readsensors();
         lcd.setCursor(0, 0);
         lcd.print("Sensor2 analog A3");
         lcd.setCursor(0, 1);
         lcd.print("Wet in Watter?");
         lcd.setCursor(9, 3);
-        lcd.print(analogRead(A3));
+        lcd.print(sense2);
         delay(250);
         if (SetButton() == LOW) {        // LOW setbutton is pressed
           while (SetButton() == LOW) {
             /*wait for button released*/
           }
-          wet_sensor_two = analogRead(A3);
+          wet_sensor_two = sense2;
           EEPROM.put(20, wet_sensor_two);
           lcd.clear();
           delay(500); // user gets a better experience switch to next screen?
@@ -591,7 +583,34 @@ void loop () {
       Calibrate_Sensors = 1;
       lcd.clear();
       lcd.print("Adjust not yet!");
-      delay(5000);
+      delay(2000);
+      lcd.clear();
+      while (0 == 0) {
+        readsensors();
+        lcd.setCursor(0, 0);
+        lcd.print("actual   dry   wet ");
+        lcd.setCursor(0, 1);
+        lcd.print("s1 "); lcd.print(sense1); lcd.setCursor(9, 1); lcd.print(dry_sensor_one);lcd.setCursor(15, 1); lcd.print(wet_sensor_one);
+        lcd.setCursor(0, 2);
+        lcd.print("s2 "); lcd.print(sense2); lcd.setCursor(9, 2); lcd.print(dry_sensor_two); lcd.setCursor(15, 2); lcd.print(wet_sensor_two);
+        lcd.setCursor(0, 3);
+        lcd.print("s1 "); lcd.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); lcd.print("% ");
+        lcd.setCursor(9, 3);
+        lcd.print("s2 "); lcd.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); lcd.print("% ");
+        lcd.setCursor(11, 1);
+        lcd.setCursor(8, 1); lcd.print("["); lcd.setCursor(12, 1); lcd.print("]");
+        delay(200);
+        lcd.setCursor(8, 1); lcd.print(" "); lcd.setCursor(12, 1); lcd.print(" ");
+        if (SetButton() == LOW) {        // LOW setbutton is pressed
+          while (SetButton() == LOW) {
+            /*wait for button released*/
+          }
+          lcd.clear();
+          delay(500); // user gets a better experience switch to next screen?
+          break;
+        }
+      }
+
     }// end    if (Calibrate_Sensors == 3) {   // you chose Adjust
 
 
@@ -907,7 +926,7 @@ void loop () {
         while (SetButton() == LOW) {
           /*wait for button released*/
         }
-        menu_nr = 11;
+        menu_nr = 8;
         lcd.clear();
 
         EEPROM.get(45, TempInt);                          // limmited write to eeprom = read is unlimmited
@@ -933,6 +952,74 @@ void loop () {
 
       }
     }// end menu_nr7
+
+
+
+
+    // 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8
+    // backlightofftimeout backlightofftimeout backlightofftimeout backlightofftimeout backlightofftimeout
+    TempLong = millis();  //  load current millis() into TempLong
+    if (menu_nr == 8) {
+      lcd.setCursor(0, 0);
+      lcd.print(F("8 Backlight T in Min"));
+      lcd.setCursor(6, 2);
+      lcd.print(backlightofftimeout);
+      lcd.print(F(" Min. "));
+    }
+    while (menu_nr == 8) {
+      lcd.setCursor(18, 3);
+      if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
+      lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
+      if ((millis() - TempLong)  > 10000) {
+        delay(1000);  // want to see the zero 0
+        TimeOut();
+        break;
+      }
+
+      float rval;
+      if ( rval = read_rotary() ) {
+        backlightofftimeout = backlightofftimeout + (rval);          // 1 minute steps
+        if (backlightofftimeout <= 1) backlightofftimeout = 1;       // minimal backlightofftimeout 1 minutes
+        TempLong = millis();  //  load current millis() into TempLong
+        lcd.setCursor(6, 2);
+        lcd.print(backlightofftimeout);
+        lcd.print(F(" Min. "));
+
+      }
+
+      if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+        while (SetButton() == LOW) {
+          /*wait for button released*/
+        }
+        menu_nr = 11;
+        lcd.clear();
+
+        EEPROM.get(50, TempInt);                                   // limmited write to eeprom = read is unlimmited
+        if (pauze_after_watering != TempInt) {            // only write to eeprom if value is different
+          EEPROM.put(50, backlightofftimeout);            // put already checks if val is needed to write
+          lcd.setCursor(0, 0);
+          lcd.print(F("Saving to EEPROM"));
+          lcd.setCursor(0, 2);
+          lcd.print("old= ");
+          lcd.print(TempInt);
+          lcd.print(F(" new= "));
+          lcd.print(backlightofftimeout);
+          TempLong = millis();                                    // load millis() into Templong for next countdown delay
+          while ((millis() - TempLong)  <= 5000) {
+            lcd.setCursor(19, 3);
+            lcd.print(5 - (millis() - TempLong) / 1000);          // on lcd timeout countdown
+          }
+          delay(1000);  // want to see the zero 0
+          for (int i = 0; i < 10; i++)Serial.println(F("pauze_after_watering DATA WRITTEN / SAVED TO EEPROM "));
+          lcd.clear();
+        }
+
+
+      }
+    }// end menu_nr 8
+
+
+
 
 
 
@@ -1347,6 +1434,27 @@ void TimeOut() {
 }
 
 
+
+
+//****************************************************************
+void readsensors() {
+  Read_A0 = 0;
+  Read_A3 = 0;
+  for (int cc = 0; cc < 10; cc++) {     // do 10 readings
+
+    dummy_read = analogRead(A0);          // reduce analog pins influence eachother?
+    delay(1);
+    Read_A0 = Read_A0 + analogRead(A0);
+    delay(1);
+    dummy_read = analogRead(A3);            // reduce analog pins influence eachother?
+    delay(1);
+    Read_A3 = Read_A3 + analogRead(A3);
+    delay(1);
+  }
+  sense1 = (Read_A0 / 10);             // divide by 10
+  sense2 = (Read_A3 / 10);
+
+}
 
 
 // Een Heitje voor een karweitje
