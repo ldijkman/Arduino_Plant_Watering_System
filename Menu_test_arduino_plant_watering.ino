@@ -164,7 +164,7 @@ float TempFloat;
 int TempInt;
 byte TempByte;
 
-long backlightofftimeout = 1 * 60 * 1000L;      // time to switch backlight off in milliseconds (the L is needed, otherwise wrong calculation Arduino IDE)
+long backlightofftimeout = 1 ;                  // time to switch backlight off in minutes 
 long backlightstart;
 byte backlightflag;
 
@@ -289,11 +289,11 @@ void setup () {
 //**********************************************************************************************************
 void loop () {
 
-  if (backlightflag == 1 && millis() - backlightstart > backlightofftimeout) {              // if backlight timed out turn it off
+  if (backlightflag == 1 && millis() - backlightstart > (backlightofftimeout* 60 * 1000L)) {              // if backlight timed out turn it off
     lcd.noBacklight();                    // Turn backlight OFF
     backlightflag = 0;
   }
-  if (backlightflag == 0 && millis() - backlightstart < backlightofftimeout) {
+  if (backlightflag == 0 && millis() - backlightstart < (backlightofftimeout* 60 * 1000L)) {
     lcd.backlight();                    // Turn backlight ON
     backlightflag = 1;
   }
