@@ -626,9 +626,18 @@ void loop () {
           }
 
           if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+            TempLong = millis();
             while (SetButton() == LOW) {
               lcd.setCursor(0, 0);
               lcd.print("long press exit    ");
+              if ((millis() - TempLong)  > 2500) {                       // after 5 seconds pressed we get into menu system
+                lcd.setCursor(0, 0);
+                lcd.print(F("Ok, EXIT  "));
+                lcd.setCursor(0, 3);
+                lcd.print(F("   Release Button   "));
+                delay(500);
+                exitflag = 1;
+              }
             }
             lcd.setCursor(0, 0);
             lcd.print("actual   dry   wet ");
@@ -661,9 +670,18 @@ void loop () {
           }
 
           if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+            TempLong = millis();
             while (SetButton() == LOW) {
               lcd.setCursor(0, 0);
               lcd.print("long press exit    ");
+              if ((millis() - TempLong)  > 2500) {                       // after 5 seconds pressed we get into menu system
+                lcd.setCursor(0, 0);
+                lcd.print(F("Ok, EXIT  "));
+                lcd.setCursor(0, 3);
+                lcd.print(F("   Release Button   "));
+                delay(500);
+                exitflag = 1;
+              }
             }
             lcd.setCursor(0, 0);
             lcd.print("actual   dry   wet ");
@@ -696,9 +714,18 @@ void loop () {
           }
 
           if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+            TempLong = millis();
             while (SetButton() == LOW) {
               lcd.setCursor(0, 0);
-              lcd.print("long press exit      ");
+              lcd.print("long press exit    ");
+              if ((millis() - TempLong)  > 2500) {                       // after 5 seconds pressed we get into menu system
+                lcd.setCursor(0, 0);
+                lcd.print(F("Ok, EXIT  "));
+                lcd.setCursor(0, 3);
+                lcd.print(F("   Release Button   "));
+                delay(500);
+                exitflag = 1;
+              }
             }
             lcd.setCursor(0, 0);
             lcd.print("actual   dry   wet ");
@@ -731,9 +758,18 @@ void loop () {
           }
 
           if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+            TempLong = millis();
             while (SetButton() == LOW) {
               lcd.setCursor(0, 0);
-              lcd.print("long press exit   ");
+              lcd.print("long press exit    ");
+              if ((millis() - TempLong)  > 2500) {                       // after 5 seconds pressed we get into menu system
+                lcd.setCursor(0, 0);
+                lcd.print(F("Ok, EXIT  "));
+                lcd.setCursor(0, 3);
+                lcd.print(F("   Release Button   "));
+                delay(500);
+                exitflag = 1;
+              }
             }
             lcd.setCursor(0, 0);
             lcd.print("actual   dry   wet  ");
