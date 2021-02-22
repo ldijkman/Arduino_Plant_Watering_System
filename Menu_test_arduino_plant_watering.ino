@@ -143,6 +143,7 @@ byte maximumaantalbeurtenperdag = 8;
 byte Calibrate_Sensors = 1;
 
 byte eepromerase = 1;
+long loopspeed;
 
 
 // rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
@@ -1244,12 +1245,15 @@ void loop () {
   /////////////////////////////////////////////////////////////////////////////////////////////
 
   counter = counter + 1;                // just a counter to see how many times i get here
-  if (counter == 100)counter = 0;
-  lcd.setCursor(10, 0);
+  if (counter >= 480)counter = 0;
+  lcd.setCursor(9, 0);
+   if (counter <= 99)lcd.print(" ");
   if (counter <= 9)lcd.print(" ");
   lcd.print(counter);                  // just a counter to see how many times i get here
 
-  delay(50); // slow it down a bit
+
+while(millis()-loopspeed <= 125){/**/}       // limmit loop to max 8 times per second, 480 times a minute
+loopspeed=millis();
 
   //////////////////////////////////////////////////////////////////////////////////////////////
 }
