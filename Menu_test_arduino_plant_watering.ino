@@ -6,7 +6,7 @@
 
    Rotary encoder menu mostly working
    few more menu items i would like to add
-   
+
    menu time / date set
   Done, menu  set backlight_time
   Done, menu eeprom erase,      No / Yes   factory settings reset & reboot
@@ -1238,19 +1238,26 @@ void loop () {
       float rval;
       if ( rval = read_rotary() ) {
         TempInt = TempInt + (rval * 10);        // 10  steps
-        if (TempInt <= 0) TempInt = 0;          
+        if (TempInt <= 0) TempInt = 0;
         // if (TempInt >= maximumaantalbeurtenperdag) TempInt = maximumaantalbeurtenperdag;       // minimal backlightofftimeout 1 minutes
         TempLong = millis();  //  load current millis() into TempLong
         char date[10] = "hh:mm:ss";  // maybe to eprom
         int adress = 810 + TempInt;
-          lcd.setCursor(0, 1); lcd.print("                    "); 
-        lcd.setCursor(0, 1); lcd.print(TempInt / 10 + 1); lcd.print(" "); lcd.print(adress); lcd.print(" "); EEPROM.get(adress, date); lcd.print(date); 
-       lcd.setCursor(0, 2); lcd.print("                    "); 
-       lcd.setCursor(0, 2); lcd.print(TempInt / 10 + 2); lcd.print(" "); lcd.print(adress + 10); lcd.print(" "); EEPROM.get(adress + 10, date); lcd.print(date); 
-         lcd.setCursor(0, 3); lcd.print("                  "); 
-        lcd.setCursor(0, 3); lcd.print(TempInt / 10 + 3); lcd.print(" "); lcd.print(adress + 20); lcd.print(" "); EEPROM.get(adress + 20, date); lcd.print(date);
-      }
+        lcd.setCursor(0, 1); lcd.print("                    ");
+        if (TempInt / 10 + 1 <= maximumaantalbeurtenperdag) {
+          lcd.setCursor(0, 1); lcd.print(TempInt / 10 + 1); lcd.print(" "); lcd.print(adress); lcd.print(" "); EEPROM.get(adress, date); lcd.print(date);
 
+        } 
+        lcd.setCursor(0, 2); lcd.print("                    ");
+        if (TempInt / 10 + 2 <= maximumaantalbeurtenperdag) {
+          lcd.setCursor(0, 2); lcd.print(TempInt / 10 + 2); lcd.print(" "); lcd.print(adress + 10); lcd.print(" "); EEPROM.get(adress + 10, date); lcd.print(date);
+        }
+        lcd.setCursor(0, 3); lcd.print("                  ");
+        if (TempInt / 10 + 3 <= maximumaantalbeurtenperdag) {
+          lcd.setCursor(0, 3); lcd.print(TempInt / 10 + 3); lcd.print(" "); lcd.print(adress + 20); lcd.print(" "); EEPROM.get(adress + 20, date); lcd.print(date);
+
+        }
+      }
 
 
       if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
