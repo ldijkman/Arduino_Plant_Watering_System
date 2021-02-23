@@ -285,6 +285,10 @@ void setup () {
   backlightstart = millis();          // load millis() in backlightstart
 
   lcd.clear();
+
+  // they say eeprom life 100 thousand writes
+  // say i write/erase a byte 4 times a day = 25 thousand days = 68 Years
+  //
   for (int i = 800 ; i < EEPROM.length() ; i++) {   // erase eprom water start times
     lcd.setCursor(0, 1);
     lcd.print("Erase Water times");
@@ -1247,7 +1251,7 @@ void loop () {
         if (TempInt / 10 + 1 <= maximumaantalbeurtenperdag) {
           lcd.setCursor(0, 1); lcd.print(TempInt / 10 + 1); lcd.print(" "); lcd.print(adress); lcd.print(" "); EEPROM.get(adress, date); lcd.print(date);
 
-        } 
+        }
         lcd.setCursor(0, 2); lcd.print("                    ");
         if (TempInt / 10 + 2 <= maximumaantalbeurtenperdag) {
           lcd.setCursor(0, 2); lcd.print(TempInt / 10 + 2); lcd.print(" "); lcd.print(adress + 10); lcd.print(" "); EEPROM.get(adress + 10, date); lcd.print(date);
@@ -1605,6 +1609,9 @@ void loop () {
 
   if (now.hour() == 23 && now.minute() == 59 && now.second() >= 59) {
     lcd.clear();
+    // they say eeprom life 100 thousand writes
+    // say i write/erase a byte 4 times a day = 25 thousand days = 68 Years
+    //
     for (int i = 800 ; i < EEPROM.length() ; i++) {   // erase eprom water start times
       lcd.setCursor(3, 2);
       lcd.print("Erase "); lcd.print(i);
