@@ -10,8 +10,9 @@
       menu time / date set
   Done, menu eeprom erase      No / Yes   factory settings reset & reboot
       menu software reboot   No / Yes
- half done, prints log to serial monitor,     menu's info => at wich times a wateringjob started today
-      menu reset watering counter
+ half done, prints log to serial monitor,     menu's info => at wich times a wateringjob started today, watering start times saved to eeprom
+ 
+      running out off space, move 2 mega??? would be nice to save dayly watering times to a daymontyear.txt file on a sdcard
 
            a bit of copy, paste, modify from http://www.sticker.tk/forum/index.php?action=view&id=296
                                              http://www.sticker.tk/forum/index.php?action=view&id=299
@@ -39,10 +40,6 @@
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 */
 
-//
-// kan makkelijker met gewone delays instead of millis();
-// maar dan staat alles stil als je bijvoorbeeld een delay van 10 minuten hebt
-// gebeurt er niks gedurende die 10 minuten
 //
 // it all started with a Question from Jo
 // Jo de Martelaer Arduino UNO / NANO WaterGift
