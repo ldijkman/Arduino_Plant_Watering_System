@@ -1237,14 +1237,17 @@ void loop () {
       float rval;
       if ( rval = read_rotary() ) {
         TempInt = TempInt + (rval * 10);        // 10  steps
-        if (TempInt <= 0) TempInt = 0;       // minimal backlightofftimeout 1 minutes
+        if (TempInt <= 0) TempInt = 0;          
         // if (TempInt >= maximumaantalbeurtenperdag) TempInt = maximumaantalbeurtenperdag;       // minimal backlightofftimeout 1 minutes
         TempLong = millis();  //  load current millis() into TempLong
         char date[10] = "hh:mm:ss";  // maybe to eprom
         int adress = 810 + TempInt;
-        lcd.setCursor(0, 1); lcd.print(TempInt / 10 + 1); lcd.print(" "); lcd.print(adress); lcd.print(" "); EEPROM.get(adress, date); lcd.print(date); lcd.print("        ");
-        lcd.setCursor(0, 2); lcd.print(TempInt / 10 + 2); lcd.print(" "); lcd.print(adress + 10); lcd.print(" "); EEPROM.get(adress + 10, date); lcd.print(date); lcd.print("       ");
-        lcd.setCursor(0, 3); lcd.print(TempInt / 10 + 3); lcd.print(" "); lcd.print(adress + 20); lcd.print(" "); EEPROM.get(adress + 20, date); lcd.print(date); lcd.print("       ");
+          lcd.setCursor(0, 1); lcd.print("                    "); 
+        lcd.setCursor(0, 1); lcd.print(TempInt / 10 + 1); lcd.print(" "); lcd.print(adress); lcd.print(" "); EEPROM.get(adress, date); lcd.print(date); 
+       lcd.setCursor(0, 2); lcd.print("                    "); 
+       lcd.setCursor(0, 2); lcd.print(TempInt / 10 + 2); lcd.print(" "); lcd.print(adress + 10); lcd.print(" "); EEPROM.get(adress + 10, date); lcd.print(date); 
+         lcd.setCursor(0, 3); lcd.print("                  "); 
+        lcd.setCursor(0, 3); lcd.print(TempInt / 10 + 3); lcd.print(" "); lcd.print(adress + 20); lcd.print(" "); EEPROM.get(adress + 20, date); lcd.print(date);
       }
 
 
