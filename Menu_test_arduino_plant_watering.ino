@@ -13,10 +13,11 @@
   Done, menu's info => at wich times a wateringjob started today, watering start times saved to eeprom for day log
 
 
-      running out off space, move 2 mega??? would be nice to save dayly watering times to a day-month-year.txt file on a SDcard
+      running out off space on NANO / UNO, move 2 mega??? would be nice to save dayly watering times to a day-month-year.txt file on a SDcard
       on mega2560 only 12% / 15%  resources used
       // https://www.google.com/search?q=aliexpress+mega+2560+pro+mini
       // https://www.google.com/search?q=aliexpress+mega+2560
+      // or move to ESP32
 
            a bit of copy, paste, modify from http://www.sticker.tk/forum/index.php?action=view&id=296
                                              http://www.sticker.tk/forum/index.php?action=view&id=299
