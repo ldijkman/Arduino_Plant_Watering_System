@@ -150,6 +150,8 @@ byte Calibrate_Sensors = 1;
 byte eepromerase = 1;
 long loopspeed;
 
+char Clearline = "                    ";  // 20 spaces to clear a line (saves some programming space maybe)
+
 
 
 // rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
@@ -322,9 +324,9 @@ void loop () {
 
   //blinknodelay_flag => likely there is a bit somewhere that does the same so it could be done with less code,
   //or maybe something with timer1 bitread or isr to set a flag
-  currentMillis = millis();
-  if (currentMillis - previousMillis >= 1000) {     //binknodelay example but not blink a LED, but set a flag => 1 second on, 1 second off
-    previousMillis = currentMillis;
+
+  if (millis() - previousMillis >= 500) {     //binknodelay example but not blink a LED, but set a flag => 1 second on, 1 second off
+    previousMillis = millis();
     if (blinknodelay_flag == 0) {
       blinknodelay_flag = 1;                       // used for backgroundlight blink when maxcount
     } else {                                       // part off text blink when time not in range for watering
@@ -354,7 +356,7 @@ void loop () {
         lcd.setCursor(0, 0);
         lcd.print(F("Ok Backlight ON     "));
         lcd.setCursor(0, 1);
-        lcd.print(F("                    "));
+        lcd.print(Clearline);
         lcd.setCursor(0, 2);
         lcd.print(F("   Keep pressed?    "));
         lcd.setCursor(0, 3);
@@ -367,7 +369,7 @@ void loop () {
         lcd.setCursor(0, 0);
         lcd.print(F("Ok, We are in Menu  "));
         lcd.setCursor(0, 1);
-        lcd.print(F("                    "));
+        lcd.print(Clearline);
         lcd.setCursor(0, 2);
         lcd.print(F("For Entering Menu   "));
         lcd.setCursor(0, 3);
@@ -1255,16 +1257,16 @@ void loop () {
         TempLong = millis();  //  load current millis() into TempLong
         char date[10] = "hh:mm:ss";  // maybe to eprom
         int adress = 810 + TempInt;
-        lcd.setCursor(0, 1); lcd.print("                    ");
+        lcd.setCursor(0, 1); lcd.print(Clearline);
         if (TempInt / 10 + 1 <= maximumaantalbeurtenperdag) {
           lcd.setCursor(0, 1); lcd.print(TempInt / 10 + 1); lcd.print(" "); lcd.print(adress); lcd.print(" "); EEPROM.get(adress, date); lcd.print(date);
 
         }
-        lcd.setCursor(0, 2); lcd.print("                    ");
+        lcd.setCursor(0, 2); lcd.print(Clearline);
         if (TempInt / 10 + 2 <= maximumaantalbeurtenperdag) {
           lcd.setCursor(0, 2); lcd.print(TempInt / 10 + 2); lcd.print(" "); lcd.print(adress + 10); lcd.print(" "); EEPROM.get(adress + 10, date); lcd.print(date);
         }
-        lcd.setCursor(0, 3); lcd.print("                  ");
+        lcd.setCursor(0, 3); lcd.print(Clearline);
         if (TempInt / 10 + 3 <= maximumaantalbeurtenperdag) {
           lcd.setCursor(0, 3); lcd.print(TempInt / 10 + 3); lcd.print(" "); lcd.print(adress + 20); lcd.print(" "); EEPROM.get(adress + 20, date); lcd.print(date);
 
@@ -1571,7 +1573,7 @@ void loop () {
     }
   }
 
-  if (watergiftcounter <= maximumaantalbeurtenperdag || blinknodelay_flag == 1) {                        // part off blink when time not ok for watering
+  if (blinknodelay_flag == 1) {                        // part off blink when time not ok for watering
     lcd.setCursor(16, 2);
     lcd.print("    "); // erase the last part of line of text  = erase =>   Hour
     lcd.setCursor(0, 2);
