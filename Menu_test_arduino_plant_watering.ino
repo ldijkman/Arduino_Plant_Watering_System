@@ -974,6 +974,7 @@ void loop () {
       if ( rval = read_rotary() ) {
         maximumaantalbeurtenperdag = maximumaantalbeurtenperdag + (rval);          // 1  step
         if (maximumaantalbeurtenperdag <= 2) maximumaantalbeurtenperdag = 2;       // minimal maximumaantalbeurtenperdag
+        if (maximumaantalbeurtenperdag >= 20) maximumaantalbeurtenperdag = 20;       // eeprom not beyond 810 to 1020
         TempLong = millis();  //  load current millis() into TempLong
         lcd.setCursor(9, 2);
         lcd.print(maximumaantalbeurtenperdag);
