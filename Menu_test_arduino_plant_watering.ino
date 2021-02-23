@@ -10,8 +10,8 @@
       menu time / date set
   Done, menu eeprom erase      No / Yes   factory settings reset & reboot
       menu software reboot   No / Yes
- half done, prints log to serial monitor,     menu's info => at wich times a wateringjob started today, watering start times saved to eeprom
- 
+  half done, prints log to serial monitor,     menu's info => at wich times a wateringjob started today, watering start times saved to eeprom
+
       running out off space, move 2 mega??? would be nice to save dayly watering times to a daymontyear.txt file on a sdcard
 
            a bit of copy, paste, modify from http://www.sticker.tk/forum/index.php?action=view&id=296
@@ -283,6 +283,14 @@ void setup () {
 
   backlightstart = millis();          // load millis() in backlightstart
 
+  lcd.clear();
+  for (int i = 800 ; i < EEPROM.length() ; i++) {   // erase eprom water start times
+    lcd.setCursor(0, 1);
+    lcd.print("Erase Water times");
+    lcd.setCursor(5, 2);
+    lcd.print(i);
+    EEPROM.write(i, 0);                             // erase eprom water start times
+  }
 }
 
 
@@ -1170,11 +1178,11 @@ void loop () {
         while (SetButton() == LOW) {
           /*wait for button released*/
         }
-        menu_nr = 11;
+        menu_nr = 9;
         lcd.clear();
 
         EEPROM.get(50, TempInt);                                   // limmited write to eeprom = read is unlimmited
-        if (pauze_after_watering != TempInt) {            // only write to eeprom if value is different
+        if (backlightofftimeout != TempInt) {            // only write to eeprom if value is different
           EEPROM.put(50, backlightofftimeout);            // put already checks if val is needed to write
           lcd.setCursor(0, 0);
           lcd.print(F("Saving to EEPROM"));
@@ -1196,6 +1204,63 @@ void loop () {
 
       }
     }// end menu_nr 8
+
+
+
+
+
+
+
+    // 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9
+    // wateringtimeslog wateringtimeslog wateringtimeslog wateringtimeslog wateringtimeslog wateringtimeslog wateringtimeslog wateringtimeslog
+    TempLong = millis();  //  load current millis() into TempLong
+    if (menu_nr == 9) {
+
+      lcd.setCursor(0, 0);
+      lcd.print(F("9 wateringtime log V"));
+      char date[10] = "hh:mm:ss";  // maybe to eprom
+      lcd.setCursor(0, 1); lcd.print("1 810 "); EEPROM.get(810, date); lcd.print(date); lcd.print("    ");
+      lcd.setCursor(0, 2); lcd.print("2 820 "); EEPROM.get(820, date); lcd.print(date); lcd.print("    ");
+      lcd.setCursor(0, 3); lcd.print("3 830 "); EEPROM.get(830, date); lcd.print(date); lcd.print("    ");
+      TempInt = 0;
+    }
+    while (menu_nr == 9) {
+      lcd.setCursor(18, 3);
+      if ((60 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
+      lcd.print(60 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
+      if ((millis() - TempLong)  > 60000) {
+        delay(1000);  // want to see the zero 0
+        TimeOut();
+        break;
+      }
+
+      float rval;
+      if ( rval = read_rotary() ) {
+        TempInt = TempInt + (rval * 10);        // 10  steps
+        if (TempInt <= 0) TempInt = 0;       // minimal backlightofftimeout 1 minutes
+        // if (TempInt >= maximumaantalbeurtenperdag) TempInt = maximumaantalbeurtenperdag;       // minimal backlightofftimeout 1 minutes
+        TempLong = millis();  //  load current millis() into TempLong
+        char date[10] = "hh:mm:ss";  // maybe to eprom
+        int adress = 810 + TempInt;
+        lcd.setCursor(0, 1); lcd.print(TempInt / 10 + 1); lcd.print(" "); lcd.print(adress); lcd.print(" "); EEPROM.get(adress, date); lcd.print(date); lcd.print("        ");
+        lcd.setCursor(0, 2); lcd.print(TempInt / 10 + 2); lcd.print(" "); lcd.print(adress + 10); lcd.print(" "); EEPROM.get(adress + 10, date); lcd.print(date); lcd.print("       ");
+        lcd.setCursor(0, 3); lcd.print(TempInt / 10 + 3); lcd.print(" "); lcd.print(adress + 20); lcd.print(" "); EEPROM.get(adress + 20, date); lcd.print(date); lcd.print("       ");
+      }
+
+
+
+      if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+        while (SetButton() == LOW) {
+          /*wait for button released*/
+        }
+        menu_nr = 11;
+        lcd.clear();
+      }
+
+
+
+    }// end menu_nr 9
+
 
 
 
@@ -1289,9 +1354,9 @@ void loop () {
     }
     while (menu_nr == 12) {
       lcd.setCursor(18, 3);
-      if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
-      lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
-      if ((millis() - TempLong)  > 10000) {
+      if ((3 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
+      lcd.print(3 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
+      if ((millis() - TempLong)  > 3000) {
         delay(1000);  // want to see the zero 0
         lcd.clear();
         menu_nr = 0;
@@ -1319,10 +1384,10 @@ void loop () {
     Serial.println("");
     Serial.println("watering start times today");
     for (int i = 0; i < watergiftcounter; i++) {
-      int adress = 800 + ((i+1) * 10);
+      int adress = 800 + ((i + 1) * 10);
       char date[10] = "hh:mm:ss";  // maybe to eprom
-      if (i+1 <= maximumaantalbeurtenperdag) {
-        Serial.print(i+1); Serial.print(" "); Serial.print(adress); Serial.print(" "); EEPROM.get(adress, date); Serial.println(date);
+      if (i + 1 <= maximumaantalbeurtenperdag) {
+        Serial.print(i + 1); Serial.print(" "); Serial.print(adress); Serial.print(" "); EEPROM.get(adress, date); Serial.println(date);
       }
     }
     Serial.println("end");
@@ -1528,10 +1593,18 @@ void loop () {
 
 
   if (now.hour() == 23 && now.minute() == 59 && now.second() >= 59) {
+    lcd.clear();
+    for (int i = 800 ; i < EEPROM.length() ; i++) {   // erase eprom water start times
+      lcd.setCursor(3, 2);
+      lcd.print("Erase "); lcd.print(i);
+      EEPROM.write(i, 0);                             // erase eprom water start times
+    }
+
+    watergiftcounter = 0; // if you trust the millis(); 49-50 days overflow       comment out the line // asm volatile("jmp 0");
+
     asm volatile("jmp 0");                                              // end of day reset/reboot arduino //start the day with a fresh millis() counter
     // no worry's about millis overflow every 50 days
     // and resets watergiftcounter
-    watergiftcounter = 0; // if you trust the millis(); 49-50 days overflow       comment out the line // asm volatile("jmp 0");
   }
 
 
