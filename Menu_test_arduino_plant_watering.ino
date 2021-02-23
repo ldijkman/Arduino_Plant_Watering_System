@@ -10,7 +10,7 @@
       menu time / date set
   Done, menu eeprom erase      No / Yes   factory settings reset & reboot
       menu software reboot   No / Yes
-  half done, prints log to serial monitor,     menu's info => at wich times a wateringjob started today, watering start times saved to eeprom
+  Done, menu's info => at wich times a wateringjob started today, watering start times saved to eeprom for day log
 
       running out off space, move 2 mega??? would be nice to save dayly watering times to a daymontyear.txt file on a sdcard
 
