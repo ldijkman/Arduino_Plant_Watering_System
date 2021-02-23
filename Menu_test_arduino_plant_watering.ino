@@ -6,11 +6,11 @@
 
    Rotary encoder menu mostly working
    few more menu items i would like to add
-      menu  set backlight_time
+  Done, menu  set backlight_time
       menu time / date set
   Done, menu eeprom erase      No / Yes   factory settings reset & reboot
       menu software reboot   No / Yes
-      menu's parameter info => at wich times a wateringjob started today
+ half done, prints log to serial monitor,     menu's info => at wich times a wateringjob started today
       menu reset watering counter
 
            a bit of copy, paste, modify from http://www.sticker.tk/forum/index.php?action=view&id=296
@@ -1479,10 +1479,10 @@ void loop () {
   if (blinknodelay_flag == 0) {                          // part off blink when time not ok for watering
     lcd.setCursor(0, 2);
     if (now.hour() < start_hour) {
-      lcd.print("OFF, Time < "); lcd.print(start_hour); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
+      lcd.print(F("OFF, Time < ")); lcd.print(start_hour); lcd.print(F(" Hour"));  // time not in range for watering, let the plants sleep
     }
     if (now.hour() >= end_hour) {
-      lcd.print("OFF, Time >= "); lcd.print(end_hour); lcd.print(" Hour");  // time not in range for watering, let the plants sleep
+      lcd.print(F("OFF, Time >= ")); lcd.print(end_hour); lcd.print(F(" Hour"));  // time not in range for watering, let the plants sleep
     }
   }
 
@@ -1490,9 +1490,9 @@ void loop () {
     lcd.setCursor(16, 2);
     lcd.print("    "); // erase the last part of line of text  = erase =>   Hour
     lcd.setCursor(0, 2);
-    lcd.print("count=");
+    lcd.print(F("count="));
     lcd.print(watergiftcounter);
-    lcd.print(" pauze=");
+    lcd.print(F(" pauze="));
     lcd.print(pauzetimer / 1000);
     lcd.print(" ");
   }
