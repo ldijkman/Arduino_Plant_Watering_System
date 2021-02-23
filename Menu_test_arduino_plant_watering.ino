@@ -1324,7 +1324,9 @@ void loop () {
     for (int i = 0; i < watergiftcounter; i++) {
       int adress = 800 + ((i+1) * 10);
       char date[10] = "hh:mm:ss";  // maybe to eprom
-      Serial.print(i+1); Serial.print(" "); Serial.print(adress); Serial.print(" "); EEPROM.get(adress, date); Serial.println(date);
+      if (i+1 <= maximumaantalbeurtenperdag) {
+        Serial.print(i+1); Serial.print(" "); Serial.print(adress); Serial.print(" "); EEPROM.get(adress, date); Serial.println(date);
+      }
     }
     Serial.println("end");
     Serial.println("");
