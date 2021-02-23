@@ -1243,7 +1243,9 @@ void loop () {
       if ( rval = read_rotary() ) {
         TempInt = TempInt + (rval * 10);        // 10  steps
         if (TempInt <= 0) TempInt = 0;
-        // if (TempInt >= maximumaantalbeurtenperdag) TempInt = maximumaantalbeurtenperdag;       // minimal backlightofftimeout 1 minutes
+        if (TempInt >= (maximumaantalbeurtenperdag*10)-30) TempInt = (maximumaantalbeurtenperdag*10)-30;  
+            Serial.println(TempInt);
+    
         TempLong = millis();  //  load current millis() into TempLong
         char date[10] = "hh:mm:ss";  // maybe to eprom
         int adress = 810 + TempInt;
