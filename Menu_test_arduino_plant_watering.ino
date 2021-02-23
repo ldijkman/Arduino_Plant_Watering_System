@@ -1245,9 +1245,9 @@ void loop () {
       if ( rval = read_rotary() ) {
         TempInt = TempInt + (rval * 10);        // 10  steps
         if (TempInt <= 0) TempInt = 0;
-        if (TempInt >= (maximumaantalbeurtenperdag*10)-30) TempInt = (maximumaantalbeurtenperdag*10)-30;  
-            Serial.println(TempInt);
-    
+        if (TempInt >= (maximumaantalbeurtenperdag * 10) - 30) TempInt = (maximumaantalbeurtenperdag * 10) - 30;
+        Serial.println(TempInt);
+
         TempLong = millis();  //  load current millis() into TempLong
         char date[10] = "hh:mm:ss";  // maybe to eprom
         int adress = 810 + TempInt;
@@ -1567,7 +1567,7 @@ void loop () {
     }
   }
 
-  if (blinknodelay_flag == 1) {                          // part off blink when time not ok for watering
+  if (watergiftcounter <= maximumaantalbeurtenperdag || blinknodelay_flag == 1) {                        // part off blink when time not ok for watering
     lcd.setCursor(16, 2);
     lcd.print("    "); // erase the last part of line of text  = erase =>   Hour
     lcd.setCursor(0, 2);
