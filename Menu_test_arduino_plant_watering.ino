@@ -177,7 +177,7 @@ byte blinknodelay_flag;                         // a blink flag that is 1 second
 
 int counter;
 
-char watering_times[25][8] = {"1:00:00", "2:00:00", "3:00:00", "4:00:00", "5:00:00", "6:00:00", "7:00:00"};  // maybe to eprom
+
 
 byte exitflag = 0;
 
@@ -576,6 +576,7 @@ void loop () {
           EEPROM.put(20, wet_sensor_two);
           lcd.clear();
           delay(500); // user gets a better experience switch to next screen?
+          Calibrate_Sensors = 3;
           break;
         }
       }
@@ -1311,12 +1312,23 @@ void loop () {
 
   DateTime now = rtc.now();
 
+
+
   second_now = now.second();
   if (last_second != second_now) {       // only do this once each second
 
     last_second = second_now;
-
-
+    Serial.println("///////////////////////////////////////");
+    Serial.println("");
+    Serial.println("watering start times today");
+    for (int i = 0; i < watergiftcounter; i++) {
+      int adress = 800 + ((i+1) * 10);
+      char date[10] = "hh:mm:ss";  // maybe to eprom
+      Serial.print(i+1); Serial.print(" "); Serial.print(adress); Serial.print(" "); EEPROM.get(adress, date); Serial.println(date);
+    }
+    Serial.println("end");
+    Serial.println("");
+    Serial.println("////////////////////////////////////////");
 
     Serial.print("millis() "); Serial.println(millis());
     Serial.println("");
@@ -1404,6 +1416,12 @@ void loop () {
             starttime = millis();                              // save starttime millis only once
             ValveStatus = 1;                                   // next time whe do no get here because valvestatus is now 1
             watergiftcounter = watergiftcounter + 1;
+            int adress = 800 + (watergiftcounter * 10);
+            DateTime now = rtc.now();
+            char date[10] = "hh:mm:ss";  // maybe to eprom
+            rtc.now().toString(date);
+            EEPROM.put(adress, date);           // write starttime to eeprom 810 820 830 840 ....
+            //   Serial.println("date");
           }
         }
       }
