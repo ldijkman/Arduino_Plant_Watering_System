@@ -6,13 +6,14 @@
 
    Rotary encoder menu mostly working
    few more menu items i would like to add
+   
+   menu time / date set
   Done, menu  set backlight_time
-      menu time / date set
-  Done, menu eeprom erase      No / Yes   factory settings reset & reboot
-      menu software reboot   No / Yes
+  Done, menu eeprom erase,      No / Yes   factory settings reset & reboot
   Done, menu's info => at wich times a wateringjob started today, watering start times saved to eeprom for day log
 
-      running out off space, move 2 mega??? would be nice to save dayly watering times to a daymontyear.txt file on a sdcard
+
+      running out off space, move 2 mega??? would be nice to save dayly watering times to a day-month-year.txt file on a SDcard
 
            a bit of copy, paste, modify from http://www.sticker.tk/forum/index.php?action=view&id=296
                                              http://www.sticker.tk/forum/index.php?action=view&id=299
