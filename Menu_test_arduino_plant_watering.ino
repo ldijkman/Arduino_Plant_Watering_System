@@ -150,7 +150,7 @@ byte Calibrate_Sensors = 1;
 byte eepromerase = 1;
 long loopspeed;
 
-char Clearline = "                    ";  // 20 spaces to clear a line (saves some programming space maybe)
+char Clearline [20]= "                    ";  // 20 spaces to clear a line (saves some programming space maybe)
 
 
 
