@@ -288,7 +288,7 @@ void setup () {
 
   // they say eeprom life 100 thousand writes
   // say i write/erase a byte 4 times a day = 25 thousand days = 68 Years
-  //
+  // could also use i2c eeprom that is on the ds3231 rtc board wich i think has 1 milion writes, RTC DS3231 with AT24C32 eeprom
   for (int i = 800 ; i < EEPROM.length() ; i++) {   // erase eprom water start times
     lcd.setCursor(0, 1);
     lcd.print("Erase Water times");
@@ -1613,7 +1613,7 @@ void loop () {
     lcd.clear();
     // they say eeprom life 100 thousand writes
     // say i write/erase a byte 4 times a day = 25 thousand days = 68 Years
-    //
+    // could also use i2c eeprom that is on the ds3231 rtc board wich i think has 1 milion writes, RTC DS3231 with AT24C32 eeprom
     for (int i = 800 ; i < EEPROM.length() ; i++) {   // erase eprom water start times
       lcd.setCursor(3, 2);
       lcd.print("Erase "); lcd.print(i);
