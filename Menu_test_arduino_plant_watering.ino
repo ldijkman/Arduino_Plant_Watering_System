@@ -1763,7 +1763,31 @@ void readsensors() {
 
 }
 
+/*
+ * #define PAUSE  500            // Set at top of source code file
+// some code...
+// https://forum.arduino.cc/index.php?topic=141049.msg2332401#msg2332401
+  FlashMessage("Game Score", 5, 0, 5);  // Set the message to column 5, row 0, and flash 5 times.
+ 
 
+// *********************************************************************
+// https://forum.arduino.cc/index.php?topic=141049.msg2332401#msg2332401
+void FlashMessage(char *msg, int col, int row, int repeat)
+{
+  char temp[] = "                ";   // Enough spaces to fill one display line
+
+  lcd.setCursor(col, row);
+  lcd.print(msg);
+  for (int i = 0; i < repeat; i++) {
+    lcd.setCursor(col, row);
+    lcd.print(temp);
+    delay(PAUSE);
+    lcd.setCursor(col, row);
+    lcd.print(msg);
+    delay(PAUSE);
+  }
+}
+ */
 // Een Heitje voor een karweitje
 // A Penny for Sharing My Thoughts?
 // http://www.paypal.me/LDijkman
