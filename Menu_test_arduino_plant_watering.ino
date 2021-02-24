@@ -101,7 +101,7 @@
 
 // parts list:
 // Uno            https://www.google.com/search?q=aliexpress+arduino+uno
-// or
+// or a nano  1 dollar?
 // Nano           https://www.google.com/search?q=aliexpress+arduino+nano
 // RTC DS3231     https://www.google.com/search?q=aliexpress+RTC+DS3231
 // i2c LCD 20x4   https://www.google.com/search?q=aliexpress+LCD+20x4+i2c
@@ -249,11 +249,11 @@ void setup () {
 
 
   // DO NEXT ONLY ONCE
-  // first run ??? write some val to eeprom if value at eepromadres 666 not is 666
-  // if this is first run then val will not be 666 at eeprom adres 666
+  // first run ??? write some val to eeprom if value at eepromadres 90 not is 666
+  // if this is first run then val will not be 666 at eeprom adres 90
   // so next will be run
-  EEPROM.get(666, TempInt);                                  // read eeprom adress 666 into TempInt
-  if (TempInt != 666) {                                     // IF this is the first run THEN val at eeprom adres 666 is not 666 ???
+  EEPROM.get(90, TempInt);                                  // read eeprom adress 90 into TempInt
+  if (TempInt != 666) {                                     // IF this is the first run THEN val at eeprom adres 90 is not 666 ???
     EEPROM.put(0, moistureforstartwatering);
     EEPROM.put(5, dry_sensor_one);
     EEPROM.put(10, wet_sensor_one);
@@ -267,7 +267,7 @@ void setup () {
     EEPROM.put(50, backlightofftimeout);
     //  EEPROM.put(55, Variable-Here);
     //  EEPROM.put(60, Variable-Here);
-    EEPROM.put(666, 666);                 // ONLY ONCE, Make His Mark, set eepromadres 666 to val 666 no need to call / run this anymore in future
+    EEPROM.put(90, 666);                 // ONLY ONCE, Make His Mark, set eepromadres 666 to val 666 no need to call / run this anymore in future
 
     lcd.clear();
     lcd.setCursor(0, 0);
@@ -313,7 +313,7 @@ void setup () {
   // say i write/erase a byte 4 times a day = 25 thousand days = 68 Years
   // could also use i2c eeprom that is on the ds3231 rtc board wich i think has 1 milion writes, RTC DS3231 with AT24C32 eeprom
   // https://www.google.com/search?q=AT24C32+pdf
-  for (int i = 800 ; i < EEPROM.length() ; i++) {   // erase eprom water start times
+  for (int i = 100 ; i < EEPROM.length() ; i++) {   // erase eprom water start times
     lcd.setCursor(0, 1);
     lcd.print("Erase Water times");
     lcd.setCursor(5, 2);
@@ -999,7 +999,7 @@ void loop () {
       if ( rval = read_rotary() ) {
         maximumaantalbeurtenperdag = maximumaantalbeurtenperdag + (rval);          // 1  step
         if (maximumaantalbeurtenperdag <= 2) maximumaantalbeurtenperdag = 2;       // minimal maximumaantalbeurtenperdag
-        if (maximumaantalbeurtenperdag >= 20) maximumaantalbeurtenperdag = 20;       // eeprom not beyond 810 to 1020
+        if (maximumaantalbeurtenperdag >= 90) maximumaantalbeurtenperdag = 90;       // eeprom 110 to 1010 not beyond  1020 otherwise overwrites 0to100
         TempLong = millis();  //  load current millis() into TempLong
         lcd.setCursor(9, 2);
         lcd.print(maximumaantalbeurtenperdag);
@@ -1250,9 +1250,9 @@ void loop () {
       lcd.setCursor(0, 0);
       lcd.print(F("9 wateringtime log V"));
       char date[10] = "hh:mm:ss";  // maybe to eprom
-      lcd.setCursor(0, 1); lcd.print("1  "); EEPROM.get(810, date); lcd.print(date); lcd.print("    ");
-      lcd.setCursor(0, 2); lcd.print("2  "); EEPROM.get(820, date); lcd.print(date); lcd.print("    ");
-      lcd.setCursor(0, 3); lcd.print("3  "); EEPROM.get(830, date); lcd.print(date); lcd.print("    ");
+      lcd.setCursor(0, 1); lcd.print("1  "); EEPROM.get(110, date); lcd.print(date); lcd.print("    ");
+      lcd.setCursor(0, 2); lcd.print("2  "); EEPROM.get(120, date); lcd.print(date); lcd.print("    ");
+      lcd.setCursor(0, 3); lcd.print("3  "); EEPROM.get(130, date); lcd.print(date); lcd.print("    ");
       TempInt = 0;
     }
     while (menu_nr == 9) {
@@ -1274,7 +1274,7 @@ void loop () {
 
         TempLong = millis();  //  load current millis() into TempLong
         char date[10] = "hh:mm:ss";  // maybe to eprom
-        int adress = 810 + TempInt;
+        int adress = 110 + TempInt;
         lcd.setCursor(0, 1); lcd.print("                    ");
         if (TempInt / 10 + 1 <= maximumaantalbeurtenperdag) {
           lcd.setCursor(0, 1); lcd.print(TempInt / 10 + 1); lcd.print("  "); /*lcd.print(adress); lcd.print(" ");*/ EEPROM.get(adress, date); lcd.print(date);
@@ -1286,7 +1286,7 @@ void loop () {
         }
         lcd.setCursor(0, 3); lcd.print("                    ");
         if (TempInt / 10 + 3 <= maximumaantalbeurtenperdag) {
-          lcd.setCursor(0, 3); lcd.print(TempInt / 10 + 3); lcd.print("  "); /*lcd.print(adress + 20); lcd.print(" ");*/ EEPROM.get(adress + 20, date); lcd.print(date);
+          lcd.setCursor(0, 3); lcd.print(TempInt / 10 + 3);  EEPROM.get(adress + 20, date); lcd.print(date); lcd.print(" "); lcd.print(adress + 20); lcd.print(" "); /**/
 
         }
       }
@@ -1389,7 +1389,7 @@ void loop () {
         // rtc.adjust(DateTime(year(unix_epoch), month(unix_epoch), day(unix_epoch), hour(unix_epoch), minute(unix_epoch), second(unix_epoch)));
 
         delay(100);
-        
+
         if ((60 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
         lcd.setCursor(18, 3);
         lcd.print(60 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
@@ -1566,7 +1566,7 @@ void loop () {
     Serial.println("");
     Serial.println("watering start times today");
     for (int i = 0; i < watergiftcounter; i++) {
-      int adress = 800 + ((i + 1) * 10);
+      int adress = 100 + ((i + 1) * 10);
       char date[10] = "hh:mm:ss";  // maybe to eprom
       if (i + 1 <= maximumaantalbeurtenperdag) {
         Serial.print(i + 1); Serial.print(" "); Serial.print(adress); Serial.print(" "); EEPROM.get(adress, date); Serial.println(date);
@@ -1662,7 +1662,7 @@ void loop () {
             starttime = millis();                              // save starttime millis only once
             ValveStatus = 1;                                   // next time whe do no get here because valvestatus is now 1
             watergiftcounter = watergiftcounter + 1;
-            int adress = 800 + (watergiftcounter * 10);
+            int adress = 100 + (watergiftcounter * 10);
             DateTime now = rtc.now();
             char date[10] = "hh:mm:ss";  // maybe to eprom
             rtc.now().toString(date);
@@ -1780,7 +1780,7 @@ void loop () {
     // say i write/erase a byte 4 times a day = 25 thousand days = 68 Years
     // could also use i2c eeprom that is on the ds3231 rtc board wich i think has 1 milion writes, RTC DS3231 with AT24C32 eeprom
     // https://www.google.com/search?q=AT24C32+pdf
-    for (int i = 800 ; i < EEPROM.length() ; i++) {   // erase eprom water start times
+    for (int i = 100 ; i < EEPROM.length() ; i++) {   // erase eprom water start times
       lcd.setCursor(3, 2);
       lcd.print("Erase "); lcd.print(i);
       EEPROM.write(i, 0);                             // erase eprom water start times
