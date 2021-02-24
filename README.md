@@ -43,7 +43,7 @@ watering start hour, end hour
 
 parameters / settings changeable and saved in eeprom adress 0 to 90
 
-standalone system, calibrate and adjust sensors possible
+standalone system, calibrate and adjust sensors possible in rotary encoder menu, settings saved to eeprom
 
 software reboot, asm volatile (" jmp 0"); at 23:59:59 to reset wateringcounter and fresh millis(); and erase days wateringtimelog
 
