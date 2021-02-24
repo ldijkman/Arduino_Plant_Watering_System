@@ -369,7 +369,7 @@ void loop () {
     TempLong = millis();  //  load current millis() into TempLong
     while (SetButton() == LOW) {                                   // while setbutton==LOW, pulled up by resistor, LOW is pressed
 
-      if ((millis() - TempLong)  < 5000) {                         // only show this mssage the first 5 seconds
+      if ((millis() - TempLong)  < 3000) {                         // only show this mssage the first 5 seconds
         lcd.setCursor(0, 0);
         lcd.print(F("Ok Backlight ON     "));
         lcd.setCursor(0, 1);
@@ -379,10 +379,10 @@ void loop () {
         lcd.setCursor(0, 3);
         lcd.print(F(" For menu Enter in  "));
         lcd.setCursor(19, 3);
-        lcd.print(5 - (millis() - TempLong) / 1000);              // on LCD countdown until menu system enter
+        lcd.print(3 - (millis() - TempLong) / 1000);              // on LCD countdown until menu system enter
       }
 
-      if ((millis() - TempLong)  > 5000) {                        // after 5 seconds pressed we get into menu system
+      if ((millis() - TempLong)  > 3000) {                        // after 5 seconds pressed we get into menu system
         lcd.setCursor(0, 0);
         lcd.print(F("Ok, We are in Menu  "));
         lcd.setCursor(0, 1);
@@ -1286,7 +1286,7 @@ void loop () {
         }
         lcd.setCursor(0, 3); lcd.print("                    ");
         if (TempInt / 10 + 3 <= maximumaantalbeurtenperdag) {
-          lcd.setCursor(0, 3); lcd.print(TempInt / 10 + 3);  EEPROM.get(adress + 20, date); lcd.print(date); lcd.print(" "); lcd.print(adress + 20); lcd.print(" "); /**/
+          lcd.setCursor(0, 3); lcd.print(TempInt / 10 + 3); lcd.print("  ");  EEPROM.get(adress + 20, date); lcd.print(date); lcd.print(" "); lcd.print(adress + 20); lcd.print(" "); /**/
 
         }
       }
