@@ -47,7 +47,7 @@ standalone system, calibrate and adjust sensors possible in rotary encoder menu,
 
 software reboot, asm volatile (" jmp 0"); at 23:59:59 to reset wateringcounter and fresh millis(); and erase days wateringtimelog
 
-NO PC needed to change parameters / settings
+NO PC needed to change parameters / settings / calibrate sensors
 
 ------
 
