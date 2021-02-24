@@ -409,6 +409,7 @@ void loop () {
     // setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint setpoint
     TempLong = millis();  //  load current millis() into TempLong
     if (menu_nr == 1) {
+      lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print(F("1 Set SwitchPoint %"));
       lcd.setCursor(8, 2);
@@ -1434,12 +1435,10 @@ void loop () {
     TempLong = millis();  //  load current millis() into TempLong
     if (menu_nr == 12) {
       lcd.setCursor(0, 0);
-      lcd.print(F("12 Back To Begin"));
-      lcd.setCursor(0, 1);
-      lcd.print(F("Menu again?"));
+      lcd.print(F("12 Menu again?"));
       lcd.setCursor(3, 2);
       if (backtobegin == 1)lcd.print(F("Yes Menu Again"));
-      if (backtobegin == 2)lcd.print(F("Exit Menu     "));
+      if (backtobegin == 2)lcd.print(F("No Exit Menu  "));
     }
     while (menu_nr == 12) {
 
@@ -1460,7 +1459,7 @@ void loop () {
         if (backtobegin > 2)backtobegin = 1;
         lcd.setCursor(3, 2);
         if (backtobegin == 1)lcd.print(F("Yes Menu Again"));
-        if (backtobegin == 2)lcd.print(F("Exit Menu     "));
+        if (backtobegin == 2)lcd.print(F("No Exit Menu  "));
       }
 
       if (SetButton() == LOW) {        // LOW setbutton is pressed
