@@ -27,13 +27,25 @@ start watering on average startvalue in % of 2 Capacitive Soil Moisture Sensors
 
 Better NOT put the sensors in 1 pot they may influence eachother if in 1 pot
 
-timed duration of watering
+------------
 
-pauzetime after watering, give water time to soak into soil
+timed duration of watering from 2 seconds to ... seconds
 
-watering counter, maximum number of watering a day
+pauzetime after watering, give water time to soak into soil, from 1 minute to ... minutes
 
-software reboot, asm volatile (" jmp 0"); at 23:59:59 to reset wateringcounter and fresh millis();
+watering counter, maximum number of watering a day, upto watering 90 jobs (eeprom steps 10 from 100 to 1000, 1023 eeprom limit)
+
+watering jobs start times saved to eeprom, max 90 a day in LOG (erased at 23:59:59)  
+
+watering start hour, end hour
+
+parameters / settings changeable and saved in eeprom adress 0 to 90
+
+standalone system, calibrate sensors possible
+
+software reboot, asm volatile (" jmp 0"); at 23:59:59 to reset wateringcounter and fresh millis(); and erase days wateringtimelog
+
+------
 
 i do not know if my code is 49-50 day millis(); overflow safe so thats why i do a software reboot
 
