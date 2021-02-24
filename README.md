@@ -1,5 +1,7 @@
 # Arduino Plant Watering System
 Arduino Plant Watering System
+ Arduino Garden watering
+ Arduino crop irrigation
 
 Advanced, Intelligent, Smart, Automated, Automatic
 
