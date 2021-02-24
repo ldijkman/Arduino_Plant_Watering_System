@@ -17,7 +17,7 @@
 
 
       running out off space on NANO / UNO, move 2 mega??? would be nice to save dayly watering times to a day-month-year.txt file on a SDcard
-      NANO, UNO 
+      NANO, UNO
       Sketch uses 30396 bytes (94%) of program storage space. Maximum is 32256 bytes.
       Global variables use 1271 bytes (62%) of dynamic memory, leaving 777 bytes for local variables. Maximum is 2048 bytes.
       on MEGA2560
@@ -164,6 +164,7 @@ byte maximumaantalbeurtenperdag = 8;
 byte Calibrate_Sensors = 1;
 byte eepromerase = 1;
 byte settimedate = 1;
+byte backtobegin = 1;
 
 long loopspeed;
 
@@ -1428,15 +1429,58 @@ void loop () {
 
 
 
-
-
-
-
-
-    // 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12
-    // Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits
+    // 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12
+    // backtobegin backtobegin backtobegin backtobegin backtobegin backtobegin backtobegin backtobegin backtobegin backtobegin backtobegin backtobegin
     TempLong = millis();  //  load current millis() into TempLong
     if (menu_nr == 12) {
+      lcd.setCursor(0, 0);
+      lcd.print(F("12 Back To Begin"));
+      lcd.setCursor(0, 1);
+      lcd.print(F("Menu again?"));
+      lcd.setCursor(3, 2);
+      if (backtobegin == 1)lcd.print(F("Yes Menu Again"));
+      if (backtobegin == 2)lcd.print(F("Exit Menu     "));
+    }
+    while (menu_nr == 12) {
+
+      lcd.setCursor(18, 3);
+      if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
+      lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
+      if ((millis() - TempLong)  > 10000) {
+        delay(1000);  // want to see the zero 0
+        TimeOut();
+        break;
+      }
+
+      float rval;
+      if ( rval = read_rotary() ) {
+        backtobegin  = backtobegin  + rval;
+        TempLong = millis();  //reset innactive time counte
+        if (backtobegin < 1)backtobegin = 2;
+        if (backtobegin > 2)backtobegin = 1;
+        lcd.setCursor(3, 2);
+        if (backtobegin == 1)lcd.print(F("Yes Menu Again"));
+        if (backtobegin == 2)lcd.print(F("Exit Menu     "));
+      }
+
+      if (SetButton() == LOW) {        // LOW setbutton is pressed
+        while (SetButton() == LOW) {
+          /*wait for button released*/
+        }
+        if (backtobegin == 1)menu_nr = 1;
+        if (backtobegin == 2)menu_nr = 15;
+        lcd.clear();
+        delay(250);
+      }
+    }// end menu_nr12
+
+
+
+
+    // 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15
+    // Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits
+    TempLong = millis();  //  load current millis() into TempLong
+    if (menu_nr == 15) {
       lcd.clear();
       DateTime now = rtc.now();
       lcd.setCursor(0, 0);
@@ -1448,7 +1492,7 @@ void loop () {
       lcd.setCursor(0, 3);
       lcd.print(F("Andijk Holland"));
     }
-    while (menu_nr == 12) {
+    while (menu_nr == 15) {
       lcd.setCursor(18, 3);
       if ((3 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
       lcd.print(3 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
