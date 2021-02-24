@@ -91,7 +91,14 @@
 // and connect rotary encoder to +5vdc and GND to 0vdc, -, min, GND, ground, or whatever they call it
 
 
-
+// parts list:
+// Uno            https://www.google.com/search?q=aliexpress+arduino+uno 
+// or
+// Nano           https://www.google.com/search?q=aliexpress+arduino+nano
+// RTC DS3231     https://www.google.com/search?q=aliexpress+RTC+DS3231
+// i2c LCD 20x4   https://www.google.com/search?q=aliexpress+LCD+20x4+i2c
+// 2 sensors      https://www.google.com/search?q=aliexpress+aduino+capacitive+soil+moisture
+// dupont wires or better solder wires for permanent device
 
 
 
