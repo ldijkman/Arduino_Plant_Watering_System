@@ -100,7 +100,8 @@
 // Nano           https://www.google.com/search?q=aliexpress+arduino+nano
 // RTC DS3231     https://www.google.com/search?q=aliexpress+RTC+DS3231
 // i2c LCD 20x4   https://www.google.com/search?q=aliexpress+LCD+20x4+i2c
-// 2 sensors      https://www.google.com/search?q=aliexpress+aduino+capacitive+soil+moisture
+// 2 sensors      https://www.google.com/search?q=aliexpress+aduino+capacitive+soil+moisture+V2
+// capacitive soil moisture sensor, most are V1.2 there is a V2, maybe better?
 // dupont wires or better solder wires for permanent device
 
 
@@ -160,8 +161,9 @@ byte Calibrate_Sensors = 1;
 byte eepromerase = 1;
 long loopspeed;
 
-char Clearline [19]= "                    ";  // 0-19=20 spaces to clear a line (saves some programming space maybe)
-
+// save some programming space? for repeating erase line
+char Clearline [19]= "                    ";  // 0-19 20 spaces to clear a line (saves some programming space maybe)
+// hmmmm, strange 3 line menu sign printed now
 
 
 // rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
