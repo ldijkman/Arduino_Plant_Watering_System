@@ -51,6 +51,10 @@ NO PC needed to change parameters / settings / calibrate sensors
 
 ------
 
+Low Cost, Low Power Consumption.
+
+-------
+
 i do not know if my code is 49-50 day millis(); overflow safe so thats why i do a software reboot
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
