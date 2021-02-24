@@ -29,6 +29,8 @@ Better NOT put the sensors in 1 pot they may influence eachother if in 1 pot
 
 ------------
 
+start watering on soil moisture sensor setpoint, setpoint changeable in rotary encoder menu, and saved to eeprom
+
 timed duration of watering from 2 seconds to ... seconds
 
 pauzetime after watering, give water time to soak into soil, from 1 minute to ... minutes
