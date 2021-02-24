@@ -1242,9 +1242,9 @@ void loop () {
       lcd.setCursor(0, 0);
       lcd.print(F("9 wateringtime log V"));
       char date[10] = "hh:mm:ss";  // maybe to eprom
-      lcd.setCursor(0, 1); lcd.print("1 810 "); EEPROM.get(810, date); lcd.print(date); lcd.print("    ");
-      lcd.setCursor(0, 2); lcd.print("2 820 "); EEPROM.get(820, date); lcd.print(date); lcd.print("    ");
-      lcd.setCursor(0, 3); lcd.print("3 830 "); EEPROM.get(830, date); lcd.print(date); lcd.print("    ");
+      lcd.setCursor(0, 1); lcd.print("1  "); EEPROM.get(810, date); lcd.print(date); lcd.print("    "); 
+      lcd.setCursor(0, 2); lcd.print("2  "); EEPROM.get(820, date); lcd.print(date); lcd.print("    ");
+      lcd.setCursor(0, 3); lcd.print("3  "); EEPROM.get(830, date); lcd.print(date); lcd.print("    ");
       TempInt = 0;
     }
     while (menu_nr == 9) {
@@ -1269,16 +1269,16 @@ void loop () {
         int adress = 810 + TempInt;
         lcd.setCursor(0, 1); lcd.print(Clearline);
         if (TempInt / 10 + 1 <= maximumaantalbeurtenperdag) {
-          lcd.setCursor(0, 1); lcd.print(TempInt / 10 + 1); lcd.print(" "); lcd.print(adress); lcd.print(" "); EEPROM.get(adress, date); lcd.print(date);
+          lcd.setCursor(0, 1); lcd.print(TempInt / 10 + 1); lcd.print("  "); /*lcd.print(adress); lcd.print(" ");*/ EEPROM.get(adress, date); lcd.print(date);
 
         }
         lcd.setCursor(0, 2); lcd.print(Clearline);
         if (TempInt / 10 + 2 <= maximumaantalbeurtenperdag) {
-          lcd.setCursor(0, 2); lcd.print(TempInt / 10 + 2); lcd.print(" "); lcd.print(adress + 10); lcd.print(" "); EEPROM.get(adress + 10, date); lcd.print(date);
+          lcd.setCursor(0, 2); lcd.print(TempInt / 10 + 2); lcd.print("  "); /*lcd.print(adress + 10); lcd.print(" ");*/ EEPROM.get(adress + 10, date); lcd.print(date);
         }
         lcd.setCursor(0, 3); lcd.print(Clearline);
         if (TempInt / 10 + 3 <= maximumaantalbeurtenperdag) {
-          lcd.setCursor(0, 3); lcd.print(TempInt / 10 + 3); lcd.print(" "); lcd.print(adress + 20); lcd.print(" "); EEPROM.get(adress + 20, date); lcd.print(date);
+          lcd.setCursor(0, 3); lcd.print(TempInt / 10 + 3); lcd.print("  "); /*lcd.print(adress + 20); lcd.print(" ");*/ EEPROM.get(adress + 20, date); lcd.print(date);
 
         }
       }
