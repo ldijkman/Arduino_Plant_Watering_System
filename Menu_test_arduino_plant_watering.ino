@@ -168,9 +168,7 @@ byte backtobegin = 1;
 
 long loopspeed;
 
-// save some programming space? for repeating erase line
-char Clearline [19] = "                    "; // 0-19 20 spaces to clear a line (saves some programming space maybe)
-// hmmmm, strange 3 line menu sign printed now
+
 
 
 // rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
@@ -375,7 +373,7 @@ void loop () {
         lcd.setCursor(0, 0);
         lcd.print(F("Ok Backlight ON     "));
         lcd.setCursor(0, 1);
-        lcd.print(Clearline);
+        lcd.print("                    ");
         lcd.setCursor(0, 2);
         lcd.print(F("   Keep pressed?    "));
         lcd.setCursor(0, 3);
@@ -388,7 +386,7 @@ void loop () {
         lcd.setCursor(0, 0);
         lcd.print(F("Ok, We are in Menu  "));
         lcd.setCursor(0, 1);
-        lcd.print(Clearline);
+        lcd.print("                    ");
         lcd.setCursor(0, 2);
         lcd.print(F("For Entering Menu   "));
         lcd.setCursor(0, 3);
@@ -1277,16 +1275,16 @@ void loop () {
         TempLong = millis();  //  load current millis() into TempLong
         char date[10] = "hh:mm:ss";  // maybe to eprom
         int adress = 810 + TempInt;
-        lcd.setCursor(0, 1); lcd.print(Clearline);
+        lcd.setCursor(0, 1); lcd.print("                    ");
         if (TempInt / 10 + 1 <= maximumaantalbeurtenperdag) {
           lcd.setCursor(0, 1); lcd.print(TempInt / 10 + 1); lcd.print("  "); /*lcd.print(adress); lcd.print(" ");*/ EEPROM.get(adress, date); lcd.print(date);
 
         }
-        lcd.setCursor(0, 2); lcd.print(Clearline);
+        lcd.setCursor(0, 2); lcd.print("                    ");
         if (TempInt / 10 + 2 <= maximumaantalbeurtenperdag) {
           lcd.setCursor(0, 2); lcd.print(TempInt / 10 + 2); lcd.print("  "); /*lcd.print(adress + 10); lcd.print(" ");*/ EEPROM.get(adress + 10, date); lcd.print(date);
         }
-        lcd.setCursor(0, 3); lcd.print(Clearline);
+        lcd.setCursor(0, 3); lcd.print("                    ");
         if (TempInt / 10 + 3 <= maximumaantalbeurtenperdag) {
           lcd.setCursor(0, 3); lcd.print(TempInt / 10 + 3); lcd.print("  "); /*lcd.print(adress + 20); lcd.print(" ");*/ EEPROM.get(adress + 20, date); lcd.print(date);
 
@@ -1321,8 +1319,6 @@ void loop () {
     if (menu_nr == 10) {
       lcd.setCursor(0, 0);
       lcd.print(F("10 Set Time / Date"));
-      lcd.setCursor(0, 1);
-      lcd.print(F("not done  yet!!!"));
       lcd.setCursor(7, 2);
       if (settimedate == 1)lcd.print(F(" No   "));
       if (settimedate == 2)lcd.print(F(" Yes  "));
@@ -1355,11 +1351,56 @@ void loop () {
           /*wait for button released*/
         }
         menu_nr = 11;
-        settimedate=1;
         lcd.clear();
         delay(250);
       }
     }// end menu_nr 10
+
+
+
+
+
+
+    if (settimedate == 2) {
+      settimedate = 1;
+      lcd.clear();
+      TempLong = millis();  //  load current millis() into TempLong
+      while (1 == 1) {
+
+        DateTime now = rtc.now();
+
+        lcd.setCursor(0, 0);
+        lcd.print(now.hour());
+        lcd.print(':');
+        if (now.minute() <= 9)lcd.print('0');
+        lcd.print(now.minute());
+        lcd.print(':');
+        if (now.second() <= 9)lcd.print('0');
+        lcd.print(now.second());
+        lcd.print(" ");
+        lcd.print(now.day());
+        lcd.print("-");
+        lcd.print(now.month());
+        lcd.print("-");
+        lcd.print(now.year());
+
+        // rtc.adjust(DateTime(jaar, maand, dag, uur, minuut, seconde));
+        // unix_epoch = timeClient.getEpochTime();    // Get Unix epoch time from the NTP server and set it to rtc
+        // rtc.adjust(DateTime(year(unix_epoch), month(unix_epoch), day(unix_epoch), hour(unix_epoch), minute(unix_epoch), second(unix_epoch)));
+
+        delay(100);
+        
+        if ((60 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
+        lcd.setCursor(18, 3);
+        lcd.print(60 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
+        if ((millis() - TempLong)  > 60000) {
+          delay(1000);  // want to see the zero 0
+          TimeOut();
+          break;
+        }
+      }
+    }
+
 
 
 
