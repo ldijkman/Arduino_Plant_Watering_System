@@ -1365,9 +1365,40 @@ void loop () {
       settimedate = 1;
       lcd.clear();
       TempLong = millis();  //  load current millis() into TempLong
+
+      DateTime now = rtc.now();
+      int uur = now.hour();
+      int minuut = now.minute();
+      int seconde = now.second();
+
+      int dag = now.day();
+      int maand = now.month();
+      int jaar = now.year();
+
       while (1 == 1) {
 
         DateTime now = rtc.now();
+
+        lcd.setCursor(3, 1);
+        lcd.print(uur);
+        lcd.print(" : ");
+        if (minuut <= 9)lcd.print('0');
+        lcd.print(minuut);
+        lcd.print(" : ");
+        if (seconde <= 9)lcd.print('0');
+        lcd.print(seconde);
+
+        lcd.setCursor(3, 2);
+        if (dag <= 9)lcd.print(' ');
+        lcd.print(dag);
+        lcd.print(" - ");
+        if (maand <= 9)lcd.print(' ');
+        lcd.print(maand);
+        lcd.print(" - ");
+        lcd.print(jaar);
+
+        lcd.setCursor(4, 3);
+        lcd.print("Set & Exit");
 
         lcd.setCursor(0, 0);
         lcd.print(now.hour());
@@ -1383,6 +1414,54 @@ void loop () {
         lcd.print(now.month());
         lcd.print("-");
         lcd.print(now.year());
+
+        // uurselect
+        lcd.setCursor(2, 1); lcd.print("["); lcd.setCursor(5, 1); lcd.print("]");
+
+        // minuutselect
+        lcd.setCursor(7, 1); lcd.print("["); lcd.setCursor(10, 1); lcd.print("]");
+
+        // secondeselect
+        lcd.setCursor(12, 1); lcd.print("["); lcd.setCursor(15, 1); lcd.print("]");
+
+
+        // dagselect
+        lcd.setCursor(2, 2); lcd.print("["); lcd.setCursor(5, 2); lcd.print("]");
+
+        // maandselect
+        lcd.setCursor(7, 2); lcd.print("["); lcd.setCursor(10, 2); lcd.print("]");
+
+        // jaarselect
+        lcd.setCursor(12, 2); lcd.print("["); lcd.setCursor(17, 2); lcd.print("]");
+
+        // saveandexitselect
+        lcd.setCursor(3, 3); lcd.print("["); lcd.setCursor(14, 3); lcd.print("]");
+
+
+        delay (500);
+
+
+        // uurselect
+        lcd.setCursor(2, 1); lcd.print(" "); lcd.setCursor(5, 1); lcd.print(" ");
+
+        // minuutselect
+        lcd.setCursor(7, 1); lcd.print(" "); lcd.setCursor(10, 1); lcd.print(" ");
+
+        // secondeselect
+        lcd.setCursor(12, 1); lcd.print(" "); lcd.setCursor(15, 1); lcd.print(" ");
+
+
+        // dagselect
+        lcd.setCursor(2, 2); lcd.print(" "); lcd.setCursor(5, 2); lcd.print(" ");
+
+        // maandselect
+        lcd.setCursor(7, 2); lcd.print(" "); lcd.setCursor(10, 2); lcd.print(" ");
+
+        // jaarselect
+        lcd.setCursor(12, 2); lcd.print(" "); lcd.setCursor(17, 2); lcd.print(" ");
+
+        // saveandexitselect
+        lcd.setCursor(3, 3); lcd.print(" "); lcd.setCursor(14, 3); lcd.print(" ");
 
         // rtc.adjust(DateTime(jaar, maand, dag, uur, minuut, seconde));
         // unix_epoch = timeClient.getEpochTime();    // Get Unix epoch time from the NTP server and set it to rtc
@@ -1562,30 +1641,31 @@ void loop () {
   if (last_second != second_now) {       // only do this once each second
 
     last_second = second_now;
-    Serial.println("///////////////////////////////////////");
-    Serial.println("");
-    Serial.println("watering start times today");
-    for (int i = 0; i < watergiftcounter; i++) {
-      int adress = 100 + ((i + 1) * 10);
-      char date[10] = "hh:mm:ss";  // maybe to eprom
-      if (i + 1 <= maximumaantalbeurtenperdag) {
-        Serial.print(i + 1); Serial.print(" "); Serial.print(adress); Serial.print(" "); EEPROM.get(adress, date); Serial.println(date);
-      }
-    }
-    Serial.println("end");
-    Serial.println("");
-    Serial.println("////////////////////////////////////////");
+    
+    // Serial.println("///////////////////////////////////////");
+    // Serial.println("");
+    // Serial.println("watering start times today");
+    // for (int i = 0; i < watergiftcounter; i++) {
+    //   int adress = 100 + ((i + 1) * 10);
+    //   char date[10] = "hh:mm:ss";  // maybe to eprom
+    //   if (i + 1 <= maximumaantalbeurtenperdag) {
+    //     Serial.print(i + 1); Serial.print(" "); Serial.print(adress); Serial.print(" "); EEPROM.get(adress, date); Serial.println(date);
+    //   }
+    //  }
+    // Serial.println("end");
+    // Serial.println("");
+    // Serial.println("////////////////////////////////////////");
 
-    Serial.print("millis() "); Serial.println(millis());
-    Serial.println("");
+    // Serial.print("millis() "); Serial.println(millis());
+    // Serial.println("");
 
-    Serial.print(daysOfTheWeek[now.dayOfTheWeek()]);
-    Serial.print(" ");
-    Serial.print(now.day(), DEC);
-    Serial.print("-");
-    Serial.print(now.month(), DEC);
-    Serial.print("-");
-    Serial.print(now.year(), DEC);
+    // Serial.print(daysOfTheWeek[now.dayOfTheWeek()]);
+    // Serial.print(" ");
+    // Serial.print(now.day(), DEC);
+    // Serial.print("-");
+    // Serial.print(now.month(), DEC);
+    // Serial.print("-");
+    // Serial.print(now.year(), DEC);
 
 
     lcd.setCursor(0, 0);
@@ -1608,36 +1688,36 @@ void loop () {
     lcd.print(moistureforstartwatering);
     lcd.print(" ");
 
-    Serial.println(' ');
+    // Serial.println(' ');
 
-    Serial.print(now.hour(), DEC);
-    Serial.print(':');
-    Serial.print(now.minute(), DEC);
-    Serial.print(':');
-    Serial.print(now.second(), DEC);
-    Serial.println();
+    // Serial.print(now.hour(), DEC);
+    // Serial.print(':');
+    // Serial.print(now.minute(), DEC);
+    // Serial.print(':');
+    // Serial.print(now.second(), DEC);
+    // Serial.println();
 
-    Serial.print("Temperature: ");
-    Serial.print(rtc.getTemperature());
-    Serial.println(" C");
+    // Serial.print("Temperature: ");
+    // Serial.print(rtc.getTemperature());
+    // Serial.println(" C");
 
-    Serial.println();
-    Serial.print("1 read analogread A0 = "); Serial.println(analogRead(A0));
-    Serial.print("1 read analogread A3 = "); Serial.println(analogRead(A3));
-    Serial.print("100 read analogread A0 = "); Serial.println(sense1);
-    Serial.print("100 read analogread A3 = "); Serial.println(sense2);
-    Serial.print("analogread average = "); Serial.println((sense1 + sense2) / 2);
+    // Serial.println();
+    // Serial.print("1 read analogread A0 = "); Serial.println(analogRead(A0));
+    // Serial.print("1 read analogread A3 = "); Serial.println(analogRead(A3));
+    // Serial.print("100 read analogread A0 = "); Serial.println(sense1);
+    // Serial.print("100 read analogread A3 = "); Serial.println(sense2);
+    // Serial.print("analogread average = "); Serial.println((sense1 + sense2) / 2);
 
 
-    Serial.print("sensor1 "); Serial.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); Serial.println(" % wet");
-    Serial.print("sensor2 "); Serial.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); Serial.println(" % wet");
+    // Serial.print("sensor1 "); Serial.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); Serial.println(" % wet");
+    //  Serial.print("sensor2 "); Serial.print(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)); Serial.println(" % wet");
 
     averageinprocent = (map(sense1, dry_sensor_one, wet_sensor_one, 0, 100) + map(sense2, dry_sensor_two, wet_sensor_two, 0, 100)) / 2;
-    Serial.print("Average "); Serial.print(averageinprocent); Serial.println(" % wet");
+    // Serial.print("Average "); Serial.print(averageinprocent); Serial.println(" % wet");
 
-    Serial.println(' ');
+    // Serial.println(' ');
 
-    Serial.print("averageinprocent = "); Serial.print(averageinprocent); Serial.print(" switchpoint = "); Serial.println(moistureforstartwatering);
+    //Serial.print("averageinprocent = "); Serial.print(averageinprocent); Serial.print(" switchpoint = "); Serial.println(moistureforstartwatering);
     lcd.setCursor(0, 1);
     lcd.print("S1=");
     lcd.print(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100)); lcd.print("   ");
@@ -1696,8 +1776,8 @@ void loop () {
       if (watergifttimer <= 0)watergifttimer = 0;
       lcd.print(watergifttimer);
       lcd.print("      ");
-      //Serial.print("watergifttimer ");
-      //Serial.println(watergifttimer);
+      // Serial.print("watergifttimer ");
+      // Serial.println(watergifttimer);
     }
   }
 
@@ -1752,8 +1832,8 @@ void loop () {
   lcd.setCursor(14, 3);
   lcd.print(rtc.getTemperature());
   lcd.print("C");
-  //Serial.print("pauzetimer ");
-  //Serial.println(pauzetimer / 1000);
+  // Serial.print("pauzetimer ");
+  // Serial.println(pauzetimer / 1000);
 
 
 
@@ -1796,14 +1876,14 @@ void loop () {
 
 
   /////////////////////////////////////////////////////////////////////////////////////////////
-
-  counter = counter + 1;                // just a counter to see how many times i get here
-  if (counter >= 480)counter = 0;
-  lcd.setCursor(9, 0);
-  if (counter <= 99)lcd.print(" ");
-  if (counter <= 9)lcd.print(" ");
-  lcd.print(counter);                  // just a counter to see how many times i get here
-
+  /*
+    counter = counter + 1;                // just a counter to see how many times i get here
+    if (counter >= 480)counter = 0;
+    lcd.setCursor(9, 0);
+    if (counter <= 99)lcd.print(" ");
+    if (counter <= 9)lcd.print(" ");
+    lcd.print(counter);                  // just a counter to see how many times i get here
+  */
 
   while (millis() - loopspeed <= 125) {
     /**/
