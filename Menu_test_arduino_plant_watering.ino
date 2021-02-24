@@ -20,7 +20,7 @@
       on mega2560 only 12% / 15%  resources used
       // https://www.google.com/search?q=aliexpress+mega+2560+pro+mini
       // https://www.google.com/search?q=aliexpress+mega+2560
-      // or move to ESP32
+      // the best is move to ESP32  veryfast / huge resource size / wifi      (is there a eeprom library for ESP32 that simulates eeprom)  
 
            a bit of copy, paste, modify from http://www.sticker.tk/forum/index.php?action=view&id=296
                                              http://www.sticker.tk/forum/index.php?action=view&id=299
