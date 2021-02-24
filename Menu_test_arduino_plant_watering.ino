@@ -17,7 +17,12 @@
 
 
       running out off space on NANO / UNO, move 2 mega??? would be nice to save dayly watering times to a day-month-year.txt file on a SDcard
-      on mega2560 only 12% / 15%  resources used
+      NANO, UNO 
+      Sketch uses 30396 bytes (94%) of program storage space. Maximum is 32256 bytes.
+      Global variables use 1271 bytes (62%) of dynamic memory, leaving 777 bytes for local variables. Maximum is 2048 bytes.
+      on MEGA2560
+      Sketch uses 31228 bytes (12%) of program storage space. Maximum is 253952 bytes.
+      Global variables use 1271 bytes (15%) of dynamic memory, leaving 6921 bytes for local variables. Maximum is 8192 bytes.
       // https://www.google.com/search?q=aliexpress+mega+2560+pro+mini
       // https://www.google.com/search?q=aliexpress+mega+2560
       // the best is move to ESP32  veryfast / huge resource size / wifi      (is there a eeprom library for ESP32 that simulates eeprom)
