@@ -7,7 +7,10 @@
    Rotary encoder menu mostly working
    few more menu items i would like to add
 
+   maybe an extra confirmation on eeprom erase/reboot to prevent acidental yes press
+
    menu time / date set
+   
   Done, menu  set backlight_time
   Done, menu eeprom erase,      No / Yes   factory settings reset & reboot
   Done, menu's info => at wich times a wateringjob started today, watering start times saved to eeprom for day log
