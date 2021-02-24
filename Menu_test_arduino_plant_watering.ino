@@ -1355,6 +1355,7 @@ void loop () {
           /*wait for button released*/
         }
         menu_nr = 11;
+        settimedate=1;
         lcd.clear();
         delay(250);
       }
@@ -1468,6 +1469,7 @@ void loop () {
         }
         if (backtobegin == 1)menu_nr = 1;
         if (backtobegin == 2)menu_nr = 15;
+        backtobegin = 1;
         lcd.clear();
         delay(250);
       }
