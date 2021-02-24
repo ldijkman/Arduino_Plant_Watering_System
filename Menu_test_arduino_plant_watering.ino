@@ -10,7 +10,7 @@
    maybe an extra confirmation on eeprom erase/reboot to prevent acidental yes press
 
    menu time / date set
-   
+
   Done, menu  set backlight_time
   Done, menu eeprom erase,      No / Yes   factory settings reset & reboot
   Done, menu's info => at wich times a wateringjob started today, watering start times saved to eeprom for day log
@@ -20,7 +20,7 @@
       on mega2560 only 12% / 15%  resources used
       // https://www.google.com/search?q=aliexpress+mega+2560+pro+mini
       // https://www.google.com/search?q=aliexpress+mega+2560
-      // the best is move to ESP32  veryfast / huge resource size / wifi      (is there a eeprom library for ESP32 that simulates eeprom)  
+      // the best is move to ESP32  veryfast / huge resource size / wifi      (is there a eeprom library for ESP32 that simulates eeprom)
 
            a bit of copy, paste, modify from http://www.sticker.tk/forum/index.php?action=view&id=296
                                              http://www.sticker.tk/forum/index.php?action=view&id=299
@@ -95,7 +95,7 @@
 
 
 // parts list:
-// Uno            https://www.google.com/search?q=aliexpress+arduino+uno 
+// Uno            https://www.google.com/search?q=aliexpress+arduino+uno
 // or
 // Nano           https://www.google.com/search?q=aliexpress+arduino+nano
 // RTC DS3231     https://www.google.com/search?q=aliexpress+RTC+DS3231
@@ -157,12 +157,13 @@ byte last_second;
 byte maximumaantalbeurtenperdag = 8;
 
 byte Calibrate_Sensors = 1;
-
 byte eepromerase = 1;
+byte settimedate = 1;
+
 long loopspeed;
 
 // save some programming space? for repeating erase line
-char Clearline [19]= "                    ";  // 0-19 20 spaces to clear a line (saves some programming space maybe)
+char Clearline [19] = "                    "; // 0-19 20 spaces to clear a line (saves some programming space maybe)
 // hmmmm, strange 3 line menu sign printed now
 
 
@@ -1244,7 +1245,7 @@ void loop () {
       lcd.setCursor(0, 0);
       lcd.print(F("9 wateringtime log V"));
       char date[10] = "hh:mm:ss";  // maybe to eprom
-      lcd.setCursor(0, 1); lcd.print("1  "); EEPROM.get(810, date); lcd.print(date); lcd.print("    "); 
+      lcd.setCursor(0, 1); lcd.print("1  "); EEPROM.get(810, date); lcd.print(date); lcd.print("    ");
       lcd.setCursor(0, 2); lcd.print("2  "); EEPROM.get(820, date); lcd.print(date); lcd.print("    ");
       lcd.setCursor(0, 3); lcd.print("3  "); EEPROM.get(830, date); lcd.print(date); lcd.print("    ");
       TempInt = 0;
@@ -1290,7 +1291,7 @@ void loop () {
         while (SetButton() == LOW) {
           /*wait for button released*/
         }
-        menu_nr = 11;
+        menu_nr = 10;
         lcd.clear();
       }
 
@@ -1298,6 +1299,59 @@ void loop () {
 
     }// end menu_nr 9
 
+
+
+
+
+
+
+
+
+
+    // 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10
+    // set time date set time date set time date set time date set time date set time date set time date set time date
+    TempLong = millis();  //  load current millis() into TempLong
+    if (menu_nr == 10) {
+      lcd.setCursor(0, 0);
+      lcd.print(F("10 Set Time / Date"));
+      lcd.setCursor(0, 1);
+      lcd.print(F("not done  yet!!!"));
+      lcd.setCursor(7, 2);
+      if (settimedate == 1)lcd.print(F(" No   "));
+      if (settimedate == 2)lcd.print(F(" Yes  "));
+
+    }
+    while (menu_nr == 10) {
+
+      lcd.setCursor(18, 3);
+      if ((10 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
+      lcd.print(10 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
+      if ((millis() - TempLong)  > 10000) {
+        delay(1000);  // want to see the zero 0
+        TimeOut();
+        break;
+      }
+
+      float rval;
+      if ( rval = read_rotary() ) {
+        settimedate  = settimedate  + rval;
+        TempLong = millis();  //reset innactive time counter
+        if (settimedate < 1)settimedate = 2;
+        if (settimedate > 2)settimedate = 1;
+        lcd.setCursor(7, 2);
+        if (settimedate == 1)lcd.print(F(" No   "));
+        if (settimedate == 2)lcd.print(F(" Yes  "));
+      }
+
+      if (SetButton() == LOW) {        // LOW setbutton is pressed
+        while (SetButton() == LOW) {
+          /*wait for button released*/
+        }
+        menu_nr = 11;
+        lcd.clear();
+        delay(250);
+      }
+    }// end menu_nr 10
 
 
 
@@ -1769,16 +1823,16 @@ void readsensors() {
 }
 
 /*
- * #define PAUSE  500            // Set at top of source code file
-// some code...
-// https://forum.arduino.cc/index.php?topic=141049.msg2332401#msg2332401
+   #define PAUSE  500            // Set at top of source code file
+  // some code...
+  // https://forum.arduino.cc/index.php?topic=141049.msg2332401#msg2332401
   FlashMessage("Game Score", 5, 0, 5);  // Set the message to column 5, row 0, and flash 5 times.
- 
 
-// *********************************************************************
-// https://forum.arduino.cc/index.php?topic=141049.msg2332401#msg2332401
-void FlashMessage(char *msg, int col, int row, int repeat)
-{
+
+  // *********************************************************************
+  // https://forum.arduino.cc/index.php?topic=141049.msg2332401#msg2332401
+  void FlashMessage(char *msg, int col, int row, int repeat)
+  {
   char temp[] = "                ";   // Enough spaces to fill one display line
 
   lcd.setCursor(col, row);
@@ -1791,8 +1845,8 @@ void FlashMessage(char *msg, int col, int row, int repeat)
     lcd.print(msg);
     delay(PAUSE);
   }
-}
- */
+  }
+*/
 // Een Heitje voor een karweitje
 // A Penny for Sharing My Thoughts?
 // http://www.paypal.me/LDijkman
