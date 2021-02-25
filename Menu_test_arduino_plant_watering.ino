@@ -44,6 +44,7 @@
   Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
   https://m.facebook.com/luberth.dijkman
   https://github.com/ldijkman/Arduino_Plant_Watering_System
+  https://github.com/ldijkman/Arduino_Plant_Watering_System/discussions
   https://youtu.be/1jKAxLyOY_s
 
   GNU General Public License,
@@ -113,6 +114,10 @@
 // 2 sensors      https://www.google.com/search?q=aliexpress+aduino+capacitive+soil+moisture+V2
 // capacitive soil moisture sensor, most are V1.2 there is a V2, maybe better?
 // dupont wires or better solder wires for permanent device
+
+
+
+// https://github.com/ldijkman/Arduino_Plant_Watering_System/discussions
 
 
 
