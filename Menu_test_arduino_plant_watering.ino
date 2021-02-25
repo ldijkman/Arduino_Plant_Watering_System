@@ -8,7 +8,7 @@
    few more menu items i would like to add
 
    maybe an extra confirmation on eeprom erase/reboot to prevent acidental Yes press
-   or 5 No's and 1 Yes, like   No No No No No Yes No No No No No     count 
+   or 5 No's and 1 Yes, like   No No No No No Yes No No No No No     count
 
    menu time / date set not finnished yet!
 
@@ -22,8 +22,8 @@
       Sketch uses 30396 bytes (94%) of program storage space. Maximum is 32256 bytes.
       Global variables use 1271 bytes (62%) of dynamic memory, leaving 777 bytes for local variables. Maximum is 2048 bytes.
 
-      Program storage space Full, Remarked all Serial.print(?????) lines => to Free some space 
-      
+      Program storage space Full, Remarked all Serial.print(?????) lines => to Free some space
+
       on MEGA2560
       Sketch uses 31228 bytes (12%) of program storage space. Maximum is 253952 bytes.
       Global variables use 1271 bytes (15%) of dynamic memory, leaving 6921 bytes for local variables. Maximum is 8192 bytes.
@@ -77,7 +77,7 @@
 // https://www.google.com/search?q=aliexpress+MCP4725
 //
 // What is maximum sensor wire length for analog? for i2c?
-// soil-watch sells 5v analog with 20meter cables 
+// soil-watch sells 5v analog with 20meter cables
 // (No grounded shield?, unshielded?=does that make sense) https://pino-tech.eu/soilwatch10/
 //
 //
@@ -324,9 +324,9 @@ void setup () {
   // could also use i2c eeprom that is on the ds3231 rtc board wich i think has 1 milion writes, RTC DS3231 with AT24C32 eeprom
   // https://www.google.com/search?q=AT24C32+pdf
   for (int i = 100 ; i < EEPROM.length() ; i++) {   // erase eprom water start times
-    lcd.setCursor(0, 1);
-    lcd.print("Erase Water times");
-    lcd.setCursor(5, 2);
+    lcd.setCursor(0, 0);
+    lcd.print("Erase WaterTime LOG");
+    lcd.setCursor(8, 2);
     lcd.print(i);
     EEPROM.write(i, 0);                             // erase eprom water start times
   }
@@ -1503,7 +1503,10 @@ void loop () {
       lcd.print(F("Factory Settings?"));
       lcd.setCursor(9, 3);
       if (eepromerase == 1)lcd.print(F("No "));
-      if (eepromerase == 2)lcd.print(F("Yes"));
+      if (eepromerase == 2)lcd.print(F("No"));
+      if (eepromerase == 3)lcd.print(F("Yes "));
+      if (eepromerase == 4)lcd.print(F("No "));
+      if (eepromerase == 5)lcd.print(F("No "));
     }
     while (menu_nr == 11) {
 
@@ -1523,11 +1526,14 @@ void loop () {
         lcd.setCursor(9, 3);
         lcd.print(eepromerase);
         lcd.print(F(" "));
-        if (eepromerase < 1)eepromerase = 2;
-        if (eepromerase > 2)eepromerase = 1;
+        if (eepromerase < 1)eepromerase = 5;
+        if (eepromerase > 5)eepromerase = 1;
         lcd.setCursor(9, 3);
         if (eepromerase == 1)lcd.print(F("No "));
-        if (eepromerase == 2)lcd.print(F("Yes"));
+        if (eepromerase == 2)lcd.print(F("No ")); // prevent acidental yes press
+        if (eepromerase == 3)lcd.print(F("Yes"));
+        if (eepromerase == 4)lcd.print(F("No "));
+        if (eepromerase == 5)lcd.print(F("No "));
       }
 
       if (SetButton() == LOW) {        // LOW setbutton is pressed
@@ -1542,7 +1548,7 @@ void loop () {
 
 
 
-    if (eepromerase == 2) {                              // you chose Yes so whe go to erase eeprom
+    if (eepromerase == 3) {                              // you chose Yes so whe go to erase eeprom
       for (int i = 0 ; i < EEPROM.length() ; i++) {
         lcd.setCursor(3, 2);
         lcd.print("Erase "); lcd.print(i);
@@ -1867,8 +1873,10 @@ void loop () {
     // could also use i2c eeprom that is on the ds3231 rtc board wich i think has 1 milion writes, RTC DS3231 with AT24C32 eeprom
     // https://www.google.com/search?q=AT24C32+pdf
     for (int i = 100 ; i < EEPROM.length() ; i++) {   // erase eprom water start times
-      lcd.setCursor(3, 2);
-      lcd.print("Erase "); lcd.print(i);
+      lcd.setCursor(0, 0);
+      lcd.print("Erase WaterTime LOG");
+      lcd.setCursor(8, 2);
+      lcd.print(i);
       EEPROM.write(i, 0);                             // erase eprom water start times
     }
 
