@@ -9,7 +9,7 @@ Advanced, Intelligent, Smart, Automated, Automatic
 
 https://youtu.be/1jKAxLyOY_s
 
-+/- 10 Dollar Automated Plant Watering Computer on Soil Moisture
++/- 10 Dollar Automated Plant Watering MicroController / Computer on Soil Moisture
 
 Arduino Nano or Uno
 
