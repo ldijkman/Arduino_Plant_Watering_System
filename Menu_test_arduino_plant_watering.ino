@@ -380,27 +380,22 @@ void loop () {
     while (SetButton() == LOW) {                                   // while setbutton==LOW, pulled up by resistor, LOW is pressed
 
       if ((millis() - TempLong)  < 3000) {                         // only show this mssage the first 5 seconds
+        lcd.clear();
         lcd.setCursor(0, 0);
-        lcd.print(F("Ok Backlight ON     "));
-        lcd.setCursor(0, 1);
-        lcd.print("                    ");
-        lcd.setCursor(0, 2);
-        lcd.print(F("   Keep pressed?    "));
-        lcd.setCursor(0, 3);
-        lcd.print(F(" For menu Enter in  "));
+        lcd.print(F("Ok Backlight ON"));
+        lcd.setCursor(5, 3);
+        lcd.print(F("Menu Enter in"));
         lcd.setCursor(19, 3);
         lcd.print(3 - (millis() - TempLong) / 1000);              // on LCD countdown until menu system enter
+        delay(250);
       }
 
       if ((millis() - TempLong)  > 3000) {                        // after 5 seconds pressed we get into menu system
+        lcd.clear();
         lcd.setCursor(0, 0);
-        lcd.print(F("Ok, We are in Menu  "));
-        lcd.setCursor(0, 1);
-        lcd.print("                    ");
-        lcd.setCursor(0, 2);
-        lcd.print(F("For Entering Menu   "));
-        lcd.setCursor(0, 3);
-        lcd.print(F("   Release Button   "));
+        lcd.print(F("Ok, We are in Menu"));
+        lcd.setCursor(3, 3);
+        lcd.print(F("Release Button"));
         delay(500);
         menu_nr = 1;
       }
