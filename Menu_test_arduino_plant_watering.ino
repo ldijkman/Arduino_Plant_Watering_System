@@ -10,7 +10,7 @@
    maybe an extra confirmation on eeprom erase/reboot to prevent acidental Yes press
    or 5 No's and 1 Yes, like   No No No No No Yes No No No No No     count 
 
-   menu time / date set
+   menu time / date set not finnished yet!
 
   Done, menu  set backlight_time
   Done, menu eeprom erase,      No / Yes   factory settings reset & reboot
