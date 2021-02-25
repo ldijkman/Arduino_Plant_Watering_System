@@ -117,7 +117,7 @@ STL file for your slic3r / 3d printer https://github.com/ldijkman/Arduino_Plant_
 https://www.codemacs.com/raspberrypi/howtoo/soil-moisture-sensor-waterproofing.9450461.htm
 
 #
-# Arduino NANO Eurocard ProtoType Layout setup:
+# Arduino NANO ProtoType Layout setup:
 
 Proto PCB https://nl.aliexpress.com/item/32997887790.html
 
