@@ -382,7 +382,7 @@ void loop () {
       if ((millis() - TempLong)  < 3000) {                         // only show this mssage the first 5 seconds
         lcd.clear();
         lcd.setCursor(0, 0);
-        lcd.print(F("Ok Backlight ON"));
+        lcd.print(F("Backlight ON"));
         lcd.setCursor(5, 3);
         lcd.print(F("Menu Enter in"));
         lcd.setCursor(19, 3);
@@ -392,8 +392,8 @@ void loop () {
 
       if ((millis() - TempLong)  > 3000) {                        // after 5 seconds pressed we get into menu system
         lcd.clear();
-        lcd.setCursor(0, 0);
-        lcd.print(F("Ok, We are in Menu"));
+        lcd.setCursor(7,1);
+        lcd.print(F("in Menu"));
         lcd.setCursor(3, 3);
         lcd.print(F("Release Button"));
         delay(500);
