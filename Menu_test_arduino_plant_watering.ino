@@ -1380,19 +1380,20 @@ void loop () {
         DateTime now = rtc.now();
 
         lcd.setCursor(3, 1);
+         if (uur <= 9)lcd.print(" ");
         lcd.print(uur);
         lcd.print(" : ");
-        if (minuut <= 9)lcd.print('0');
+        if (minuut <= 9)lcd.print("0");
         lcd.print(minuut);
         lcd.print(" : ");
-        if (seconde <= 9)lcd.print('0');
+        if (seconde <= 9)lcd.print("0");
         lcd.print(seconde);
 
         lcd.setCursor(3, 2);
-        if (dag <= 9)lcd.print(' ');
+        if (dag <= 9)lcd.print(" ");
         lcd.print(dag);
         lcd.print(" - ");
-        if (maand <= 9)lcd.print(' ');
+        if (maand <= 9)lcd.print(" ");
         lcd.print(maand);
         lcd.print(" - ");
         lcd.print(jaar);
@@ -1885,10 +1886,13 @@ void loop () {
     lcd.print(counter);                  // just a counter to see how many times i get here
   */
 
+
+// there should be an  arduino command  outsidedelay(); or max_ex_per_sec(); like next
   while (millis() - loopspeed <= 125) {
     /**/
   }       // limmit loop to max 8 times per second, 480 times a minute
   loopspeed = millis();
+// there should be an  arduino command  outsidedelay();  or max_ex_per_sec(); like above
 
   //////////////////////////////////////////////////////////////////////////////////////////////
 }
