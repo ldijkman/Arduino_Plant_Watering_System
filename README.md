@@ -118,9 +118,8 @@ https://www.codemacs.com/raspberrypi/howtoo/soil-moisture-sensor-waterproofing.9
 #
 # Arduino NANO Eurocard ProtoType setup:
 
-<img src="https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/arduino_plant_watering_nano_prototype_1.jpg" width="30%" heigth="30%">
-
 <img src="https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/arduino_plant_watering_nano_prototype_2.jpg" width="30%" heigth="30%">
+<img src="https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/arduino_plant_watering_nano_prototype_1.jpg" width="30%" heigth="30%">
 
 a Penny for Sharing My Thoughts?
 
