@@ -115,9 +115,9 @@ STL file for your slic3r / 3d printer https://github.com/ldijkman/Arduino_Plant_
 
 https://www.codemacs.com/raspberrypi/howtoo/soil-moisture-sensor-waterproofing.9450461.htm
 
-<img src="https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/arduino_plant_watering_nano_prototype_1.jpg">
+<img src="https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/arduino_plant_watering_nano_prototype_1.jpg" width="50%" heigth="50%">
 
-<img src="https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/arduino_plant_watering_nano_prototype_1.jpg">
+<img src="https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/arduino_plant_watering_nano_prototype_2.jpg" width="50%" heigth="50%">
 
 a Penny for Sharing My Thoughts?
 
