@@ -7,7 +7,8 @@
    Rotary encoder menu mostly working
    few more menu items i would like to add
 
-   maybe an extra confirmation on eeprom erase/reboot to prevent acidental yes press
+   maybe an extra confirmation on eeprom erase/reboot to prevent acidental Yes press
+   or 5 No's and 1 Yes, like   No No No No No Yes No No No No No     count 
 
    menu time / date set
 
@@ -459,7 +460,7 @@ void loop () {
             lcd.print(5 - (millis() - TempLong) / 1000);          // on lcd timeout countdown
           }
           delay(1000);  // want to see the zero 0
-         // for (int i = 0; i < 10; i++)Serial.println(F("moistureforstartwatering DATA WRITTEN / SAVED TO EEPROM "));
+          // for (int i = 0; i < 10; i++)Serial.println(F("moistureforstartwatering DATA WRITTEN / SAVED TO EEPROM "));
           lcd.clear();
         }
 
@@ -896,7 +897,7 @@ void loop () {
             lcd.print(5 - (millis() - TempLong) / 1000);          // on lcd timeout countdown
           }
           delay(1000);  // want to see the zero 0
-         // for (int i = 0; i < 10; i++)Serial.println(F("watering_duration DATA WRITTEN / SAVED TO EEPROM "));
+          // for (int i = 0; i < 10; i++)Serial.println(F("watering_duration DATA WRITTEN / SAVED TO EEPROM "));
           lcd.clear();
         }
 
@@ -961,7 +962,7 @@ void loop () {
             lcd.print(5 - (millis() - TempLong) / 1000);          // on lcd timeout countdown
           }
           delay(1000);  // want to see the zero 0
-         // for (int i = 0; i < 10; i++)Serial.println(F("pauze_after_watering DATA WRITTEN / SAVED TO EEPROM "));
+          // for (int i = 0; i < 10; i++)Serial.println(F("pauze_after_watering DATA WRITTEN / SAVED TO EEPROM "));
           lcd.clear();
         }
 
@@ -1030,7 +1031,7 @@ void loop () {
             lcd.print(5 - (millis() - TempLong) / 1000);          // on lcd timeout countdown
           }
           delay(1000);  // want to see the zero 0
-         // for (int i = 0; i < 10; i++)Serial.println(F("maximumaantalbeurtenperdag DATA WRITTEN / SAVED TO EEPROM "));
+          // for (int i = 0; i < 10; i++)Serial.println(F("maximumaantalbeurtenperdag DATA WRITTEN / SAVED TO EEPROM "));
           lcd.clear();
         }
 
@@ -1095,7 +1096,7 @@ void loop () {
             lcd.print(5 - (millis() - TempLong) / 1000);          // on lcd timeout countdown
           }
           delay(1000);  // want to see the zero 0
-         // for (int i = 0; i < 10; i++)Serial.println(F("start_hour DATA WRITTEN / SAVED TO EEPROM "));
+          // for (int i = 0; i < 10; i++)Serial.println(F("start_hour DATA WRITTEN / SAVED TO EEPROM "));
           lcd.clear();
         }
 
@@ -1163,7 +1164,7 @@ void loop () {
             lcd.print(5 - (millis() - TempLong) / 1000);          // on lcd timeout countdown
           }
           delay(1000);  // want to see the zero 0
-         // for (int i = 0; i < 10; i++)Serial.println(F("end_hour DATA WRITTEN / SAVED TO EEPROM "));
+          // for (int i = 0; i < 10; i++)Serial.println(F("end_hour DATA WRITTEN / SAVED TO EEPROM "));
           lcd.clear();
         }
 
@@ -1228,7 +1229,7 @@ void loop () {
             lcd.print(5 - (millis() - TempLong) / 1000);          // on lcd timeout countdown
           }
           delay(1000);  // want to see the zero 0
-         // for (int i = 0; i < 10; i++)Serial.println(F("pauze_after_watering DATA WRITTEN / SAVED TO EEPROM "));
+          // for (int i = 0; i < 10; i++)Serial.println(F("pauze_after_watering DATA WRITTEN / SAVED TO EEPROM "));
           lcd.clear();
         }
 
@@ -1270,7 +1271,7 @@ void loop () {
         TempInt = TempInt + (rval * 10);        // 10  steps
         if (TempInt <= 0) TempInt = 0;
         if (TempInt >= (maximumaantalbeurtenperdag * 10) - 30) TempInt = (maximumaantalbeurtenperdag * 10) - 30;
-       // Serial.println(TempInt);
+        // Serial.println(TempInt);
 
         TempLong = millis();  //  load current millis() into TempLong
         char date[10] = "hh:mm:ss";  // maybe to eprom
@@ -1380,7 +1381,7 @@ void loop () {
         DateTime now = rtc.now();
 
         lcd.setCursor(3, 1);
-         if (uur <= 9)lcd.print(" ");
+        if (uur <= 9)lcd.print(" ");
         lcd.print(uur);
         lcd.print(" : ");
         if (minuut <= 9)lcd.print("0");
@@ -1642,7 +1643,7 @@ void loop () {
   if (last_second != second_now) {       // only do this once each second
 
     last_second = second_now;
-    
+
     // Serial.println("///////////////////////////////////////");
     // Serial.println("");
     // Serial.println("watering start times today");
@@ -1887,12 +1888,12 @@ void loop () {
   */
 
 
-// there should be an  arduino command  outsidedelay(); or max_ex_per_sec(); like next
+  // there should be an  arduino command  outsidedelay(); or max_ex_per_sec(); like next
   while (millis() - loopspeed <= 125) {
     /**/
   }       // limmit loop to max 8 times per second, 480 times a minute
   loopspeed = millis();
-// there should be an  arduino command  outsidedelay();  or max_ex_per_sec(); like above
+  // there should be an  arduino command  outsidedelay();  or max_ex_per_sec(); like above
 
   //////////////////////////////////////////////////////////////////////////////////////////////
 }
