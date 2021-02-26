@@ -91,8 +91,8 @@
 
 
 // future SD Card log
-// #include <SPI.h> // not enough space == 105%
-// #include <SD.h> // not enough space == 105%
+// #include <SPI.h> // not enough space == 105%    for mega 2560 or mega pro mini
+// #include <SD.h> // not enough space == 105%    for mega 2560 or mega pro mini
 // future SD Card log
 
 #include "RTClib.h"                   // https://github.com/adafruit/RTClib
