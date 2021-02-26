@@ -1,34 +1,6 @@
-
-/*
-   removed the date for showing sp= setpoint               (add another LCD display with different i2c adress? ;-)
-
-   added rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
-
-   Rotary encoder menu working
-
-
-      running out off space on NANO / UNO, move 2 mega??? would be nice to save dayly watering times to a day-month-year.txt file on a SDcard
-      NANO, UNO
-      Sketch uses 30396 bytes (94%) of program storage space. Maximum is 32256 bytes.
-      Global variables use 1271 bytes (62%) of dynamic memory, leaving 777 bytes for local variables. Maximum is 2048 bytes.
-
-      Program storage space Full, Remarked all Serial.print(?????) lines => to Free some space
-      latest nano / uno version uses 90% / 44%
-
-      on MEGA2560
-      Sketch uses 31228 bytes (12%) of program storage space. Maximum is 253952 bytes.
-      Global variables use 1271 bytes (15%) of dynamic memory, leaving 6921 bytes for local variables. Maximum is 8192 bytes.
-      // https://www.google.com/search?q=aliexpress+mega+2560+pro+mini
-      // https://www.google.com/search?q=aliexpress+mega+2560
-      // the best is move to ESP32  veryfast / huge resource size / wifi      (is there a eeprom library for ESP32 that simulates eeprom)
-
-           a bit of copy, paste, modify from http://www.sticker.tk/forum/index.php?action=view&id=296
-                                             http://www.sticker.tk/forum/index.php?action=view&id=299
-
-*/
-
 /*
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+  Arduino Nano / Uno / Mega2560 
   Arduino Automated Plant Watering System, automatic irrigation system
   Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
 
