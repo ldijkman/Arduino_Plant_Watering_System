@@ -5,7 +5,7 @@
    added rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
 
    Rotary encoder menu working
- 
+
 
       running out off space on NANO / UNO, move 2 mega??? would be nice to save dayly watering times to a day-month-year.txt file on a SDcard
       NANO, UNO
@@ -175,6 +175,7 @@ long loopspeed;
 // rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
 // Robust Rotary encoder reading
 // Copyright John Main - best-microcontroller-projects.com
+// https://www.best-microcontroller-projects.com/rotary-encoder.html
 #define rotarybutton_SW 2           // input D2 rotary encoder SW
 #define CLK 3                       // input D3 rotary encoder CLK
 #define DATA 4                      // input D4 rotary encoder DT
