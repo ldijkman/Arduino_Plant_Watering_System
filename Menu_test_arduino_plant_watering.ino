@@ -2,7 +2,7 @@
 // Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
 /*
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-  Arduino Nano / Uno / Mega2560 
+  Arduino Nano / Uno / Mega2560
   Arduino Automated Plant Watering System, automatic irrigation system
   Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
 
@@ -1938,18 +1938,20 @@ void loop () {
     // could also use i2c eeprom that is on the ds3231 rtc board wich i think has 1 milion writes, RTC DS3231 with AT24C32 eeprom
     // https://www.google.com/search?q=AT24C32+pdf
 
-// erase is done at reboot in setup()   
-//    for (int i = 100 ; i < EEPROM.length() ; i++) {   // erase eprom water start times
-//      lcd.setCursor(0, 0);
-//      lcd.print("Erase WaterTime LOG");
-//      lcd.setCursor(8, 2);
-//      lcd.print(i);
-//      EEPROM.write(i, 0);                             // erase eprom water start times
-//    }
-// erase is done at reboot in setup()
+    // erase is done at reboot in setup()
+    //    for (int i = 100 ; i < EEPROM.length() ; i++) {   // erase eprom water start times
+    //      lcd.setCursor(0, 0);
+    //      lcd.print("Erase WaterTime LOG");
+    //      lcd.setCursor(8, 2);
+    //      lcd.print(i);
+    //      EEPROM.write(i, 0);                             // erase eprom water start times
+    //    }
+    // erase is done at reboot in setup()
 
     watergiftcounter = 0; // if you trust the millis(); 49-50 days overflow       comment out the line // asm volatile("jmp 0");
-
+    lcd.setCursor(3, 2);
+    lcd.print("Reboot Now!    ");
+    delay(2500);
     asm volatile("jmp 0");                                              // end of day reset/reboot arduino //start the day with a fresh millis() counter
     // no worry's about millis overflow every 50 days
     // and resets watergiftcounter
