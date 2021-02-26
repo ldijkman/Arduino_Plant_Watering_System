@@ -4,18 +4,8 @@
 
    added rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
 
-   Rotary encoder menu mostly working
-   few more menu items i would like to add
-
-   maybe an extra confirmation on eeprom erase/reboot to prevent acidental Yes press
-   or 5 No's and 1 Yes, like   No No No No No Yes No No No No No     count
-
-   menu time / date set not finnished yet!
-
-  Done, menu  set backlight_time
-  Done, menu eeprom erase,      No / Yes   factory settings reset & reboot
-  Done, menu's info => at wich times a wateringjob started today, watering start times saved to eeprom for day log
-
+   Rotary encoder menu working
+ 
 
       running out off space on NANO / UNO, move 2 mega??? would be nice to save dayly watering times to a day-month-year.txt file on a SDcard
       NANO, UNO
@@ -330,6 +320,7 @@ void setup () {
     lcd.print(i);
     EEPROM.write(i, 0);                             // erase eprom water start times
   }
+  lcd.clear();
 }
 
 
@@ -392,7 +383,7 @@ void loop () {
 
       if ((millis() - TempLong)  > 3000) {                        // after 5 seconds pressed we get into menu system
         lcd.clear();
-        lcd.setCursor(7,1);
+        lcd.setCursor(7, 1);
         lcd.print(F("in Menu"));
         lcd.setCursor(3, 3);
         lcd.print(F("Release Button"));
@@ -1421,68 +1412,206 @@ void loop () {
         lcd.print("-");
         lcd.print(now.year());
 
-        // uurselect
-        lcd.setCursor(2, 1); lcd.print("["); lcd.setCursor(5, 1); lcd.print("]");
 
-        // minuutselect
-        lcd.setCursor(7, 1); lcd.print("["); lcd.setCursor(10, 1); lcd.print("]");
+        // uur uur uur uur uur uur uur uur uur uur uur uur uur uur uur uur uur uur uur uur uur uur
+        while (1 == 1) {
 
-        // secondeselect
-        lcd.setCursor(12, 1); lcd.print("["); lcd.setCursor(15, 1); lcd.print("]");
+          // uurselect on
+          lcd.setCursor(2, 1); lcd.print("["); lcd.setCursor(5, 1); lcd.print("]");
+          float rval;
+          if ( rval = read_rotary() ) {
+            uur = uur + (rval);
+            if (uur < 0 )uur = 23;
+            if (uur > 23 )uur = 0;
+            lcd.setCursor(3, 1);
+            if (uur <= 9)lcd.print(" ");
+            lcd.print(uur);
+          }
 
-
-        // dagselect
-        lcd.setCursor(2, 2); lcd.print("["); lcd.setCursor(5, 2); lcd.print("]");
-
-        // maandselect
-        lcd.setCursor(7, 2); lcd.print("["); lcd.setCursor(10, 2); lcd.print("]");
-
-        // jaarselect
-        lcd.setCursor(12, 2); lcd.print("["); lcd.setCursor(17, 2); lcd.print("]");
-
-        // saveandexitselect
-        lcd.setCursor(3, 3); lcd.print("["); lcd.setCursor(14, 3); lcd.print("]");
-
-
-        delay (500);
-
-
-        // uurselect
-        lcd.setCursor(2, 1); lcd.print(" "); lcd.setCursor(5, 1); lcd.print(" ");
-
-        // minuutselect
-        lcd.setCursor(7, 1); lcd.print(" "); lcd.setCursor(10, 1); lcd.print(" ");
-
-        // secondeselect
-        lcd.setCursor(12, 1); lcd.print(" "); lcd.setCursor(15, 1); lcd.print(" ");
+          if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+            while (SetButton() == LOW) {
+              /*wait for button released*/
+            }
+            // uurselect off
+            lcd.setCursor(2, 1); lcd.print(" "); lcd.setCursor(5, 1); lcd.print(" ");
+            break;
+          }
+        }
 
 
-        // dagselect
-        lcd.setCursor(2, 2); lcd.print(" "); lcd.setCursor(5, 2); lcd.print(" ");
 
-        // maandselect
-        lcd.setCursor(7, 2); lcd.print(" "); lcd.setCursor(10, 2); lcd.print(" ");
 
-        // jaarselect
-        lcd.setCursor(12, 2); lcd.print(" "); lcd.setCursor(17, 2); lcd.print(" ");
+        // minuut minuut minuut minuut minuut minuut minuut minuut minuut minuut minuut minuut minuut
+        while (1 == 1) {
 
-        // saveandexitselect
-        lcd.setCursor(3, 3); lcd.print(" "); lcd.setCursor(14, 3); lcd.print(" ");
+          // minuutselect
+          lcd.setCursor(7, 1); lcd.print("["); lcd.setCursor(10, 1); lcd.print("]");
+          float rval;
+          if ( rval = read_rotary() ) {
+            minuut = minuut + (rval);
+            if (minuut < 0 )minuut = 59;
+            if (minuut > 59 )minuut = 0;
+            lcd.setCursor(8, 1);
+            if (minuut <= 9)lcd.print("0");
+            lcd.print(minuut);
+          }
 
-        // rtc.adjust(DateTime(jaar, maand, dag, uur, minuut, seconde));
-        // unix_epoch = timeClient.getEpochTime();    // Get Unix epoch time from the NTP server and set it to rtc
-        // rtc.adjust(DateTime(year(unix_epoch), month(unix_epoch), day(unix_epoch), hour(unix_epoch), minute(unix_epoch), second(unix_epoch)));
+          if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+            while (SetButton() == LOW) {
+              /*wait for button released*/
+            }
+            // minuutselect
+            lcd.setCursor(7, 1); lcd.print(" "); lcd.setCursor(10, 1); lcd.print(" ");
+            break;
+          }
+        }
 
-        delay(100);
 
-        if ((60 - (millis() - TempLong) / 1000) <= 9)lcd.print(" ");      // move 1 char when smaller a 10 wich is 2 chars
-        lcd.setCursor(18, 3);
-        lcd.print(60 - (millis() - TempLong) / 1000);                     // on lcd timeout countdown
-        if ((millis() - TempLong)  > 60000) {
-          delay(1000);  // want to see the zero 0
-          TimeOut();
+
+
+
+
+
+
+
+        // seconde seconde seconde seconde seconde seconde seconde seconde seconde seconde seconde seconde
+        while (1 == 1) {
+
+          // secondeselect
+          lcd.setCursor(12, 1); lcd.print("["); lcd.setCursor(15, 1); lcd.print("]");
+          float rval;
+          if ( rval = read_rotary() ) {
+            seconde = seconde + (rval);
+            if (seconde < 0 )seconde = 59;
+            if (seconde > 59 )seconde = 0;
+            lcd.setCursor(13, 1);
+            if (seconde <= 9)lcd.print("0");
+            lcd.print(seconde);
+          }
+
+          if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+            while (SetButton() == LOW) {
+              /*wait for button released*/
+            }
+            // secondeselect
+            lcd.setCursor(12, 1); lcd.print(" "); lcd.setCursor(15, 1); lcd.print(" ");
+            break;
+          }
+        }
+
+
+
+
+        // dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag
+        while (1 == 1) {
+
+          // dagselect
+          lcd.setCursor(2, 2); lcd.print("["); lcd.setCursor(5, 2); lcd.print("]");
+          float rval;
+          if ( rval = read_rotary() ) {
+            dag = dag + (rval);
+            if (dag < 1 )dag = 31;
+            if (dag > 31 )dag = 1;
+            lcd.setCursor(3, 2);
+            if (dag <= 9)lcd.print(" ");
+            lcd.print(dag);
+          }
+
+          if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+            while (SetButton() == LOW) {
+              /*wait for button released*/
+            }
+            // dagselect
+            lcd.setCursor(2, 2); lcd.print(" "); lcd.setCursor(5, 2); lcd.print(" ");
+            break;
+          }
+        }
+
+
+
+
+        // maand maand maand maand maand maand maand maand maand maand maand maand maand maand
+        while (1 == 1) {
+
+          // maandselect
+          lcd.setCursor(7, 2); lcd.print("["); lcd.setCursor(10, 2); lcd.print("]");
+          float rval;
+          if ( rval = read_rotary() ) {
+            maand = maand + (rval);
+            if (maand < 1 )maand = 12;
+            if (maand > 12 )maand = 1;
+            lcd.setCursor(8, 2);
+            if (maand <= 9)lcd.print(" ");
+            lcd.print(maand);
+          }
+
+          if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+            while (SetButton() == LOW) {
+              /*wait for button released*/
+            }
+            // maandselect
+            lcd.setCursor(7, 2); lcd.print(" "); lcd.setCursor(10, 2); lcd.print(" ");
+            break;
+          }
+        }
+
+
+
+
+
+
+
+        // jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar
+        while (1 == 1) {
+
+          // jaarselect
+          lcd.setCursor(12, 2); lcd.print("["); lcd.setCursor(17, 2); lcd.print("]");
+          float rval;
+          if ( rval = read_rotary() ) {
+            jaar = jaar + (rval);
+            lcd.setCursor(13, 2);
+            lcd.print(jaar);
+          }
+
+          if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+            while (SetButton() == LOW) {
+              /*wait for button released*/
+            }
+            // jaarselect
+            lcd.setCursor(12, 2); lcd.print(" "); lcd.setCursor(17, 2); lcd.print(" ");
+            break;
+          }
+        }
+
+
+
+
+        // jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar
+        while (1 == 1) {
+
+          // saveandexitselect
+          lcd.setCursor(3, 3); lcd.print("["); lcd.setCursor(14, 3); lcd.print("]");
+
+
+          if (SetButton() == LOW) {                                    // if setbutton==LOW, pulled up by resistor, LOW is pressed
+            while (SetButton() == LOW) {
+              /*wait for button released*/
+            }
+            lcd.setCursor(12, 2); lcd.print(" "); lcd.setCursor(17, 2); lcd.print(" ");
+            rtc.adjust(DateTime(jaar, maand, dag, uur, minuut, seconde));
+            exitflag = 1;
+            break;
+          }
+
+
+        }
+
+        if (exitflag == 1) {
+          exitflag = 0;
+          lcd.clear();
           break;
         }
+
       }
     }
 
@@ -2011,29 +2140,8 @@ void readsensors() {
 }
 
 /*
-   #define PAUSE  500            // Set at top of source code file
-  // some code...
-  // https://forum.arduino.cc/index.php?topic=141049.msg2332401#msg2332401
-  FlashMessage("Game Score", 5, 0, 5);  // Set the message to column 5, row 0, and flash 5 times.
 
 
-  // *********************************************************************
-  // https://forum.arduino.cc/index.php?topic=141049.msg2332401#msg2332401
-  void FlashMessage(char *msg, int col, int row, int repeat)
-  {
-  char temp[] = "                ";   // Enough spaces to fill one display line
-
-  lcd.setCursor(col, row);
-  lcd.print(msg);
-  for (int i = 0; i < repeat; i++) {
-    lcd.setCursor(col, row);
-    lcd.print(temp);
-    delay(PAUSE);
-    lcd.setCursor(col, row);
-    lcd.print(msg);
-    delay(PAUSE);
-  }
-  }
 */
 // Een Heitje voor een karweitje
 // A Penny for Sharing My Thoughts?
