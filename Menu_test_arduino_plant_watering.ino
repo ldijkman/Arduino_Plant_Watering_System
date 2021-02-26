@@ -1933,6 +1933,7 @@ void loop () {
 
   if (now.hour() == 23 && now.minute() == 59 && now.second() >= 59) {
     lcd.clear();
+    lcd.backlight();                    // Turn backlight ON
     // they say eeprom life 100 thousand writes
     // say i write/erase a byte 4 times a day = 25 thousand days = 68 Years
     // could also use i2c eeprom that is on the ds3231 rtc board wich i think has 1 milion writes, RTC DS3231 with AT24C32 eeprom
