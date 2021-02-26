@@ -13,6 +13,7 @@
       Global variables use 1271 bytes (62%) of dynamic memory, leaving 777 bytes for local variables. Maximum is 2048 bytes.
 
       Program storage space Full, Remarked all Serial.print(?????) lines => to Free some space
+      latest nano / uno version uses 90% / 44%
 
       on MEGA2560
       Sketch uses 31228 bytes (12%) of program storage space. Maximum is 253952 bytes.
