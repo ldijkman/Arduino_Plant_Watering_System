@@ -44,6 +44,11 @@
   and you must make the source code available.
   https://www.gnu.org/licenses
 
+  used code for rotary encoder from:
+   Robust Rotary encoder reading
+   Copyright John Main - best-microcontroller-projects.com
+   https://www.best-microcontroller-projects.com/rotary-encoder.html
+
   http://Paypal.Me/LDijkman
   All above must be included in any redistribution
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
