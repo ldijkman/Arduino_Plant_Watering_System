@@ -1,3 +1,5 @@
+// Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
+// Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
 /*
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
   Arduino Nano / Uno / Mega2560 
