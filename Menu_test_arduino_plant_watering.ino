@@ -90,6 +90,10 @@
 // https://github.com/ldijkman/Arduino_Plant_Watering_System/discussions
 
 
+// future SD Card log
+// #include <SPI.h> // not enough space == 105%
+// #include <SD.h> // not enough space == 105%
+// future SD Card log
 
 #include "RTClib.h"                   // https://github.com/adafruit/RTClib
 
@@ -148,7 +152,7 @@ byte backtobegin = 1;
 
 long loopspeed;
 
-
+String ClearLine = "                    ";  // 20 spaces
 
 
 // rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
@@ -1240,16 +1244,16 @@ void loop () {
         TempLong = millis();  //  load current millis() into TempLong
         char date[10] = "hh:mm:ss";  // maybe to eprom
         int adress = 110 + TempInt;
-        lcd.setCursor(0, 1); lcd.print("                    ");
+        lcd.setCursor(0, 1); lcd.print(ClearLine);
         if (TempInt / 10 + 1 <= maximumaantalbeurtenperdag) {
           lcd.setCursor(0, 1); lcd.print(TempInt / 10 + 1); lcd.print("  "); /*lcd.print(adress); lcd.print(" ");*/ EEPROM.get(adress, date); lcd.print(date);
 
         }
-        lcd.setCursor(0, 2); lcd.print("                    ");
+        lcd.setCursor(0, 2); lcd.print(ClearLine);
         if (TempInt / 10 + 2 <= maximumaantalbeurtenperdag) {
           lcd.setCursor(0, 2); lcd.print(TempInt / 10 + 2); lcd.print("  "); /*lcd.print(adress + 10); lcd.print(" ");*/ EEPROM.get(adress + 10, date); lcd.print(date);
         }
-        lcd.setCursor(0, 3); lcd.print("                    ");
+        lcd.setCursor(0, 3); lcd.print(ClearLine);
         if (TempInt / 10 + 3 <= maximumaantalbeurtenperdag) {
           lcd.setCursor(0, 3); lcd.print(TempInt / 10 + 3); lcd.print("  ");  EEPROM.get(adress + 20, date); lcd.print(date); lcd.print(" "); lcd.print(adress + 20); lcd.print(" "); /**/
 
