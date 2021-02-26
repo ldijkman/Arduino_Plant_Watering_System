@@ -86,13 +86,16 @@
 // dupont wires or better solder wires for permanent device
 
 
+// other sensors https://www.tindie.com/products/miceuz/i2c-soil-moisture-sensor/#product-name
 
 // https://github.com/ldijkman/Arduino_Plant_Watering_System/discussions
 
 
-// future SD Card log
-// #include <SPI.h> // not enough space == 105%    for mega 2560 or mega pro mini
-// #include <SD.h> // not enough space == 105%    for mega 2560 or mega pro mini
+// future SD Card log 
+#if (defined(__AVR_ATmega2560__))
+#include <SPI.h>                  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
+#include <SD.h>                   // not enough space nano uno == 105%    for mega 2560 or mega pro mini
+#endif
 // future SD Card log
 
 #include "RTClib.h"                   // https://github.com/adafruit/RTClib
