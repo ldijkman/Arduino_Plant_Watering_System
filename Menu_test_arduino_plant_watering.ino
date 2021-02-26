@@ -440,9 +440,7 @@ void loop () {
 
 
       }
-    }// end menu_nr1
-
-
+    }// end menu_nr 1
 
 
 
@@ -489,7 +487,7 @@ void loop () {
         lcd.clear();
         delay(250);
       }
-    }// end menu_nr2
+    }// end menu_nr 2
 
 
 
@@ -877,8 +875,7 @@ void loop () {
 
 
       }
-    }// end menu_nr3
-
+    }// end menu_nr 3
 
 
 
@@ -942,10 +939,7 @@ void loop () {
 
 
       }
-    }// end menu_nr4
-
-
-
+    }// end menu_nr 4
 
 
 
@@ -1011,7 +1005,8 @@ void loop () {
 
 
       }
-    }// end menu_nr5
+    }// end menu_nr 5
+
 
 
     // 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6
@@ -1076,9 +1071,7 @@ void loop () {
 
 
       }
-    }// end menu_nr6
-
-
+    }// end menu_nr 6
 
 
 
@@ -1144,8 +1137,7 @@ void loop () {
 
 
       }
-    }// end menu_nr7
-
+    }// end menu_nr 7
 
 
 
@@ -1213,10 +1205,6 @@ void loop () {
 
 
 
-
-
-
-
     // 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9
     // wateringtimeslog wateringtimeslog wateringtimeslog wateringtimeslog wateringtimeslog wateringtimeslog wateringtimeslog wateringtimeslog
     TempLong = millis();  //  load current millis() into TempLong
@@ -1278,13 +1266,6 @@ void loop () {
 
 
     }// end menu_nr 9
-
-
-
-
-
-
-
 
 
 
@@ -1418,8 +1399,6 @@ void loop () {
         }
 
 
-
-
         // minuut minuut minuut minuut minuut minuut minuut minuut minuut minuut minuut minuut minuut
         while (1 == 1) {
 
@@ -1444,13 +1423,6 @@ void loop () {
             break;
           }
         }
-
-
-
-
-
-
-
 
 
         // seconde seconde seconde seconde seconde seconde seconde seconde seconde seconde seconde seconde
@@ -1479,8 +1451,6 @@ void loop () {
         }
 
 
-
-
         // dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag dag
         while (1 == 1) {
 
@@ -1505,8 +1475,6 @@ void loop () {
             break;
           }
         }
-
-
 
 
         // maand maand maand maand maand maand maand maand maand maand maand maand maand maand
@@ -1535,11 +1503,6 @@ void loop () {
         }
 
 
-
-
-
-
-
         // jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar
         while (1 == 1) {
 
@@ -1561,8 +1524,6 @@ void loop () {
             break;
           }
         }
-
-
 
 
         // jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar jaar
@@ -1593,12 +1554,6 @@ void loop () {
 
       }
     }
-
-
-
-
-
-
 
 
     // 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11
@@ -1652,7 +1607,7 @@ void loop () {
         lcd.clear();
         delay(250);
       }
-    }// end menu_nr11
+    }// end menu_nr 11
 
 
 
@@ -1713,7 +1668,7 @@ void loop () {
         lcd.clear();
         delay(250);
       }
-    }// end menu_nr12
+    }// end menu_nr 12
 
 
 
@@ -1744,11 +1699,11 @@ void loop () {
         break;
       }
 
-    }// end menu_nr12
+    }// end menu_nr 15
 
 
 
-  } // end    if (menu_nr!= 0) {
+  } // end    if (menu_nr != 0) {
 
 
 
