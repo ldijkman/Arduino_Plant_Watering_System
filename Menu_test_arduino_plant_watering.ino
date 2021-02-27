@@ -1,6 +1,6 @@
 
-// working on SD card Logging for mega 2560 board (not enough progmem space on nano /uno)
-// create a file datalog.txt on SD
+// working on     SD card Logging for mega 2560 board (not enough progmem space on nano /uno)
+// working on     creates a file on SD card each day
 
 // Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
 // Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
@@ -1768,9 +1768,9 @@ void loop () {
     // test for mega 2560
     // future SD Card log  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
 #if (defined(__AVR_ATmega2560__))
-  
+
     String dataString = "";
- 
+
     dataString += now.day();
     dataString += "-";
     dataString += now.month();
@@ -1788,19 +1788,41 @@ void loop () {
     dataString += String(sense2);
     dataString += ";";
 
-    File dataFile = SD.open("datalog.txt", FILE_WRITE);
 
-    // if the file is available, write to it:
-    if (dataFile) {
-      dataFile.println(dataString);
-      dataFile.close();
-      // print to the serial port too:
-      Serial.println(dataString);
+
+
+
+
+    File myFile;
+
+    String dateFile = String(now.day()) + "-" + String(now.month()) + "-21.txt";
+    
+    if (SD.exists(dateFile)) {
+      Serial.println("dataFile exists.");
+    } else {
+      Serial.println("dataFile doesn't exist.");
+      Serial.println("CreatingdataFile...");
+      myFile = SD.open(dateFile, FILE_WRITE);
+      myFile.close();
     }
-    // if the file isn't open, pop up an error:
+    
+    myFile = SD.open(dateFile, FILE_WRITE);
+
+    if (myFile) {
+      myFile.println(dataString);
+      myFile.close(); 
+      Serial.println(dataString);            // print to the serial port too:
+    }
+    
     else {
-      Serial.println("error opening datalog.txt");
+      Serial.print("error opening ");  Serial.println(myFile);    // if the file isn't open, pop up an error:
     }
+
+
+
+
+
+
 #endif
     // future SD Card log  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
     // end test for mega 2560
