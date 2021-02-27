@@ -1,5 +1,6 @@
 
 // working on SD card Logging for mega 2560 board (not enough progmem space on nano /uno)
+// create a file datalog.txt on SD
 
 // Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
 // Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
@@ -96,22 +97,17 @@
 
 // future SD Card log  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
 #if (defined(__AVR_ATmega2560__))
-#include <SPI.h>                  
-#include <SD.h>                   
+#include <SPI.h>
+#include <SD.h>
 /*
-  https://github.com/wemos/D1_mini_Examples/blob/master/examples/04.Shields/Micro_SD_Shield/Datalogger/Datalogger.ino
-  The WeMos Micro SD Shield uses: https://www.google.com/search?q=aliexpress+WeMos+Micro+SD+Shield
-  D5, D6, D7, D8, 3V3 and G
-
-  The shield uses SPI bus pins:
-  D5 = CLK
-  D6 = MISO
-  D7 = MOSI
-  D8 = CS
-  change this to match your SD shield or module;
-  WeMos Micro SD Shield V1.0.0: D8 https://www.google.com/search?q=aliexpress+WeMos+Micro+SD+Shield
+ used an SPI TFT LCD SD-Card reader maybe not safe 5v / 3.3v ???????? !!!!!!!! !!!!!
+ SPI bus pins:
+  mega pin i/o 52  = CLK   (on SPI TFT LCD == SCK) 
+  mega pin i/o 50 = MISO
+  mega pin i/o 51 = MOSI
+  mega pin i/o 4 = CS
 */
-const int chipSelect = 8;
+const int chipSelect = 4;
 
 #endif
 // future SD Card log // not enough space nano uno == 105%    for mega 2560 or mega pro mini
@@ -321,17 +317,18 @@ void setup () {
   // say i write/erase a byte 4 times a day = 25 thousand days = 68 Years
   // could also use i2c eeprom that is on the ds3231 rtc board wich i think has 1 milion writes, RTC DS3231 with AT24C32 eeprom
   // https://www.google.com/search?q=AT24C32+pdf
-  for (int i = 100 ; i < EEPROM.length() ; i++) {   // erase eprom water start times
+  for (int i = 100 ; i < 1010 /*EEPROM.length()*/ ; i++) {   // erase eprom water start times
     lcd.setCursor(0, 0);
     lcd.print("Erase WaterTime LOG");
     lcd.setCursor(8, 2);
     lcd.print(i);
     EEPROM.write(i, 0);                             // erase eprom water start times
+    Serial.println(i);
   }
   lcd.clear();
 
 
-
+  Serial.print("Initializing SD card...");
 #if (defined(__AVR_ATmega2560__))
   Serial.print("Initializing SD card...");
 
@@ -1764,32 +1761,44 @@ void loop () {
     last_second = second_now;
 
 
-// test for mega 2560
-// future SD Card log  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
+    // test for mega 2560
+    // future SD Card log  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
 #if (defined(__AVR_ATmega2560__))
-  String dataString = "";
-  int sensor = analogRead(A0);
-  dataString += String(sensor);
-  
-  File dataFile = SD.open("datalog.txt", FILE_WRITE);
+    String dataString = "";
+    int sensor = analogRead(A0);
+    dataString += now.day();
+    dataString += "-";
+    dataString += now.month();
+    dataString += "-";
+    dataString += now.year();
+    dataString += ";";
+    dataString += now.hour();
+    dataString += ":";
+    dataString += now.minute();
+    dataString += ":";
+    dataString += now.second();
+    dataString += ";";
+    dataString += String(sensor);
 
-  // if the file is available, write to it:
-  if (dataFile) {
-    dataFile.println(dataString);
-    dataFile.close();
-    // print to the serial port too:
-    Serial.println(dataString);
-  }
-  // if the file isn't open, pop up an error:
-  else {
-    Serial.println("error opening datalog.txt");
-  }
+    File dataFile = SD.open("datalog.txt", FILE_WRITE);
+
+    // if the file is available, write to it:
+    if (dataFile) {
+      dataFile.println(dataString);
+      dataFile.close();
+      // print to the serial port too:
+      Serial.println(dataString);
+    }
+    // if the file isn't open, pop up an error:
+    else {
+      Serial.println("error opening datalog.txt");
+    }
 #endif
-// future SD Card log  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
-// end test for mega 2560
+    // future SD Card log  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
+    // end test for mega 2560
 
 
-    
+
 
     // Serial.println("///////////////////////////////////////");
     // Serial.println("");
