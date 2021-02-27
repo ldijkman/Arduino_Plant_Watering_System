@@ -1829,6 +1829,8 @@ void loop () {
       Serial.println(dateFile);; Serial.println(" doesn't exist.");
       Serial.println("CreatingdataFile...");
       myFile = SD.open(dateFile, FILE_WRITE);
+      String header = "date, time, sense1, sense2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime,";
+      myFile.println(header);
       myFile.close();
     }
 
@@ -1959,9 +1961,9 @@ void loop () {
             int adress = 100 + (watergiftcounter * 10);
             DateTime now = rtc.now();
             char date[10] = "hh:mm:ss";  // maybe to eprom
-           
+
             rtc.now().toString(date);
-            lastwatering=date;
+            lastwatering = date;
             EEPROM.put(adress, date);           // write starttime to eeprom 810 820 830 840 ....
             //   Serial.println("date");
           }
