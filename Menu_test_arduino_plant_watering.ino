@@ -84,17 +84,17 @@
 // 2 sensors      https://www.google.com/search?q=aliexpress+aduino+capacitive+soil+moisture+V2
 // capacitive soil moisture sensor, most are V1.2 there is a V2, maybe better?
 // dupont wires or better solder wires for permanent device
-
+// relays https://www.google.com/search?q=aliexpress+WeMos+relais+Shield
 
 // other sensors https://www.tindie.com/products/miceuz/i2c-soil-moisture-sensor/#product-name
 
 // https://github.com/ldijkman/Arduino_Plant_Watering_System/discussions
 
 
-// future SD Card log
+// future SD Card log  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
 #if (defined(__AVR_ATmega2560__))
-#include <SPI.h>                  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
-#include <SD.h>                   // not enough space nano uno == 105%    for mega 2560 or mega pro mini
+#include <SPI.h>                  
+#include <SD.h>                   
 /*
   https://github.com/wemos/D1_mini_Examples/blob/master/examples/04.Shields/Micro_SD_Shield/Datalogger/Datalogger.ino
   The WeMos Micro SD Shield uses: https://www.google.com/search?q=aliexpress+WeMos+Micro+SD+Shield
@@ -111,7 +111,9 @@
 const int chipSelect = D4;
 
 #endif
-// future SD Card log
+// future SD Card log // not enough space nano uno == 105%    for mega 2560 or mega pro mini
+
+
 
 #include "RTClib.h"                   // https://github.com/adafruit/RTClib
 
