@@ -1,3 +1,6 @@
+
+// working on SD card Logging for mega 2560 board (not enough progmem space on nano /uno)
+
 // Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
 // Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
 /*
