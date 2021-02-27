@@ -107,11 +107,11 @@
   mega pin i/o 52  = CLK   (on SPI TFT LCD == SCK)
   mega pin i/o 50 = MISO
   mega pin i/o 51 = MOSI
-  mega pin i/o 4 = CS
+  mega pin i/o 53 = CS
 
   used an SPI TFT LCD SD-Card reader maybe not safe 5v / 3.3v ???????? !!!!!!!! !!!!!
 */
-const int chipSelect = 4;
+const int chipSelect = 53;
 
 #endif
 // future SD Card log // not enough space nano uno == 105%    for mega 2560 or mega pro mini
