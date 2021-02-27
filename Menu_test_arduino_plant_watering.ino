@@ -104,9 +104,9 @@
   https://diyi0t.com/sd-card-arduino-esp8266-esp32/
 
   SPI bus pins:
-  mega pin i/o 52  = CLK   (on SPI TFT LCD == SCK)
   mega pin i/o 50 = MISO
   mega pin i/o 51 = MOSI
+  mega pin i/o 52 = CLK   (on SPI TFT LCD == SCK)
   mega pin i/o 53 = CS
 
   used an SPI TFT LCD SD-Card reader maybe not safe 5v / 3.3v ???????? !!!!!!!! !!!!!
