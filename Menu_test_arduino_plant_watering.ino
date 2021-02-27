@@ -1787,7 +1787,8 @@ void loop () {
     dataString += ";";
     dataString += String(sense2);
     dataString += ";";
-
+    dataString += rtc.getTemperature();
+    dataString += ";";
 
 
 
@@ -1796,24 +1797,24 @@ void loop () {
     File myFile;
 
     String dateFile = String(now.day()) + "-" + String(now.month()) + "-21.txt";
-    
+
     if (SD.exists(dateFile)) {
-      Serial.println("dataFile exists.");
+      Serial.print("File exists. "); Serial.println(dateFile);
     } else {
-      Serial.println("dataFile doesn't exist.");
+      Serial.println(dateFile);; Serial.println(" doesn't exist.");
       Serial.println("CreatingdataFile...");
       myFile = SD.open(dateFile, FILE_WRITE);
       myFile.close();
     }
-    
+
     myFile = SD.open(dateFile, FILE_WRITE);
 
     if (myFile) {
       myFile.println(dataString);
-      myFile.close(); 
+      myFile.close();
       Serial.println(dataString);            // print to the serial port too:
     }
-    
+
     else {
       Serial.print("error opening ");  Serial.println(myFile);    // if the file isn't open, pop up an error:
     }
