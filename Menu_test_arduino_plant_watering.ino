@@ -1779,8 +1779,10 @@ void loop () {
     dataString += ",";
     dataString += now.hour();
     dataString += ":";
+    if (now.minute() <= 9)dataString += "0";
     dataString += now.minute();
     dataString += ":";
+    if (now.second() <= 9)dataString += "0";
     dataString += now.second();
     dataString += ",";
     dataString += String(sense1);
