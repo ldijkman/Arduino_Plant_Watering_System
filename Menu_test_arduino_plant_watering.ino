@@ -1794,6 +1794,10 @@ void loop () {
     dataString += ",";
     dataString += rtc.getTemperature();
     dataString += ",";
+    dataString += String(watergiftcounter);
+    dataString += ",";
+    dataString += String(maximumaantalbeurtenperdag);
+     dataString += ",";
 
 
 
