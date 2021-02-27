@@ -111,7 +111,7 @@
   change this to match your SD shield or module;
   WeMos Micro SD Shield V1.0.0: D8 https://www.google.com/search?q=aliexpress+WeMos+Micro+SD+Shield
 */
-const int chipSelect = D4;
+const int chipSelect = 8;
 
 #endif
 // future SD Card log // not enough space nano uno == 105%    for mega 2560 or mega pro mini
@@ -342,7 +342,7 @@ void setup () {
     return;
   }
   Serial.println("card initialized.");
-}
+
 #endif
 
 
