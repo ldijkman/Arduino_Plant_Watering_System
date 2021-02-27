@@ -100,12 +100,16 @@
 #include <SPI.h>
 #include <SD.h>
 /*
- used an SPI TFT LCD SD-Card reader maybe not safe 5v / 3.3v ???????? !!!!!!!! !!!!!
- SPI bus pins:
-  mega pin i/o 52  = CLK   (on SPI TFT LCD == SCK) 
+  used an SPI TFT LCD SD-Card reader maybe not safe 5v / 3.3v ???????? !!!!!!!! !!!!!
+  https://diyi0t.com/sd-card-arduino-esp8266-esp32/
+
+  SPI bus pins:
+  mega pin i/o 52  = CLK   (on SPI TFT LCD == SCK)
   mega pin i/o 50 = MISO
   mega pin i/o 51 = MOSI
   mega pin i/o 4 = CS
+
+  used an SPI TFT LCD SD-Card reader maybe not safe 5v / 3.3v ???????? !!!!!!!! !!!!!
 */
 const int chipSelect = 4;
 
@@ -1764,8 +1768,9 @@ void loop () {
     // test for mega 2560
     // future SD Card log  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
 #if (defined(__AVR_ATmega2560__))
+  
     String dataString = "";
-    int sensor = analogRead(A0);
+ 
     dataString += now.day();
     dataString += "-";
     dataString += now.month();
@@ -1778,7 +1783,10 @@ void loop () {
     dataString += ":";
     dataString += now.second();
     dataString += ";";
-    dataString += String(sensor);
+    dataString += String(sense1);
+    dataString += ";";
+    dataString += String(sense2);
+    dataString += ";";
 
     File dataFile = SD.open("datalog.txt", FILE_WRITE);
 
