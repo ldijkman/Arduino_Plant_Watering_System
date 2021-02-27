@@ -95,6 +95,19 @@
 #if (defined(__AVR_ATmega2560__))
 #include <SPI.h>                  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
 #include <SD.h>                   // not enough space nano uno == 105%    for mega 2560 or mega pro mini
+ /* The WeMos Micro SD Shield uses:
+ * D5, D6, D7, D8, 3V3 and G
+ *
+ * The shield uses SPI bus pins:
+ * D5 = CLK
+ * D6 = MISO
+ * D7 = MOSI
+ * D8 = CS
+change this to match your SD shield or module;
+WeMos Micro SD Shield V1.0.0: D8
+*/
+const int chipSelect = D4;
+
 #endif
 // future SD Card log
 
@@ -309,6 +322,23 @@ void setup () {
     EEPROM.write(i, 0);                             // erase eprom water start times
   }
   lcd.clear();
+
+
+
+#if (defined(__AVR_ATmega2560__))
+Serial.print("Initializing SD card...");
+
+  // see if the card is present and can be initialized:
+  if (!SD.begin(chipSelect)) {
+    Serial.println("Card failed, or not present");
+    // don't do anything more:
+    return;
+  }
+  Serial.println("card initialized.");
+}
+#endif
+
+
 }
 
 
