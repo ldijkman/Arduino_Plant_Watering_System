@@ -89,6 +89,8 @@
 // capacitive soil moisture sensor, most are V1.2 there is a V2, maybe better?
 // dupont wires or better solder wires for permanent device
 // relays https://www.google.com/search?q=aliexpress+WeMos+relais+Shield
+//
+// for mega sd card log https://www.google.com/search?q=aliexpress+Micro+SD+card+mini+TF+card+reader+module+SPI+interfaces+for+arduino+with+level+converter+chip
 
 // other sensors https://www.tindie.com/products/miceuz/i2c-soil-moisture-sensor/#product-name
 
@@ -102,6 +104,7 @@
 /*
   i used an SPI TFT LCD SD-Card reader, maybe not safe 5v / 3.3v ???????? !!!!!!!! !!!!!
   https://diyi0t.com/sd-card-arduino-esp8266-esp32/
+  https://www.google.com/search?q=aliexpress+Micro+SD+card+mini+TF+card+reader+module+SPI+interfaces+for+arduino+with+level+converter+chip
 
   SPI bus pins:
   mega pin i/o 50 = MISO
