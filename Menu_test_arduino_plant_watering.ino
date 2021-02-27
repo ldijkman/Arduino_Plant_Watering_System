@@ -1763,6 +1763,34 @@ void loop () {
 
     last_second = second_now;
 
+
+// test for mega 2560
+// future SD Card log  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
+#if (defined(__AVR_ATmega2560__))
+  String dataString = "";
+  int sensor = analogRead(A0);
+  dataString += String(sensor);
+  
+  File dataFile = SD.open("datalog.txt", FILE_WRITE);
+
+  // if the file is available, write to it:
+  if (dataFile) {
+    dataFile.println(dataString);
+    dataFile.close();
+    // print to the serial port too:
+    Serial.println(dataString);
+  }
+  // if the file isn't open, pop up an error:
+  else {
+    Serial.println("error opening datalog.txt");
+  }
+#endif
+// future SD Card log  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
+// end test for mega 2560
+
+
+    
+
     // Serial.println("///////////////////////////////////////");
     // Serial.println("");
     // Serial.println("watering start times today");
