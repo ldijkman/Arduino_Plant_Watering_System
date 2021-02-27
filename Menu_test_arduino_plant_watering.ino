@@ -346,7 +346,7 @@ void setup () {
 
 #endif
 
-// rtc.adjust(DateTime(2021, 2, 27, 23, 59, 00));
+  // rtc.adjust(DateTime(2021, 2, 29, 22, 59, 00));
 }
 
 
@@ -1796,7 +1796,7 @@ void loop () {
 
     File myFile;
 
-    String dateFile = String(now.day()) + "-" + String(now.month()) + "-21.txt";
+    String dateFile = String(now.day()) + "-" + String(now.month()) + "-" + String(now.year() - 2000) + ".txt";
 
     if (SD.exists(dateFile)) {
       Serial.print("File exists. "); Serial.println(dateFile);
