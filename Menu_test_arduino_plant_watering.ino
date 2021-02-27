@@ -1799,9 +1799,9 @@ void loop () {
     if (now.second() <= 9)dataString += "0";
     dataString += now.second();
     dataString += ",";
-    dataString += String(sense1);
+    dataString += String(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100));
     dataString += ",";
-    dataString += String(sense2);
+    dataString += String(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100));
     dataString += ",";
     dataString += String(averageinprocent);
     dataString += ",";
