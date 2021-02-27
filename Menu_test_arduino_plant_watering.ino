@@ -2,6 +2,7 @@
 // working on     SD card Logging for mega 2560 board (not enough progmem space on nano /uno)
 // working on     creates a comma seperated log file datestamp .txt on SD card each day
 // on a mega2560 allmost everything / every change is logged to sdcard
+//but how do a visualize such a LOG file online or in a spreadsheet editor???
 
 // Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
 // Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
