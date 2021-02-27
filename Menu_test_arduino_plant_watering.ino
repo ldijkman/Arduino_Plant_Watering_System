@@ -346,7 +346,7 @@ void setup () {
 
 #endif
 
-
+// rtc.adjust(DateTime(2021, 2, 27, 23, 59, 00));
 }
 
 
@@ -1776,19 +1776,19 @@ void loop () {
     dataString += now.month();
     dataString += "-";
     dataString += now.year();
-    dataString += ";";
+    dataString += ",";
     dataString += now.hour();
     dataString += ":";
     dataString += now.minute();
     dataString += ":";
     dataString += now.second();
-    dataString += ";";
+    dataString += ",";
     dataString += String(sense1);
-    dataString += ";";
+    dataString += ",";
     dataString += String(sense2);
-    dataString += ";";
+    dataString += ",";
     dataString += rtc.getTemperature();
-    dataString += ";";
+    dataString += ",";
 
 
 
