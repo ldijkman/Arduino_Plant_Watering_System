@@ -142,6 +142,8 @@ signed long pauzetimer;
 signed long startpauzetimer;
 signed long starttime;
 
+String lastwatering;
+
 unsigned long previousMillis = 0;
 unsigned long currentMillis;
 
@@ -1792,14 +1794,26 @@ void loop () {
     dataString += ",";
     dataString += String(sense2);
     dataString += ",";
+    dataString += String(averageinprocent);
+    dataString += ",";
+    dataString += String(moistureforstartwatering);
+    dataString += ",";
+    dataString += String(start_hour);
+    dataString += ",";
+    dataString += String(end_hour);
+    dataString += ",";
     dataString += rtc.getTemperature();
     dataString += ",";
     dataString += String(watergiftcounter);
     dataString += ",";
     dataString += String(maximumaantalbeurtenperdag);
-     dataString += ",";
-
-
+    dataString += ",";
+    dataString += String(watering_duration);
+    dataString += ",";
+    dataString += String(pauze_after_watering);
+    dataString += ",";
+    dataString += String(lastwatering);
+    dataString += ",";
 
 
 
@@ -1943,7 +1957,9 @@ void loop () {
             int adress = 100 + (watergiftcounter * 10);
             DateTime now = rtc.now();
             char date[10] = "hh:mm:ss";  // maybe to eprom
+           
             rtc.now().toString(date);
+            lastwatering=date;
             EEPROM.put(adress, date);           // write starttime to eeprom 810 820 830 840 ....
             //   Serial.println("date");
           }
