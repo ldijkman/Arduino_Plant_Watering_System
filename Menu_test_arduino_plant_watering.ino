@@ -1839,7 +1839,7 @@ void loop () {
       Serial.println(dateFile);; Serial.println(" doesn't exist.");
       Serial.println("CreatingdataFile...");
       myFile = SD.open(dateFile, FILE_WRITE);
-      String header = "date, time, sense1, sense2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus,";
+      String header = "date, time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus,";
       myFile.println(header);
       myFile.close();
     }
