@@ -8,6 +8,7 @@
 //
 // if you drag the log .txt file from sdcard to here https://www.csvplot.com/
 // they will make a chart
+// drag menu items on left to x or y
 //***********************************************************************
 //
 // Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
