@@ -1832,8 +1832,7 @@ void loop () {
 
     if (SD.exists(DateStampFile)) {
       Serial.print("File exists. "); Serial.println(DateStampFile);
-      lcd.setCursor(14, 0);
-      lcd.print("sp=");
+ 
       myFile = SD.open(DateStampFile, FILE_WRITE);
 
       if (myFile) {
