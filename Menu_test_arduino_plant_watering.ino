@@ -1827,7 +1827,7 @@ void loop () {
 
     File myFile;
 
-    String DateStampFile = String(now.day()) + "-" + String(now.month()) + "-" + String(now.year() - 2000) + ".TXT";
+    String DateStampFile = String(now.day()) + "_" + String(now.month()) + "_" + String(now.year() - 2000) + ".TXT";
     String LogFileHeader = "date, time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus,";
 
     if (SD.exists(DateStampFile)) {
