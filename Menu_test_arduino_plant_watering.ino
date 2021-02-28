@@ -16,7 +16,7 @@
 // sudo apt-get install kst
 // kst2 
 // has a load of options and is fast https://miscircuitos.com/using-kst-plot-visualize-data-real-time/
-//
+// https://www.youtube.com/watch?v=d1uz5g_cWh4
 //
 //***********************************************************************
 //
