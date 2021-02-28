@@ -1,4 +1,3 @@
-
 // working on     SD card Logging for mega 2560 board (not enough progmem space on nano /uno)
 // working on     creates a comma seperated log file datestamp .txt on SD card each day
 // on a mega2560 allmost everything / every change is logged to sdcard
@@ -8,7 +7,12 @@
 //
 // if you drag the log .txt file from sdcard to here https://www.csvplot.com/
 // they will make a chart
+// https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/csvplot.com_log_txt_mega2560.jpg
 // drag menu items on left to x or y
+//
+// if you know a good (simple) online/ofline chart maker to view the data
+// let me know??? https://m.facebook.com/luberth.dijkman
+//
 //***********************************************************************
 //
 // Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
@@ -18,24 +22,20 @@
   Arduino Nano / Uno / Mega2560
   Arduino Automated Plant Watering System, automatic irrigation system
   Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
-
   Copyright 2021 Dirk Luberth Dijkman Bangert 30 1619GJ Andijk The Netherlands
   https://m.facebook.com/luberth.dijkman
   https://github.com/ldijkman/Arduino_Plant_Watering_System
   https://github.com/ldijkman/Arduino_Plant_Watering_System/discussions
   https://youtu.be/1jKAxLyOY_s
-
   GNU General Public License,
   which basically means that you may freely copy, change, and distribute it,
   but you may not impose any restrictions on further distribution,
   and you must make the source code available.
   https://www.gnu.org/licenses
-
   used code for rotary encoder from:
    Robust Rotary encoder reading
    Copyright John Main - best-microcontroller-projects.com
    https://www.best-microcontroller-projects.com/rotary-encoder.html
-
   http://Paypal.Me/LDijkman
   All above must be included in any redistribution
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -114,13 +114,11 @@
   i used an SPI TFT LCD SD-Card reader, maybe not safe 5v / 3.3v ???????? !!!!!!!! !!!!!
   https://diyi0t.com/sd-card-arduino-esp8266-esp32/
   https://www.google.com/search?q=aliexpress+Micro+SD+card+mini+TF+card+reader+module+SPI+interfaces+for+arduino+with+level+converter+chip
-
   SPI bus pins:
   mega pin i/o 50 = MISO
   mega pin i/o 51 = MOSI
   mega pin i/o 52 = CLK   (on SPI TFT LCD == SCK)
   mega pin i/o 53 = CS
-
   i used an SPI TFT LCD SD-Card reader, maybe not safe 5v / 3.3v ???????? !!!!!!!! !!!!!
 */
 const int chipSelect = 53;
@@ -1825,39 +1823,35 @@ void loop () {
     dataString += ",";
     dataString += String(ValveStatus);
     dataString += ",";
-    
-
 
 
     File myFile;
 
-    String dateFile = String(now.day()) + "-" + String(now.month()) + "-" + String(now.year() - 2000) + ".txt";
+    String DateStampFile = String(now.day()) + "-" + String(now.month()) + "-" + String(now.year() - 2000) + ".TXT";
+    String LogFileHeader = "date, time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus,";
 
-    if (SD.exists(dateFile)) {
-      Serial.print("File exists. "); Serial.println(dateFile);
-    } else {
-      Serial.println(dateFile);; Serial.println(" doesn't exist.");
-      Serial.println("CreatingdataFile...");
-      myFile = SD.open(dateFile, FILE_WRITE);
-      String header = "date, time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus,";
-      myFile.println(header);
+    if (SD.exists(DateStampFile)) {
+      Serial.print("File exists. "); Serial.println(DateStampFile);
+
+      myFile = SD.open(DateStampFile, FILE_WRITE);
+
+      if (myFile) {
+        myFile.println(dataString);                                 // print string to sdcard log file
+        myFile.close();
+        Serial.println(dataString);                                 // print to the serial port too:
+      } else {
+        Serial.print("error opening ");  Serial.println(myFile);    // if the file isn't open, pop up an error:
+      }
+
+    }
+    else
+    {
+      Serial.print(DateStampFile); Serial.println(" Does not exist.");
+      Serial.print(DateStampFile); Serial.println(" Creating File.");
+      myFile = SD.open(DateStampFile, FILE_WRITE);                  // create file with datestamp.txt
+      myFile.println(LogFileHeader);                                // print header to file for spreadsheet or chartmaker
       myFile.close();
     }
-
-    myFile = SD.open(dateFile, FILE_WRITE);
-
-    if (myFile) {
-      myFile.println(dataString);
-      myFile.close();
-      Serial.println(dataString);            // print to the serial port too:
-    }
-
-    else {
-      Serial.print("error opening ");  Serial.println(myFile);    // if the file isn't open, pop up an error:
-    }
-
-
-
 
 
 
@@ -2233,8 +2227,6 @@ void readsensors() {
 }
 
 /*
-
-
 */
 // Een Heitje voor een karweitje
 // A Penny for Sharing My Thoughts?
