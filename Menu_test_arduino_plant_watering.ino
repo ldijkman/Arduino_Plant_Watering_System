@@ -1824,6 +1824,8 @@ void loop () {
     dataString += String(ValveStatus);
     dataString += ",";
 
+    lcd.setCursor(9, 0);
+    lcd.print("SD  ");
 
     File myFile;
 
@@ -1832,7 +1834,7 @@ void loop () {
 
     if (SD.exists(DateStampFile)) {
       Serial.print("File exists. "); Serial.println(DateStampFile);
- 
+
       myFile = SD.open(DateStampFile, FILE_WRITE);
 
       if (myFile) {
@@ -1840,7 +1842,7 @@ void loop () {
         myFile.close();
         Serial.println(dataString);                                 // print to the serial port too:
         lcd.setCursor(9, 0);
-        lcd.print("SDok ");
+        lcd.print("SDok");
       } else {
         Serial.print("error opening ");  Serial.println(myFile);    // if the file isn't open, pop up an error:
         lcd.setCursor(9, 0);
