@@ -1832,15 +1832,20 @@ void loop () {
 
     if (SD.exists(DateStampFile)) {
       Serial.print("File exists. "); Serial.println(DateStampFile);
-
+      lcd.setCursor(14, 0);
+      lcd.print("sp=");
       myFile = SD.open(DateStampFile, FILE_WRITE);
 
       if (myFile) {
         myFile.println(dataString);                                 // print string to sdcard log file
         myFile.close();
         Serial.println(dataString);                                 // print to the serial port too:
+        lcd.setCursor(9, 0);
+        lcd.print("SDok ");
       } else {
         Serial.print("error opening ");  Serial.println(myFile);    // if the file isn't open, pop up an error:
+        lcd.setCursor(9, 0);
+        lcd.print("SD=X");
       }
 
     }
@@ -1851,6 +1856,8 @@ void loop () {
       myFile = SD.open(DateStampFile, FILE_WRITE);                  // create file with datestamp.txt
       myFile.println(LogFileHeader);                                // print header to file for spreadsheet or chartmaker
       myFile.close();
+      lcd.setCursor(9, 0);
+      lcd.print("SD=X");
     }
 
 
