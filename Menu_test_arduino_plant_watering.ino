@@ -23,6 +23,9 @@
 // WOW!
 // plot data from serial port in realtime https://miscircuitos.com/plot-real-time-signal-coming-arduino/
 //
+// should make a menu for mega2560 version => dump sdcard ?file to serial port 
+//
+//
 //***********************************************************************
 //
 // Arduino Advanced Automated Plant Watering System, StandAlone, Low Cost, Low Power Consumption
