@@ -368,7 +368,7 @@ void setup () {
 
 #endif
 
- // rtc.adjust(DateTime(2021, 4, 9,7, 59, 00));
+  // rtc.adjust(DateTime(2021, 4, 9,7, 59, 00));
 }
 
 
@@ -393,7 +393,7 @@ void loop () {
   // https://urish.medium.com/5-ways-to-blink-an-led-with-arduino-8f8a41b4fc7d
   // like this oneliner
   // used for blinking text when time is not in range
-   blinknodelay_flag = (millis() / 1000) % 2;  // continues 1second high, 1second low
+  blinknodelay_flag = (millis() / 1000) % 2;  // continues 1second high, 1second low
 
 
 
@@ -1828,6 +1828,11 @@ void loop () {
     dataString += ",";
     dataString += String(ValveStatus);
     dataString += ",";
+    dataString += ",";
+    dataString += String(watergiftcounter);
+    dataString += ",";
+    dataString += String(pauzetimer / 1000);
+    dataString += ",";
 
     lcd.setCursor(9, 0);
     lcd.print("SD  ");
@@ -1836,7 +1841,7 @@ void loop () {
 
     // filename must be 8.3 size
     String DateStampFile = String(now.day()) + "_" + String(now.month()) + "_" + String(now.year() - 2000) + ".TXT";
-    String LogFileHeader = "time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus,";
+    String LogFileHeader = "time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus, watergiftcounter, pauzetimer,";
     // must be a units header here?, but cannot find info about that
 
     if (SD.exists(DateStampFile)) {                                 // does the file exist on sdcard?
