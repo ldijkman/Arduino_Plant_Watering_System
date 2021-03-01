@@ -13,10 +13,13 @@
 // if you know a good (simple) online/ofline chart maker to view (all) the data
 // let me know??? https://m.facebook.com/luberth.dijkman
 // 
-// sudo apt-get install kst
-// kst2 
-// has a load of options and is fast https://miscircuitos.com/using-kst-plot-visualize-data-real-time/
-// https://www.youtube.com/watch?v=d1uz5g_cWh4
+// sudo apt-get install kst        install on my linux raspberry pi00
+// kst2                            command to start it = kst2 / it is also in startmenu Education
+// kst-plot has a ton / load of options 
+// and is fast with big data
+// https://miscircuitos.com/using-kst-plot-visualize-data-real-time/
+// https://kst-plot.kde.org/
+// https://kst-plot.kde.org/video_tutorials/
 //
 //***********************************************************************
 //
