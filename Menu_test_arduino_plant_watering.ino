@@ -1828,7 +1828,6 @@ void loop () {
     dataString += ",";
     dataString += String(ValveStatus);
     dataString += ",";
-    dataString += ",";
     dataString += String(watergiftcounter);
     dataString += ",";
     dataString += String(pauzetimer / 1000);
