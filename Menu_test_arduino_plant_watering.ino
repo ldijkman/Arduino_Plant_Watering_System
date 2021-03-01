@@ -368,7 +368,7 @@ void setup () {
 
 #endif
 
-  // rtc.adjust(DateTime(2021, 9, 29,12, 59, 00));
+ // rtc.adjust(DateTime(2021, 4, 9,7, 59, 00));
 }
 
 
@@ -388,25 +388,13 @@ void loop () {
     backlightflag = 1;
   }
 
-  //blinknodelay_flag => likely there is a bit somewhere that does the same so it could be done with less code,
-  //or maybe something with timer1 bitread or isr to set a flag
 
   // 5-ways-to-blink-an-led-with-arduino
   // https://urish.medium.com/5-ways-to-blink-an-led-with-arduino-8f8a41b4fc7d
   // like this oneliner
-  // digitalWrite(LED_BUILTIN, (millis() / 1000) % 2);
-  // blinknodelay_flag = (millis() / 1000) % 2;
 
-  if (millis() - previousMillis >= 500) {     //binknodelay example but not blink a LED, but set a flag => 1 second on, 1 second off
-    previousMillis = millis();
-    if (blinknodelay_flag == 0) {
-      blinknodelay_flag = 1;                       // used for backgroundlight blink when maxcount
-    } else {                                       // part off text blink when time not in range for watering
-      blinknodelay_flag = 0;
-    }
-  }
-  //blinknodelay_flag => likely there is a bit somewhere that does the same so it could be done with less code
-  //or maybe something with timer1 bitread or isr to set a flag
+   blinknodelay_flag = (millis() / 1000) % 2;
+
 
 
   // read the sensors 10 times and divide by 10
