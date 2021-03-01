@@ -12,16 +12,16 @@
 //
 // if you know a good (simple) online/ofline chart maker to view (all) the data
 // let me know??? https://m.facebook.com/luberth.dijkman
-// 
+//
 // sudo apt-get install kst        install on my linux raspberry pi400
 // kst2                            command to start it = kst2 / it is also in startmenu Education
-// kst-plot has a ton / load of options 
+// kst-plot has a ton / load of options
 // and is fast with big data
 // https://miscircuitos.com/using-kst-plot-visualize-data-real-time/
 // https://kst-plot.kde.org/
 // https://kst-plot.kde.org/video_tutorials/
 // WOW!
-// plot data from serial port in realtime https://miscircuitos.com/plot-real-time-signal-coming-arduino/ 
+// plot data from serial port in realtime https://miscircuitos.com/plot-real-time-signal-coming-arduino/
 //
 //***********************************************************************
 //
@@ -368,7 +368,7 @@ void setup () {
 
 #endif
 
- // rtc.adjust(DateTime(2021, 9, 29,12, 59, 00));
+  // rtc.adjust(DateTime(2021, 9, 29,12, 59, 00));
 }
 
 
@@ -390,6 +390,12 @@ void loop () {
 
   //blinknodelay_flag => likely there is a bit somewhere that does the same so it could be done with less code,
   //or maybe something with timer1 bitread or isr to set a flag
+
+  // 5-ways-to-blink-an-led-with-arduino
+  // https://urish.medium.com/5-ways-to-blink-an-led-with-arduino-8f8a41b4fc7d
+  // like this oneliner
+  // digitalWrite(LED_BUILTIN, (millis() / 1000) % 2);
+  // blinknodelay_flag = (millis() / 1000) % 2;
 
   if (millis() - previousMillis >= 500) {     //binknodelay example but not blink a LED, but set a flag => 1 second on, 1 second off
     previousMillis = millis();
@@ -1787,18 +1793,18 @@ void loop () {
     last_second = second_now;
 
 
-    // test for mega 2560 
+    // test for mega 2560
     // future for Mega2560 SD Card log  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
 #if (defined(__AVR_ATmega2560__))
 
     String dataString = "";
-/*
-    dataString += now.day();          // leave the year is allready in filename
-    dataString += "-";
-    dataString += now.month();
-    dataString += "-";
-    dataString += now.year();
-    dataString += ",";
+    /*
+        dataString += now.day();          // leave the year is allready in filename
+        dataString += "-";
+        dataString += now.month();
+        dataString += "-";
+        dataString += now.year();
+        dataString += ",";
     */
     dataString += now.hour();
     dataString += ":";
@@ -1844,7 +1850,7 @@ void loop () {
     String DateStampFile = String(now.day()) + "_" + String(now.month()) + "_" + String(now.year() - 2000) + ".TXT";
     String LogFileHeader = "time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus,";
     // must be a units header here?, but cannot find info about that
-    
+
     if (SD.exists(DateStampFile)) {                                 // does the file exist on sdcard?
       Serial.print("File exists. "); Serial.println(DateStampFile);
 
@@ -2092,8 +2098,8 @@ void loop () {
     //Serial.println("watergift stop / kraan dicht pomp uit");
     digitalWrite(13, LOW);          // 13 is onboard led  en waterklep en/of waterpomp stop
 
-   // if (blinknodelay_flag == 0)lcd.noBacklight();              // max count reached error blink backlight
-   // if (blinknodelay_flag == 1)lcd.backlight();               // max count reached error blink backlight
+    // if (blinknodelay_flag == 0)lcd.noBacklight();              // max count reached error blink backlight
+    // if (blinknodelay_flag == 1)lcd.backlight();               // max count reached error blink backlight
   }
 
 
