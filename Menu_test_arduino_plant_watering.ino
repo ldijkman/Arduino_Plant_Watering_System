@@ -363,7 +363,7 @@ void setup () {
 
 #endif
 
-  // rtc.adjust(DateTime(2021, 2, 29, 22, 59, 00));
+ // rtc.adjust(DateTime(2021, 9, 29,12, 59, 00));
 }
 
 
@@ -1782,18 +1782,19 @@ void loop () {
     last_second = second_now;
 
 
-    // test for mega 2560
-    // future SD Card log  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
+    // test for mega 2560 
+    // future for Mega2560 SD Card log  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
 #if (defined(__AVR_ATmega2560__))
 
     String dataString = "";
-
-    dataString += now.day();
+/*
+    dataString += now.day();          // leave the year is allready in filename
     dataString += "-";
     dataString += now.month();
     dataString += "-";
     dataString += now.year();
     dataString += ",";
+    */
     dataString += now.hour();
     dataString += ":";
     if (now.minute() <= 9)dataString += "0";
@@ -1834,15 +1835,17 @@ void loop () {
 
     File myFile;
 
+    // filename must be 8.3 size
     String DateStampFile = String(now.day()) + "_" + String(now.month()) + "_" + String(now.year() - 2000) + ".TXT";
-    String LogFileHeader = "date, time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus,";
-
-    if (SD.exists(DateStampFile)) {
+    String LogFileHeader = "time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus,";
+    // must be a units header here?, but cannot find info about that
+    
+    if (SD.exists(DateStampFile)) {                                 // does the file exist on sdcard?
       Serial.print("File exists. "); Serial.println(DateStampFile);
 
-      myFile = SD.open(DateStampFile, FILE_WRITE);
+      myFile = SD.open(DateStampFile, FILE_WRITE);                  // if yes open it
 
-      if (myFile) {
+      if (myFile) {                                                 // looks like println allready seeks end of file, where to append
         myFile.println(dataString);                                 // print string to sdcard log file
         myFile.close();
         Serial.println(dataString);                                 // print to the serial port too:
@@ -1859,7 +1862,7 @@ void loop () {
     {
       Serial.print(DateStampFile); Serial.println(" Does not exist.");
       Serial.print(DateStampFile); Serial.println(" Creating File.");
-      myFile = SD.open(DateStampFile, FILE_WRITE);                  // create file with datestamp.txt
+      myFile = SD.open(DateStampFile, FILE_WRITE);                  // create file with datestamp.txt MUST BE 8.3 SIZE
       myFile.println(LogFileHeader);                                // print header to file for spreadsheet or chartmaker
       myFile.close();
       lcd.setCursor(9, 0);
@@ -1869,7 +1872,7 @@ void loop () {
 
 
 #endif
-    // future SD Card log  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
+    // future for Mega2560 SD Card log  // not enough space nano uno == 105%    for mega 2560 or mega pro mini
     // end test for mega 2560
 
 
@@ -2084,12 +2087,12 @@ void loop () {
     //Serial.println("watergift stop / kraan dicht pomp uit");
     digitalWrite(13, LOW);          // 13 is onboard led  en waterklep en/of waterpomp stop
 
-    if (blinknodelay_flag == 0)lcd.noBacklight();              // max count reached error blink backlight
-    if (blinknodelay_flag == 1)lcd.backlight();               // max count reached error blink backlight
+   // if (blinknodelay_flag == 0)lcd.noBacklight();              // max count reached error blink backlight
+   // if (blinknodelay_flag == 1)lcd.backlight();               // max count reached error blink backlight
   }
 
 
-  if (now.hour() == 23 && now.minute() == 59 && now.second() >= 59) {
+  if (now.hour() == 23 && now.minute() == 59 && now.second() >= 58) {
     lcd.clear();
     lcd.backlight();                    // Turn backlight ON
     // they say eeprom life 100 thousand writes
