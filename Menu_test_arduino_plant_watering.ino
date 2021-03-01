@@ -392,8 +392,8 @@ void loop () {
   // 5-ways-to-blink-an-led-with-arduino
   // https://urish.medium.com/5-ways-to-blink-an-led-with-arduino-8f8a41b4fc7d
   // like this oneliner
-
-   blinknodelay_flag = (millis() / 1000) % 2;
+  // used for blinking text when time is not in range
+   blinknodelay_flag = (millis() / 1000) % 2;  // continues 1second high, 1second low
 
 
 
