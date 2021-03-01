@@ -2035,6 +2035,7 @@ void loop () {
   }
 
   if (ValveStatus == 0) {
+     digitalWrite(13, LOW);
     pauzetimer =  (pauze_after_watering * 60 * 1000L) - (millis() - startpauzetimer) ;
     if (pauzetimer <= 0) pauzetimer = 0;
     if (pauzetimer > 0)backlightstart = millis();            // keep backlight on when pauzetimer is running
