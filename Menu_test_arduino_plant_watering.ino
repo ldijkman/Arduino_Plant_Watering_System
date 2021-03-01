@@ -2070,6 +2070,7 @@ void loop () {
     lcd.print("Closed      ");     // dont know sometimes a long value at 0/close = erase it with extra spaces
     // looked like a overflow from long 0 countdown to max long = 2^32-1 value, now in log i see sometimes 4294967
     // should count signed long to -1 and i say if -1 count is 0, now in log i see sometimes 4294967
+    // ????????? 32 bits 4,294,967,295 / 1000 = 4,294,967 
   }
   if (ValveStatus == 1) {
     lcd.print("Open");
