@@ -1847,7 +1847,7 @@ void loop () {
     // must be a units header here?, but cannot find info about that
 
     if (SD.exists(DateStampFile)) {                                 // does the file exist on sdcard?
-      Serial.print("File exists. "); Serial.println(DateStampFile);
+//      Serial.print("File exists. "); Serial.println(DateStampFile);
 
       myFile = SD.open(DateStampFile, FILE_WRITE);                  // if yes open it
 
