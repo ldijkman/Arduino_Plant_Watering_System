@@ -23,7 +23,9 @@
 // WOW!
 // plot data from serial port in realtime https://miscircuitos.com/plot-real-time-signal-coming-arduino/
 //
-// should make a menu for mega2560 version => dump sdcard ?file to serial port 
+// should make a menu for mega2560 version => dump sdcard ?file to serial port
+// serialdata to file => pi@raspberrypi:~ $ (stty raw; cat > received.csv) < /dev/ttyUSB0
+// why always a restart of arduino when connect serial
 //
 //
 //***********************************************************************
@@ -352,26 +354,29 @@ void setup () {
     lcd.setCursor(8, 2);
     lcd.print(i);
     EEPROM.write(i, 0);                             // erase eprom water start times
-    Serial.println(i);
+    //Serial.println(i);
   }
   lcd.clear();
 
 
-  Serial.print("Initializing SD card...");
+  //Serial.print("Initializing SD card...");
 #if (defined(__AVR_ATmega2560__))
-  Serial.print("Initializing SD card...");
+  //Serial.print("Initializing SD card...");
 
   // see if the card is present and can be initialized:
   if (!SD.begin(chipSelect)) {
-    Serial.println("Card failed, or not present");
+    //Serial.println("Card failed, or not present");
     // don't do anything more:
     return;
   }
-  Serial.println("card initialized.");
+  //Serial.println("card initialized.");
 
 #endif
 
-  // rtc.adjust(DateTime(2021, 4, 9,7, 59, 00));
+  //rtc.adjust(DateTime(2021, 5, 9,9, 59, 00));
+  // header for realtime serial to file kst plot pi@raspberrypi:~ $ (stty raw; cat > received.csv) < /dev/ttyUSB0
+  Serial.println("time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus, watergifttimer, pauzetimer,");
+
 }
 
 
@@ -1847,7 +1852,7 @@ void loop () {
     // must be a units header here?, but cannot find info about that
 
     if (SD.exists(DateStampFile)) {                                 // does the file exist on sdcard?
-//      Serial.print("File exists. "); Serial.println(DateStampFile);
+      //      Serial.print("File exists. "); Serial.println(DateStampFile);
 
       myFile = SD.open(DateStampFile, FILE_WRITE);                  // if yes open it
 
@@ -2009,7 +2014,9 @@ void loop () {
   if (ValveStatus == 1) {
     backlightstart = millis();                                 // keep backlight on when valvestatus is open
     //Serial.println("watergift start kraan open pomp aan");
-    digitalWrite(13, HIGH);                  // 13 is onboard led en waterklep en/of waterpomp start
+    if (watergiftcounter < maximumaantalbeurtenperdag) {
+      digitalWrite(13, HIGH);                  // 13 is onboard led en waterklep en/of waterpomp start
+    }
     startpauzetimer = millis();              // the latest time  we get into "if (ValveStatus == 1) {" will be used to set "startpauzetimer = millis();"
     pauzetimer =  (pauze_after_watering * 60 * 1000L); // show pauzetime, wich countdown after valvestaus=0
     if (millis() - starttime <= (watering_duration * 1000L)) {
@@ -2035,7 +2042,7 @@ void loop () {
   }
 
   if (ValveStatus == 0) {
-     digitalWrite(13, LOW);
+    digitalWrite(13, LOW);
     pauzetimer =  (pauze_after_watering * 60 * 1000L) - (millis() - startpauzetimer) ;
     if (pauzetimer <= 0) pauzetimer = 0;
     if (pauzetimer > 0)backlightstart = millis();            // keep backlight on when pauzetimer is running
@@ -2070,7 +2077,7 @@ void loop () {
     lcd.print("Closed      ");     // dont know sometimes a long value at 0/close = erase it with extra spaces
     // looked like a overflow from long 0 countdown to max long = 2^32-1 value, now in log i see sometimes 4294967
     // should count signed long to -1 and i say if -1 count is 0, now in log i see sometimes 4294967
-    // ????????? 32 bits 4,294,967,295 / 1000 = 4,294,967 
+    // ????????? 32 bits 4,294,967,295 / 1000 = 4,294,967
   }
   if (ValveStatus == 1) {
     lcd.print("Open");
@@ -2141,9 +2148,9 @@ void loop () {
 
 
   // there should be an  arduino command  outsidedelay(); or max_ex_per_sec(); like next
-  while (millis() - loopspeed <= 125) {
+  while (millis() - loopspeed <= 100) {
     /**/
-  }       // limmit loop to max 8 times per second, 480 times a minute
+  }       // limmit loop to max 10 times per second, 600 times a minute
   loopspeed = millis();
   // there should be an  arduino command  outsidedelay();  or max_ex_per_sec(); like above
 
