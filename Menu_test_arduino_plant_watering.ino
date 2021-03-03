@@ -31,6 +31,9 @@
 // another windows linux mac csv graph viewer
 // http://www.analogflavor.com/en/view-csv-files-as-graphs/
 // http://www.analogflavor.com/en/bespice/downloads/
+// sorry kst but this Analog Flavor - BeSpice Wave is easier
+// also does realtime plot serial to file  => pi@raspberrypi:~ $ (stty raw; cat > received.csv) < /dev/ttyUSB0
+//
 //
 //***********************************************************************
 //
