@@ -95,17 +95,17 @@ The First?
 https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/Menu_test_arduino_plant_watering.ino
 
 #
-# Code compiles different on Mega2560 SD-Card
+# Code compiles different on Mega2560 with SD-Card
 
-on mega2560 possible to write a lot of variables to sdcard logfile CSV each second
+on mega2560 possible to write a lot of variables to SD-Card LOGfile CSV each second
 
 wich van be viewed in spreadsheat editor
 
 Or 
 
-i like Analog Flavor BeSpice Wave http://www.analogflavor.com/en/
+i like Analog Flavor BeSpice Wave http://www.analogflavor.com/en/bespice/bespice-wave/
 
-BeSpice Wave = perfect *.CSV to graphic view
+BeSpice Wave == Perfect *.CSV to Graphic View
 
 
 
