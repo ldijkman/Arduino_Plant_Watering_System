@@ -2045,7 +2045,7 @@ void loop () {
       watergifttimer = (starttime + (watering_duration * 1000L) - millis()) / 1000;
 
       if (watergifttimer <= 0)watergifttimer = 0;
-      if (watergifttimer == 4294967)watergifttimer = 0;
+      if (watergifttimer == 4294967)watergifttimer = 0; // i do not know should be signed, but sometimes i get count below zero thats not -1 but  32bit overflow/1000
 
       lcd.print(watergifttimer);
       lcd.print("      ");
