@@ -383,8 +383,8 @@ void setup () {
   //rtc.adjust(DateTime(2021, 5, 9,9, 59, 00));
 
   // header for realtime serial to file kst plot  CSV graph Viewer                pi@raspberrypi:~ $ (stty raw; cat > received.csv) < /dev/ttyUSB0
-  Serial.println("time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus, watergifttimer, pauzetimer, outputread,");
-
+  Serial.println("time, dry1, wett1, dry2, wett2, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus, watergifttimer, pauzetimer, outputread,");
+   
 }
 
 
@@ -1818,6 +1818,14 @@ void loop () {
     if (now.second() <= 9)dataString += "0";
     dataString += now.second();
     dataString += ",";
+    dataString += String(dry_sensor_one);
+    dataString += ",";
+    dataString += String(wet_sensor_one);
+    dataString += ",";
+    dataString += String(dry_sensor_two);
+    dataString += ",";
+    dataString += String(wet_sensor_two);  
+    dataString += ",";
     dataString += String(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100));
     dataString += ",";
     dataString += String(map(sense2, dry_sensor_two, wet_sensor_two, 0, 100));
@@ -1858,7 +1866,7 @@ void loop () {
 
     // filename must be 8.3 size CSV file 5 december 2021 makes 5_12_21.CSV
     String DateStampFile = String(now.day()) + "_" + String(now.month()) + "_" + String(now.year() - 2000) + ".CSV";
-    String LogFileHeader = "time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus, watergifttimer, pauzetimer, outputread,";
+    String LogFileHeader = "time, dry1, wett1, dry2, wett2, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus, watergifttimer, pauzetimer, outputread,";
     // must be a units header here?, but cannot find info about that
 
     if (SD.exists(DateStampFile)) {                                 // does the file exist on sdcard?
