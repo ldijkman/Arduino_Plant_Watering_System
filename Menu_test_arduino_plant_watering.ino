@@ -2143,9 +2143,9 @@ void loop () {
 
 
   noTone(buzzeroutput);
-  if (errorflag == 1) {
-    digitalWrite(alarmoutput, blinknodelay_flag);       // blink error light or relais on output alarmoutput
+  if (errorflag == 1) {   
     tone(buzzeroutput, 500+(blinknodelay_flag*1000));   // 500 or 1500hz
+    digitalWrite(alarmoutput, blinknodelay_flag);       // blink error light or relais on output alarmoutput
   }
 
 
