@@ -211,6 +211,8 @@ long loopspeed;
 
 String ClearLine = "                    ";  // 20 spaces
 
+byte errorflag = 0;
+
 
 // rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
 // Robust Rotary encoder reading
@@ -247,7 +249,8 @@ byte exitflag = 0;
 //**********************************************************************************************
 void setup () {
 
-  pinMode(13, OUTPUT);                 // pin 13 for valve open / close is also the onboard LED
+  pinMode(12, OUTPUT);                  // error light blink
+  pinMode(13, OUTPUT);                  // pin 13 for valve open / close is also the onboard LED
 
   //                                            i have 3 pullup resistors on my KY-040 so INPUT_PULLUP should not be needed
   //                                            BUT
@@ -384,7 +387,7 @@ void setup () {
 
   // header for realtime serial to file kst plot  CSV graph Viewer                pi@raspberrypi:~ $ (stty raw; cat > received.csv) < /dev/ttyUSB0
   Serial.println("time, dry1, wett1, dry2, wett2, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus, watergifttimer, pauzetimer, outputread,");
-   
+
 }
 
 
@@ -1824,7 +1827,7 @@ void loop () {
     dataString += ",";
     dataString += String(dry_sensor_two);
     dataString += ",";
-    dataString += String(wet_sensor_two);  
+    dataString += String(wet_sensor_two);
     dataString += ",";
     dataString += String(map(sense1, dry_sensor_one, wet_sensor_one, 0, 100));
     dataString += ",";
@@ -2127,6 +2130,11 @@ void loop () {
     // if (blinknodelay_flag == 0)lcd.noBacklight();              // max count reached error blink backlight
     // if (blinknodelay_flag == 1)lcd.backlight();               // max count reached error blink backlight
   }
+
+// a test
+  errorflag = 1;
+  if (errorflag == 1)digitalWrite(12, blinknodelay_flag);       // blink error light or relais on output 12
+errorflag = 0;
 
 
   if (now.hour() == 23 && now.minute() == 59 && now.second() >= 58) {
