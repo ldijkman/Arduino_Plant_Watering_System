@@ -246,7 +246,7 @@ byte exitflag = 0;
 
 byte errorflag = 0;
 byte alarmoutput = 10;
-byte buzzeroutput = 8;
+byte buzzeroutput = 8; // https://www.google.com/search?q=aliexpress+KY-006+passive+buzzer+module
 
 
 
