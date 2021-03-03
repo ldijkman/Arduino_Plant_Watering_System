@@ -1868,6 +1868,7 @@ void loop () {
     lcd.print("SD  ");
 
     File myFile;
+    errorflag = 0;
 
     // filename must be 8.3 size CSV file 5 december 2021 makes 5_12_21.CSV
     String DateStampFile = String(now.day()) + "_" + String(now.month()) + "_" + String(now.year() - 2000) + ".CSV";
@@ -2136,9 +2137,9 @@ void loop () {
     // if (blinknodelay_flag == 1)lcd.backlight();               // max count reached error blink backlight
   }
 
-  // a test
+ 
   if (errorflag == 1)digitalWrite(10, blinknodelay_flag);       // blink error light or relais on output 10
-  errorflag = 0;
+ 
 
 
   if (now.hour() == 23 && now.minute() == 59 && now.second() >= 58) {
