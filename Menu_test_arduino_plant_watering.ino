@@ -247,7 +247,7 @@ byte exitflag = 0;
 byte errorflag = 0;
 byte alarmoutput = 10;
 byte buzzeroutput = 8;
-int  buzzercount = 0;
+
 
 
 //**********************************************************************************************
@@ -2144,10 +2144,8 @@ void loop () {
 
   noTone(buzzeroutput);
   if (errorflag == 1) {
-    buzzercount++;
-    if (buzzercount > 10)buzzercount = 5;
     digitalWrite(alarmoutput, blinknodelay_flag);       // blink error light or relais on output alarmoutput
-    tone(buzzeroutput, buzzercount * 100);
+    tone(buzzeroutput, 500+(blinknodelay_flag*1000));   // 500 or 1500hz
   }
 
 
