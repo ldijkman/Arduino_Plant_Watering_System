@@ -128,6 +128,8 @@ do not know yet how to get rit of this, some old buffer?
 
 add a dollar for ESP8266 for RealTime serial WIFI monitor or download SD-card CSV LOG file ???
 
+or add an ethernetshield for hardwired localarea net connection or data log dpwnload and realtime graphic monitoring
+
 -------
 
 
