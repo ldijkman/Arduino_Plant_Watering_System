@@ -126,6 +126,8 @@ sometimes there is some old text before the wat should be the first header line
 
 do not know yet how to get rit of this, some old buffer?
 
+add a dollar for ESP8266 for RealTime serial WIFI monitor or download SD-card CSV LOG file ???
+
 -------
 
 
