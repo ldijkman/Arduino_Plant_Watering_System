@@ -378,7 +378,7 @@ void setup () {
 #endif
 
   //rtc.adjust(DateTime(2021, 5, 9,9, 59, 00));
- 
+
   // header for realtime serial to file kst plot  CSV graph Viewer                pi@raspberrypi:~ $ (stty raw; cat > received.csv) < /dev/ttyUSB0
   Serial.println("time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus, watergifttimer, pauzetimer, outputread,");
 
@@ -2030,10 +2030,12 @@ void loop () {
       lcd.setCursor(0, 3);
       lcd.print("Open");
       lcd.print(" ");
-      if (watergifttimer > 0) {
-        watergifttimer = (starttime + (watering_duration * 1000L) - millis()) / 1000;
-      }
+
+      watergifttimer = (starttime + (watering_duration * 1000L) - millis()) / 1000;
+
       if (watergifttimer <= 0)watergifttimer = 0;
+      if (watergifttimer == 4294967)watergifttimer = 0;
+
       lcd.print(watergifttimer);
       lcd.print("      ");
       // Serial.print("watergifttimer ");
