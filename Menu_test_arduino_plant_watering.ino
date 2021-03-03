@@ -211,7 +211,7 @@ long loopspeed;
 
 String ClearLine = "                    ";  // 20 spaces
 
-byte errorflag = 0;
+
 
 
 // rotary encoder push button KY-040 https://www.google.com/search?q=KY-040
@@ -242,14 +242,18 @@ byte blinknodelay_flag;                         // a blink flag that is 1 second
 
 int counter;
 
-
-
 byte exitflag = 0;
+
+byte errorflag = 0;
+byte alarmoutput = 10;
+byte buzzeroutput = 8;
+int  buzzercount = 0;
+
 
 //**********************************************************************************************
 void setup () {
 
-  pinMode(10, OUTPUT);                  // error light blink
+  pinMode(alarmoutput, OUTPUT);                  // error light blink
   pinMode(13, OUTPUT);                  // pin 13 for valve open / close is also the onboard LED
 
   //                                            i have 3 pullup resistors on my KY-040 so INPUT_PULLUP should not be needed
@@ -2137,9 +2141,15 @@ void loop () {
     // if (blinknodelay_flag == 1)lcd.backlight();               // max count reached error blink backlight
   }
 
- 
-  if (errorflag == 1)digitalWrite(10, blinknodelay_flag);       // blink error light or relais on output 10
- 
+
+  noTone(buzzeroutput);
+  if (errorflag == 1) {
+    buzzercount++;
+    if (buzzercount > 10)buzzercount = 5;
+    digitalWrite(alarmoutput, blinknodelay_flag);       // blink error light or relais on output alarmoutput
+    tone(buzzeroutput, buzzercount * 100);
+  }
+
 
 
   if (now.hour() == 23 && now.minute() == 59 && now.second() >= 58) {
