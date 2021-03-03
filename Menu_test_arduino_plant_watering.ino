@@ -374,8 +374,9 @@ void setup () {
 #endif
 
   //rtc.adjust(DateTime(2021, 5, 9,9, 59, 00));
-  // header for realtime serial to file kst plot pi@raspberrypi:~ $ (stty raw; cat > received.csv) < /dev/ttyUSB0
-  Serial.println("time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus, watergifttimer, pauzetimer,");
+ 
+  // header for realtime serial to file kst plot  CSV graph Viewer                pi@raspberrypi:~ $ (stty raw; cat > received.csv) < /dev/ttyUSB0
+  Serial.println("time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus, watergifttimer, pauzetimer, outputread,");
 
 }
 
@@ -1840,15 +1841,17 @@ void loop () {
     dataString += ",";
     dataString += String(pauzetimer / 1000);
     dataString += ",";
+    dataString += String(digitalRead(13)); //read output staus
+    dataString += ",";
 
     lcd.setCursor(9, 0);
     lcd.print("SD  ");
 
     File myFile;
 
-    // filename must be 8.3 size
-    String DateStampFile = String(now.day()) + "_" + String(now.month()) + "_" + String(now.year() - 2000) + ".TXT";
-    String LogFileHeader = "time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus, watergifttimer, pauzetimer,";
+    // filename must be 8.3 size CSV file 5 december 2021 makes 5_12_21.CSV
+    String DateStampFile = String(now.day()) + "_" + String(now.month()) + "_" + String(now.year() - 2000) + ".CSV";
+    String LogFileHeader = "time, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus, watergifttimer, pauzetimer, outputread,";
     // must be a units header here?, but cannot find info about that
 
     if (SD.exists(DateStampFile)) {                                 // does the file exist on sdcard?
@@ -2023,7 +2026,9 @@ void loop () {
       lcd.setCursor(0, 3);
       lcd.print("Open");
       lcd.print(" ");
-      watergifttimer = (starttime + (watering_duration * 1000L) - millis()) / 1000;
+      if (watergifttimer > 0) {
+        watergifttimer = (starttime + (watering_duration * 1000L) - millis()) / 1000;
+      }
       if (watergifttimer <= 0)watergifttimer = 0;
       lcd.print(watergifttimer);
       lcd.print("      ");
