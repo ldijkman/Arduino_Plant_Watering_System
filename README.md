@@ -97,6 +97,8 @@ https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/Menu_test_ar
 #
 # Code compiles different on Mega2560 with SD-Card
 
+arduino nano / uno out of progmem space, mega has more, so added SD-Card reader
+
 on mega2560 possible to write a lot of variables to SD-Card LOGfile CSV each second
 
 a comma seperated txt file https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/CSV_received.CSV
