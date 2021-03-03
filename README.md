@@ -96,6 +96,7 @@ https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/Menu_test_ar
 
 #
 # Code compiles different on Mega2560 with SD-Card
+# now Creates Graphics like proffesional Growers have
 
 arduino nano / uno out of progmem space, mega has more, so added SD-Card reader/writer(with levelconverter?!)
 
