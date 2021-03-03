@@ -115,6 +115,15 @@ BeSpice Wave == Perfect *.CSV to Graphic View (on my Raspberry pi400)
 
 https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/csv_recieved.png
 
+------
+
+serialdata to file for realtime plot
+
+sometimes there is some old text before the wat should be the first header line
+
+do not know yet how to get rit of this, some old buffer?
+
+-------
 
 
 #
