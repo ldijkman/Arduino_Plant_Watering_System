@@ -249,7 +249,7 @@ byte exitflag = 0;
 //**********************************************************************************************
 void setup () {
 
-  pinMode(12, OUTPUT);                  // error light blink
+  pinMode(10, OUTPUT);                  // error light blink
   pinMode(13, OUTPUT);                  // pin 13 for valve open / close is also the onboard LED
 
   //                                            i have 3 pullup resistors on my KY-040 so INPUT_PULLUP should not be needed
@@ -386,7 +386,7 @@ void setup () {
   //rtc.adjust(DateTime(2021, 5, 9,9, 59, 00));
 
   // header for realtime serial to file kst plot  CSV graph Viewer                pi@raspberrypi:~ $ (stty raw; cat > received.csv) < /dev/ttyUSB0
-  Serial.println("time, dry1, wett1, dry2, wett2, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus, watergifttimer, pauzetimer, outputread,");
+  Serial.println("time, dry1, wett1, dry2, wett2, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus, watergifttimer, pauzetimer, outputread, errorflag,");
 
 }
 
@@ -1859,7 +1859,9 @@ void loop () {
     dataString += ",";
     dataString += String(pauzetimer / 1000);
     dataString += ",";
-    dataString += String(digitalRead(13)); //read output staus
+    dataString += String(digitalRead(13)); //read output status
+    dataString += ",";
+    dataString += String(errorflag);
     dataString += ",";
 
     lcd.setCursor(9, 0);
@@ -1869,7 +1871,7 @@ void loop () {
 
     // filename must be 8.3 size CSV file 5 december 2021 makes 5_12_21.CSV
     String DateStampFile = String(now.day()) + "_" + String(now.month()) + "_" + String(now.year() - 2000) + ".CSV";
-    String LogFileHeader = "time, dry1, wett1, dry2, wett2, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus, watergifttimer, pauzetimer, outputread,";
+    String LogFileHeader = "time, dry1, wett1, dry2, wett2, sensor1, sensor2, averageinprocent, moisturestartprocent, starthour, endhour, temperature, jobcounter, maxjobs, wateringduration, pauzeduration, lastwateringtime, ValveStatus, watergifttimer, pauzetimer, outputread, errorflag,";
     // must be a units header here?, but cannot find info about that
 
     if (SD.exists(DateStampFile)) {                                 // does the file exist on sdcard?
@@ -1883,22 +1885,25 @@ void loop () {
         Serial.println(dataString);                                 // print to the serial port too:
         lcd.setCursor(9, 0);
         lcd.print("SDok");
+        errorflag = 0;
       } else {
-        Serial.print("error opening ");  Serial.println(myFile);    // if the file isn't open, pop up an error:
+        Serial.print("# error opening ");  Serial.println(myFile);    // if the file isn't open, pop up an error:
         lcd.setCursor(9, 0);
         lcd.print("SD=X");
+        errorflag = 1;
       }
 
     }
     else
     {
-      Serial.print(DateStampFile); Serial.println(" Does not exist.");
-      Serial.print(DateStampFile); Serial.println(" Creating File.");
+      Serial.print(DateStampFile); Serial.println("# Does not exist.");
+      Serial.print(DateStampFile); Serial.println("# Creating File.");
       myFile = SD.open(DateStampFile, FILE_WRITE);                  // create file with datestamp.txt MUST BE 8.3 SIZE
       myFile.println(LogFileHeader);                                // print header to file for spreadsheet or chartmaker
       myFile.close();
       lcd.setCursor(9, 0);
       lcd.print("SD=X");
+      errorflag = 1;
     }
 
 
@@ -2131,10 +2136,9 @@ void loop () {
     // if (blinknodelay_flag == 1)lcd.backlight();               // max count reached error blink backlight
   }
 
-// a test
-  errorflag = 1;
-  if (errorflag == 1)digitalWrite(12, blinknodelay_flag);       // blink error light or relais on output 12
-errorflag = 0;
+  // a test
+  if (errorflag == 1)digitalWrite(10, blinknodelay_flag);       // blink error light or relais on output 10
+  errorflag = 0;
 
 
   if (now.hour() == 23 && now.minute() == 59 && now.second() >= 58) {
