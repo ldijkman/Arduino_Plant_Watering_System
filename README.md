@@ -106,7 +106,7 @@ a comma seperated txt file https://github.com/ldijkman/Arduino_Plant_Watering_Sy
 
 with a header on line 1 wich describes the fields
 
-wich van be viewed in spreadsheat editor 
+wich can be viewed in spreadsheat editor 
 
 Or 
 
@@ -115,6 +115,8 @@ i like Analog Flavor BeSpice Wave http://www.analogflavor.com/en/bespice/bespice
 BeSpice Wave == Perfect *.CSV to Graphic View (on my Raspberry pi400)
 
 https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/csv_recieved.png
+
+i do a countdown on wateringduration timer and pauzetimer, easy to see remaining time on LCD display
 
 ------
 
