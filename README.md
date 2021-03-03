@@ -99,7 +99,7 @@ https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/Menu_test_ar
 
 on mega2560 possible to write a lot of variables to SD-Card LOGfile CSV each second
 
-a comma seperated txt file
+a comma seperated txt file https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/CSV_received.CSV
 
 with a header on line 1 wich describes the fields
 
@@ -110,6 +110,8 @@ Or
 i like Analog Flavor BeSpice Wave http://www.analogflavor.com/en/bespice/bespice-wave/
 
 BeSpice Wave == Perfect *.CSV to Graphic View (on my Raspberry pi400)
+
+https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/Analog%20Flavor%20-%20BeSpice%20Wave.png
 
 
 
