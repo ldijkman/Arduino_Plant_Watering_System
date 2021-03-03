@@ -27,8 +27,10 @@
 // serialdata to file => pi@raspberrypi:~ $ (stty raw; cat > received.csv) < /dev/ttyUSB0
 // why always a restart of arduino when connect serial
 //
-// another windows linux mac csv graph viewer http://www.analogflavor.com/en/view-csv-files-as-graphs/
-//
+// this csv graph viewer is easier menu on left side to turn things on/off
+// another windows linux mac csv graph viewer
+// http://www.analogflavor.com/en/view-csv-files-as-graphs/
+// http://www.analogflavor.com/en/bespice/downloads/
 //
 //***********************************************************************
 //
