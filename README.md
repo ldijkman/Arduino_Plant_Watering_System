@@ -99,13 +99,17 @@ https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/Menu_test_ar
 
 on mega2560 possible to write a lot of variables to SD-Card LOGfile CSV each second
 
-wich van be viewed in spreadsheat editor
+a comma seperated txt file
+
+with a header on line 1 wich describes the fields
+
+wich van be viewed in spreadsheat editor 
 
 Or 
 
 i like Analog Flavor BeSpice Wave http://www.analogflavor.com/en/bespice/bespice-wave/
 
-BeSpice Wave == Perfect *.CSV to Graphic View
+BeSpice Wave == Perfect *.CSV to Graphic View (on my Raspberry pi400)
 
 
 
