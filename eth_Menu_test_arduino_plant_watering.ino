@@ -1,5 +1,6 @@
 // changed i/o => for uno/mega ethernetshield and sdcard on that shield
 // was playing with ethernetshield
+// encoder rotation did not work on 2 and 3 changed to  to 31 32
 // i wander wat a fs100p does => maybe i like that more/better for realtime monitoring over distance
 // https://www.google.com/search?q=aliexpress+FS100P+Serial+to+Ethernet+Converter+Module
 
@@ -224,8 +225,8 @@ String ClearLine = "                    ";  // 20 spaces
 // Copyright John Main - best-microcontroller-projects.com
 // https://www.best-microcontroller-projects.com/rotary-encoder.html
 #define rotarybutton_SW 2           // input D2 rotary encoder SW
-#define CLK 3                       // input D3 rotary encoder CLK
-#define DATA 4                      // input D4 rotary encoder DT
+#define CLK 31                       // input D3 rotary encoder CLK
+#define DATA 32                      // input D4 rotary encoder DT
 // and connect rotary encoder to +5vdc and GND to 0vdc, -, min, GND, ground, or whatever they call it
 static uint8_t prevNextCode = 0;
 static uint16_t store = 0;
