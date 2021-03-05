@@ -1,7 +1,7 @@
-// changed i/o 
+// changed i/o => for uno/mega ethernetshield and sdcard on that shield
 // was playing with ethernetshield
-// i wander wat a fs100p does
-// https://www.google.com/search?q=aliexpress+FS100P+Serial+to+Ethernet+Converter
+// i wander wat a fs100p does => maybe i like that more/better for realtime monitoring over distance
+// https://www.google.com/search?q=aliexpress+FS100P+Serial+to+Ethernet+Converter+Module
 
 // working on     SD card Logging for mega 2560 board (not enough progmem space on nano /uno)
 // working on     creates a comma seperated log file datestamp .txt on SD card each day
