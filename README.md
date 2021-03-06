@@ -140,6 +140,7 @@ or add a 2 dollar W5500 ethernet module for hardwired localarea net connection o
 
 -------
 
+<img src="https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/recieve_html_javascript_csv_chart_view.png">
 
 #
 # Sense:
