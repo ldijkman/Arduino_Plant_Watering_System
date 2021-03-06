@@ -21,6 +21,7 @@ height: 300px;
 </style>
 <script src="http://www.amcharts.com/lib/4/core.js"></script>
 <script src="http://www.amcharts.com/lib/4/charts.js"></script>
+<script src="//cdn.amcharts.com/lib/4/themes/animated.js"></script>
 </head>
 
 <body>
@@ -58,15 +59,17 @@ var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 
 // Create series
 var series1 = chart.series.push(new am4charts.LineSeries());
-series1.dataFields.valueY = "ValveStatus";
+series1.dataFields.valueY = "ValveStatus"+10;
 series1.dataFields.categoryX = "time";
 series1.name = "ValveStatus";
 series1.strokeWidth = 1;
 series1.tensionX = 0.7;
+  series1.tooltipText = "{time}: [b]{ValeStatus}[/]";
 series1.bullets.push(new am4charts.CircleBullet());
 
 var series2 = chart.series.push(new am4charts.LineSeries());
 series2.dataFields.valueY = "watergifttimer";
+series2.tooltipText = "{time}: [b]{watergifttimer}[/]";
 series2.dataFields.categoryX = "time";
 series2.name = "watergifttimer";
 series2.strokeWidth = 1;
@@ -92,6 +95,7 @@ series4.bullets.push(new am4charts.CircleBullet());
 
 // Add legend
 chart.legend = new am4charts.Legend();
+chart.cursor = new am4charts.XYCursor();
 </script>
 </body>
 </html>
