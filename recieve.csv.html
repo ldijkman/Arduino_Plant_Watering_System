@@ -3,7 +3,7 @@
 <head>
 
 <meta charset='UTF-8'>
-<title>CodePen Demo</title>
+<title>CSV To Chart javascript</title>
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +15,7 @@ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, A
 
 #chartdiv {
 width: 100%;
-height: 300px;
+height: 100%;
 }
 
 </style>
@@ -27,7 +27,7 @@ height: 300px;
 <body>
 
 
-<div id="chartdiv"></div>
+takes some time to load CSV <br>
 <div id="chartdiv"></div>
 <script>
 /**
@@ -59,30 +59,31 @@ var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 
 // Create series
 var series1 = chart.series.push(new am4charts.LineSeries());
-series1.dataFields.valueY = "ValveStatus"+10;
+series1.dataFields.valueY = "ValveStatus";
 series1.dataFields.categoryX = "time";
 series1.name = "ValveStatus";
 series1.strokeWidth = 1;
 series1.tensionX = 0.7;
-  series1.tooltipText = "{time}: [b]{ValeStatus}[/]";
 series1.bullets.push(new am4charts.CircleBullet());
+series1.tooltipText = "{name}: [b]{ValveStatus}[/]";
 
 var series2 = chart.series.push(new am4charts.LineSeries());
 series2.dataFields.valueY = "watergifttimer";
-series2.tooltipText = "{time}: [b]{watergifttimer}[/]";
 series2.dataFields.categoryX = "time";
 series2.name = "watergifttimer";
 series2.strokeWidth = 1;
 series2.tensionX = 12.7;
 series2.bullets.push(new am4charts.CircleBullet());
+series2.tooltipText = "{name}: [b]{watergifttimer}[/]";
 
 var series3 = chart.series.push(new am4charts.LineSeries());
 series3.dataFields.valueY = "pauzetimer";
 series3.dataFields.categoryX = "time";
-series3.name = " pauzetimer";
+series3.name = "pauzetimer";
 series3.strokeWidth = 1;
 series3.tensionX = 0.7;
 series3.bullets.push(new am4charts.CircleBullet());
+series3.tooltipText = "{name}: [b]{pauzetimer}[/]";
 
 var series4 = chart.series.push(new am4charts.LineSeries());
 series4.dataFields.valueY = "jobcounter";
@@ -91,6 +92,7 @@ series4.name = "jobcounter";
 series4.strokeWidth = 1;
 series4.tensionX = 0.7;
 series4.bullets.push(new am4charts.CircleBullet());
+series4.tooltipText = "{name}: [b]{jobcounter}[/]";
 
 
 // Add legend
