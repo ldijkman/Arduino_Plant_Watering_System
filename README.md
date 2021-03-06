@@ -140,7 +140,13 @@ or add a 2 dollar W5500 ethernet module for hardwired localarea net connection o
 
 -------
 
+javascript csv chart viewer of a piece of
+
+recieved CSV file logged by arduino plant watering http://www.arduino.tk/csv_chart.html
+
 <img src="https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/recieve_html_javascript_csv_chart_view.png">
+
+ http://www.arduino.tk/csv_chart.html
 
 #
 # Sense:
