@@ -1,0 +1,97 @@
+<html>
+
+<head>
+
+<meta charset='UTF-8'>
+<title>CodePen Demo</title>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+#chartdiv {
+width: 100%;
+height: 300px;
+}
+
+</style>
+<script src="http://www.amcharts.com/lib/4/core.js"></script>
+<script src="http://www.amcharts.com/lib/4/charts.js"></script>
+</head>
+
+<body>
+
+
+<div id="chartdiv"></div>
+<div id="chartdiv"></div>
+<script>
+/**
+ * ---------------------------------------
+ * This demo was created using amCharts 4.
+ *
+ * For more information visit:
+ * https://www.amcharts.com/
+ *
+ * Documentation is available at:
+ * https://www.amcharts.com/docs/v4/
+ * ---------------------------------------
+ */
+
+// Create chart instance
+var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+// Set up data source
+chart.dataSource.url = "https://raw.githubusercontent.com/ldijkman/Arduino_Plant_Watering_System/main/CSV_received.CSV";
+chart.dataSource.parser = new am4core.CSVParser();
+chart.dataSource.parser.options.useColumnNames = true;
+
+// Create axes
+var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "time";
+
+// Create value axis
+var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+// Create series
+var series1 = chart.series.push(new am4charts.LineSeries());
+series1.dataFields.valueY = "ValveStatus";
+series1.dataFields.categoryX = "time";
+series1.name = "ValveStatus";
+series1.strokeWidth = 1;
+series1.tensionX = 0.7;
+series1.bullets.push(new am4charts.CircleBullet());
+
+var series2 = chart.series.push(new am4charts.LineSeries());
+series2.dataFields.valueY = "watergifttimer";
+series2.dataFields.categoryX = "time";
+series2.name = "watergifttimer";
+series2.strokeWidth = 1;
+series2.tensionX = 12.7;
+series2.bullets.push(new am4charts.CircleBullet());
+
+var series3 = chart.series.push(new am4charts.LineSeries());
+series3.dataFields.valueY = "pauzetimer";
+series3.dataFields.categoryX = "time";
+series3.name = " pauzetimer";
+series3.strokeWidth = 1;
+series3.tensionX = 0.7;
+series3.bullets.push(new am4charts.CircleBullet());
+
+var series4 = chart.series.push(new am4charts.LineSeries());
+series4.dataFields.valueY = "jobcounter";
+series4.dataFields.categoryX = "time";
+series4.name = "jobcounter";
+series4.strokeWidth = 1;
+series4.tensionX = 0.7;
+series4.bullets.push(new am4charts.CircleBullet());
+
+
+// Add legend
+chart.legend = new am4charts.Legend();
+</script>
+</body>
+</html>
