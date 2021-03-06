@@ -144,6 +144,8 @@ javascript csv chart viewer of a piece of
 
 recieved CSV file logged by arduino plant watering http://www.arduino.tk/csv_chart.html
 
+http://arduino.tk/csv_chart.php?file=https://docs.google.com/spreadsheets/d/e/2PACX-1vSyqm-eDgvxsNgwtlzRAz1hRmUhbeP9y-idFBoOIaayzl3J9vPoIVJJ8Aj76e-ilFwtiOTIxOgy23Ql/pub?output=csv
+
 <img src="https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/recieve_html_javascript_csv_chart_view.png">
 
  http://www.arduino.tk/csv_chart.html
