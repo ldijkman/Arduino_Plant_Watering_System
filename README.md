@@ -10,6 +10,14 @@ Advanced, Intelligent, Smart, Automated, Automatic
 
 https://youtu.be/1jKAxLyOY_s
 
+----
+
+javascript csv chart viewer of a piece of 
+
+recieved CSV file logged by arduino plant watering http://www.arduino.tk/csv_chart.html
+
+-----
+
 +/- 10 Dollar Automated Plant Watering MicroController / Computer on Soil Moisture
 
 Arduino Nano or Uno
