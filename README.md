@@ -149,6 +149,15 @@ http://arduino.tk/csv_chart.php?file=https://docs.google.com/spreadsheets/d/e/2P
 <img src="https://github.com/ldijkman/Arduino_Plant_Watering_System/blob/main/recieve_html_javascript_csv_chart_view.png">
 
  http://www.arduino.tk/csv_chart.html
+ 
+ 
+ bit reduced log file size some val saved once each minute
+ 
+ csv spreadsheat view of data
+https://raw.githubusercontent.com/ldijkman/Arduino_Plant_Watering_System/main/reduce_received.csv
+
+csv graphic view 
+http://arduino.tk/csv_chart.php?file=https://raw.githubusercontent.com/ldijkman/Arduino_Plant_Watering_System/main/reduce_received.csv
 
 #
 # Sense:
